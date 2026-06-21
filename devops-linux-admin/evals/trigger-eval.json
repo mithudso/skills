@@ -1,0 +1,22 @@
+[
+  {"query": "my server is pegged at 100% CPU and load average is 40, where do I even start", "should_trigger": true},
+  {"query": "systemd service keeps flapping into restart loop — how do I dig out why from journald", "should_trigger": true},
+  {"query": "pin this apt package so unattended-upgrades stops bumping it", "should_trigger": true},
+  {"query": "my bash script swallows errors in a pipeline even with set -e, what gives", "should_trigger": true},
+  {"query": "quick ss or tcpdump one-liner to find what's hogging port 8080", "should_trigger": true},
+  {"query": "why does dig resolve but Safari can't on my Mac", "should_trigger": true},
+  {"query": "flush the DNS cache on macOS", "should_trigger": true},
+  {"query": "scutil --dns shows the wrong resolver after I switched Wi-Fi networks", "should_trigger": true},
+  {"query": "my VPN broke split DNS on my MacBook", "should_trigger": true},
+  {"query": "what's the macOS equivalent of ss -tlnp", "should_trigger": true},
+  {"query": "my domain returns SERVFAIL only on validating resolvers — is the DNSSEC chain broken?", "should_trigger": false},
+  {"query": "how do PID and mount namespaces compose with cgroups v2 when I unshare", "should_trigger": false},
+  {"query": "docker compose services can't resolve each other across the bridge network", "should_trigger": false},
+  {"query": "write a bpftrace one-liner to trace TCP retransmits per process", "should_trigger": false},
+  {"query": "Atlas cluster connection times out over VPC peering — should I switch to PrivateLink?", "should_trigger": false},
+  {"query": "Cloudflare keeps throwing 522 errors but my origin nginx is up", "should_trigger": false},
+  {"query": "tune Node's http.Agent keepAlive and maxSockets for thousands of outbound connections", "should_trigger": false},
+  {"query": "Chrome heap snapshot shows detached DOM nodes growing — find the retainer path", "should_trigger": false},
+  {"query": "best VPC subnet layout with NAT gateways across three AZs for a new AWS account", "should_trigger": false},
+  {"query": "nginx ingress controller returns 502 for one Kubernetes service", "should_trigger": false}
+]
