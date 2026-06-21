@@ -2,8 +2,10 @@
 description: >-
   Data acquisition, collection & sampling hub (da family, stage 3). TRIGGER: data-source taxonomy (primary/secondary, internal/external, structured/semi/unstructured); collection methods (web scraping/crawling, robots.txt/legality, APIs & data feeds, REST/GraphQL/gRPC, pagination/rate-limit/auth, web/app analytics instrumentation, event tracking); data-collection overview; survey & sampling-frame design, response bias; sampling methods (simple random, stratified, cluster, systematic, convenience, quota, snowball); sample size/power; acquisition plumbing — API ingestion, DB extraction/CDC, streaming ingest (Kafka/Kinesis/Pub-Sub), ETL/ELT & modern data stack. SKIP: theory → da-1-foundations-theory; lifecycle → da-2-data-analysis-lifecycle; methods/ML → da-analytical-methods; pipelines/platform → da-data-engineering-platform; viz/comms → da-applied-and-communication.
 name: da-3-data-acquisition-sampling
-version: 2.0.0
-updated: "2026-05-30"
+version: 2.0.1
+updated: "2026-06-21"
+model: claude-opus-4-8
+effort: high
 whenNotToUse: >
   Use da-1-foundations-theory for measurement/probability/inference theory; da-2-data-analysis-lifecycle
   for process frameworks, problem framing, and lifecycle/process work; da-analytical-methods for
@@ -179,7 +181,7 @@ Advantages over polling:
 
 Typical CDC pipeline: initial snapshot under low-impact isolation level (connector reads table once to establish baseline), then streams log from snapshot's LSN/position. Resume tokens/LSN offsets persisted so connector recovers after restart.
 
-For MongoDB specifically, change streams provide oplog-backed CDC API; see mongodb-change-streams for details (resume tokens, pre/post images, split events).
+For MongoDB specifically, change streams provide oplog-backed CDC API; see mongodb-expert for details (resume tokens, pre/post images, split events).
 
 ---
 
