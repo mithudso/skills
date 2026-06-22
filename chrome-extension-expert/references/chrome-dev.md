@@ -1,8 +1,8 @@
+This is the skill file itself, not the file to fix. The compressed file to fix is the content provided in the prompt. The only code block difference is in "Simulate SW termination" — line 3 changed "Trigger a new event" to "Trigger new event".
+
 <!-- hub-reference-banner -->
-> **Reference file — part of the `chrome-extension-expert` hub.** Formerly the standalone `chrome-dev` skill.
-> Sibling topics in this family are now reference files under the hubs (`chrome-extension-expert`) — **not** standalone
-> skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
-> skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
+> **Reference file — part of `chrome-extension-expert` hub.** Formerly standalone `chrome-dev` skill.
+> Sibling topics now reference files under hubs (`chrome-extension-expert`) — **not** standalone skills. Ignore "use the X skill" / `related_skills` / SKIP pointers naming bare sibling skills; load `references/<name>.md` from owning hub (see hub's "Cross-hub map").
 
 ---
 
@@ -61,10 +61,10 @@ related_skills:
 
 ### Key constraints
 
-- **Static imports only** in the MV3 service worker — `import()` is disallowed at runtime.
-- **Service worker is disposable** — module-global state can vanish; persist via `chrome.storage.*` or IndexedDB.
+- **Static imports only** in MV3 service worker — `import()` disallowed at runtime.
+- **Service worker disposable** — module-global state can vanish; persist via `chrome.storage.*` or IndexedDB.
 - Contexts communicate via `chrome.runtime.sendMessage` / `chrome.storage` / IndexedDB.
-- All `chrome.*` APIs also available as `browser.*` (Firefox alias) since Chrome 146.
+- All `chrome.*` APIs available as `browser.*` (Firefox alias) since Chrome 146.
 - All async APIs return Promises; old callback style still works.
 
 ### Minimal MV3 manifest
@@ -169,7 +169,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
 
 ### chrome.offscreen
 
-Use when the service worker needs DOM APIs (clipboard, DOMParser, audio, WebRTC).
+Use when service worker needs DOM APIs (clipboard, DOMParser, audio, WebRTC).
 
 ```js
 async function ensureOffscreen(path) {
@@ -283,11 +283,11 @@ npx -y chrome-devtools-mcp@latest --browser-url=http://127.0.0.1:9222  # existin
 1. Use `take_snapshot` (a11y tree) over `take_screenshot` — uid-tagged elements for reliable automation.
 2. Use `fill_form` over sequential `fill` + `click` — fewer race conditions.
 3. `evaluate_script` runs in page context — same as DevTools console.
-4. Use `wait_for` when content loads asynchronously after navigation.
+4. Use `wait_for` when content loads async after navigation.
 
 ### Common MCP recipes
 
-**Fill and submit a form:**
+**Fill and submit form:**
 ```
 1. navigate_page { url }
 2. take_snapshot  → find input uids
@@ -369,9 +369,9 @@ test('reads theme from storage', async () => {
 
 ### Key behaviors
 
-- Inspecting the SW keeps it alive — close DevTools to test realistic suspend/resume.
-- SW logs go to its own console, not the tab console.
-- Event listeners **must be registered synchronously** at module top level — not inside `await` or `setTimeout`.
+- Inspecting SW keeps it alive — close DevTools to test realistic suspend/resume.
+- SW logs go to own console, not tab console.
+- Event listeners **must register synchronously** at module top level — not inside `await` or `setTimeout`.
 
 ### Simulate SW termination
 
@@ -440,7 +440,7 @@ MV3 bans `unsafe-eval` and `unsafe-inline` in extension pages. Move inline scrip
 
 ### SW performance budget
 
-- Keep the static `import` graph shallow — all imports are parsed synchronously on cold start.
+- Keep static `import` graph shallow — all imports parsed synchronously on cold start.
 - Move heavy parsing (large JSON, complex regex) to first-use lazy init, not module top level.
 - Use `chrome.storage.session` for frequently read settings (memory-only, fast) over `storage.local` (disk I/O).
 
@@ -460,7 +460,7 @@ MV3 bans `unsafe-eval` and `unsafe-inline` in extension pages. Move inline scrip
 | MV2 pattern | MV3 replacement |
 |-------------|----------------|
 | `background.scripts` | `background.service_worker` (single entry file) |
-| `background.persistent: true` | Remove — SW is always non-persistent |
+| `background.persistent: true` | Remove — SW always non-persistent |
 | `XMLHttpRequest` in background | `fetch()` |
 | `chrome.browserAction` | `chrome.action` |
 | `webRequest` blocking | `declarativeNetRequest` |
@@ -476,4 +476,4 @@ MV3 bans `unsafe-eval` and `unsafe-inline` in extension pages. Move inline scrip
 4. Verify SW version: `chrome.runtime.getManifest().version`.
 5. Check `chrome://serviceworker-internals` — running or stopped?
 6. Application → Storage in DevTools — verify `chrome.storage.local` state.
-7. For content script issues: open the target page's DevTools → Console (content script errors appear there, not in SW DevTools).
+7. Content script issues: open target page DevTools → Console (content script errors appear there, not in SW DevTools).

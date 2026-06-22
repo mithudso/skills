@@ -1,8 +1,8 @@
+Compressing inline text directly (no file path provided, so running manually per skill rules).
+
 <!-- hub-reference-banner -->
-> **Reference file — part of the `chrome-extension-expert` hub.** Formerly the standalone `live-hub-toolkit` skill.
-> Sibling topics in this family are now reference files under the hubs (`chrome-extension-expert`) — **not** standalone
-> skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
-> skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
+> **Reference file — part of the `chrome-extension-expert` hub.** Formerly standalone `live-hub-toolkit` skill.
+> Sibling topics now reference files under hubs (`chrome-extension-expert`) — **not** standalone skills. Ignore "use X skill" / `related_skills` / SKIP pointers naming bare sibling skills; load from `references/<name>.md` in owning hub (see hub's "Cross-hub map").
 
 ---
 
@@ -58,13 +58,13 @@ related_skills:
 
 # Live Hub Toolkit
 
-Real-time data discovery for Chrome extensions monitoring support portals. The content script watches the DOM, builds a context snapshot on every meaningful change, deduplicates against the last published snapshot, and forwards deltas to the service worker for enrichment, storage, and downstream rendering.
+Real-time data discovery for Chrome extensions on support portals. Content script watches DOM, builds context snapshot on change, deduplicates against last snapshot, forwards deltas to service worker for enrichment, storage, rendering.
 
 **Cardinal rules:**
-1. **Extract raw, normalize elsewhere.** Content script emits raw scraped fields. Normalization, severity ranking, and timestamp cleanup belong in background helpers.
-2. **Deduplicate at the signature level.** Hash the meaningful fields; skip publish if unchanged since the last cycle.
-3. **Degrade gracefully.** Missing fields produce partial records, not crashes.
-4. **Respect the extension lifecycle.** Detect invalidated contexts, disconnect observers, and stop all timers when the extension reloads.
+1. **Extract raw, normalize elsewhere.** Content script emits raw scraped fields. Normalization, severity ranking, timestamp cleanup in background helpers.
+2. **Deduplicate at signature level.** Hash meaningful fields; skip publish if unchanged since last cycle.
+3. **Degrade gracefully.** Missing fields → partial records, not crashes.
+4. **Respect extension lifecycle.** Detect invalidated contexts, disconnect observers, stop timers on reload.
 
 ## Pipeline
 
@@ -104,7 +104,7 @@ Support Portal Page
 |---------|-----------|---------|
 | `MCA_UPSERT_CASE_CONTEXT` | content → background | Push extracted page context |
 | `MCA_GET_CASE_CONTEXT` | background → content | Pull current snapshot on demand |
-| `MCA_EVALUATE_TRACKING_PROMPT` | content → background | Ask whether to prompt operator to track |
+| `MCA_EVALUATE_TRACKING_PROMPT` | content → background | Ask if prompt operator to track |
 | `MCA_SYNC_FAVORITED_ACCOUNTS` | content → background | Push portfolio favorites list |
 | `MCA_REALTIME_BRIDGE_PAGE_READY` | content → background | Signal page bootstrap complete |
 
@@ -244,7 +244,7 @@ function normalizeCaseNumber(value = '') {
 
 ### Record scoring
 
-Score a record by counting non-empty fields. The richer record wins:
+Score record by non-empty field count. Richer record wins:
 
 ```js
 function scoreCaseRecord(record = {}) {
@@ -272,7 +272,7 @@ function mergeCaseCollections(...collections) {
 }
 ```
 
-Properties: **idempotent** (merging same collection twice produces the same result), **monotonic** (richer always replaces sparser), **deterministic sort** (stable output order).
+Properties: **idempotent** (same collection twice → same result), **monotonic** (richer replaces sparser), **deterministic sort** (stable output order).
 
 ---
 
@@ -311,7 +311,7 @@ function collectAccountCasesFromContexts(contexts = [], { accountId, accountName
 }
 ```
 
-The `observedAccountPage` flag is critical: it determines whether missing cases should be archived or merely not-yet-seen.
+`observedAccountPage` flag critical: determines if missing cases archive or merely not-yet-seen.
 
 ---
 
@@ -379,13 +379,13 @@ function findCasesToArchiveFromAccountSync({ existingCaseNumbers = [], mergedCas
 }
 ```
 
-**Only archive when `observedAccountPage === true`** — never archive cases the extension simply hasn't seen yet.
+Only archive when `observedAccountPage === true` — never archive cases extension hasn't seen yet.
 
 ---
 
 ## SPA navigation detection
 
-Support portals are typically SPAs. Layer all five mechanisms:
+Support portals typically SPAs. Layer all five mechanisms:
 
 ```js
 // 1. History API patching
@@ -442,7 +442,7 @@ window.__mdbCaseAssistantHubExtractorBooted = true;
 
 ## DOM extraction helpers
 
-Core utilities: `normalizeWhitespace()`, `isElementVisible()`, `readElementValue()`, and the universal `extractLabeledValue()` (tries inline "Label: Value" pattern and sibling element strategies). Also covers `extractAccountCases()` (walks case links and container rows) and `matchesTrackedAccount()` (ID-first, name-fallback account matching).
+Core utilities: `normalizeWhitespace()`, `isElementVisible()`, `readElementValue()`, `extractLabeledValue()` (inline "Label: Value" + sibling strategies). Also `extractAccountCases()` (walks case links/rows) and `matchesTrackedAccount()` (ID-first, name-fallback).
 
 Full implementations: [references/dom-extraction-helpers.md](./references/dom-extraction-helpers.md)
 
@@ -453,20 +453,20 @@ Full implementations: [references/dom-extraction-helpers.md](./references/dom-ex
 | Anti-pattern | Why it fails | Fix |
 |---|---|---|
 | Publishing on every MutationObserver callback | Floods service worker with identical data | Signature-based dedup with debounced publish |
-| Including `extracted_at` in the signature | Signature changes every cycle, defeating dedup | Exclude volatile timestamps from signature |
-| Normalizing in the content script | Content script becomes bloated, hard to test | Extract raw, normalize in background helpers |
+| Including `extracted_at` in signature | Signature changes every cycle, defeating dedup | Exclude volatile timestamps from signature |
+| Normalizing in content script | Content script bloated, hard to test | Extract raw, normalize in background helpers |
 | Single extraction strategy per field | Breaks when portal redesigns | Selector fallback chains + labeled value search |
 | No boot guard | Content script runs twice after extension reload | Check `window.__booted` flag before init |
 | Ignoring `document.hidden` | Publishes stale data for background tabs | Skip publish when hidden, re-extract on focus |
 | Not disconnecting observers on invalidation | Console errors, leaked timers | `deactivateExtractor()` on first error |
-| Trusting a single tab for account case list | Misses cases open in other tabs | `collectAccountCasesFromContexts` across all |
-| Archiving without observing the account page | Incorrectly archives cases not yet seen | Only archive when `observedAccountPage === true` |
+| Trusting single tab for account case list | Misses cases open in other tabs | `collectAccountCasesFromContexts` across all |
+| Archiving without observing account page | Incorrectly archives cases not yet seen | Only archive when `observedAccountPage === true` |
 
 ---
 
 ## Testing
 
-The `live-hub-toolkit` package is designed for pure unit testing without browser APIs — all functions accept and return plain objects.
+`live-hub-toolkit` pure unit testing without browser APIs — all functions take/return plain objects.
 
 ```js
 import test from 'node:test';
@@ -529,5 +529,5 @@ Deciding what to archive?
 
 - `packages/live-hub-toolkit/src/index.js` — pure normalization and merge functions
 - `src/background/live-hub-case-discovery.js` — re-export bridge for service worker
-- `src/content/hub-extractor.js` — production content script with full extraction pipeline
-- `src/background/case-enricher.js` — background-side normalization and severity ranking
+- `src/content/hub-extractor.js` — production content script, full extraction pipeline
+- `src/background/case-enricher.js` — background normalization + severity ranking

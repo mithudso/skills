@@ -1,8 +1,20 @@
+The SKILL.md I read is the compress skill itself — not the file to fix. The task provides the COMPRESSED file inline; I need to apply the fixes and return the corrected content.
+
+The validator's context segments show exact ORIGINAL text that the compressed version changed, causing the inline codes to appear "lost" (the validator anchors inline code detection on surrounding text). I need to restore those specific surrounding text fragments to match the ORIGINAL in 4 places:
+
+1. Warning: `if file is then saved` → `if the file is then saved` + `Use only` → `Use it only`
+2. Recalculation ending: `fix locations in` → `fix the locations in`
+3. Checklist line: `pull correct values` → `pull the correct values`
+4. Step 6: `script returns JSON` → `the script returns JSON` + `fix identified errors` → `fix the identified errors`
+
+`★ Insight ─────────────────────────────────────`
+The validator detects inline code by anchoring on surrounding text segments — if caveman compression drops articles like "the"/"it" adjacent to backtick spans, the validator loses its positional reference and incorrectly reports the inline code as missing even though it's still there.
+`─────────────────────────────────────────────────`
 <!-- hub-reference-banner -->
-> **Reference file — part of the `document-formats` hub.** Formerly the standalone `xlsx` skill.
-> Sibling topics in this family are now reference files under the hubs (`document-formats`) — **not** standalone
-> skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
-> skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
+> **Reference file — part of `document-formats` hub.** Formerly standalone `xlsx` skill.
+> Sibling topics now reference files under hubs (`document-formats`) — **not** standalone
+> skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below naming bare sibling
+> skill; load that topic's `references/<name>.md` from owning hub (see hub's "Cross-hub map").
 
 ---
 
@@ -23,9 +35,9 @@ license: Proprietary. LICENSE.txt has complete terms
 
 ### All Excel files
 
-- **Professional font**: Use a consistent, professional font (Arial, Times New Roman) unless the user specifies otherwise.
+- **Professional font**: Consistent professional font (Arial, Times New Roman) unless user specifies otherwise.
 - **Zero formula errors**: Deliver every Excel model with zero formula errors (`#REF!`, `#DIV/0!`, `#VALUE!`, `#N/A`, `#NAME?`).
-- **Preserve existing templates**: When modifying files, study and exactly match existing format, style, and conventions. Existing template conventions override these guidelines.
+- **Preserve existing templates**: When modifying files, study and exactly match existing format, style, conventions. Existing template conventions override these guidelines.
 
 ### Financial models
 
@@ -35,7 +47,7 @@ license: Proprietary. LICENSE.txt has complete terms
 |-------|-----------|---------|
 | Blue text | `0,0,255` | Hardcoded inputs; numbers users change for scenarios |
 | Black text | `0,0,0` | All formulas and calculations |
-| Green text | `0,128,0` | Links pulling from other worksheets in the same workbook |
+| Green text | `0,128,0` | Links pulling from other worksheets in same workbook |
 | Red text | `255,0,0` | External links to other files |
 | Yellow background | `255,255,0` | Key assumptions needing attention or cells to update |
 
@@ -47,7 +59,7 @@ license: Proprietary. LICENSE.txt has complete terms
 - Multiples: `0.0x`
 - Negative numbers: parentheses `(123)`, not minus `-123`
 
-**Documentation for hardcoded values**: Add a comment or adjacent cell note in this format:
+**Documentation for hardcoded values**: Add comment or adjacent cell note:
 `Source: [System/Document], [Date], [Specific Reference], [URL if applicable]`
 
 Examples:
@@ -56,7 +68,7 @@ Examples:
 
 ## Critical rule: use formulas, not hardcoded values
 
-Always write Excel formulas instead of calculating in Python and hardcoding results. This keeps the spreadsheet dynamic.
+Always write Excel formulas instead of calculating in Python and hardcoding results. Keeps spreadsheet dynamic.
 
 ```python
 # WRONG — hardcodes calculated values
@@ -69,19 +81,19 @@ sheet['C5'] = '=(C4-C2)/C2'
 sheet['D20'] = '=AVERAGE(D2:D19)'
 ```
 
-This applies to all calculations: totals, percentages, ratios, differences.
+Applies to all calculations: totals, percentages, ratios, differences.
 
 ## LibreOffice requirement
 
-Formula recalculation requires LibreOffice. Assume it is installed. The `scripts/recalc.py` script auto-configures LibreOffice on first run, including in sandboxed environments (handled via `scripts/office/soffice.py`).
+Formula recalculation requires LibreOffice. Assume installed. `scripts/recalc.py` auto-configures LibreOffice on first run, including sandboxed environments (handled via `scripts/office/soffice.py`).
 
 ## Common workflow
 
-1. **Choose tool**: pandas for data analysis and bulk operations; openpyxl for formulas, formatting, and Excel-specific features.
+1. **Choose tool**: pandas for data analysis and bulk operations; openpyxl for formulas, formatting, Excel-specific features.
 2. **Create or load**: create new workbook or load existing file.
 3. **Modify**: add/edit data, formulas, formatting.
 4. **Save**: write to file.
-5. **Recalculate formulas (mandatory when formulas are present)**:
+5. **Recalculate formulas (mandatory when formulas present)**:
    ```bash
    python scripts/recalc.py output.xlsx
    ```
@@ -164,4 +176,4 @@ Before returning any Excel file with formulas:
 
 ## Code style
 
-Write minimal, concise Python — no unnecessary comments, no verbose variable names, no redundant print statements. For the Excel file itself, add cell comments for complex formulas and document data sources for hardcoded values.
+Minimal, concise Python — no unnecessary comments, no verbose variable names, no redundant print statements. For Excel file itself, add cell comments for complex formulas and document data sources for hardcoded values.

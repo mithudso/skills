@@ -1,8 +1,6 @@
 <!-- hub-reference-banner -->
-> **Reference file — part of the `document-formats` hub.** Formerly the standalone `json-advanced` skill.
-> Sibling topics in this family are now reference files under the hubs (`document-formats`) — **not** standalone
-> skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
-> skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
+> **Reference file — part of `document-formats` hub.** Formerly standalone `json-advanced` skill.
+> Sibling topics now reference files under hubs (`document-formats`) — **not** standalone skills. Ignore "use X skill" / `related_skills` / SKIP pointers naming bare sibling skills; load `references/<name>.md` from owning hub (see hub's "Cross-hub map").
 
 ---
 
@@ -10,16 +8,9 @@
 name: json-advanced
 title: "Advanced JSON Patterns"
 description: >
-  Advanced JSON manipulation beyond basic parse/stringify — streaming parsers, JSON Schema
-  validation (Ajv/Draft 2020-12), JSON Patch (RFC 6902), JSONPath queries, binary formats
-  (BSON/MessagePack/CBOR), performance optimization (simdjson, fast-json-stringify),
-  NDJSON/JSON Lines, JSON5/JSONC, and type-safe validation (Zod/TypeBox).
-  TRIGGER: user needs to stream a large JSON file (>100MB), validate JSON against a schema
-  with Ajv or Zod, apply JSON Patch/diff operations, query nested JSON with JSONPath or
-  JMESPath, serialize faster than JSON.stringify, parse JSON5 or JSONC config files, use
-  MessagePack or CBOR instead of JSON, or handle BigInt/circular references/undefined in JSON.
-  SKIP: basic JSON.parse/JSON.stringify usage with no advanced requirements; JSON in a specific
-  framework context (use react-nextjs or software-engineering-patterns instead).
+  Advanced JSON beyond parse/stringify — streaming parsers, JSON Schema validation (Ajv/Draft 2020-12), JSON Patch (RFC 6902), JSONPath, binary formats (BSON/MessagePack/CBOR), perf optimization (simdjson, fast-json-stringify), NDJSON/JSON Lines, JSON5/JSONC, type-safe validation (Zod/TypeBox).
+  TRIGGER: stream large JSON (>100MB), validate with Ajv/Zod, apply JSON Patch/diff, query with JSONPath/JMESPath, serialize faster than JSON.stringify, parse JSON5/JSONC configs, use MessagePack/CBOR, handle BigInt/circular refs/undefined.
+  SKIP: basic JSON.parse/JSON.stringify with no advanced needs; JSON in specific framework (use react-nextjs or software-engineering-patterns).
 category: developer
 version: "1.1.1"
 updated: "2026-05-31"
@@ -36,17 +27,17 @@ keywords:
   - Zod TypeBox type-safe validation
   - BigInt circular reference JSON
 whenToUse:
-  - Streaming large JSON files that don't fit in memory (stream-json, oboe.js)
-  - Validating JSON structure and values against a schema (Ajv, Zod, TypeBox)
-  - Applying structural diffs or patches to JSON documents (JSON Patch RFC 6902)
-  - Querying nested JSON structures with path expressions (JSONPath, JMESPath)
-  - Optimizing JSON serialization performance (fast-json-stringify, simdjson)
-  - Parsing JSON5 or JSONC config files with comments and trailing commas
-  - Using binary JSON formats (MessagePack, CBOR, BSON) instead of text JSON
-  - Handling BigInt, circular references, undefined, or Date round-trips in JSON
+  - Stream large JSON not fitting in memory (stream-json, oboe.js)
+  - Validate JSON structure against schema (Ajv, Zod, TypeBox)
+  - Apply structural diffs/patches to JSON (JSON Patch RFC 6902)
+  - Query nested JSON with path expressions (JSONPath, JMESPath)
+  - Optimize JSON serialization perf (fast-json-stringify, simdjson)
+  - Parse JSON5/JSONC configs with comments and trailing commas
+  - Use binary JSON formats (MessagePack, CBOR, BSON) instead of text JSON
+  - Handle BigInt, circular refs, undefined, Date round-trips in JSON
 whenNotToUse:
-  - Basic JSON.parse/JSON.stringify with no advanced requirements
-  - Framework-specific JSON handling (use react-nextjs or express-patterns)
+  - Basic JSON.parse/JSON.stringify with no advanced needs
+  - Framework-specific JSON (use react-nextjs or express-patterns)
   - MongoDB BSON document design (use mongodb-expert or mongodb-schema-design)
 related_skills:
   - programming-languages
@@ -56,24 +47,24 @@ related_skills:
 
 # Advanced JSON Patterns
 
-Expert reference for JSON manipulation beyond `JSON.parse`/`JSON.stringify`. A response from this skill is correct when it picks the right library for the constraint (size, streaming, type safety, binary), flags known edge cases (BigInt, circular refs, Date round-trips), and produces idiomatic Node.js/TypeScript patterns.
+Expert reference for JSON beyond `JSON.parse`/`JSON.stringify`. Correct response picks right library for constraint (size, streaming, type safety, binary), flags edge cases (BigInt, circular refs, Date round-trips), produces idiomatic Node.js/TypeScript patterns.
 
-> **Staleness note:** Library version figures (Ajv Draft 2020-12, Zod, fast-json-stringify, msgpackr) and benchmark comparisons were current as of May 2026. Verify current versions from npm before using.
+> **Staleness note:** Library versions (Ajv Draft 2020-12, Zod, fast-json-stringify, msgpackr) and benchmarks current as of May 2026. Verify from npm before using.
 
 **Navigation by task:**
-- Stream a large JSON file without loading it into memory → JSON Streaming / Large Files
-- Validate JSON structure and values at runtime → JSON Schema (Ajv) or Type-Safe Validation (Zod/TypeBox)
-- Apply structural diffs or patches → JSON Patch (RFC 6902) / JSON Merge Patch
+- Stream large JSON without loading into memory → JSON Streaming / Large Files
+- Validate JSON structure at runtime → JSON Schema (Ajv) or Type-Safe Validation (Zod/TypeBox)
+- Apply diffs/patches → JSON Patch (RFC 6902) / JSON Merge Patch
 - Query nested structures with path expressions → JSONPath
 - Serialize faster than JSON.stringify → Performance Optimization (fast-json-stringify, simdjson)
-- Parse JSON5 or JSONC config files with comments → JSON5 / JSONC / JSON Lines
+- Parse JSON5/JSONC configs with comments → JSON5 / JSONC / JSON Lines
 - Use binary serialization instead of JSON → Binary JSON Formats (MessagePack, CBOR, BSON)
 - TypeScript-native validation with type inference → Type-Safe JSON Validation (Zod, TypeBox)
 - Common pitfalls and safe alternatives → Anti-Patterns / Troubleshooting
 
 ## Overview
 
-This skill covers JSON manipulation beyond `JSON.parse`/`JSON.stringify` — streaming parsers for large files, schema validation, structural diffing/patching, querying nested data, binary serialization formats, and performance optimization. Focused on Node.js/JavaScript with Python equivalents where relevant.
+JSON beyond `JSON.parse`/`JSON.stringify` — streaming parsers for large files, schema validation, structural diffing/patching, querying nested data, binary formats, perf optimization. Node.js/JavaScript focus; Python equivalents where relevant.
 
 ---
 
@@ -81,7 +72,7 @@ This skill covers JSON manipulation beyond `JSON.parse`/`JSON.stringify` — str
 
 ### JSON Streaming / Large Files
 
-For files too large to fit in memory (>100MB), use streaming parsers that emit events or objects incrementally.
+Files too large for memory (>100MB): use streaming parsers emitting events or objects incrementally.
 
 **Node.js libraries:**
 
@@ -135,7 +126,7 @@ for (const item of items) {
 
 ### JSON Schema (Draft 2020-12)
 
-Runtime validation of JSON structure and values. The standard for API contracts, config validation, and OpenAPI specs.
+Runtime validation of JSON structure and values. Standard for API contracts, config validation, OpenAPI specs.
 
 **Ajv (Node.js) — fastest JSON Schema validator:**
 
@@ -171,7 +162,7 @@ if (!validate(data)) console.error(validate.errors);
 
 ### JSON Patch (RFC 6902)
 
-Describes changes to a JSON document as an array of operations. Used for collaborative editing, API partial updates, audit trails.
+Describes changes to JSON document as array of operations. Used for collaborative editing, API partial updates, audit trails.
 
 ```javascript
 const jsonpatch = require('fast-json-patch');
@@ -194,7 +185,7 @@ const errors = jsonpatch.validate(patch, original);
 
 **Operations:** `add`, `remove`, `replace`, `move`, `copy`, `test`.
 
-**JSON Merge Patch (RFC 7396):** Simpler alternative — just send the partial object. `null` means delete.
+**JSON Merge Patch (RFC 7396):** Simpler alternative — send partial object. `null` means delete.
 ```javascript
 const mergePatch = require('json-merge-patch');
 const result = mergePatch.apply(original, { age: 31, address: null });
@@ -309,7 +300,7 @@ const { serialize, deserialize } = require('bson');
 const bsonBuffer = serialize({ _id: new ObjectId(), ts: new Date() });
 ```
 
-**Decision guide:** JSON for human readability and debugging. MessagePack for size-sensitive IPC/caching. BSON for MongoDB. Protobuf for typed RPC contracts.
+**Decision guide:** JSON for human readability + debugging. MessagePack for size-sensitive IPC/caching. BSON for MongoDB. Protobuf for typed RPC contracts.
 
 ---
 
@@ -354,7 +345,7 @@ const valid = Value.Check(T, data);
 
 | Anti-Pattern | Why It Fails | Correct Approach |
 |---|---|---|
-| `JSON.parse` in a try/catch for validation | Only catches syntax errors, not schema | Use Ajv or Zod for structural validation |
+| `JSON.parse` in try/catch for validation | Only catches syntax errors, not schema | Use Ajv or Zod for structural validation |
 | Storing large arrays as single JSON files | Can't stream-read, OOM on large data | Use NDJSON (.jsonl) — one object per line |
 | `eval()` or `new Function()` for JSON with comments | Code injection vulnerability | Use `json5` or `jsonc-parser` |
 | Deep-cloning via `JSON.parse(JSON.stringify(x))` | Loses Date, undefined, functions, symbols | Use `structuredClone()` (Node 17+) |

@@ -1,8 +1,8 @@
+User provided text directly — I'll compress inline following the strict rules.
+
 <!-- hub-reference-banner -->
-> **Reference file — part of the `document-formats` hub.** Formerly the standalone `pptx` skill.
-> Sibling topics in this family are now reference files under the hubs (`document-formats`) — **not** standalone
-> skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
-> skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
+> **Reference file — part of the `document-formats` hub.** Formerly standalone `pptx` skill.
+> Sibling topics = reference files under hubs (`document-formats`) — **not** standalone skills. Ignore "use the X skill" / `related_skills` / SKIP pointers naming bare sibling skills; load `references/<name>.md` from owning hub (see hub's "Cross-hub map").
 
 ---
 
@@ -21,7 +21,7 @@ license: Proprietary
 
 ## Overview
 
-A .pptx file is a ZIP archive containing XML files conforming to the Office Open XML (OOXML/PresentationML) standard (ECMA-376, ISO/IEC 29500). Libraries in Node.js and Python provide high-level APIs for creating and manipulating these files without requiring PowerPoint to be installed.
+.pptx = ZIP archive of XML (OOXML/PresentationML, ECMA-376, ISO/IEC 29500). Node.js + Python libs provide high-level APIs — no PowerPoint install needed.
 
 ## Quick Reference
 
@@ -76,11 +76,11 @@ presentation.pptx (ZIP archive)
 
 ### Key Concepts
 
-- **[Content_Types].xml**: Maps every part to its MIME type. Must be updated when adding new part types.
-- **Relationship files (.rels)**: Define connections between parts using `rId` references. Each source part has its own `_rels/<name>.rels` file.
-- **Slide hierarchy**: Master -> Layout -> Slide. Properties inherit downward (master defines defaults, layout overrides, slide overrides further). A slide references its layout via relationship; layout references its master.
-- **Placeholders**: Typed containers (title, body, date, footer, slide number) inherited from master through layout to slide. Accessed by `idx` value, not position.
-- **EMU (English Metric Units)**: Internal measurement unit. 1 inch = 914400 EMU. 1 cm = 360000 EMU. 1 pt = 12700 EMU.
+- **[Content_Types].xml**: Maps parts to MIME types. Update when adding new part types.
+- **Relationship files (.rels)**: Connect parts via `rId` references. Each source part has `_rels/<name>.rels`.
+- **Slide hierarchy**: Master → Layout → Slide. Properties inherit down (master = defaults, layout overrides, slide overrides further). Slide refs layout via relationship; layout refs master.
+- **Placeholders**: Typed containers (title, body, date, footer, slide number) inherited master→layout→slide. Accessed by `idx`, not position.
+- **EMU (English Metric Units)**: Internal unit. 1 inch = 914400 EMU. 1 cm = 360000 EMU. 1 pt = 12700 EMU.
 
 ---
 
@@ -113,7 +113,7 @@ Need to generate .pptx?
 **Version**: 4.0.1 | **Weekly downloads**: ~1.8M | **License**: MIT
 **GitHub**: https://github.com/gitbrent/PptxGenJS
 
-Zero runtime dependencies. Works in Node.js, browsers, React, Vite, Electron. Dual ESM/CJS builds. Ships with TypeScript definitions (`types/index.d.ts`).
+Zero deps. Works in Node.js, browsers, React, Vite, Electron. Dual ESM/CJS. Ships TypeScript defs (`types/index.d.ts`).
 
 #### Installation
 ```bash
@@ -190,7 +190,7 @@ const buffer = await pptx.write({ outputType: 'nodebuffer' });
 **Version**: 1.0.0 | **License**: MIT
 **Docs**: https://python-pptx.readthedocs.io
 
-Mature, well-documented library. Reads and writes .pptx files. Template-based workflow is idiomatic.
+Reads/writes .pptx. Template-based workflow idiomatic.
 
 #### Installation
 ```bash
@@ -288,7 +288,7 @@ Not supported natively: waterfall, funnel, treemap, sunburst, heatmap, Gantt.
 **Version**: 0.8.1 | **Weekly downloads**: ~10K | **License**: MIT
 **GitHub**: https://github.com/singerla/pptx-automizer
 
-Server-side only. Reads existing .pptx templates, merges slides, modifies content via XML callbacks. Can wrap PptxGenJS for from-scratch elements within templates.
+Server-side only. Reads .pptx templates, merges slides, modifies via XML callbacks. Wraps PptxGenJS for from-scratch elements in templates.
 
 ```javascript
 import Automizer from 'pptx-automizer';
@@ -484,33 +484,33 @@ async function addChartImageSlide(pptx, chartConfig, title) {
 ## Anti-Patterns and Pitfalls
 
 ### Memory Issues
-- **python-pptx** holds entire .pptx as parsed lxml tree in memory. At 1000+ slides, RSS can peak at 1.7GB.
-  - **Workaround**: Split into multiple smaller presentations, merge at the end. Or use parallelized generation with asyncio and merge.
-  - **Alternative**: `gentle-python-pptx` library caches parsed properties for repeated processing of large files.
-- **PptxGenJS** is more memory-efficient (streaming ZIP write), but very large image-heavy decks can still exhaust Node.js heap.
-  - **Workaround**: Process in batches, increase `--max-old-space-size`, or stream images from disk rather than base64.
+- **python-pptx** holds full .pptx as lxml tree. 1000+ slides → RSS peaks ~1.7GB.
+  - **Workaround**: Split into smaller decks, merge after. Or parallelize with asyncio.
+  - **Alternative**: `gentle-python-pptx` caches parsed properties for large files.
+- **PptxGenJS** more memory-efficient (streaming ZIP), but large image-heavy decks can exhaust Node.js heap.
+  - **Workaround**: Batch process, increase `--max-old-space-size`, stream images from disk vs base64.
 
 ### Font Embedding Gotchas
-- Programmatic libraries generally DO NOT embed fonts in the output .pptx.
-- Each embedded font family adds 500KB-2MB to file size.
-- Many commercial fonts have licensing metadata that blocks embedding.
-- **Best practice**: Use system-safe fonts (Calibri, Arial, Aptos, Segoe UI) that are pre-installed on Windows and Mac. This eliminates rendering differences entirely.
-- If custom fonts are required, instruct end users to install them, or use PDF export as the distribution format.
+- Programmatic libs DO NOT embed fonts.
+- Each font family adds 500KB–2MB.
+- Commercial fonts often have licensing metadata blocking embed.
+- **Best practice**: Use system fonts (Calibri, Arial, Aptos, Segoe UI) pre-installed on Windows/Mac — eliminates rendering differences.
+- Custom fonts needed? Tell users to install, or export PDF.
 
 ### Cross-Platform Rendering Differences
-- Text reflow: Same text may wrap differently on Windows vs macOS vs LibreOffice due to font metrics differences.
-- Charts render with platform-specific fonts and anti-aliasing.
-- EMF/WMF images only render on Windows; use PNG/SVG for cross-platform.
-- **Mitigation**: Test on all target platforms. Use fixed-width text boxes with adequate padding. Prefer PNG over vector for pixel-perfect results.
+- Text reflow differs Windows/macOS/LibreOffice (font metrics).
+- Charts render with platform fonts + anti-aliasing.
+- EMF/WMF Windows-only; use PNG/SVG cross-platform.
+- **Mitigation**: Test all target platforms. Fixed-width text boxes + padding. PNG over vector for pixel-perfect.
 
 ### Common Mistakes
-1. **Placing shapes outside slide bounds**: No bounds validation -- content gets clipped during rendering.
-2. **Ignoring placeholder inheritance**: Manually positioning text boxes instead of using template placeholders leads to inconsistent styling.
-3. **Hardcoding slide layout indices**: Layout indices vary between templates. Always enumerate and match by name.
-4. **Missing relationship updates**: When manipulating XML directly, forgetting to update `.rels` files corrupts the archive.
-5. **Large base64 images in memory**: For Node.js, pass file paths instead of base64 strings when possible.
-6. **Not setting `autoPage` for tables**: Large tables overflow the slide without `autoPage: true` (PptxGenJS) or manual pagination.
-7. **Forgetting `[Content_Types].xml`**: Adding new media types (SVG, video) requires updating the content types registry.
+1. **Shapes outside slide bounds**: No validation — content clips during render.
+2. **Ignoring placeholder inheritance**: Manual text box position → inconsistent styling.
+3. **Hardcoding layout indices**: Indices vary by template. Enumerate and match by name.
+4. **Missing `.rels` updates**: Direct XML manipulation without updating `.rels` corrupts archive.
+5. **Large base64 images**: Pass file paths, not base64, where possible.
+6. **No `autoPage` for tables**: Large tables overflow without `autoPage: true` (PptxGenJS) or manual pagination.
+7. **Forgetting `[Content_Types].xml`**: New media types (SVG, video) need content types registry update.
 
 ---
 
@@ -518,16 +518,16 @@ async function addChartImageSlide(pptx, chartConfig, title) {
 
 | Symptom | Cause | Fix |
 |---------|-------|-----|
-| "The file is corrupt" on open | Malformed XML or missing relationship | Unzip .pptx, validate XML, check all rId references exist in .rels |
-| Images not showing | Wrong relationship target or missing content type | Verify media path in .rels matches actual file in media/ folder |
-| Slide appears blank | Content placed outside visible area | Check x/y/w/h values are within slide dimensions |
-| Charts show "Chart not available" | Chart XML references missing data part | Ensure chart data worksheets (embedded Excel) are properly included |
+| "The file is corrupt" on open | Malformed XML or missing relationship | Unzip .pptx, validate XML, check all rId refs exist in .rels |
+| Images not showing | Wrong relationship target or missing content type | Verify media path in .rels matches file in media/ |
+| Slide appears blank | Content outside visible area | Check x/y/w/h within slide dimensions |
+| Charts show "Chart not available" | Chart XML refs missing data part | Ensure chart data worksheets (embedded Excel) included |
 | Text overlaps or truncates | No autofit/shrink, text exceeds box | Enable `shrinkText: true` (PptxGenJS) or `tf.auto_size = MSO_AUTO_SIZE.BEST_FIT` (python-pptx, import from `pptx.enum.text`) |
-| File opens in "repair" mode | ZIP structure issue or XML namespace error | Ensure proper XML declarations, no BOM in XML files |
-| python-pptx OOM on large decks | Full DOM tree held in memory | Split generation into chunks, merge afterward |
-| PptxGenJS hangs on write | Very large base64 images blocking event loop | Use file paths, stream writes, or Worker threads |
+| File opens in "repair" mode | ZIP structure or XML namespace error | Ensure proper XML declarations, no BOM in XML files |
+| python-pptx OOM on large decks | Full DOM tree in memory | Split generation, merge after |
+| PptxGenJS hangs on write | Large base64 images blocking event loop | Use file paths, stream writes, or Worker threads |
 | Layout mismatch after template change | Hardcoded layout index shifted | Enumerate layouts by name: `prs.slide_layouts` iteration |
-| LibreOffice PDF looks different | Font substitution | Install matching fonts on server, or embed them in the .pptx first |
+| LibreOffice PDF looks different | Font substitution | Install matching fonts on server, or embed in .pptx first |
 
 ---
 

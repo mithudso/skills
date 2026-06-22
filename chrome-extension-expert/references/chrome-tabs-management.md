@@ -1,8 +1,6 @@
 <!-- hub-reference-banner -->
-> **Reference file — part of the `chrome-extension-expert` hub.** Formerly the standalone `chrome-tabs-management` skill.
-> Sibling topics in this family are now reference files under the hubs (`chrome-extension-expert`) — **not** standalone
-> skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
-> skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
+> **Reference file — part of the `chrome-extension-expert` hub.** Formerly standalone `chrome-tabs-management` skill.
+> Sibling topics now reference files under hubs (`chrome-extension-expert`) — **not** standalone skills. Ignore "use the X skill" / `related_skills` / SKIP pointers naming bare sibling skills; load `references/<name>.md` from owning hub (see "Cross-hub map").
 
 ---
 
@@ -10,20 +8,19 @@
 name: chrome-tabs-management
 description: >
   Chrome extension tabs API patterns — chrome.tabs query/get/update/create/remove,
-  tab messaging (sendMessage to specific tabs), tab lifecycle events
+  tab messaging (sendMessage to specific tabs), lifecycle events
   (onUpdated/onCreated/onRemoved/onActivated), activeTab vs tabs permission,
-  chrome.tabGroups API, tab discarding and freezing, programmatic injection
-  via chrome.scripting with tab targets, per-tab badge state via chrome.action,
-  and finding extension-owned pages.
-  TRIGGER: building or reviewing tab management logic in MV3 Chrome extensions,
-  querying tabs by URL or state, messaging content scripts in specific tabs,
-  handling tab lifecycle events, grouping or discarding tabs, per-tab badge
-  state, injecting scripts into specific tabs on demand.
-  SKIP: basic MV3 architecture, storage, or SW lifecycle (use chrome-dev or
-  mv3-service-worker-expert), offscreen documents or native messaging (use
-  chrome-mv3-advanced), extension packaging or publishing (use
-  chrome-extension-packaging), E2E testing of extension pages (use
-  extension-e2e-testing).
+  chrome.tabGroups API, tab discard/freeze, programmatic injection
+  via chrome.scripting with tab targets, per-tab badge via chrome.action,
+  finding extension-owned pages.
+  TRIGGER: building/reviewing tab management in MV3 Chrome extensions,
+  querying tabs by URL/state, messaging content scripts in specific tabs,
+  handling lifecycle events, grouping/discarding tabs, per-tab badge,
+  injecting scripts into specific tabs on demand.
+  SKIP: basic MV3 architecture/storage/SW lifecycle (use chrome-dev or
+  mv3-service-worker-expert), offscreen docs/native messaging (use
+  chrome-mv3-advanced), extension packaging/publishing (use
+  chrome-extension-packaging), E2E testing (use extension-e2e-testing).
 version: 1.1.0
 category: developer
 tags: [chrome-extension, tabs, mv3, service-worker, messaging, lifecycle, tabGroups, scripting, badge, activeTab, discard, freeze]
@@ -33,9 +30,9 @@ updated: 2026-05-29
 
 # Chrome Tabs Management — MV3 Developer Reference
 
-Complete reference for Chrome extension tab operations in Manifest V3. Covers querying, creating, updating, removing, messaging, lifecycle events, tab groups, discarding, programmatic injection, per-tab badge state, and finding extension pages.
+Complete MV3 Chrome extension tab operations reference: query, create, update, remove, message, lifecycle events, groups, discard, inject, badge, find extension pages.
 
-All code examples target Manifest V3 with promise-based APIs (no callbacks). Current as of Chrome 132+ / May 2026.
+All examples use MV3 promise APIs (no callbacks). Chrome 132+ / May 2026.
 
 ---
 
@@ -43,22 +40,22 @@ All code examples target Manifest V3 with promise-based APIs (no callbacks). Cur
 
 ### The `tabs` permission
 
-Grants access to four sensitive Tab properties:
+Grants 4 sensitive Tab properties:
 
 | Property | Requires `tabs` | Description |
 |----------|-----------------|-------------|
-| `url` | Yes | Full URL of the tab |
-| `pendingUrl` | Yes | URL being navigated to |
+| `url` | Yes | Full tab URL |
+| `pendingUrl` | Yes | Navigation target URL |
 | `title` | Yes | Page title |
 | `favIconUrl` | Yes | Favicon URL |
 | `id`, `windowId`, `active`, `pinned`, `status`, `index`, `groupId`, `discarded` | No | Always available |
-| `frozen` | No | Whether tab is frozen (Chrome 132+) |
+| `frozen` | No | Tab frozen (Chrome 132+) |
 
-**Warning shown to user:** "Read your browsing history" — only request when you genuinely need URL/title access.
+**Warning shown to user:** "Read your browsing history" — request only when URL/title access needed.
 
 ### The `activeTab` permission
 
-Grants temporary access to the **current tab only** when the user invokes the extension (action click, keyboard shortcut, context menu, permissions prompt).
+Grants temporary **current tab only** access when user invokes extension (action click, keyboard shortcut, context menu, permissions prompt).
 
 ```json
 { "permissions": ["activeTab"] }
@@ -67,9 +64,9 @@ Grants temporary access to the **current tab only** when the user invokes the ex
 **What it grants temporarily:**
 - `chrome.scripting.executeScript()` / `insertCSS()` / `removeCSS()` on that tab
 - Access to `url`, `title`, `favIconUrl` for that tab
-- Behaves like a temporary host permission for the tab's origin
+- Acts as temporary host permission for tab's origin
 
-**No warning text shown** — prefer `activeTab` over `"tabs"` when you only need the current tab on user gesture.
+**No warning text shown** — prefer `activeTab` over `"tabs"` for current-tab-on-gesture needs.
 
 ### Permission decision matrix
 
@@ -184,7 +181,7 @@ async function broadcastToSupportTabs(message) {
 
 ### Messaging frozen/discarded tabs
 
-Since Chrome 132, messages to **frozen** tabs are queued and delivered on unfreeze. Messages to **discarded** tabs fail — content script is unloaded.
+Since Chrome 132, messages to **frozen** tabs queue, deliver on unfreeze. **Discarded** tab messages fail — content script unloaded.
 
 ```js
 async function safeTabMessage(tabId, message) {
@@ -199,7 +196,7 @@ async function safeTabMessage(tabId, message) {
 
 ## 4. Tab Lifecycle Events
 
-All lifecycle events fire in the service worker and wake it if suspended.
+All lifecycle events fire in SW, wake it if suspended.
 
 ```js
 // onCreated — URL may be empty at this point
@@ -239,7 +236,7 @@ chrome.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
 });
 ```
 
-**Lifecycle event ordering** for a typical navigation in an existing tab:
+**Lifecycle event ordering** for navigation in existing tab:
 1. `onUpdated` — `status: 'loading'`, `url: <new URL>`
 2. `onUpdated` — `title: <new title>` (may fire multiple times)
 3. `onUpdated` — `favIconUrl: <icon URL>`
@@ -249,7 +246,7 @@ chrome.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
 
 ## 5. Tab Groups
 
-Requires `"tabGroups"` permission to **modify** group properties (title, color, collapsed). Grouping/ungrouping tabs requires no extra permission.
+Requires `"tabGroups"` permission to **modify** group properties (title, color, collapsed). Grouping/ungrouping needs no extra permission.
 
 ```js
 // Group tabs into a new group
@@ -274,7 +271,7 @@ const blueGroups = await chrome.tabGroups.query({ color: 'blue' });
 await chrome.tabGroups.move(groupId, { windowId: targetWindowId, index: -1 });
 ```
 
-**Known limitation:** Chrome's "saved tab groups" (Chrome 119+) cannot be updated via the extension API. Calling `tabGroups.update()` on a saved group throws. There is no API property to detect whether a group is saved.
+**Known limitation:** Chrome "saved tab groups" (Chrome 119+) can't be updated via API. `tabGroups.update()` on saved group throws. No API property to detect if group is saved.
 
 ---
 
@@ -339,7 +336,7 @@ await chrome.scripting.removeCSS({
 
 ## 8. Per-Tab Badge State
 
-`chrome.action` supports per-tab badge text, color, icon, title, and popup. Per-tab values override global defaults and auto-clear when the tab closes.
+`chrome.action` supports per-tab badge text, color, icon, title, popup. Per-tab values override global defaults; auto-clear on tab close.
 
 ```js
 // Set badge for a specific tab
@@ -497,10 +494,10 @@ async function groupTabsByDomain() {
 | Error | Cause | Fix |
 |-------|-------|-----|
 | `No tab with id: N` | Tab closed between query and use | Re-query or wrap in try/catch |
-| `Receiving end does not exist` | No content script listener in the tab | Inject content script first, then message |
-| `Cannot access a chrome:// URL` | Injecting into a protected page | Check `tab.url` before injecting |
+| `Receiving end does not exist` | No content script in tab | Inject content script first, then message |
+| `Cannot access a chrome:// URL` | Injecting into protected page | Check `tab.url` before injecting |
 | `Cannot discard the active tab` | Tried to discard focused tab | Only discard inactive tabs |
-| `Saved tab groups cannot be updated` | Tried to update a saved tab group | No workaround — API limitation |
+| `Saved tab groups cannot be updated` | Tried to update saved tab group | No workaround — API limitation |
 | `The extensions gallery cannot be scripted` | Injecting into Chrome Web Store | Skip `chrome.google.com/webstore` URLs |
 
 ```js
@@ -515,11 +512,11 @@ async function safeGetTab(tabId) {
 
 ## 12. Anti-Patterns
 
-1. **Querying all tabs without filters.** `chrome.tabs.query({})` returns every tab. Always filter by `currentWindow`, `active`, `url`, or other criteria.
-2. **Not filtering onUpdated events.** This event fires many times per navigation. Always check `changeInfo` properties before doing work.
-3. **Assuming `tab.url` is always available.** Without `"tabs"` permission, `tab.url` is undefined. Check for the permission or use `activeTab`.
-4. **Sending messages without error handling.** `chrome.tabs.sendMessage()` throws if no listener exists. Always catch `"Receiving end does not exist"`.
-5. **Storing tab IDs long-term.** Tab IDs are not stable across browser restarts. Use URL patterns or session storage for persistence.
-6. **Using `chrome.tabs.executeScript` (MV2).** In MV3, use `chrome.scripting.executeScript()` — the old API is removed.
-7. **Calling `chrome.tabs.getCurrent()` from the service worker.** Returns `undefined` — only works from extension pages running in a tab.
-8. **Not checking discarded/frozen state before messaging.** Discarded tabs have no content script. Frozen tabs queue messages. Check state first.
+1. **Querying all tabs without filters.** `chrome.tabs.query({})` returns every tab. Filter by `currentWindow`, `active`, `url`, etc.
+2. **Not filtering onUpdated events.** Fires many times per navigation. Check `changeInfo` before doing work.
+3. **Assuming `tab.url` always available.** Without `"tabs"` permission, `tab.url` is undefined. Check permission or use `activeTab`.
+4. **Sending messages without error handling.** `chrome.tabs.sendMessage()` throws if no listener. Catch `"Receiving end does not exist"`.
+5. **Storing tab IDs long-term.** Tab IDs unstable across browser restarts. Use URL patterns or session storage.
+6. **Using `chrome.tabs.executeScript` (MV2).** In MV3, use `chrome.scripting.executeScript()` — old API removed.
+7. **Calling `chrome.tabs.getCurrent()` from SW.** Returns `undefined` — works only from extension pages in a tab.
+8. **Not checking discarded/frozen state before messaging.** Discarded tabs: no content script. Frozen tabs: queue messages. Check state first.

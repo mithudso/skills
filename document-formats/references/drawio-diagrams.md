@@ -1,8 +1,8 @@
 <!-- hub-reference-banner -->
-> **Reference file — part of the `document-formats` hub.** Formerly the standalone `drawio-diagrams` skill.
-> Sibling topics in this family are now reference files under the hubs (`document-formats`) — **not** standalone
-> skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
-> skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
+> **Reference file — part of the `document-formats` hub.** Formerly standalone `drawio-diagrams` skill.
+> Sibling topics now reference files under hubs (`document-formats`) — **not** standalone
+> skills. Ignore "use the X skill" / `related_skills` / SKIP pointers naming bare sibling
+> skills; load topic's `references/<name>.md` from owning hub (see hub's "Cross-hub map").
 
 ---
 
@@ -53,9 +53,9 @@ related_skills:
 
 # Draw.io / Diagrams.net Programmatic Reference
 
-Expert reference for programmatic draw.io diagram generation and manipulation. A response from this skill is correct when it produces valid mxGraphModel XML (with root cells id="0" and id="1"), uses the right encoding for the target context (uncompressed for Git, compressed for wire), and applies style strings that render correctly in the draw.io editor.
+Expert reference for programmatic draw.io diagram generation and manipulation. Response correct when: produces valid mxGraphModel XML (root cells id="0" and id="1"), uses right encoding for context (uncompressed for Git, compressed for wire), applies style strings that render in draw.io editor.
 
-> **Staleness note:** Library versions (drawpyo, maxGraph, draw.io desktop CLI), the drawio-mcp server feature set, and Docker headless image names were current as of May 2026. Verify current versions from each project's releases page before use.
+> **Staleness note:** Library versions (drawpyo, maxGraph, draw.io desktop CLI), drawio-mcp feature set, Docker headless image names current as of May 2026. Verify from each project's releases page before use.
 
 **Navigation by task:**
 - XML structure (mxGraphModel, mxCell, mxGeometry, layers, pages) → Core Concepts
@@ -73,7 +73,7 @@ Expert reference for programmatic draw.io diagram generation and manipulation. A
 
 ## Overview
 
-Draw.io (diagrams.net) is an open-source diagramming tool whose native file format is XML-based (.drawio or .drawio.xml). The format is fully documented and can be generated, parsed, and manipulated programmatically without the draw.io editor. This makes it suitable for diagram-as-code workflows, CI/CD-generated architecture diagrams, and automated documentation pipelines.
+Draw.io (diagrams.net) open-source diagramming tool; native file format XML-based (.drawio or .drawio.xml). Format fully documented, can be generated/parsed/manipulated without editor. Suitable for diagram-as-code workflows, CI/CD-generated architecture diagrams, automated documentation pipelines.
 
 Key ecosystem components:
 - **File format**: XML with mxGraphModel structure (compressed or uncompressed)
@@ -88,29 +88,29 @@ Key ecosystem components:
 
 ### Cell Model
 
-Everything in a draw.io diagram is an **mxCell**. There are four roles:
+Everything in draw.io = **mxCell**. Four roles:
 
 | Role | Attributes | Purpose |
 |------|-----------|---------|
-| Root cell | `id="0"` | Invisible root of the cell hierarchy |
+| Root cell | `id="0"` | Invisible root of cell hierarchy |
 | Layer cell | `id="1" parent="0"` | Default layer; additional layers also have parent="0" |
 | Vertex | `vertex="1" parent="1"` | Shapes, text boxes, images, containers |
 | Edge | `edge="1" parent="1"` | Connectors between vertices |
 
-Cells are **mutually exclusive** -- a cell is either a vertex OR an edge, never both.
+Cells **mutually exclusive** -- vertex OR edge, never both.
 
 ### Geometry (mxGeometry)
 
-Every vertex has an `<mxGeometry>` child defining position and size:
-- `x`, `y` -- top-left corner position (absolute or relative if inside a container)
+Every vertex has `<mxGeometry>` child:
+- `x`, `y` -- top-left corner (absolute or relative inside container)
 - `width`, `height` -- dimensions in pixels
-- `relative="1"` -- used for edge labels (position along the edge, 0-1)
+- `relative="1"` -- for edge labels (position along edge, 0-1)
 
 Edges use `<mxGeometry>` with `<Array as="points">` for waypoints and `<mxPoint>` for source/target offsets.
 
 ### Style Strings
 
-Visual appearance is a semicolon-delimited key=value string:
+Semicolon-delimited key=value string:
 ```
 rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=12;
 ```
@@ -126,8 +126,8 @@ Key style properties:
 
 ### Edge Styles
 
-Edge routing options:
-- `edgeStyle=orthogonalEdgeStyle` -- right-angle routing (most common)
+Routing options:
+- `edgeStyle=orthogonalEdgeStyle` -- right-angle (most common)
 - `edgeStyle=elbowEdgeStyle` -- single bend
 - `edgeStyle=entityRelationEdgeStyle` -- ER diagram style
 - `edgeStyle=none` or omit -- straight line
@@ -135,29 +135,29 @@ Edge routing options:
 - `rounded=1` -- rounded corners on orthogonal edges
 
 Arrow markers:
-- `startArrow=none`, `endArrow=block` (filled arrow), `endArrow=open`, `endArrow=diamond`, `endArrow=diamondThin`
+- `startArrow=none`, `endArrow=block` (filled), `endArrow=open`, `endArrow=diamond`, `endArrow=diamondThin`
 - `startFill=0`, `endFill=0` -- hollow markers
 
 ### Connectors and Source/Target
 
-Edges reference source and target cells by ID:
+Edges reference source/target by ID:
 ```xml
 <mxCell id="e1" edge="1" source="v1" target="v2" parent="1">
 ```
 
-Connection points can be constrained to specific positions using `exitX`, `exitY`, `entryX`, `entryY` (0-1 relative to cell bounds) and `exitPerimeter=0` to attach to the exact point rather than the perimeter.
+Connection points constrained via `exitX`, `exitY`, `entryX`, `entryY` (0-1 relative to cell bounds) and `exitPerimeter=0` to attach to exact point.
 
 ### Layers
 
-A layer is an mxCell with `parent="0"` and no vertex/edge attribute:
+Layer = mxCell with `parent="0"` and no vertex/edge attribute:
 ```xml
 <mxCell id="layer2" value="Background" parent="0"/>
 ```
-Assign cells to a layer by setting `parent="layer2"`.
+Assign cells to layer by setting `parent="layer2"`.
 
 ### Pages
 
-Multiple pages are supported via multiple `<diagram>` elements inside `<mxfile>`:
+Multiple pages via multiple `<diagram>` elements inside `<mxfile>`:
 ```xml
 <mxfile>
   <diagram id="page1" name="Architecture">...</diagram>
@@ -192,16 +192,16 @@ Multiple pages are supported via multiple `<diagram>` elements inside `<mxfile>`
 
 ### Compressed Format
 
-When compressed, the `<diagram>` element contains Base64-encoded deflated content instead of an `<mxGraphModel>` child:
+When compressed, `<diagram>` element contains Base64-encoded deflated content instead of `<mxGraphModel>` child:
 ```xml
 <diagram id="abc123" name="Page-1">
   7V1Zc6M4EP41fkwKxOF9...base64string...
 </diagram>
 ```
 
-**Encoding process**: XML string -> `encodeURIComponent()` -> raw DEFLATE (no zlib headers, wbits=-15) -> Base64 encode
+**Encoding**: XML string -> `encodeURIComponent()` -> raw DEFLATE (no zlib headers, wbits=-15) -> Base64 encode
 
-**Decoding process**: Base64 decode -> raw INFLATE (wbits=-15) -> `decodeURIComponent()` -> XML string
+**Decoding**: Base64 decode -> raw INFLATE (wbits=-15) -> `decodeURIComponent()` -> XML string
 
 ### mxGraphModel Attributes
 
@@ -219,7 +219,7 @@ When compressed, the `<diagram>` element contains Base64-encoded deflated conten
 
 ### Minimal Valid File
 
-For programmatic generation, the minimum viable structure:
+Minimum viable structure:
 ```xml
 <mxGraphModel>
   <root>
@@ -229,7 +229,7 @@ For programmatic generation, the minimum viable structure:
 </mxGraphModel>
 ```
 
-Draw.io will accept just the `<mxGraphModel>` without the `<mxfile>`/`<diagram>` wrappers.
+Draw.io accepts just `<mxGraphModel>` without `<mxfile>`/`<diagram>` wrappers.
 
 ---
 
@@ -237,7 +237,7 @@ Draw.io will accept just the `<mxGraphModel>` without the `<mxfile>`/`<diagram>`
 
 ### Python: drawpyo
 
-The most mature Python library for programmatic draw.io generation.
+Most mature Python library for programmatic draw.io generation.
 
 ```bash
 pip install drawpyo
@@ -288,11 +288,11 @@ Features: tree diagram generation, flowcharts, shape libraries (General, Flowcha
 pip install drawio-diagram-generator
 ```
 
-A newer alternative with component-based architecture and flexible layout system.
+Newer alternative with component-based architecture and flexible layout system.
 
 ### TypeScript/JavaScript: @maxgraph/core
 
-The maintained successor to mxGraph (EOL Nov 2020). Provides the same graph model as draw.io.
+Maintained successor to mxGraph (EOL Nov 2020). Same graph model as draw.io.
 
 ```bash
 npm install @maxgraph/core
@@ -306,7 +306,7 @@ import { Graph, InternalEvent } from '@maxgraph/core';
 // direct XML string building or template approaches are often simpler.
 ```
 
-Note: maxGraph is primarily designed for interactive browser-based editors. For pure file generation without rendering, direct XML construction is typically simpler.
+Note: maxGraph primarily designed for interactive browser-based editors. For pure file generation without rendering, direct XML construction simpler.
 
 ### JavaScript: Direct XML Generation (Recommended for Node.js)
 
@@ -426,11 +426,11 @@ done
 
 Supported formats: `pdf`, `png`, `jpg`, `svg`, `vsdx`, `xml`
 
-**Platform paths**: On macOS the binary is `/Applications/draw.io.app/Contents/MacOS/draw.io` (alias it as `drawio` in your shell profile). On Linux, install the `.deb`/`.rpm`/`.AppImage` from the [releases page](https://github.com/jgraph/drawio-desktop/releases). On Windows, the installer adds `draw.io` to PATH automatically.
+**Platform paths**: macOS binary at `/Applications/draw.io.app/Contents/MacOS/draw.io` (alias as `drawio` in shell profile). Linux: install `.deb`/`.rpm`/`.AppImage` from [releases page](https://github.com/jgraph/drawio-desktop/releases). Windows: installer adds `draw.io` to PATH.
 
 ### Headless Export (Linux CI/Docker)
 
-Draw.io desktop is Electron-based and requires a display server:
+Draw.io desktop is Electron-based, requires display server:
 
 ```bash
 # With xvfb
@@ -457,7 +457,7 @@ drawio-exporter -f png input.drawio output/
 
 ### Puppeteer-based Export
 
-For environments where the desktop app is not available, use `puppeteer` to drive the diagrams.net export endpoint. The community package `drawio-export` (npm) wraps this approach. Alternatively, the `rlespinasse/drawio-desktop-headless` Docker image (shown above) is the more reliable path for CI since it bundles a real Electron draw.io instance with xvfb.
+For environments without desktop app, use `puppeteer` to drive diagrams.net export endpoint. Community package `drawio-export` (npm) wraps this. `rlespinasse/drawio-desktop-headless` Docker image (above) more reliable for CI — bundles real Electron draw.io instance with xvfb.
 
 ---
 
@@ -564,7 +564,7 @@ def decision_tree_to_drawio(tree, filepath):
 
 Store .drawio files uncompressed for meaningful diffs:
 
-1. **Configure draw.io** to save uncompressed: In draw.io editor, go to Extras > Preferences > check "Compressed" to OFF, or set the file attribute:
+1. **Configure draw.io** to save uncompressed: Extras > Preferences > uncheck "Compressed", or set file attribute:
    ```xml
    <mxfile compressed="false">
    ```
@@ -787,7 +787,7 @@ The official `jgraph/drawio-mcp` provides AI-assisted diagram generation with:
 - `search_shapes` -- Search 10,000+ shapes across all libraries (AWS, Azure, GCP, Kubernetes, UML, BPMN, etc.)
 - Style and XML reference docs bundled for LLM context
 
-Install: See [jgraph/drawio-mcp](https://github.com/jgraph/drawio-mcp) for setup instructions. Typical MCP config adds a stdio transport entry pointing to the drawio-mcp server binary.
+Install: See [jgraph/drawio-mcp](https://github.com/jgraph/drawio-mcp) for setup. Typical MCP config adds stdio transport entry pointing to drawio-mcp server binary.
 
 ---
 

@@ -28,32 +28,19 @@ related_skills:
 version: "1.1.1"
 updated: "2026-05-31"
 ---
-
 # Integration & API Clients
 
-The hub for building and maintaining **integration clients against third-party
-SaaS product platforms** — Jira, Monday.com, Slack, Salesforce, Glean, and Aha!.
-It covers the concrete, vendor-specific work of talking to each platform: its
-REST or GraphQL API surface, its auth model (OAuth 2.0, cookie/session, API
-tokens), its webhook/event delivery, its SDKs and CLIs, and — where relevant —
-the quirks of calling that API from a Chrome MV3 extension context rather than a
-trusted server.
+Hub for building/maintaining **integration clients against third-party SaaS platforms** — Jira, Monday.com, Slack, Salesforce, Glean, Aha!. Covers vendor-specific API surfaces: REST/GraphQL, auth (OAuth 2.0, cookie/session, API tokens), webhook/event delivery, SDKs/CLIs, and Chrome MV3 extension quirks.
 
-This is the vendor-detail layer. It assumes you have already decided *that* you
-need to integrate; it answers *how* to do it correctly for a specific platform.
+Vendor-detail layer. Assumes you decided *that* to integrate; answers *how* for specific platform.
 
 ## How to use this skill
 
-This skill consolidates **8 integration sub-skills** as on-demand reference
-files under `references/`. Match the task to the routing table below and **Read
-the listed `references/…md` file before answering deep questions** — the table
-alone is not enough for endpoint, auth-flow, payload-shape, or CLI detail. For
-exact field names, scopes, and version specifics, treat each vendor's official
-developer docs as the source of truth.
+Consolidates **8 integration sub-skills** as on-demand reference files under `references/`. Match task to routing table below. **Read listed `references/…md` file before answering deep questions** — table alone not enough for endpoint, auth-flow, payload-shape, or CLI detail. For exact field names, scopes, version specifics: vendor's official developer docs = source of truth.
 
 ## Sub-skill routing table
 
-This hub absorbs 8 former standalone skills as on-demand reference files. When a task matches a row, **Read the listed `references/` file** before answering — do not rely on this table alone for depth.
+Hub absorbs 8 former standalone skills as on-demand reference files. Task matches row → **Read listed `references/` file** before answering — table alone insufficient for depth.
 
 | Sub-topic | When to load | Reference file |
 | --- | --- | --- |
@@ -68,36 +55,19 @@ This hub absorbs 8 former standalone skills as on-demand reference files. When a
 
 ## Cross-hub boundaries
 
-This hub owns vendor-specific integration-client development. Hand off when the
-task is not about a specific vendor's API:
+Hub owns vendor-specific integration-client dev. Hand off when task not about specific vendor's API:
 
-- **General, vendor-neutral API design** (pagination strategy, idempotency keys,
-  error-envelope conventions, REST-vs-RPC style, retry/backoff patterns not tied
-  to one platform) → `software-engineering-patterns`.
-- **AI / LLM / agent integration** (tool-calling, agent orchestration, RAG over
-  these data sources) → `ai-agent-engineering`.
-- **Generic Chrome extension OAuth/identity plumbing** (`chrome.identity`,
-  `launchWebAuthFlow`, token caching) not tied to a specific vendor API →
-  `chrome-extension-expert` (references/chrome-identity-oauth.md). This hub owns the vendor-API call; the extension
-  identity flow that fronts it lives there.
-- **TAM operational workflows that *use* these platforms** — Monday board
-  audits, Slack subscription audits, account/report generation — stay in their
-  standalone / tam-ops skills (`monday-board-audit`,
-  `slack-subscription-auditor`, `tam-account-reports`). This hub builds the
-  client; those skills run the recurring operational task on top of it.
+- **General, vendor-neutral API design** (pagination strategy, idempotency keys, error-envelope conventions, REST-vs-RPC style, retry/backoff not tied to one platform) → `software-engineering-patterns`.
+- **AI / LLM / agent integration** (tool-calling, agent orchestration, RAG over these data sources) → `ai-agent-engineering`.
+- **Generic Chrome extension OAuth/identity plumbing** (`chrome.identity`, `launchWebAuthFlow`, token caching) not tied to specific vendor API → `chrome-extension-expert` (references/chrome-identity-oauth.md). Hub owns vendor-API call; extension identity flow lives there.
+- **TAM operational workflows that *use* these platforms** — Monday board audits, Slack subscription audits, account/report generation — stay in standalone / tam-ops skills (`monday-board-audit`, `slack-subscription-auditor`, `tam-account-reports`). Hub builds client; those skills run recurring operational task on top.
 
-Some topics straddle a boundary (e.g. a Monday GraphQL query embedded inside a
-board-audit workflow). Lead with the hub that matches intent: if you are
-building or fixing the *client/integration*, stay here; if you are running the
-*operational task*, route to tam-ops.
+Some topics straddle boundary (e.g. Monday GraphQL query inside board-audit workflow). Lead with hub matching intent: building/fixing *client/integration* → stay here; running *operational task* → route to tam-ops.
 
 <!-- cross-hub-map -->
 ## Cross-hub map — where every integration topic lives
 
-This family is split across these hubs. If a task's deep material is **not** in this hub's Sub-skill
-routing table, it is a reference file under a sibling hub below — **activate that hub or `Read` its
-`references/<name>.md` directly**. Every former standalone skill in this family is now a reference under one
-of these hubs (nothing was deleted).
+Family split across these hubs. Task's deep material **not** in this hub's sub-skill routing table → reference file under sibling hub below — **activate that hub or `Read` its `references/<name>.md` directly**. Every former standalone skill now reference under one hub (nothing deleted).
 
 | Hub | Owns | Example reference files |
 | --- | --- | --- |

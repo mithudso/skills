@@ -1,10 +1,10 @@
 <!-- hub-reference-banner -->
-> **Reference file — part of the `atlas-diagnostics-expert` hub.** Formerly the standalone `mongodb-capacity-planning` skill.
-> Sibling MongoDB sub-topics are now reference files under the four hubs (`mongodb-expert`,
+> **Reference file — part of `atlas-diagnostics-expert` hub.** Formerly standalone `mongodb-capacity-planning` skill.
+> Sibling MongoDB sub-topics now reference files under four hubs (`mongodb-expert`,
 > `mongodb-atlas-expert`, `atlas-diagnostics-expert`, `mongodb-operations-expert`) — **not**
-> standalone skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that
-> name a bare `mongodb-*`/`atlas-*` skill; instead load that topic's `references/<name>.md`
-> from the owning hub (see the hub's "Cross-hub map").
+> standalone skills. Ignore "use the X skill" / `related_skills` / SKIP pointers below naming
+> bare `mongodb-*`/`atlas-*` skill; instead load that topic's `references/<name>.md`
+> from owning hub (see hub's "Cross-hub map").
 
 ---
 
@@ -79,24 +79,21 @@ related_skills:
 
 # MongoDB Capacity Planning
 
-Use this skill when:
-- Sizing a new Atlas cluster for a customer workload
+Use when:
+- Sizing new Atlas cluster for customer workload
 - Debugging capacity exhaustion (disk full, CPU pegged, replication lag spiking)
-- Planning storage or tier growth over a 12-month horizon
-- Reviewing autoscaling configuration and alert thresholds
-- Evaluating whether sharding is the right next step
+- Planning storage or tier growth over 12-month horizon
+- Reviewing autoscaling config and alert thresholds
+- Evaluating whether sharding is right next step
 
 ---
 
 ## 1. Working Set Sizing
 
-The **working set** is the subset of data plus indexes that the application touches
-in steady-state operation. When the working set fits in WiredTiger's in-memory cache,
-reads are served from RAM and do not require disk I/O.
+**Working set** = subset of data + indexes app touches in steady-state. When working set fits in WiredTiger's in-memory cache, reads serve from RAM — no disk I/O.
 
-**WiredTiger cache default:** 50% of total RAM (minimum 1 GB).
-Rule of thumb: working set must fit inside the cache to avoid cache eviction pressure
-and the resulting dramatic latency spikes.
+**WiredTiger cache default:** 50% of total RAM (min 1 GB).
+Rule: working set must fit in cache to avoid eviction pressure and latency spikes.
 
 ```javascript
 // Estimate working set from the shell
@@ -131,15 +128,13 @@ db.serverStatus().wiredTiger.cache["pages read into cache"]    // high = evictio
 db.serverStatus().wiredTiger.cache["unmodified pages evicted"] // rising = working set > cache
 ```
 
-**Actionable threshold:** if "unmodified pages evicted" grows consistently, the working
-set exceeds cache. Upsize RAM (next tier) before disk IOPS become saturated.
+**Actionable threshold:** "unmodified pages evicted" growing consistently = working set exceeds cache. Upsize RAM (next tier) before disk IOPS saturate.
 
 ---
 
 ## 2. IOPS Forecasting
 
-IOPS requirements come from write throughput (every write hits the journal + data file)
-and reads that miss the WiredTiger cache.
+IOPS come from write throughput (every write hits journal + data file) and reads missing WiredTiger cache.
 
 **Disk types on Atlas:**
 
@@ -175,17 +170,15 @@ curl -s -u "$ATLAS_PUBLIC_KEY:$ATLAS_PRIVATE_KEY" --digest \
   | jq '.measurements[] | {name: .name, max: [.dataPoints[].value | numbers] | max}'
 ```
 
-**Sizing rule:** sustained IOPS at 80%+ of provisioned limit signals it is time to either
-provision more IOPS (gp3/io2) or move to NVMe-backed tiers.
+**Sizing rule:** sustained IOPS at 80%+ of provisioned limit = time to provision more IOPS (gp3/io2) or move to NVMe-backed tiers.
 
 ---
 
 ## 3. Storage Growth Modeling
 
-Total on-disk usage = data files + indexes + journal + oplog + diagnostic logs.
+Total on-disk = data files + indexes + journal + oplog + diagnostic logs.
 
-**Index overhead:** 10–30% of raw data size depending on field count and index types.
-Geospatial and text indexes tend toward the higher end.
+**Index overhead:** 10–30% of raw data size depending on field count and index types. Geospatial and text indexes trend higher.
 
 ```javascript
 // Current database footprint (MongoDB 4.4+; totalSize available from 4.4 onward)
@@ -224,16 +217,13 @@ const withIndexes = forecast.map(r => ({
 }));
 ```
 
-**Real-world example:** A large e-commerce cluster at 85 TB total across 13 shards on M80 instances.
-Autoscaling triggered at 90% disk used. Without the forecast, the team would have been
-surprised by scale events mid-cycle.
+**Real-world example:** Large e-commerce cluster at 85 TB across 13 shards on M80. Autoscaling triggered at 90% disk used. Without forecast, team surprised by scale events mid-cycle.
 
 ---
 
 ## 4. Connection Capacity
 
-Every driver connection consumes a server-side socket + thread (or async slot on 6.0+).
-Atlas enforces hard connection limits per tier to protect shared infrastructure.
+Every driver connection consumes server-side socket + thread (or async slot on 6.0+). Atlas enforces hard connection limits per tier.
 
 **Atlas connection limits (per replica set node):**
 
@@ -278,21 +268,16 @@ const client = new MongoClient(uri, {
 // That exhausts an M20. Use M30+ or reduce pool size.
 ```
 
-**Sharded clusters:** `mongos` routers each maintain their own connection pools to every
-shard. A topology with 4 mongos x 6 shards x 3 nodes = 72 connections per mongos
-before counting the application's own pool. Size mongos count conservatively.
+**Sharded clusters:** `mongos` routers each maintain own connection pools to every shard. Topology with 4 mongos x 6 shards x 3 nodes = 72 connections per mongos before counting app's own pool. Size mongos count conservatively.
 
 ---
 
 ## 5. Oplog Sizing
 
-The oplog is a capped collection on each replica set member that records all write
-operations. Secondaries replay the oplog to stay in sync. The oplog window (how far back
-in time operations are retained) determines how long a secondary can lag before it goes
-stale and requires a full resync.
+Oplog = capped collection on each replica set member recording all writes. Secondaries replay oplog to stay in sync. Oplog window (how far back ops retained) determines how long secondary can lag before going stale and requiring full resync.
 
 **Minimum recommended oplog window: 24 hours.**
-For clusters with heavy maintenance windows (index builds, migrations), 72 hours is safer.
+For clusters with heavy maintenance windows (index builds, migrations), 72 hours safer.
 
 ```javascript
 // Check current oplog window and size
@@ -329,16 +314,13 @@ print(`Estimated oplog window: ${windowHrs.toFixed(1)} hours`);
 // If < 24, increase oplog size via Atlas cluster configuration.
 ```
 
-Atlas default oplog size is 5% of disk. For very write-heavy workloads this may produce
-windows well under 24 hours. Explicitly configure a larger oplog via the Atlas UI
-(Cluster > Configuration > Oplog Size).
+Atlas default oplog size is 5% of disk. For write-heavy workloads this may produce windows well under 24 hours. Explicitly configure larger oplog via Atlas UI (Cluster > Configuration > Oplog Size).
 
 ---
 
 ## 6. Cluster Tier Selection
 
-Choose the tier whose RAM accommodates the working set and whose CPU handles the
-write/query concurrency. Storage can be scaled independently on most tiers.
+Choose tier whose RAM accommodates working set and whose CPU handles write/query concurrency. Storage scales independently on most tiers.
 
 | Tier | RAM   | vCPUs | Max Storage | Typical Use                            |
 |------|-------|-------|-------------|----------------------------------------|
@@ -349,12 +331,10 @@ write/query concurrency. Storage can be scaled independently on most tiers.
 | M50  | 32 GB | 8     | 4 TB        | Large working sets, moderate write load|
 | M80  | 64 GB | 32    | 4 TB        | High-throughput, large working sets    |
 
-**Vertical vs horizontal scaling decision:**
+**Vertical vs horizontal scaling:**
 
-- Scale **vertically** (upsize tier) when: RAM is the constraint (cache misses), or
-  CPU is the bottleneck for single-document operations.
-- Scale **horizontally** (shard) when: a single node cannot serve the write throughput,
-  storage exceeds ~4 TB, or the working set cannot fit in M80 RAM.
+- Scale **vertically** (upsize tier) when: RAM is constraint (cache misses), or CPU bottleneck for single-document operations.
+- Scale **horizontally** (shard) when: single node can't serve write throughput, storage exceeds ~4 TB, or working set won't fit in M80 RAM.
 
 ```bash
 # Atlas CLI: resize cluster tier (requires Atlas CLI >= 1.x)
@@ -368,14 +348,13 @@ atlas clusters update MY_CLUSTER \
 
 ## 7. Sharding Triggers
 
-Sharding distributes data and write load across multiple replica sets (shards). Introduce
-sharding proactively — migrating an unsharded collection later is disruptive.
+Sharding distributes data and write load across multiple replica sets (shards). Introduce proactively — migrating unsharded collection later is disruptive.
 
-**Start sharding when any of these apply:**
+**Start sharding when any apply:**
 - Storage per node approaches 4 TB (practical single-shard limit before management overhead)
-- Working set exceeds M80 RAM (64 GB) and cannot be reduced by indexing or data tiering
-- Write throughput saturates a single primary's CPU or disk IOPS
-- A single collection grows beyond ~500 GB and the access pattern is range or scatter-gather heavy (queries that hit every shard because the filter does not include the shard key)
+- Working set exceeds M80 RAM (64 GB) and can't be reduced by indexing or data tiering
+- Write throughput saturates single primary's CPU or disk IOPS
+- Single collection grows beyond ~500 GB and access pattern is range or scatter-gather heavy
 
 ```javascript
 // Enable sharding on a database
@@ -407,16 +386,13 @@ sh.shardCollection("events_db.events", { tenantId: 1, _id: 1 })
 sh.shardCollection("logs_db.logs", { _id: "hashed" })
 ```
 
-**Real-world example:** A large-scale sharded deployment — 13 shards, 85 TB total, M80 per shard. Autoscaling
-triggers at 90% disk. The shard key selection was the critical design decision that
-allowed balanced chunk distribution at this scale.
+**Real-world example:** Large-scale sharded deployment — 13 shards, 85 TB total, M80 per shard. Autoscaling triggers at 90% disk. Shard key selection was critical design decision enabling balanced chunk distribution at this scale.
 
 ---
 
 ## 8. Read vs Write Distribution
 
-Replica set topology lets you route reads to secondaries to offshift read load from
-the primary. Write concern controls durability vs latency trade-off.
+Replica set topology lets you route reads to secondaries to offshift read load from primary. Write concern controls durability vs latency trade-off.
 
 ```javascript
 // Read preference options
@@ -455,17 +431,13 @@ await col.insertOne(doc, { writeConcern: { w: 'majority', j: true } });
 await col.insertMany(events, { writeConcern: { w: 1, j: false } });
 ```
 
-**Rule of thumb:** `secondaryPreferred` effectively doubles read throughput for a 3-node
-RS with zero additional cost. Use it for reporting, dashboards, and analytics queries.
-Reserve `primary` read preference only for reads that must see the absolute latest write.
+**Rule:** `secondaryPreferred` effectively doubles read throughput for 3-node RS at zero additional cost. Use for reporting, dashboards, analytics queries. Reserve `primary` read preference only for reads requiring absolute latest write.
 
 ---
 
 ## 9. Atlas Performance Advisor
 
-The Performance Advisor analyzes slow queries (> 100ms by default) and suggests
-indexes without requiring manual explain-plan analysis. It also flags schema issues
-like unbounded array growth.
+Performance Advisor analyzes slow queries (> 100ms default) and suggests indexes without manual explain-plan analysis. Also flags schema issues like unbounded array growth.
 
 **Access:** Atlas UI → Cluster → Performance Advisor tab.
 
@@ -481,13 +453,10 @@ db.system.profile.find({}, { op: 1, ns: 1, millis: 1, ts: 1 })
 ```
 
 **Performance Advisor capabilities:**
-- **Slow query log analysis:** surfaces operations exceeding the threshold, grouped by
-  query shape.
-- **Index recommendations:** suggests covering indexes based on query patterns; includes
-  estimated impact score.
-- **Schema suggestions:** flags missing indexes, collection scans, and excessive
-  in-memory sorts.
-- **Drop redundant indexes:** identifies unused indexes that consume write overhead and RAM.
+- **Slow query log analysis:** surfaces operations exceeding threshold, grouped by query shape.
+- **Index recommendations:** suggests covering indexes based on query patterns; includes estimated impact score.
+- **Schema suggestions:** flags missing indexes, collection scans, excessive in-memory sorts.
+- **Drop redundant indexes:** identifies unused indexes consuming write overhead and RAM.
 
 ```javascript
 // Validate a Performance Advisor index recommendation before applying
@@ -505,13 +474,13 @@ db.orders.find({ customerId: "C123", status: "pending" })
 // Confirm: winningPlan.inputStage.stage === "IXSCAN"
 ```
 
-For large Atlas footprints with hundreds of clusters, Performance Advisor runs independently per cluster. Prioritize clusters with high query latency percentiles (p99 > 500ms) for index review sessions.
+For large Atlas footprints with hundreds of clusters, Performance Advisor runs independently per cluster. Prioritize clusters with high query latency percentiles (p99 > 500ms) for index review.
 
 ---
 
 ## 10. Growth Signals
 
-Monitor these Atlas metrics to detect capacity pressure before it becomes an incident:
+Monitor these Atlas metrics to detect capacity pressure before incident:
 
 | Signal                    | Threshold to Act                      | Atlas Metric                         |
 |---------------------------|---------------------------------------|--------------------------------------|
@@ -538,7 +507,7 @@ print(`Cache used: ${cacheUsedPct.toFixed(1)}%`);
 print(`Pages evicted (unmodified): ${cache["unmodified pages evicted"]}`);
 ```
 
-**Recommended Atlas Alerts to configure:**
+**Recommended Atlas Alerts:**
 
 ```text
 Disk used % > 75%     → Warn   (plan resize)
@@ -552,7 +521,7 @@ Query p95 > 500ms     → Warn
 
 ## 11. Capacity Testing
 
-Load test before launch to find the saturation point, not after a production incident.
+Load test before launch to find saturation point, not after production incident.
 
 ```bash
 # mongoperf: disk I/O benchmark included with MongoDB tools
@@ -578,15 +547,13 @@ async function rampLoad(targetRPS, rampMinutes, durationMinutes) {
 ```
 
 **What to measure during load test:**
-1. WiredTiger cache hit ratio — should stay > 95% for read-heavy workloads
-2. Disk IOPS vs provisioned limit — find the knee of the curve
-3. Replication lag on secondaries — should remain < 10s under target load
-4. Connection count — verify pool sizing does not exhaust tier limit
-5. p95/p99 query latency — establish baseline before and saturation threshold
+1. WiredTiger cache hit ratio — stay > 95% for read-heavy workloads
+2. Disk IOPS vs provisioned limit — find knee of curve
+3. Replication lag on secondaries — stay < 10s under target load
+4. Connection count — verify pool sizing doesn't exhaust tier limit
+5. p95/p99 query latency — establish baseline and saturation threshold
 
-**Ramp-up pattern:** increase load 10% every 5 minutes. Watch for the latency inflection
-point — the RPS where p99 latency doubles. That is your saturation threshold; target
-50-60% of it as steady-state operating point to leave headroom.
+**Ramp-up pattern:** increase load 10% every 5 minutes. Watch for latency inflection point — RPS where p99 latency doubles. That's saturation threshold; target 50-60% as steady-state operating point for headroom.
 
 ---
 
@@ -594,27 +561,19 @@ point — the RPS where p99 latency doubles. That is your saturation threshold; 
 
 **Mistake 1: Undersized RAM — working set spills to disk**
 
-Symptom: cache eviction rate rising, disk read IOPS increasing, latency degrading
-under normal load. Fix: upsize tier to bring working set into WiredTiger cache.
+Symptom: cache eviction rate rising, disk read IOPS increasing, latency degrading under normal load. Fix: upsize tier to bring working set into WiredTiger cache.
 
 **Mistake 2: Ignoring index growth**
 
-Indexes typically grow at the same rate as the underlying data. A 1 TB collection with
-8 compound indexes can easily carry 250+ GB of index data. This must be accounted for
-in both storage and RAM planning.
+Indexes grow at same rate as underlying data. 1 TB collection with 8 compound indexes can carry 250+ GB index data. Must be accounted for in both storage and RAM planning.
 
 **Mistake 3: No oplog headroom**
 
-Atlas default 5% oplog on a 500 GB disk = 25 GB oplog. At 1 GB/hr write throughput,
-the window is only 25 hours — barely above the 24-hour recommendation. A scheduled
-maintenance task or index build that pauses replication for 2 hours can push a secondary
-off the oplog, requiring a full resync.
+Atlas default 5% oplog on 500 GB disk = 25 GB oplog. At 1 GB/hr write throughput, window is only 25 hours — barely above 24-hour recommendation. Scheduled maintenance or index build pausing replication 2 hours can push secondary off oplog, requiring full resync.
 
 **Mistake 4: Forgetting analytics workload impact**
 
-Analytics queries (aggregations, full collection scans, large sort stages) can evict hot
-working-set pages from cache, causing sudden latency spikes for OLTP workloads. Isolate
-analytics reads to tagged secondaries or dedicated Analytics Nodes in Atlas.
+Analytics queries (aggregations, full collection scans, large sort stages) can evict hot working-set pages from cache, causing sudden latency spikes for OLTP workloads. Isolate analytics reads to tagged secondaries or dedicated Analytics Nodes in Atlas.
 
 ```javascript
 // Analytics Node: route long-running aggregations explicitly
@@ -629,27 +588,21 @@ await analyticsDB.collection("orders").aggregate([
 
 **Mistake 5: Monotonic shard key causing hot shard**
 
-Using `_id` (ObjectId) or `createdAt` alone as a shard key routes all new inserts to
-the last chunk on one shard. All write load concentrates there until chunk migration
-catches up — which it often cannot under high write rates.
+Using `_id` (ObjectId) or `createdAt` alone as shard key routes all new inserts to last chunk on one shard. All write load concentrates there until chunk migration catches up — which often can't happen under high write rates.
 
 **Mistake 6: Over-provisioning mongos on sharded clusters**
 
-Each mongos maintains connection pools to every shard node. 10 mongos x 6 shards x
-3 nodes = 180 server-side connections per app instance (before the app's own pool).
-Start with 2-3 mongos instances and add based on measured mongos CPU, not guesswork.
+Each mongos maintains connection pools to every shard node. 10 mongos x 6 shards x 3 nodes = 180 server-side connections per app instance (before app's own pool). Start with 2-3 mongos instances; add based on measured mongos CPU, not guesswork.
 
 **Mistake 7: Sizing for average load, not peak**
 
-Atlas autoscaling reacts to sustained load (typically a 15-30 minute window). A sharp
-traffic spike that lasts 10 minutes can saturate disk IOPS and connections before
-autoscaling kicks in. Provision for 2x expected peak, not average.
+Atlas autoscaling reacts to sustained load (typically 15-30 minute window). Sharp traffic spike lasting 10 minutes can saturate disk IOPS and connections before autoscaling kicks in. Provision for 2x expected peak, not average.
 
 ---
 
 ## Quick Reference Checklist
 
-When starting a capacity sizing engagement:
+When starting capacity sizing engagement:
 
 ```text
 [ ] What is the working set size? (indexes + hot data)
@@ -670,7 +623,7 @@ When starting a capacity sizing engagement:
 
 ## Time Series Collection Capacity Considerations
 
-Time series collections (MongoDB 5.0+) have a distinct working set model from regular collections.
+Time series collections (MongoDB 5.0+) have distinct working set model from regular collections.
 
 **Working set formula:**
 ```
@@ -687,11 +640,11 @@ Recent queries = (3,600 / 86,400) × 10,000 × 125 KB = ~54 MB
 Total ≈ 1.3 GB WiredTiger cache pressure
 ```
 
-**Storage savings:** 70-94% compression vs regular collections for numeric sensor data. Factor this into storage growth projections — a workload that would need 10 TB in a regular collection typically needs 0.6-3 TB as a time series collection.
+**Storage savings:** 70-94% compression vs regular collections for numeric sensor data. Factor into storage growth projections — workload needing 10 TB in regular collection typically needs 0.6-3 TB as time series.
 
-**MongoDB 8.0 block processing:** Direct columnar writes reduce cache usage by 10-20x vs MongoDB 7.0. If a customer is on 7.0 with a time series workload hitting cache limits, upgrading to 8.0 is the lowest-friction capacity intervention before scaling up.
+**MongoDB 8.0 block processing:** Direct columnar writes reduce cache usage 10-20x vs MongoDB 7.0. Customer on 7.0 with time series workload hitting cache limits — upgrading to 8.0 is lowest-friction capacity intervention before scaling up.
 
-**High-cardinality metaField anti-pattern:** Each unique `metaField` value holds one open bucket in cache. A metaField with 1M+ unique values (e.g., per-user UUIDs) generates ~125 GB of open-bucket working set pressure. Diagnose with:
+**High-cardinality metaField anti-pattern:** Each unique `metaField` value holds one open bucket in cache. metaField with 1M+ unique values (e.g., per-user UUIDs) generates ~125 GB open-bucket working set pressure. Diagnose with:
 ```javascript
 db.getCollection("system.buckets.my_collection").countDocuments({ "control.closed": false })
 ```
@@ -704,7 +657,7 @@ For full time series sizing guidance including granularity bucket span reference
 
 *Cross-pollinated from `mongodb-atlas-flex-serverless` — researched 2026-05-28.*
 
-Flex is now the standard entry-level paid Atlas cluster (replaced M2/M5 and Serverless as of January 22, 2026). Sizing decisions should account for Flex's hard limits before recommending a dedicated tier.
+Flex is now standard entry-level paid Atlas cluster (replaced M2/M5 and Serverless as of January 22, 2026). Sizing decisions must account for Flex's hard limits before recommending dedicated tier.
 
 ### Flex hard limits (sizing thresholds)
 
@@ -724,12 +677,12 @@ Use Flex when:
 - Data < 5 GB (development, staging, light production)
 - No private networking requirement
 
-Move to M10 dedicated when any single threshold above is hit, or when the workload requires:
+Move to M10 dedicated when any single threshold above is hit, or workload requires:
 - Performance Advisor access (needed for capacity optimization work)
 - PITR backup (compliance/DR requirement)
 - Private Endpoints or VPC Peering
 
 ### Flex autoscaling behavior
-Flex does NOT autoscale beyond 500 ops/sec — it throttles. Unlike dedicated clusters with elastic compute autoscaling, Flex has a fixed ceiling. Capacity planning for Flex should treat 500 ops/sec as a hard ceiling, not an elastic limit.
+Flex does NOT autoscale beyond 500 ops/sec — it throttles. Unlike dedicated clusters with elastic compute autoscaling, Flex has fixed ceiling. Capacity planning for Flex must treat 500 ops/sec as hard ceiling, not elastic limit.
 
 For full Flex billing model, unsupported features list, and tooling migration, see `mongodb-atlas-flex-serverless`.

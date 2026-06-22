@@ -1,26 +1,16 @@
 # llms.txt & Markdown-for-LLMs
 
-The `llms.txt` convention — a **curated, markdown-formatted index a site publishes for LLM
-consumers**, plus the broader practice of authoring markdown *for* language models (CLAUDE.md /
-AGENTS.md, `.md` API endpoints). This is a markdown **file-format convention**, so it lives in
-`document-formats`; the deeper *LLM context-engineering* discipline (what to put in a system prompt,
-caching, retrieval) belongs to the `ai-mcp-sdk-prompting` hub — defer there for prompt/context design.
+`llms.txt` — **curated, markdown-formatted index site publishes for LLM consumers**, plus broader practice of authoring markdown *for* language models (CLAUDE.md / AGENTS.md, `.md` API endpoints). Markdown **file-format convention** → lives in `document-formats`; deeper *LLM context-engineering* (system prompt content, caching, retrieval) → `ai-mcp-sdk-prompting` hub.
 
-> **Honesty note (carry this into any recommendation):** `llms.txt` is a *proposed* convention, not a
-> ratified standard, and **no major AI platform has committed to reading it as a first-class input**. A
-> Nov-2025 SERanking study across ~300k domains found it does **not measurably improve AI citations**.
-> Recommend it as low-cost, well-formed metadata — not as a proven ranking/visibility lever.
+> **Honesty note (carry into any recommendation):** `llms.txt` *proposed* convention, not ratified standard. **No major AI platform committed to reading it as first-class input**. Nov-2025 SERanking study across ~300k domains: does **not measurably improve AI citations**. Recommend as low-cost, well-formed metadata — not proven ranking/visibility lever.
 
 ---
 
 ## 1. `llms.txt` — what it is
 
-Proposed by **Jeremy Howard (Answer.AI), Sept 2024**. A markdown file at the site root (`/llms.txt`)
-that gives an LLM a **hand-curated, priority-ordered map** of the site's high-value content. It is to
-LLM retrieval what `robots.txt` is to crawlers — but *additive guidance*, not access control.
+Proposed by **Jeremy Howard (Answer.AI), Sept 2024**. Markdown file at site root (`/llms.txt`) giving LLM **hand-curated, priority-ordered map** of high-value content. To LLM retrieval what `robots.txt` is to crawlers — but *additive guidance*, not access control.
 
-**Spec shape** (from llmstxt.org) — markdown with a required H1 + optional blockquote summary, then
-H2-grouped link lists:
+**Spec shape** (from llmstxt.org) — markdown with required H1 + optional blockquote summary, then H2-grouped link lists:
 
 ```markdown
 # Project Name
@@ -37,41 +27,33 @@ Optional context paragraphs (no headings).
 - [Changelog](https://example.com/changelog.md)
 ```
 
-- The `## Optional` section is special: its links may be **skipped** when the consumer needs a shorter context.
-- Links ideally point to **clean markdown** versions of pages (LLM-friendly, no nav chrome).
+- `## Optional` section special: links may be **skipped** when consumer needs shorter context.
+- Links ideally point to **clean markdown** versions (LLM-friendly, no nav chrome).
 
 ## 2. `llms.txt` vs `llms-full.txt` vs neighbors
 
 | File | Purpose |
 | --- | --- |
-| `/llms.txt` | Curated **index** — links + one-line descriptions; small, an entry point. |
-| `/llms-full.txt` | The **entire documentation inlined** into one big markdown file — paste-the-whole-thing context. Can be huge; watch token cost. |
-| `robots.txt` | *Restricts* what crawlers may fetch (access control). Orthogonal to llms.txt. |
-| `sitemap.xml` | Enumerates *every* URL for search indexing (exhaustive, machine-only). llms.txt is curated + human-readable. |
+| `/llms.txt` | Curated **index** — links + one-line descriptions; small, entry point. |
+| `/llms-full.txt` | **Entire docs inlined** into one big markdown file — paste-the-whole-thing context. Can be huge; watch token cost. |
+| `robots.txt` | *Restricts* crawler access (access control). Orthogonal to llms.txt. |
+| `sitemap.xml` | Enumerates *every* URL for search (exhaustive, machine-only). llms.txt is curated + human-readable. |
 
-Common pattern: serve a markdown twin of each HTML page (e.g. content negotiation, or a `.md` suffix —
-the "append `.md` to any docs URL" pattern several dev-tool sites now ship), and list the important
-ones in `llms.txt`. Adopters include Anthropic, Stripe, Zapier, Cloudflare, and many dev-tool docs.
+Common pattern: serve markdown twin of each HTML page (content negotiation, or `.md` suffix — "append `.md` to any docs URL" pattern several dev-tool sites ship), list important ones in `llms.txt`. Adopters: Anthropic, Stripe, Zapier, Cloudflare, many dev-tool docs.
 
-## 3. Authoring markdown *for* LLMs (the broader practice)
+## 3. Authoring markdown *for* LLMs (broader practice)
 
-- **`CLAUDE.md` / `AGENTS.md`** — repo-root markdown that instructs coding agents (project conventions,
-  build/test commands, do/don't). Keep terse, imperative, high-signal; agents read it as context every session.
-- **Clean-markdown endpoints** — strip nav/ads/chrome; stable headings (they become anchors and
-  retrieval boundaries); short, front-loaded sections (mitigates "lost in the middle").
-- **Determinism & token economy** — prefer plain CommonMark (tables/code fences render predictably in
-  LLM output); avoid renderer-specific syntax an LLM consumer won't interpret; budget `llms-full.txt` size.
-- For *how an LLM uses* this context (caching, retrieval, injection hardening, context-window budgeting),
-  that's context-engineering → **`ai-mcp-sdk-prompting`**, not this format reference.
+- **`CLAUDE.md` / `AGENTS.md`** — repo-root markdown instructing coding agents (project conventions, build/test commands, do/don't). Keep terse, imperative, high-signal; agents read every session.
+- **Clean-markdown endpoints** — strip nav/ads/chrome; stable headings (become anchors + retrieval boundaries); short, front-loaded sections (mitigates "lost in the middle").
+- **Determinism & token economy** — prefer plain CommonMark (tables/code fences render predictably); avoid renderer-specific syntax LLM consumer won't interpret; budget `llms-full.txt` size.
+- *How LLM uses context* (caching, retrieval, injection hardening, context-window budgeting) → **`ai-mcp-sdk-prompting`**, not this format reference.
 
 ## 4. Generating & validating
 
-- Generators: docs frameworks increasingly emit `llms.txt`/`llms-full.txt` (Mintlify, Starlight plugins,
-  Docusaurus plugins, `llmstxt`-style site plugins); or generate from your sitemap + markdown source.
-- Validate: it's just markdown — lint with `markdownlint`/`remark-lint` (see `references/markdown-linting.md`)
-  and confirm the H1 + link-list structure; check linked `.md` URLs resolve.
+- Generators: docs frameworks increasingly emit `llms.txt`/`llms-full.txt` (Mintlify, Starlight plugins, Docusaurus plugins, `llmstxt`-style site plugins); or generate from sitemap + markdown source.
+- Validate: just markdown — lint with `markdownlint`/`remark-lint` (see `references/markdown-linting.md`), confirm H1 + link-list structure; check linked `.md` URLs resolve.
 
 ## Sources
 - [llmstxt.org (the proposal/spec)](https://llmstxt.org/) · [Answer.AI announcement](https://www.answer.ai/posts/2024-09-03-llmstxt.html)
 - [Is llms.txt Dead? Adoption in 2025 (llms-txt.io)](https://llms-txt.io/blog/is-llms-txt-dead) · [SERanking 300k-domain study coverage](https://codersera.com/blog/llms-txt-complete-guide-2026/)
-- Related practice: `CLAUDE.md`/`AGENTS.md` agent-context conventions (see the `ai-mcp-sdk-prompting` hub for context engineering).
+- Related practice: `CLAUDE.md`/`AGENTS.md` agent-context conventions (see `ai-mcp-sdk-prompting` hub for context engineering).

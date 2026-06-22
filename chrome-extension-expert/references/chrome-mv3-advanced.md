@@ -1,8 +1,8 @@
 <!-- hub-reference-banner -->
-> **Reference file — part of the `chrome-extension-expert` hub.** Formerly the standalone `chrome-mv3-advanced` skill.
-> Sibling topics in this family are now reference files under the hubs (`chrome-extension-expert`) — **not** standalone
-> skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
-> skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
+> **Reference file — part of the `chrome-extension-expert` hub.** Formerly standalone `chrome-mv3-advanced` skill.
+> Sibling topics now reference files under hubs (`chrome-extension-expert`) — **not** standalone
+> skills. Ignore "use the X skill" / `related_skills` / SKIP pointers naming bare sibling
+> skills; load that topic's `references/<name>.md` from owning hub (see hub's "Cross-hub map").
 
 ---
 
@@ -36,9 +36,9 @@ updated: 2026-05-29
 
 # Chrome MV3 Advanced APIs — Developer Reference
 
-Deep reference for the advanced Chrome MV3 APIs that go beyond basic extension architecture: offscreen documents, native messaging, identity/OAuth, and the newer platform APIs (side panel, userScripts, tabCapture, DNR).
+Deep reference for advanced Chrome MV3 APIs beyond basic extension architecture: offscreen documents, native messaging, identity/OAuth, newer platform APIs (side panel, userScripts, tabCapture, DNR).
 
-**When standalone depth is needed:** `chrome-offscreen-documents`, `chrome-native-messaging`, and `chrome-identity-oauth` each embed full standalone references. This skill covers all topics at a useful depth and adds cross-topic coordination patterns (Sections 5–6) that the standalone skills don't cover.
+**When standalone depth needed:** `chrome-offscreen-documents`, `chrome-native-messaging`, `chrome-identity-oauth` each embed full standalone references. This skill covers all topics at useful depth plus cross-topic coordination patterns (Sections 5–6) standalone skills don't cover.
 
 ---
 
@@ -63,13 +63,13 @@ Deep reference for the advanced Chrome MV3 APIs that go beyond basic extension a
 
 | Need | Best choice | Why |
 |---|---|---|
-| Call a local CLI tool / binary | Native messaging | Only way to exec local processes |
-| Read/write local file system | Native messaging or File System Access API | Browser sandbox prevents direct FS |
+| Call local CLI tool / binary | Native messaging | Only way to exec local processes |
+| Read/write local file system | Native messaging or File System Access API | Browser sandbox blocks direct FS |
 | Access OS keychain | Native messaging | No JS API for OS keychain |
-| Call a local HTTP server | Fetch to `localhost` | Simpler, no host install required |
+| Call local HTTP server | Fetch to `localhost` | Simpler, no host install required |
 | Real-time bidirectional with local app | `connectNative` (port) | Keeps process alive, streaming |
 | One-shot query to local app | `sendNativeMessage` | Simpler, no port lifecycle |
-| Large data (>1 MB) | Split into chunks or use local HTTP | Native message from host capped at 1 MB |
+| Large data (>1 MB) | Split chunks or use local HTTP | Native message from host capped at 1 MB |
 
 ### Which Identity API to use
 
@@ -87,7 +87,7 @@ Deep reference for the advanced Chrome MV3 APIs that go beyond basic extension a
 
 ### Overview
 
-`chrome.offscreen` (Chrome 109+, MV3 only) creates a hidden HTML document with full DOM access. **One document per extension per profile** — always check before creating.
+`chrome.offscreen` (Chrome 109+, MV3 only) creates hidden HTML document with full DOM access. **One document per extension per profile** — always check before creating.
 
 **Permission required:** `"offscreen"` in manifest.json
 
@@ -104,7 +104,7 @@ Deep reference for the advanced Chrome MV3 APIs that go beyond basic extension a
 | `USER_MEDIA` | Unlimited | `getUserMedia()` |
 | `BLOBS` | Unlimited | `URL.createObjectURL()` |
 
-Use an array for multiple reasons: `reasons: ['DOM_PARSER', 'CLIPBOARD']`
+Use array for multiple reasons: `reasons: ['DOM_PARSER', 'CLIPBOARD']`
 
 ### Single-Instance Pattern (Chrome 116+)
 
@@ -189,7 +189,7 @@ document.getElementById('keepalive').play().catch(() => {});
 
 **Protocol:** 4-byte little-endian uint32 length prefix + UTF-8 JSON payload.
 **Limits:** Chrome→host 64 MB; host→Chrome **1 MB max** (hard limit).
-**Debug output must go to stderr** — any bytes on stdout corrupt the framing.
+**Debug output must go to stderr** — any bytes on stdout corrupt framing.
 
 **Permission:** `"nativeMessaging"` in manifest.json
 
@@ -252,7 +252,7 @@ port.postMessage({ command: 'start' });
 const response = await chrome.runtime.sendNativeMessage('com.example.myapp', { cmd: 'ping' });
 ```
 
-**Note:** `connectNative` is only available in extension pages and service worker — not in content scripts.
+**Note:** `connectNative` available in extension pages and service worker only — not content scripts.
 
 ---
 
@@ -322,7 +322,7 @@ async function launchOAuthFlow(provider) {
 
 ### chrome.declarativeNetRequest (DNR)
 
-MV3 replacement for blocking `webRequest`. Rules execute in the browser without JS.
+MV3 replacement for blocking `webRequest`. Rules execute in browser without JS.
 
 | Rule type | Max rules | Cleared on restart? |
 |---|---|---|
@@ -391,13 +391,13 @@ chrome.tabs.onActivated.addListener(async ({ tabId }) => {
 await chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true });
 ```
 
-**Key behavior:** `sidePanel.open()` requires a user gesture. Tab-specific panels override the global panel for that tab only.
+**Key behavior:** `sidePanel.open()` requires user gesture. Tab-specific panels override global panel for that tab only.
 
 ### chrome.userScripts (Chrome 120+)
 
-Runs scripts in the USER_SCRIPT world — separate from both MAIN (page) and ISOLATED (content script).
+Runs scripts in USER_SCRIPT world — separate from both MAIN (page) and ISOLATED (content script).
 
-**Requires:** `"userScripts"` permission. Until Chrome 138, user must enable "Allow User Scripts" on the extension details page.
+**Requires:** `"userScripts"` permission. Until Chrome 138, user must enable "Allow User Scripts" on extension details page.
 
 ```js
 await chrome.userScripts.register([{
@@ -420,7 +420,7 @@ await chrome.userScripts.configureWorld({ messaging: true });
 
 ### chrome.tabCapture (Chrome 116+)
 
-Stream IDs must be used within a few seconds of creation; consume them in an offscreen document.
+Stream IDs must be used within seconds of creation; consume in offscreen document.
 
 ```js
 // service worker — get stream ID
@@ -445,11 +445,11 @@ chrome.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
 });
 ```
 
-**Note:** `desktopCapture.chooseDesktopMedia` stream IDs are NOT usable in offscreen documents. Only `tabCapture.getMediaStreamId` streams work in offscreen. For desktop capture, use a visible extension page (popup, side panel, or options page).
+**Note:** `desktopCapture.chooseDesktopMedia` stream IDs NOT usable in offscreen documents. Only `tabCapture.getMediaStreamId` streams work offscreen. For desktop capture, use visible extension page (popup, side panel, or options page).
 
 ### chrome.omnibox
 
-Register a keyword that activates when typed in the address bar:
+Register keyword activating when typed in address bar:
 
 ```json
 { "omnibox": { "keyword": "myext" } }
@@ -471,7 +471,7 @@ chrome.omnibox.onInputEntered.addListener((text, disposition) => {
 
 ### File System Access API
 
-Extensions can use the web File System Access API for local file operations with user gesture. **Cannot be called from the service worker** — use from popup, options page, or side panel only.
+Extensions can use web File System Access API for local file ops with user gesture. **Cannot call from service worker** — use from popup, options page, or side panel only.
 
 ```js
 // Open a file (requires user gesture)
@@ -501,7 +501,7 @@ For background file access without user gesture, use native messaging instead.
 
 ### Pattern: SSE/LLM Stream Host in Offscreen
 
-The canonical pattern for persistent streaming in MV3. SW sleeps; offscreen (with `AUDIO_PLAYBACK` keepalive) persists indefinitely.
+Canonical pattern for persistent streaming in MV3. SW sleeps; offscreen (with `AUDIO_PLAYBACK` keepalive) persists indefinitely.
 
 ```
 LLM API / SSE endpoint

@@ -1,8 +1,8 @@
+The file being fixed is not `SKILL.md` — the task wants the corrected compressed content returned directly. The fix is restoring the second `chrome-extension-expert` backtick occurrence in the banner (line 2: `under hubs` → `under hubs (\`chrome-extension-expert\`)`).
+
 <!-- hub-reference-banner -->
-> **Reference file — part of the `chrome-extension-expert` hub.** Formerly the standalone `dexie-indexeddb-local-first-reviewer` skill.
-> Sibling topics in this family are now reference files under the hubs (`chrome-extension-expert`) — **not** standalone
-> skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
-> skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
+> **Reference file — part of `chrome-extension-expert` hub.** Formerly standalone `dexie-indexeddb-local-first-reviewer` skill.
+> Sibling topics now reference files under hubs (`chrome-extension-expert`) — **not** standalone skills. Ignore "use the X skill" / `related_skills` / SKIP pointers naming bare sibling skills; load topic's `references/<name>.md` from owning hub (see hub's "Cross-hub map").
 
 ---
 
@@ -65,9 +65,7 @@ related_skills:
 
 # Dexie / IndexedDB Local-first Reviewer
 
-Practical review reference for auditing Dexie and IndexedDB usage in local-first applications.
-Covers schema/index correctness, migration safety, transaction boundaries, cache invalidation,
-and MV3 persistence constraints.
+Review reference for auditing Dexie and IndexedDB in local-first apps. Covers schema/index correctness, migration safety, transaction boundaries, cache invalidation, MV3 persistence.
 
 **Sources:** [Dexie docs](https://dexie.org/docs/), [MDN IndexedDB API](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API), [Chrome MV3 service worker lifecycle](https://developer.chrome.com/docs/extensions/develop/concepts/service-workers/lifecycle).
 
@@ -75,22 +73,22 @@ and MV3 persistence constraints.
 
 ## Quick Review Rules
 
-1. **Index only what you query.** If code sorts or filters on a field, that field must be in `stores()`. Over-indexing hurts performance; Dexie explicitly recommends avoiding large indexed values.
-2. **Compound index order must match query shape.** Declared as `[a+b]`; query prefix must align or the index is skipped.
-3. **Schema changes are migrations.** New indexes and renamed fields belong in versioned `upgrade()` calls, not ad hoc runtime fixups.
-4. **Wrap related writes in one transaction.** Control-yielding async gaps can break intended atomicity even inside Dexie transactions.
-5. **Prefer batch writes.** Review per-document write loops skeptically — `bulkAdd()`/`bulkPut()` exist for a reason.
-6. **Every cache needs an explicit invalidation trigger** near the write paths that can stale it.
-7. **MV3 globals are disposable.** Anything that must survive suspend belongs in IndexedDB or `chrome.storage.*`, not memory.
+1. **Index only what you query.** Field in `stores()` only if code sorts/filters on it. Over-indexing hurts performance; Dexie explicitly warns against large indexed values.
+2. **Compound index order must match query shape.** Declared `[a+b]`; query prefix must align or index skipped.
+3. **Schema changes are migrations.** New indexes and renamed fields go in versioned `upgrade()` calls, not ad hoc runtime fixups.
+4. **Wrap related writes in one transaction.** Control-yielding async gaps break atomicity even inside Dexie transactions.
+5. **Prefer batch writes.** Per-document write loops suspicious — `bulkAdd()`/`bulkPut()` exist for reason.
+6. **Every cache needs explicit invalidation trigger** near write paths that can stale it.
+7. **MV3 globals are disposable.** Anything surviving suspend goes in IndexedDB or `chrome.storage.*`, not memory.
 
 ## Review Workflow
 
 | Step | What to check | Key APIs |
 |---|---|---|
-| 1. Map access patterns | Identify hot reads, sorted/range queries, fan-out joins before judging schema | `stores()`, `where()` |
-| 2. Verify index coverage | Each `where()`, `orderBy()`, compound selector → actual schema index exists and order matches | `where()`, `IDBIndex` |
+| 1. Map access patterns | Hot reads, sorted/range queries, fan-out joins before judging schema | `stores()`, `where()` |
+| 2. Verify index coverage | Each `where()`, `orderBy()`, compound selector → actual schema index exists, order matches | `where()`, `IDBIndex` |
 | 3. Inspect write atomicity | Related writes, migration flags, derived-record updates in one transaction or partial-commit risk | `transaction()`, `IDBTransaction` |
-| 4. Check migration safety | New indexes, renamed fields, backfills are versioned and idempotent; first-open cannot loop | `upgrade()`, `IDBDatabase` |
+| 4. Check migration safety | New indexes, renamed fields, backfills versioned and idempotent; first-open cannot loop | `upgrade()`, `IDBDatabase` |
 | 5. Audit cache invalidation | Thread summaries, unread counts, prompt caches cannot drift after writes | repo `docs/ARCHITECTURE.md` |
 | 6. Check failure modes | Quota/eviction assumptions, re-open behavior, MV3 suspend/resume | MDN storage quotas, Chrome lifecycle |
 
@@ -99,25 +97,25 @@ and MV3 persistence constraints.
 | Method / surface | Purpose | Review focus | Caveats |
 |---|---|---|---|
 | `version().stores()` | Declares tables and indexes | Index only queried fields; verify compound index order | Over-indexing hurts performance and stability |
-| `version().upgrade()` | Versioned schema/data migration | Idempotence, field backfill safety, old-to-new mapping | Runs inside upgrade transaction; mistakes can strand users on open |
+| `version().upgrade()` | Versioned schema/data migration | Idempotence, field backfill safety, old-to-new mapping | Runs inside upgrade transaction; mistakes strand users on open |
 | `transaction()` | Atomic read/write group | Async gaps, nested scope, rollback behavior | IndexedDB auto-commits when control yields unexpectedly |
-| `bulkAdd()` / `bulkPut()` | Batch insert/upsert | Per-doc loops, `BulkError` handling, partial-success assumptions | Insert-only vs upsert semantics differ — do not use `bulkAdd()` where idempotence requires `bulkPut()` |
-| `where()` / `WhereClause` | Indexed lookup/range query | Selector-to-index alignment, fallback filtering | Misaligned queries silently degrade to slower JS-side filtering |
+| `bulkAdd()` / `bulkPut()` | Batch insert/upsert | Per-doc loops, `BulkError` handling, partial-success assumptions | Insert-only vs upsert semantics differ — don't use `bulkAdd()` where idempotence requires `bulkPut()` |
+| `where()` / `WhereClause` | Indexed lookup/range query | Selector-to-index alignment, fallback filtering | Misaligned queries silently degrade to JS-side filtering |
 | `IDBKeyRange`-style range | Efficient lower/upper bounds | Inclusive/exclusive edge correctness | Easy off-by-one errors |
 | `Dexie.waitFor()` | Keep transaction alive across async | Whether truly necessary | CPU-expensive in hot paths |
-| Repo cache declarations | Fast-path derived reads | Explicit invalidation, write adjacency, bounded growth | TTL-only caches can hide stale state if writes don't bust them |
+| Repo cache declarations | Fast-path derived reads | Explicit invalidation, write adjacency, bounded growth | TTL-only caches hide stale state if writes don't bust them |
 
 ## Standards
 
-- Use **compound indexes for real multi-field access patterns** instead of broad JS-side filtering on a weak seed.
-- Keep **migration logic explicit, versioned, and one-way** — no live shape mutations without an upgrade path.
-- Distinguish **insert-only** (`bulkAdd`) and **upsert** (`bulkPut`) semantics deliberately.
-- Treat **quota and eviction as variable browser behavior**, not a guaranteed capacity budget.
-- In MV3, persist **authoritative state** to IndexedDB/storage; treat in-memory caches as performance helpers only.
-- Every cache must have an **explicit invalidation trigger** — TTL alone is insufficient for write-adjacent caches.
+- **Compound indexes for real multi-field access patterns** — not broad JS-side filtering on weak seed.
+- **Migration logic explicit, versioned, one-way** — no live shape mutations without upgrade path.
+- Distinguish **insert-only** (`bulkAdd`) vs **upsert** (`bulkPut`) deliberately.
+- Treat **quota and eviction as variable browser behavior**, not guaranteed capacity.
+- MV3: persist **authoritative state** to IndexedDB/storage; in-memory caches = performance helpers only.
+- Every cache needs **explicit invalidation trigger** — TTL alone insufficient for write-adjacent caches.
 
 ## Known Ambiguities
 
-- Exact performance depends on actual data volume and query mix, not just schema correctness.
-- Code can look correct while still relying on JS-side filtering after a partial indexed seed — treat that as a performance/correctness finding.
-- Distinguish **authoritative persisted state**, **derived persisted state**, and **ephemeral cache state** — most bugs come from mixing these categories.
+- Actual performance depends on data volume and query mix, not just schema correctness.
+- Code can look correct while relying on JS-side filtering after partial indexed seed — treat as performance/correctness finding.
+- Distinguish **authoritative persisted state**, **derived persisted state**, **ephemeral cache state** — most bugs from mixing these.

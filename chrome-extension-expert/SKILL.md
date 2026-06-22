@@ -26,18 +26,18 @@ updated: "2026-05-31"
 ---
 # Chrome Extension Expert
 
-Dev hub for Chrome/Chromium MV3 browser extensions. First-choice reference for extension-specific work: MV3 model, service-worker lifecycle, messaging boundaries (worker, content scripts, popup, options, offscreen docs), `chrome.*` API surface (identity, storage, tabs, notifications, action), native-messaging bridges, packaging, Web Store distribution, in-page UI (content scripts, shadow DOM, markdown rendering), websockets in worker, E2E testing unpacked extension, extension security review.
+MV3 browser extension dev hub. First-choice for extension work: MV3 model, service-worker lifecycle, messaging boundaries (worker, content scripts, popup, options, offscreen docs), `chrome.*` API surface (identity, storage, tabs, notifications, action), native-messaging bridges, packaging, Web Store, in-page UI (content scripts, shadow DOM, markdown rendering), websockets in worker, E2E testing, security review.
 
-Use when task: how extension built, packaged, wired, or secured — not general web UI, language syntax, or generic architecture (see sibling hubs below).
+Use when: how extension built, packaged, wired, or secured — not general web UI, language syntax, or generic architecture.
 
 ## How to use this skill
 
-17 Chrome-extension sub-skills as on-demand reference files. Match task to routing table below and **Read listed `references/<name>.md` before answering deep questions** — table alone not enough for depth. For exact API signatures, manifest keys, Chrome version behavior: defer to official Chrome for Developers extension docs.
+17 sub-skills as on-demand reference files. Match task to routing table → **Read listed `references/<name>.md` before answering deep questions** — table alone insufficient. For exact API signatures, manifest keys, Chrome version behavior: defer to official Chrome for Developers docs.
 
 <!-- ROUTING TABLE: chrome-extension-expert — auto-generated, edit descriptions as needed -->
 ## Sub-skill routing table
 
-Hub absorbs 17 former standalone skills as on-demand reference files. Task matches row → **Read listed `references/` file** before answering — do not rely on table alone for depth.
+Hub absorbs 17 former standalone skills as on-demand reference files. Task matches row → **Read listed `references/` file** before answering.
 
 | Sub-topic | When to load | Reference file |
 | --- | --- | --- |
@@ -65,19 +65,19 @@ Hub absorbs 17 former standalone skills as on-demand reference files. Task match
 
 ## Cross-hub boundaries
 
-Hub owns Chrome-extension-specific development. Hand off when task falls into sibling hub:
+Hub owns Chrome-extension-specific dev. Hand off when task falls into sibling hub:
 
 - **General frontend / UI / CSS** not extension-specific → `frontend-ui`.
 - **General JavaScript / TypeScript language** → `programming-languages`.
 - **General software patterns / architecture** → `software-engineering-patterns`.
-- **This project's own extension code and runtime** (mdb-tam dashboard extension) → treat as user's repo, not this hub. Use repo's own docs (`docs/ARCHITECTURE.md`, `src/background/README.md`) and source.
+- **This project's own extension code and runtime** (mdb-tam dashboard extension) → treat as user's repo. Use repo's own docs (`docs/ARCHITECTURE.md`, `src/background/README.md`) and source.
 
-Some topics touch two hubs (e.g., shadow-DOM overlay = extension content-script concern here + general UI in `frontend-ui`). Lead with hub matching user's intent — extension-specific stays here.
+Topics touching two hubs (e.g., shadow-DOM overlay = extension content-script concern here + general UI in `frontend-ui`): lead with hub matching user's intent.
 
 <!-- cross-hub-map -->
 ## Cross-hub map — where every chrome-extension topic lives
 
-Family split across hubs. Task's deep material **not** in this hub's sub-skill routing table → it's a reference file under sibling hub below — **activate that hub or `Read` its `references/<name>.md` directly**. Every former standalone skill in family now a reference under one hub (nothing deleted).
+Family split across hubs. Task's deep material **not** in this hub's routing table → reference file under sibling hub — **activate that hub or `Read` its `references/<name>.md` directly**.
 
 | Hub | Owns | Example reference files |
 | --- | --- | --- |

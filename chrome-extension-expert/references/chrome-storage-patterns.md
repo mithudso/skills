@@ -1,8 +1,8 @@
 <!-- hub-reference-banner -->
-> **Reference file — part of the `chrome-extension-expert` hub.** Formerly the standalone `chrome-storage-patterns` skill.
-> Sibling topics in this family are now reference files under the hubs (`chrome-extension-expert`) — **not** standalone
-> skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
-> skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
+> **Reference file — part of the `chrome-extension-expert` hub.** Formerly standalone `chrome-storage-patterns` skill.
+> Sibling topics now reference files under hubs (`chrome-extension-expert`) — **not** standalone
+> skills. Ignore "use the X skill" / `related_skills` / SKIP pointers naming bare sibling
+> skills; load that topic's `references/<name>.md` from owning hub (see hub's "Cross-hub map").
 
 ---
 
@@ -31,9 +31,9 @@ updated: 2026-05-29
 
 ## Overview
 
-The `chrome.storage` API is the canonical persistence layer for Chrome MV3 extensions. Unlike `localStorage` (synchronous, blocking, unavailable in service workers), `chrome.storage` provides asynchronous bulk read/write accessible from every extension context: service workers, content scripts, popups, options pages, and extension-owned tabs.
+`chrome.storage` = canonical persistence layer for Chrome MV3 extensions. Unlike `localStorage` (synchronous, blocking, unavailable in service workers), `chrome.storage` provides async bulk read/write accessible from every extension context: service workers, content scripts, popups, options pages, extension-owned tabs.
 
-MV3's ephemeral service workers make proper storage architecture critical. Service workers terminate after 30 seconds of inactivity and lose all in-memory state on restart. Every piece of state that must survive a restart needs to be written to `chrome.storage.local` or `chrome.storage.session` proactively.
+MV3 ephemeral service workers make storage architecture critical. Service workers terminate after 30s idle, lose all in-memory state on restart. Any state that must survive restart needs writing to `chrome.storage.local` or `chrome.storage.session` proactively.
 
 ## Storage Areas Comparison
 
@@ -94,7 +94,7 @@ await chrome.storage.local.clear();
 
 ### Enabling Content Script Access to Session Storage
 
-By default, `chrome.storage.session` is only accessible from trusted contexts (service worker, extension pages). To allow content scripts:
+Default: `chrome.storage.session` only accessible from trusted contexts (service worker, extension pages). To allow content scripts:
 
 ```javascript
 // Call once in service worker at startup
@@ -107,7 +107,7 @@ chrome.storage.session.setAccessLevel({
 
 ### Pattern 1: Service Worker State Recovery
 
-The most critical MV3 pattern. Restore state on every SW activation:
+Most critical MV3 pattern. Restore state on every SW activation:
 
 ```javascript
 // service-worker.js
@@ -140,7 +140,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 ### Pattern 2: Dual-Layer Cache (Session + Local)
 
-Use session storage as a fast read cache, local as durable backup:
+Session storage = fast read cache; local = durable backup:
 
 ```javascript
 async function getCaseData(caseId) {
@@ -169,7 +169,7 @@ async function getCaseData(caseId) {
 
 ### Pattern 3: Batch Read/Write
 
-Each `get()`/`set()` involves IPC between the extension process and the browser process. Always batch:
+Each `get()`/`set()` = IPC between extension process and browser process. Always batch:
 
 ```javascript
 // BAD: 3 round-trips
@@ -189,7 +189,7 @@ await chrome.storage.local.set({ keyA: valueA, keyB: valueB });
 
 ### Pattern 4: Cross-Context Synchronization with onChanged
 
-The `onChanged` listener fires in every extension context when storage mutates:
+`onChanged` fires in every extension context when storage mutates:
 
 ```javascript
 // In service worker, popup, options page, or content script:
@@ -211,11 +211,11 @@ chrome.storage.local.onChanged.addListener((changes) => {
 });
 ```
 
-**Note:** Content scripts receive `onChanged` events for `local` and `sync` by default but NOT for `session` unless `setAccessLevel` is called (see above).
+**Note:** Content scripts receive `onChanged` events for `local` and `sync` by default but NOT for `session` unless `setAccessLevel` called (see above).
 
 ### Pattern 5: Chunking Large Data
 
-When a single value would approach comfortable serialization sizes (~1 MB+):
+When single value approaches ~1 MB+:
 
 ```javascript
 const CHUNK_SIZE = 1024 * 1024; // 1 MB per chunk
@@ -280,7 +280,7 @@ async function evictOldEntries(area) {
 
 ### Pattern 7: Debounced Writes
 
-Coalesce rapid state changes to avoid excessive IPC and write throttling:
+Coalesce rapid state changes — avoids excessive IPC and write throttling:
 
 ```javascript
 let writeTimer = null;
@@ -356,7 +356,7 @@ chrome.runtime.onInstalled.addListener(() => { ensureSchema(); });
 
 ### Pattern 9: Migration from localStorage
 
-Service workers cannot access `localStorage`. Use an offscreen document for migration:
+Service workers cannot access `localStorage`. Use offscreen document for migration:
 
 ```javascript
 // service-worker.js
@@ -415,7 +415,7 @@ console.log(`Storage: ${(totalBytes / LOCAL_QUOTA * 100).toFixed(1)}% used`);
 { "permissions": ["storage", "unlimitedStorage"] }
 ```
 
-With `unlimitedStorage`, `chrome.storage.local` is no longer capped at 10 MB.
+With `unlimitedStorage`, `chrome.storage.local` no longer capped at 10 MB.
 
 ## Anti-Patterns
 
@@ -506,12 +506,12 @@ await chrome.storage.local.set(batch);
 ## Performance Tips
 
 1. **Prefer session over local for hot data** — in-memory, no disk I/O
-2. **Batch all reads and writes** — each call is a full IPC round-trip
+2. **Batch all reads and writes** — each call = full IPC round-trip
 3. **Avoid `get(null)` on large stores** — retrieves all keys; expensive at scale
-4. **Cache locally after read** — keep a JS variable as read cache, invalidate on `onChanged`
+4. **Cache locally after read** — keep JS variable as read cache, invalidate on `onChanged`
 5. **Debounce rapid writes** — coalesce mutations within 100–500ms windows
-6. **Structure keys for partial reads** — prefer `{ case_123: {...} }` over `{ allCases: [...] }` to fetch individual entries cheaply
-7. **Monitor usage** — periodically call `getBytesInUse()` and alert on high utilization
+6. **Structure keys for partial reads** — prefer `{ case_123: {...} }` over `{ allCases: [...] }` for cheap individual fetches
+7. **Monitor usage** — periodically call `getBytesInUse()`, alert on high utilization
 
 ## Cross-Browser Compatibility
 
@@ -526,9 +526,9 @@ await chrome.storage.local.set(batch);
 | Offscreen documents | Chrome 109+ | Not supported | Not supported |
 
 **Portability notes:**
-- Use `webextension-polyfill` for cross-browser extensions — it normalizes to the Promise-based API.
-- `setAccessLevel` is Chrome-only. On Firefox, content scripts can access `session` storage by default without any extra call.
-- For `localStorage` migration in Firefox, use background scripts (persistent in Firefox MV2, event-based in MV3) instead of offscreen documents.
+- Use `webextension-polyfill` for cross-browser extensions — normalizes to Promise-based API.
+- `setAccessLevel` Chrome-only. Firefox: content scripts access `session` by default, no extra call needed.
+- For `localStorage` migration in Firefox, use background scripts instead of offscreen documents.
 
 ## References
 

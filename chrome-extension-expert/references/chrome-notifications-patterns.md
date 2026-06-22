@@ -1,8 +1,6 @@
 <!-- hub-reference-banner -->
-> **Reference file — part of the `chrome-extension-expert` hub.** Formerly the standalone `chrome-notifications-patterns` skill.
-> Sibling topics in this family are now reference files under the hubs (`chrome-extension-expert`) — **not** standalone
-> skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
-> skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
+> **Reference file — part of `chrome-extension-expert` hub.** Formerly standalone `chrome-notifications-patterns` skill.
+> Siblings now reference files under hubs (`chrome-extension-expert`) — **not** standalone skills. Ignore "use X skill" / `related_skills` / SKIP pointers naming bare sibling skills; load `references/<name>.md` from owning hub (see hub "Cross-hub map").
 
 ---
 
@@ -34,7 +32,7 @@ updated: 2026-05-29
 
 ## Overview
 
-Chrome MV3 extensions have four notification surfaces. Choosing the wrong surface causes notification fatigue or missed alerts.
+MV3 extensions: four notification surfaces. Wrong surface → notification fatigue or missed alerts.
 
 | Surface | Urgency | Persists? | User input? | Works when tab closed? |
 |---------|---------|-----------|-------------|----------------------|
@@ -54,16 +52,16 @@ Chrome MV3 extensions have four notification surfaces. Choosing the wrong surfac
 }
 ```
 
-- `"notifications"` — required for `chrome.notifications` API and all notification events
-- `"alarms"` — required only for recurring/scheduled notifications
-- `"offscreen"` — required only if playing notification sounds via offscreen audio
-- `"action"` key — required for badge text/color via `chrome.action.setBadgeText`
+- `"notifications"` — `chrome.notifications` API + all notification events
+- `"alarms"` — recurring/scheduled notifications only
+- `"offscreen"` — notification sounds via offscreen audio only
+- `"action"` key — badge text/color via `chrome.action.setBadgeText`
 
 ## chrome.notifications API
 
 ### Template Types
 
-All templates require `type`, `iconUrl`, `title`, and `message`.
+All templates require `type`, `iconUrl`, `title`, `message`.
 
 ```javascript
 // Basic — simple informational notification
@@ -112,15 +110,15 @@ await chrome.notifications.create('sync-progress', {
 | `requireInteraction` | boolean | false | Stays until user dismisses (use for critical alerts) |
 | `silent` | boolean | false | Suppresses OS notification sound |
 | `buttons` | array | [] | Up to 2 buttons: `[{ title: 'View' }, { title: 'Dismiss' }]` |
-| `contextMessage` | string | — | Secondary text below the message |
-| `eventTime` | number | — | Timestamp in ms; displayed in the notification |
+| `contextMessage` | string | — | Secondary text below message |
+| `eventTime` | number | — | Timestamp in ms; displayed in notification |
 | `items` | array | — | Required for `list` type |
 | `progress` | number | — | Required for `progress` type (0–100) |
 | `imageUrl` | string | — | Required for `image` type |
 
 ### Notification ID Management and Deduplication
 
-Calling `create()` with an ID that already exists **replaces** the existing notification — use this as the primary deduplication strategy.
+`create()` with existing ID **replaces** notification — primary dedup strategy.
 
 ```javascript
 // Deterministic ID prevents duplicate notifications for the same event
@@ -141,7 +139,7 @@ async function clearNotificationsByPrefix(prefix) {
 
 ## Event Handling
 
-All notification events fire in the service worker. Register listeners at the top level so they survive SW restarts.
+All notification events fire in service worker. Register at top level — survive SW restarts.
 
 ```javascript
 // service-worker.js
@@ -171,11 +169,11 @@ chrome.notifications.onClosed.addListener((notificationId, byUser) => {
 });
 ```
 
-**Always call `chrome.notifications.clear(id)` after handling a click or button event** — the notification does not auto-clear on interaction.
+**Always call `chrome.notifications.clear(id)` after click or button event** — notification doesn't auto-clear on interaction.
 
 ## Badge + Notification Coordination
 
-Badge text provides a persistent count indicator that complements transient system notifications.
+Badge text: persistent count indicator, complements transient system notifications.
 
 ```javascript
 // service-worker.js
@@ -214,7 +212,7 @@ async function updateTabBadge(tabId, count, severity = 'info') {
 
 ## Alarm-Driven Recurring Notifications
 
-Service workers are ephemeral. Use `chrome.alarms` to schedule notification checks that survive SW restarts.
+Service workers ephemeral. Use `chrome.alarms` for notification checks that survive SW restarts.
 
 ```javascript
 // service-worker.js
@@ -256,11 +254,11 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 });
 ```
 
-**Minimum interval:** `chrome.alarms` enforces a minimum of 1 minute in production and 30 seconds for unpacked extensions.
+**Min interval:** `chrome.alarms` enforces 1 minute production, 30 seconds unpacked extensions.
 
 ## In-Page Toast / Snackbar (Content Script)
 
-For notifications that belong inside the page (not system tray), inject a toast via content script using shadow DOM isolation.
+Notifications inside page (not system tray): inject toast via content script with shadow DOM isolation.
 
 ```javascript
 // content-script.js
@@ -363,7 +361,7 @@ async function sendToastToActiveTab(payload) {
 
 ## Notification Sound via Offscreen Document
 
-MV3 service workers cannot play audio directly. Use an offscreen document:
+MV3 service workers can't play audio. Use offscreen document:
 
 ```javascript
 // service-worker.js
@@ -397,11 +395,11 @@ chrome.runtime.onMessage.addListener((msg) => {
 });
 ```
 
-**Note:** Offscreen documents created with `AUDIO_PLAYBACK` auto-close after 30 seconds of silence. Always check for an existing document before sending a play message.
+**Note:** Offscreen docs with `AUDIO_PLAYBACK` auto-close after 30s silence. Check for existing doc before sending play message.
 
 ## Alert Popup Windows
 
-For critical alerts requiring dedicated UI (acknowledgement forms, multi-field input):
+Critical alerts requiring dedicated UI (acknowledgement forms, multi-field input):
 
 ```javascript
 // service-worker.js
@@ -434,7 +432,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 ```
 
-**Limitations:** Not modal, cannot stay on top of other windows, slower to open than system notifications. Use only when the alert requires user input beyond a simple click/dismiss.
+**Limitations:** Not modal, can't stay on top of other windows, slower than system notifications. Use only when alert needs user input beyond click/dismiss.
 
 ## Anti-Patterns
 
@@ -501,7 +499,7 @@ async function shouldNotify(caseNumber) {
 
 ## Permission Check
 
-The `"notifications"` permission in `manifest.json` is declared permission — it does not guarantee the user has granted it (users can revoke it in OS settings). Check before creating:
+`"notifications"` in `manifest.json` is declared permission — doesn't guarantee user granted it (revocable in OS settings). Check before creating:
 
 ```javascript
 async function safeNotify(id, options) {

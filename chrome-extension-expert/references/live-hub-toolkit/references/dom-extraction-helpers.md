@@ -40,7 +40,7 @@ function escapeRegex(value) {
 
 ## Universal labeled value extractor
 
-Support portals render key-value pairs in various HTML structures (dt/dd, th/td, label/span). This extractor tries multiple strategies:
+Support portals render key-value pairs in various HTML structures (dt/dd, th/td, label/span). Extractor tries multiple strategies:
 
 ```js
 function extractLabeledValue(labels = []) {
@@ -72,7 +72,7 @@ function extractLabeledValue(labels = []) {
 
 ## Account case table extraction
 
-Walk visible case links and their container rows to build structured records:
+Walk visible case links and container rows, build structured records:
 
 ```js
 function extractAccountCases() {
@@ -105,7 +105,7 @@ function extractAccountCases() {
 
 ## Account matching helper
 
-Match a discovered record to a tracked account by ID (preferred) or name (fallback):
+Match discovered record to tracked account by ID (preferred) or name (fallback):
 
 ```js
 function matchesTrackedAccount(record = {}, accountId = '', accountName = '') {

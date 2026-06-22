@@ -1,8 +1,6 @@
 <!-- hub-reference-banner -->
-> **Reference file — part of the `chrome-extension-expert` hub.** Formerly the standalone `shadow-dom-component-authoring` skill.
-> Sibling topics in this family are now reference files under the hubs (`chrome-extension-expert`) — **not** standalone
-> skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
-> skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
+> **Reference file — part of the `chrome-extension-expert` hub.** Formerly standalone `shadow-dom-component-authoring` skill.
+> Sibling topics now reference files under hubs (`chrome-extension-expert`) — **not** standalone skills. Ignore "use the X skill" / `related_skills` / SKIP pointers naming bare sibling skills; load topic's `references/<name>.md` from owning hub (see hub's "Cross-hub map").
 
 ---
 
@@ -12,7 +10,7 @@ version: "1.1.0"
 updated: "2026-05-29"
 description: >
   Shadow DOM component authoring for Chrome extension overlays and web components.
-  TRIGGER: user is building shadow DOM components, attaching shadow roots (open/closed),
+  TRIGGER: user building shadow DOM components, attaching shadow roots (open/closed),
   styling with adoptedStyleSheets or :host/:host-context/::slotted, composing with slots,
   debugging event retargeting or composedPath, theming across shadow boundaries with CSS
   custom properties, implementing custom element lifecycle callbacks, using declarative
@@ -53,23 +51,22 @@ related_skills:
 
 # Shadow DOM Component Authoring for Chrome Extension Overlays
 
-Expert reference for encapsulated UI components using shadow DOM, with emphasis on Chrome
-extension content script overlays.
+Expert reference for encapsulated UI components using shadow DOM. Focus: Chrome extension content script overlays.
 
 ## When NOT to use this skill
 
 - **React/Vue component styling:** use `frontend-design`.
-- **General CSS and HTML reference:** use `html-css`.
+- **CSS/HTML reference:** use `html-css`.
 - **Chrome extension messaging (postMessage, runtime.sendMessage):** use `extension-message-bridge`.
-- **Content script DOM scraping and extraction:** use `dom-scraping-resilience`.
+- **Content script DOM scraping/extraction:** use `dom-scraping-resilience`.
 
 ## Skill guidance
 
-- For extension overlays: always recommend **closed mode + `all: initial`** as the baseline.
-- For reusable web components (non-extension): **open mode** is the standard default.
-- Prefer `adoptedStyleSheets` over `<style>` injection when sharing styles across multiple shadow roots.
-- Never recommend deprecated `/deep/` or `::shadow` selectors.
-- For event handling across shadow boundaries: always check the `composed` property.
+- Extension overlays: always use **closed mode + `all: initial`** as baseline.
+- Reusable web components (non-extension): **open mode** is standard default.
+- Prefer `adoptedStyleSheets` over `<style>` when sharing styles across multiple shadow roots.
+- Never use deprecated `/deep/` or `::shadow` selectors.
+- Event handling across shadow boundaries: always check `composed` property.
 
 ---
 
@@ -77,7 +74,7 @@ extension content script overlays.
 
 ### Open mode
 
-Exposes the shadow root via `element.shadowRoot`. External JavaScript has full read/write access.
+Exposes shadow root via `element.shadowRoot`. External JS has full read/write access.
 
 ```js
 class InfoCard extends HTMLElement {
@@ -101,7 +98,7 @@ document.querySelector('info-card').shadowRoot.querySelector('.title');
 
 ### Closed mode
 
-Returns `null` from `element.shadowRoot`. Only code holding the reference from `attachShadow()` can access the tree.
+Returns `null` from `element.shadowRoot`. Only code holding reference from `attachShadow()` can access tree.
 
 ```js
 class SecureOverlay extends HTMLElement {
@@ -132,8 +129,8 @@ document.querySelector('secure-overlay').shadowRoot; // null
 
 **Closed mode limitations:**
 - `element.shadowRoot` returns `null` — no external `querySelector`
-- DevTools Elements panel still shows the tree (closed mode blocks scripts, not the user)
-- `event.composedPath()` still reveals the full path to listeners that receive the event
+- DevTools Elements panel still shows tree (closed blocks scripts, not user)
+- `event.composedPath()` still reveals full path to receiving listeners
 
 ### Mode comparison
 
@@ -153,7 +150,7 @@ document.querySelector('secure-overlay').shadowRoot; // null
 
 ### Constructable stylesheets
 
-Create once, share across many shadow roots. Highest-performance approach for shared styles.
+Create once, share across many shadow roots. Highest-perf approach for shared styles.
 
 ```js
 const sharedStyles = new CSSStyleSheet();
@@ -214,7 +211,7 @@ sharedStyles.deleteRule(0);
 
 ### :host-context — style based on ancestor
 
-Adapts a component to external context without breaking encapsulation.
+Adapts component to external context without breaking encapsulation.
 
 ```css
 :host-context(.dark-theme)  { --bg: #0f172a; --fg: #e2e8f0; }
@@ -225,7 +222,7 @@ Adapts a component to external context without breaking encapsulation.
 
 ### ::slotted — style projected light DOM content
 
-Only targets top-level slotted elements. Cannot descend into their children.
+Targets only top-level slotted elements. Cannot descend into children.
 
 ```css
 ::slotted(*)   { margin: 0; padding: 8px; }
@@ -250,7 +247,7 @@ Only targets top-level slotted elements. Cannot descend into their children.
 my-button::part(base) { background: hotpink; border-radius: 999px; }
 ```
 
-Use `::part()` to create a public styling API without exposing full shadow tree access.
+Use `::part()` for public styling API without exposing full shadow tree access.
 
 ---
 
@@ -309,7 +306,7 @@ slot.assignedNodes({ flatten: true }); // all nodes including text, follows fall
 
 ### How retargeting works
 
-Events originating inside a shadow tree retarget `event.target` to the host element when bubbling past the shadow root. External listeners never see internal implementation details.
+Events inside shadow tree retarget `event.target` to host element when bubbling past shadow root. External listeners never see internal details.
 
 ```js
 hostElement.addEventListener('click', (e) => {
@@ -320,7 +317,7 @@ hostElement.addEventListener('click', (e) => {
 
 ### The `composed` property
 
-Events must have `composed: true` to cross shadow boundaries. Native UI events are composed by default. **Custom events are NOT composed by default.**
+Events need `composed: true` to cross shadow boundaries. Native UI events composed by default. **Custom events NOT composed by default.**
 
 ```js
 // Stays inside shadow root
@@ -350,13 +347,13 @@ shadow.querySelector('.btn').dispatchEvent(
 | Custom events | false (default) | Must set `composed: true` explicitly |
 | slotchange | false | Stays inside shadow root |
 
-**Slotted element note:** events on slotted elements (light DOM) are NOT retargeted because the elements physically live in the light DOM.
+**Slotted element note:** events on slotted elements (light DOM) NOT retargeted — elements physically live in light DOM.
 
 ---
 
 ## 6. CSS custom properties crossing shadow boundaries
 
-CSS custom properties are inherited and cross shadow DOM boundaries naturally — the primary mechanism for external theming.
+CSS custom properties inherited, cross shadow DOM boundaries naturally — primary mechanism for external theming.
 
 ```js
 const styles = new CSSStyleSheet();
@@ -391,7 +388,7 @@ secure-overlay { --overlay-bg: #ffffff; --overlay-accent: #16a34a; }
 | `background`, `border`, `margin`, `padding` | No (not inherited) |
 | `display`, `position`, `width`, `height` | No (not inherited) |
 
-**Rule:** use `all: initial` on `:host` for extension overlays, then expose `--*` custom properties as the intentional theming contract.
+**Rule:** use `all: initial` on `:host` for extension overlays, then expose `--*` custom properties as intentional theming contract.
 
 ---
 
@@ -447,7 +444,7 @@ customElements.define('case-overlay', CaseOverlay);
 4. `disconnectedCallback()` — removed; clean up
 5. `adoptedCallback()` — moved between documents (rare)
 
-**Rule:** never read layout-dependent values (`offsetWidth`, `getBoundingClientRect`) in the constructor. Wait for `connectedCallback`.
+**Rule:** never read layout-dependent values (`offsetWidth`, `getBoundingClientRect`) in constructor. Wait for `connectedCallback`.
 
 ---
 
@@ -465,7 +462,7 @@ customElements.define('case-overlay', CaseOverlay);
 </info-card>
 ```
 
-Browser parses the template, creates the shadow root, removes the template element — no JavaScript required for initial render.
+Browser parses template, creates shadow root, removes template element — no JS needed for initial render.
 
 **Hydration with custom elements:**
 ```js
@@ -483,7 +480,7 @@ class InfoCard extends HTMLElement {
 
 **When declarative shadow DOM matters:**
 - Server-side rendering — eliminates FOUC
-- Static site generators — shadow DOM without a JS bundle
+- Static site generators — shadow DOM without JS bundle
 - Progressive enhancement — structure first, interactivity on hydration
 
 **Not applicable for Chrome extension overlays** — content scripts inject imperatively.
@@ -545,7 +542,7 @@ div { display: inline; }               /* Breaks block layout */
 button { all: unset; }                  /* Strips button styling */
 ```
 
-`all: initial` resets every CSS property to its initial value. Use `!important` on `:host` in extension overlays to guard against host page `!important` rules on inherited properties.
+`all: initial` resets every CSS property. Use `!important` on `:host` in extension overlays to guard against host page `!important` rules on inherited properties.
 
 ### iframe + shadow DOM hybrid (maximum isolation)
 
@@ -614,22 +611,22 @@ observer.observe(document.documentElement, { childList: true });
 | Host page stacking context hides overlay | `z-index: 2147483646` + `position: fixed` on `:host` |
 | Click events caught by host page listener | `e.stopPropagation()` on shadow root for internal-only events |
 | Host page `MutationObserver` removes overlay | Re-injection guard (pattern above) |
-| Extension styles leak into host page | All styles must live inside shadow root — never `<style>` to the host document |
+| Extension styles leak into host page | All styles must live inside shadow root — never `<style>` to host document |
 
 ---
 
 ## 10. Anti-patterns
 
 1. **Open mode for extension overlays.** Host scripts can read/mutate via `element.shadowRoot`.
-2. **Omitting `all: initial` on `:host`.** Inherited properties from host page leak in.
+2. **Omitting `all: initial` on `:host`.** Host page inherited properties leak in.
 3. **Deprecated `::shadow` or `/deep/` combinators.** Removed from all browsers.
-4. **Custom events with `composed: true` by default.** Only set when the event genuinely needs to cross the boundary.
+4. **Custom events with `composed: true` by default.** Only set when event genuinely needs to cross boundary.
 5. **Layout reads in `constructor`.** `offsetWidth`, `getBoundingClientRect` return zero before connection. Use `connectedCallback`.
-6. **Missing `disconnectedCallback` cleanup.** Timers, observers, and listeners must be cleaned up.
-7. **`::slotted(div) span`.** `::slotted()` only targets top-level slotted elements.
-8. **`<style>` added to the host page document.** Extension styles must live exclusively inside the shadow root.
-9. **Closed mode as a security sandbox.** DevTools still shows the tree; `composedPath()` still exposes internal nodes.
-10. **`innerHTML` with user-controlled strings.** Build DOM with `createElement`/`textContent`. Raw string injection is an XSS vector even inside shadow DOM.
+6. **Missing `disconnectedCallback` cleanup.** Timers, observers, listeners must be cleaned up.
+7. **`::slotted(div) span`.** `::slotted()` targets only top-level slotted elements.
+8. **`<style>` added to host page document.** Extension styles must live exclusively inside shadow root.
+9. **Closed mode as security sandbox.** DevTools still shows tree; `composedPath()` still exposes internal nodes.
+10. **`innerHTML` with user-controlled strings.** Build DOM with `createElement`/`textContent`. Raw string injection is XSS vector even inside shadow DOM.
 
 ---
 
@@ -641,11 +638,11 @@ observer.observe(document.documentElement, { childList: true });
 - [ ] `adoptedStyleSheets` used when sharing styles across multiple shadow roots
 - [ ] No deprecated `::shadow` or `/deep/` selectors
 - [ ] Custom events use `composed: true` only when cross-boundary propagation is intentional
-- [ ] CSS custom properties documented as the public theming API
+- [ ] CSS custom properties documented as public theming API
 - [ ] `connectedCallback` used for DOM-dependent setup (not `constructor`)
 - [ ] `disconnectedCallback` cleans up timers, observers, and listeners
 - [ ] `*, *::before, *::after { box-sizing: border-box }` set inside shadow root
 - [ ] iframe `sandbox` attribute set appropriately for hybrid patterns
-- [ ] Re-injection guard present if host page may remove the overlay host element
+- [ ] Re-injection guard present if host page may remove overlay host element
 - [ ] DOM built with safe methods (`createElement`/`textContent`), not raw `innerHTML`
 - [ ] `::part()` used to expose intended styling hooks instead of full open access

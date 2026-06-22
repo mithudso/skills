@@ -61,7 +61,6 @@ related_skills:
   - venture-nonprofit-cause
   - psychology-of-charitable-giving
 ---
-
 <!-- SPOKE of the applied-psychology hub. Lives at applied-psychology/references/health-behavior-change-and-donor-registration/ when folded; currently installed as a standalone skill until folding completes. -->
 # Health Behavior Change Models & Organ Donor Registration Interventions
 
@@ -77,11 +76,7 @@ related_skills:
 
 ## The core challenge: most people support donation. Very few register.
 
-Survey after survey shows 80–90% of the US and UK public support organ donation. Yet as of 2023,
-only ~58% of Americans are registered donors, and pre-law-change UK sat around 40%.
-This **willingness–registration gap** is the defining puzzle of donation psychology: the
-intention–behavior gap as a public-health emergency. Understanding it requires both the
-formal health-behavior-change models and the empirical intervention evidence base.
+Surveys: 80–90% US/UK public support organ donation. 2023: ~58% Americans registered; pre-law-change UK ~40%. **Willingness–registration gap** = intention–behavior gap as public-health emergency. Need both formal behavior-change models and empirical intervention evidence.
 
 ---
 
@@ -97,14 +92,13 @@ formal health-behavior-change models and the empirical intervention evidence bas
 | Should we switch to opt-out? | Defaults evidence (contested) | Opt-out lifts registration counts but causation on actual donation is debated |
 | How to map barriers for a campaign intervention? | COM-B / Behaviour Change Wheel | Diagnose capability / opportunity / motivation deficits first |
 
-**How to structure a response using this skill:** (1) use the decision table to select the model(s) most relevant to the question; (2) for multi-model questions, lead with COM-B as the diagnostic scaffold, then layer in HBM/TPB/EPPM for mechanism detail; (3) always pair a model recommendation with the evidence-base caveat from the Limitations section.
+**Response structure:** (1) Use decision table to select models. (2) Multi-model questions: lead with COM-B as diagnostic scaffold, layer HBM/TPB/EPPM for mechanism detail. (3) Always pair model recommendation with evidence caveat from Limitations section.
 
 ---
 
 ## 1. Health Belief Model (HBM)
 
-**Provenance:** Developed 1950s–70s by Hochbaum, Rosenstock, and colleagues at the US Public
-Health Service. Self-efficacy added explicitly by Rosenstock, Strecher, & Becker (1988).
+**Provenance:** Developed 1950s–70s, Hochbaum, Rosenstock, colleagues at US Public Health Service. Self-efficacy added by Rosenstock, Strecher, & Becker (1988).
 
 ### Constructs
 
@@ -117,16 +111,12 @@ Health Service. Self-efficacy added explicitly by Rosenstock, Strecher, & Becker
 | Cues to action | Internal or external stimuli that trigger action | Seeing a "register now" prompt while renewing a license |
 | Self-efficacy | Confidence one can perform the behavior | "I know how to register and it takes 2 minutes" |
 
-**How to use HBM for registration campaigns:**
-1. Survey for the dominant barrier (fear of family conflict, distrust of the medical system, body-integrity concerns) — barriers predict non-registration more consistently than any other construct.
-2. Address barriers directly with brief factual corrections before making the registration ask.
-3. Pair a cue to action (the registration prompt) immediately after the barrier is addressed.
+**HBM for registration campaigns:**
+1. Survey for dominant barrier (fear of family conflict, distrust of medical system, body-integrity concerns) — barriers predict non-registration most consistently.
+2. Address barriers directly with brief factual corrections before registration ask.
+3. Pair cue to action immediately after barrier addressed.
 
-**Replication note:** HBM has strong face validity and decades of use. Meta-analyses show moderate
-predictive validity (barriers and benefits are the strongest predictors; susceptibility and
-severity are weaker). The model predicts intention reasonably well but is less reliable for
-predicting actual behavioral follow-through without accounting for PBC and implementation
-intentions. Effect sizes vary substantially across health behaviors and populations.
+**Replication note:** HBM has strong face validity, decades of use. Meta-analyses show moderate predictive validity (barriers and benefits strongest; susceptibility and severity weaker). Predicts intention reasonably well, less reliable for actual behavioral follow-through without PBC and implementation intentions. Effect sizes vary substantially across behaviors and populations.
 
 ---
 
@@ -142,44 +132,30 @@ intentions. Effect sizes vary substantially across health behaviors and populati
 - → Combined attitudes + subjective norms → **Behavioral intention** → **Behavior**
 
 **TPB extends TRA by adding:**
-- **Perceived behavioral control (PBC)**: Belief in one's ability to perform the behavior
-  ("I know how and I'm capable of registering"; functionally similar to self-efficacy)
+- **Perceived behavioral control (PBC)**: Belief in ability to perform the behavior ("I know how and I'm capable of registering"; functionally similar to self-efficacy)
 - PBC predicts both intention AND behavior directly (especially when actual control is imperfect)
 
 ### Application to organ donation
 
-A 2021 systematic review of 17 TPB-based intervention studies (Asgarimojarad et al.,
-*Saudi J Kidney Dis Transpl*) found TPB-based interventions improve organ donation behavior.
-**PBC is the strongest moderating predictor across cultures**: structural barriers (knowing how
-to register, family discussion anxiety, mistrust) dominate when attitudes are already positive.
-Removing knowledge barriers and providing an immediate registration opportunity addresses PBC
-directly and is the most consistent finding across community-based intervention studies.
+2021 systematic review of 17 TPB-based intervention studies (Asgarimojarad et al., *Saudi J Kidney Dis Transpl*): TPB-based interventions improve organ donation behavior. **PBC strongest moderating predictor across cultures**: structural barriers (knowing how to register, family discussion anxiety, mistrust) dominate when attitudes already positive. Removing knowledge barriers + providing immediate registration opportunity addresses PBC directly — most consistent finding across community-based intervention studies.
 
-**Cultural note:** Cross-cultural TPB studies show attitude → intention is stronger in
-individualist cultures (Americans); subjective norm → intention is stronger in collectivist
-cultures (Koreans). Intervention design should adjust accordingly.
+**Cultural note:** Cross-cultural TPB studies: attitude → intention stronger in individualist cultures (Americans); subjective norm → intention stronger in collectivist cultures (Koreans). Adjust intervention design accordingly.
 
-**On the intention–action gap:** TPB explains *intention* well (R² often 40–60% in donation
-studies). It explains *behavior* less well. The gap between a strong intention and actual
-registration is driven primarily by PBC (structural barriers) and the absence of an immediate
-registration opportunity — not by weak attitudes or low motivation. This is why the single most
-consistent finding across every systematic review is: **provide an immediate registration
-opportunity at the point of contact**.
+**On the intention–action gap:** TPB explains *intention* well (R² often 40–60% in donation studies). Explains *behavior* less well. Gap between strong intention and actual registration driven primarily by PBC (structural barriers) and absence of immediate registration opportunity — not weak attitudes or low motivation. Single most consistent finding across every systematic review: **provide an immediate registration opportunity at the point of contact**.
 
 ---
 
 ## 3. Extended Parallel Process Model (EPPM)
 
-**Provenance:** Witte (1992), *Communication Monographs*. Integrates Leventhal's danger-control /
-fear-control framework with Protection Motivation Theory (Rogers) and prior fear-appeal work.
+**Provenance:** Witte (1992), *Communication Monographs*. Integrates Leventhal's danger-control / fear-control framework with Protection Motivation Theory (Rogers) and prior fear-appeal work.
 
 ### Core mechanism
 
-When a fear appeal is received, the recipient assesses two things in sequence:
+Fear appeal received → recipient assesses two things in sequence:
 1. **Threat appraisal**: How susceptible am I? How severe is it?
 2. **Efficacy appraisal**: How effective is the recommended action? Can I do it?
 
-The ratio of perceived efficacy to perceived threat determines the response:
+Perceived efficacy/threat ratio determines response:
 
 | Threat | Efficacy | Response | Outcome |
 | --- | --- | --- | --- |
@@ -187,43 +163,26 @@ The ratio of perceived efficacy to perceived threat determines the response:
 | High | High | **Danger control** | Protective behavior (desired outcome) |
 | High | Low | **Fear control** | Denial, reactance, avoidance (backfire) |
 
-**Why fear-only donation messages can backfire:** "Three people die every day on the waiting
-list" is a high-threat message. If the recipient simultaneously feels the registration process
-is complicated, or that doctors will give up on them if registered (low response efficacy), the
-fear-control response kicks in — they avoid thinking about it rather than registering.
+**Why fear-only donation messages backfire:** "Three people die every day on the waiting list" = high-threat message. If recipient simultaneously feels registration is complicated, or doctors will give up on them if registered (low response efficacy), fear-control kicks in — avoidance instead of registration.
 
-**The EPPM fix:** Pair high-threat messaging with high-efficacy information (the registration
-takes 2 minutes; doctors prioritize treatment regardless of donor status; you can specify
-conditions). The BIT RCT found the loss-frame "Three people die every day" performed well
-*because* the simultaneous context (a simple registration page) provided a high-efficacy cue.
+**The EPPM fix:** Pair high-threat messaging with high-efficacy information (registration takes 2 minutes; doctors prioritize treatment regardless of donor status; conditions can be specified). BIT RCT found loss-frame "Three people die every day" performed well *because* simultaneous context (simple registration page) provided high-efficacy cue.
 
-**Fear appeal meta-analysis honest note:** Witte & Allen (2000) meta-analysis found fear appeals
-are generally effective when efficacy is high, and ineffective or counterproductive when efficacy
-is low. Effect sizes are moderate (r ≈ .20 — the correlation between message exposure and
-intention-change outcomes) and heterogeneous. The EPPM is well-supported in the health
-communication literature but most tests involve self-report outcomes; behavioral follow-through
-with objectively measured registration is rarer.
+**Fear appeal meta-analysis honest note:** Witte & Allen (2000): fear appeals generally effective when efficacy is high, ineffective or counterproductive when efficacy is low. Effect sizes moderate (r ≈ .20) and heterogeneous. EPPM well-supported in health communication literature but most tests use self-report outcomes; behavioral follow-through with objectively measured registration is rarer.
 
-> **Scope note:** This section covers EPPM applied to registration behavior. For EPPM applied to
-> charitable giving or prosocial donation-appeal design more broadly, see
-> `psychology-of-charitable-giving`.
+> **Scope note:** This section covers EPPM applied to registration behavior. For EPPM applied to charitable giving or prosocial donation-appeal design, see `psychology-of-charitable-giving`.
 
 ---
 
 ## 4. COM-B / Behaviour Change Wheel
 
-**Provenance:** Michie, van Stralen, & West (2011), *Implementation Science*. Synthesizes 19
-behavior-change frameworks into a unified system.
+**Provenance:** Michie, van Stralen, & West (2011), *Implementation Science*. Synthesizes 19 behavior-change frameworks into unified system.
 
 ### COM-B model
 
-Behavior (B) requires three conditions — all three must be sufficient:
-- **Capability (C)**: Physical and psychological ability (knowledge of how to register; knowing
-  where to go; understanding what donation means)
-- **Opportunity (O)**: Physical and social environment that enables the behavior (a registration
-  prompt at the DMV or ID renewal; family acceptance; time available)
-- **Motivation (M)**: Reflective (conscious decision, goals) and automatic (habits, emotions,
-  impulses) processes
+Behavior (B) requires three conditions — all must be sufficient:
+- **Capability (C)**: Physical and psychological ability (knowledge of how to register; knowing where to go; understanding what donation means)
+- **Opportunity (O)**: Physical and social environment enabling behavior (registration prompt at DMV or ID renewal; family acceptance; time available)
+- **Motivation (M)**: Reflective (conscious decision, goals) and automatic (habits, emotions, impulses) processes
 
 ### Organ-donation diagnostic map
 
@@ -236,8 +195,7 @@ Behavior (B) requires three conditions — all three must be sufficient:
 | Motivation — reflective | "I mean to, I just haven't done it yet" | Implementation intentions; cues to action |
 | Motivation — automatic | Mortality salience causes avoidance | Fear-managed messaging (EPPM); framing |
 
-**COM-B is complementary, not redundant, to TPB:** COM-B maps intervention types to deficits;
-TPB identifies the specific attitudinal and normative mechanisms that drive intention.
+**COM-B vs TPB:** COM-B maps intervention types to deficits; TPB identifies specific attitudinal and normative mechanisms driving intention. Complementary, not redundant.
 
 **Behaviour Change Wheel — nine intervention functions** (Michie et al. 2011):
 
@@ -257,37 +215,25 @@ TPB identifies the specific attitudinal and normative mechanisms that drive inte
 
 ## 5. The Willingness–Registration Gap
 
-The gap is empirically documented and theoretically important. Key features:
+Gap empirically documented and theoretically important. Key features:
 
-- **Scale**: US: ~85% approve of donation (Gallup); ~58% registered (2023 HRSA data).
-  UK pre-2020: 80%+ support, ~40% registered.
-- **Mechanism:** Not primarily attitudinal — most non-registrants have positive attitudes. The
-  dominant drivers are:
-  1. **PBC barriers**: Perceived complexity, uncertainty about family impact, distrust of the
-     medical system, body-integrity concerns
-  2. **Mortality salience**: Confronting registration forces confrontation with personal death;
-     avoidance is an automatic motivation response
-  3. **Absence of an immediate registration opportunity**: Intentions without a proximate action
-     opportunity decay rapidly (implementation-intentions research)
-  4. **Social-norm uncertainty**: People underestimate how many of their peers are registered
-     (pluralistic ignorance in the direction that reduces registration)
+- **Scale**: US: ~85% approve of donation (Gallup); ~58% registered (2023 HRSA data). UK pre-2020: 80%+ support, ~40% registered.
+- **Mechanism:** Not primarily attitudinal — most non-registrants have positive attitudes. Dominant drivers:
+  1. **PBC barriers**: Perceived complexity, uncertainty about family impact, distrust of medical system, body-integrity concerns
+  2. **Mortality salience**: Registration confronts personal death; avoidance is automatic motivation response
+  3. **Absence of immediate registration opportunity**: Intentions without proximate action opportunity decay rapidly (implementation-intentions research)
+  4. **Social-norm uncertainty**: People underestimate how many peers are registered (pluralistic ignorance reducing registration)
 
-- **What the research says about bridging it:**
-  - The single most replicated finding: **provide an immediate, frictionless registration
-    opportunity at the point of contact** (Golding et al. 2017 systematic review;
-    Cochrane 2021: RR 1.30 for registration-behavior outcomes)
-  - Brief myth-busting reduces attitudinal ambivalence, which increases PBC and subjective norm
-    (Feeley narrative-with-information studies)
-  - Anticipated regret ("How would you feel if a family member needed an organ and you hadn't
-    registered?") increases initial commitment (Lowe et al. 2024, *PLOS ONE*, US national survey)
+- **Bridging it:**
+  - Single most replicated finding: **provide immediate, frictionless registration opportunity at point of contact** (Golding et al. 2017 systematic review; Cochrane 2021: RR 1.30 for registration-behavior outcomes)
+  - Brief myth-busting reduces attitudinal ambivalence, increases PBC and subjective norm (Feeley narrative-with-information studies)
+  - Anticipated regret ("How would you feel if a family member needed an organ and you hadn't registered?") increases initial commitment (Lowe et al. 2024, *PLOS ONE*, US national survey)
 
 ---
 
 ## 6. Registration Intervention Evidence Base
 
-> **Scope:** This section covers the behavioral evidence for registration-choice architecture
-> (defaults, framing, prompted choice). Policy advocacy for or against presumed-consent
-> legislation is out of scope; see `venture-organ-donation-frontier` for the policy layer.
+> **Scope:** Behavioral evidence for registration-choice architecture (defaults, framing, prompted choice). Policy advocacy for/against presumed-consent legislation out of scope; see `venture-organ-donation-frontier` for policy layer.
 
 ### Active choice / Mandated choice / Prompted choice
 
@@ -296,35 +242,19 @@ The gap is empirically documented and theoretically important. Key features:
 | Opt-in (US status quo) | Must actively consent to be registered | Baseline; lowest registration rates among the three |
 | Opt-out / Presumed consent | Registered by default unless explicit objection | Cross-country data: ~25–30% higher donation rates (Abadie & Gay 2006) — but contested (see below) |
 | Mandated choice | Must make a yes/no decision; no default | Odds of registration ~2× opt-in (Kessler & Roth 2014, *AEJ: Economic Policy*); Virginia's experience shows ~24% remain undecided |
-| Prompted choice | Embedded in a routine transaction (ID renewal, DMV) | Italy quasi-experiment (Fieles-Ahmad & Schulze Spuentrup 2026): significant increase in consent registrations; consistent with BIT findings |
+| Prompted choice | Embedded in routine transaction (ID renewal, DMV) | Italy quasi-experiment (Fieles-Ahmad & Schulze Spuentrup 2026): significant increase in consent registrations; consistent with BIT findings |
 
-**The opt-out / presumed consent causal evidence: what it actually shows:**
+**Opt-out / presumed consent causal evidence:**
 
-Johnson & Goldstein (2003, *Science*; 2004, *Transplantation*) showed dramatic cross-country
-differences: opt-out countries have ~60 percentage points higher consent rates. Their online
-experiment (n=161) showed opt-out roughly doubles self-reported donation intent vs opt-in.
+Johnson & Goldstein (2003, *Science*; 2004, *Transplantation*): dramatic cross-country differences — opt-out countries ~60 percentage points higher consent rates. Online experiment (n=161): opt-out roughly doubles self-reported donation intent vs opt-in.
 
-However, the cross-country comparison conflates consent law with infrastructure, health system
-capacity, GDP, traffic mortality rates, Catholic religious culture, and whether families are
-routinely consulted before procurement. Abadie & Gay (2006) used panel regression to partial
-these out and found ~25–30% higher donation rates in presumed-consent countries — but critics
-note the identifying variation is still observational. A later study (Shepherd et al. 2014)
-found presumed consent only increases donation rates when family consent is also routinely
-sought and a combined registry is maintained; otherwise the effect is negligible.
+Cross-country comparison conflates consent law with infrastructure, health system capacity, GDP, traffic mortality rates, Catholic religious culture, and whether families routinely consulted before procurement. Abadie & Gay (2006) used panel regression — found ~25–30% higher donation rates in presumed-consent countries — but critics note identifying variation still observational. Shepherd et al. (2014): presumed consent only increases donation rates when family consent also routinely sought and combined registry maintained; otherwise effect negligible.
 
-**Practical takeaway:** Opt-out/presumed-consent is associated with higher registration counts
-and somewhat higher donation rates, but the causal mechanism is not purely defaults — it also
-reflects the accompanying infrastructure investments and cultural conditions. The US is opt-in
-and this is unlikely to change in the near term; the actionable intervention evidence is in
-prompted-choice (integrating registration into routine government transactions) and message
-framing at the point of contact.
+**Practical takeaway:** Opt-out/presumed-consent associated with higher registration counts and somewhat higher donation rates, but causal mechanism not purely defaults — also reflects accompanying infrastructure investments and cultural conditions. US is opt-in and unlikely to change near-term; actionable intervention evidence is in prompted-choice and message framing at point of contact.
 
 ### UK Behavioural Insights Team RCT (2013)
 
-The largest RCT ever run on organ donor registration: **n = 1,085,322** UK road-tax/driving-
-licence applicants on GOV.UK, randomized to one of eight message variants or control. The table
-below shows six of the eight tested variants; the remaining two variants (control variants and
-a combined frame) did not differ significantly from control and are omitted for brevity.
+Largest RCT on organ donor registration: **n = 1,085,322** UK road-tax/driving-licence applicants on GOV.UK, randomized to one of eight message variants or control. Six of eight tested variants shown below; remaining two didn't differ significantly from control.
 
 **Results (selected variants):**
 
@@ -337,65 +267,50 @@ a combined frame) did not differ significantly from control and are omitted for 
 | Social norms alone: "Every day thousands of people who see this page decide to register." | **OR 0.94** (p < 0.05) | **Significantly reduced registrations** |
 | Social norms + image of people | OR ~0.96 (not significantly different from social-norms-alone) | Also backfired |
 
-**Why did the social-norms message backfire?** The message described the norm as *thousands*
-registering daily — which may have highlighted the vastness of the decision or paradoxically
-communicated that "most people still need to decide" rather than "most people have done it."
-The phrasing also lacked any efficacy component. This result is a sharp warning against
-assuming social-norm messaging always increases prosocial behavior in donation contexts.
+**Why did the social-norms message backfire?** Message described norm as *thousands* registering daily — may have highlighted vastness of decision or paradoxically communicated "most people still need to decide" rather than "most people have done it." Lacked any efficacy component. Sharp warning: social-norm messaging doesn't always increase prosocial behavior in donation contexts.
 
-**Implications of the BIT trial:**
-1. Reciprocity priming is the single most evidence-supported message type at registration scale
-2. Loss-framing is comparably effective (but not significantly better)
-3. Social-norm messages need precise calibration — a generic norm message can backfire
-4. Projected impact of the best message: ~96,000 additional registrations per year if applied
-   across GOV.UK consistently
+**BIT trial implications:**
+1. Reciprocity priming = single most evidence-supported message type at registration scale
+2. Loss-framing comparably effective (not significantly better)
+3. Social-norm messages need precise calibration — generic norm message can backfire
+4. Projected impact of best message: ~96,000 additional registrations per year if applied consistently across GOV.UK
 
 ### Community-based interventions
 
-The 2021 Cochrane systematic review (46 RCTs/cluster-RCTs/quasi-RCTs; n up to 1.29M) found:
+2021 Cochrane systematic review (46 RCTs/cluster-RCTs/quasi-RCTs; n up to 1.29M):
 - Registration behavior: **RR 1.30 (95% CI 1.19–1.43)** — low certainty, high heterogeneity (I² = 84%)
-- Community interventions targeting specific ethnic groups: **RR 2.14** — but I² = 85%, so high heterogeneity
+- Community interventions targeting specific ethnic groups: **RR 2.14** — but I² = 85%, high heterogeneity
 - Classroom interventions with transplant community speakers: RR 1.33, I² = 0% — most consistent
-- Brief interventions to address myths/concerns + immediate registration opportunity: most consistent finding across all reviews
+- Brief interventions addressing myths/concerns + immediate registration opportunity: most consistent finding across all reviews
 
-**The honest caveat:** Most community-intervention studies have high risk of bias and high
-heterogeneity. The Cochrane reviewers rate overall certainty as *low*. Effect sizes should be
-treated as upper-bound estimates.
+**Honest caveat:** Most community-intervention studies have high risk of bias and high heterogeneity. Cochrane reviewers rate overall certainty as *low*. Treat effect sizes as upper-bound estimates.
 
 ---
 
 ## 7. Barriers-to-Registration Quick Reference
 
-Most common empirically documented barriers (to address in campaigns):
+Most common empirically documented barriers:
 
 | Barrier | Prevalence | Intervention |
 | --- | --- | --- |
 | Doctors won't try as hard to save me | Very common (esp. low-trust populations) | Factual correction (organs retrieved only after death is confirmed) |
-| Body-integrity / disfigurement concern | Common | Factual: body is treated with respect; open-casket funerals proceed normally |
+| Body-integrity / disfigurement concern | Common | Factual: body treated with respect; open-casket funerals proceed normally |
 | Religious objection | Moderate; varies by faith | Faith-concordant messaging; most major religions support donation |
 | Family will be upset | Moderate | Facilitate family conversation; provide conversation scripts |
 | Don't know how to register | Moderate | Immediate registration opportunity; reduce friction |
 | Haven't thought about it | Very common | Salience + cue to action at point of contact |
-| "I'm too young / healthy to think about this" | Common in 18–30 | Reframe: registration is for others' benefit, not your risk acknowledgment |
+| "I'm too young / healthy to think about this" | Common in 18–30 | Reframe: registration is for others' benefit, not risk acknowledgment |
 
 ---
 
 ## Limitations and Replication Honesty
 
-- **HBM:** Moderate predictive validity; barriers/benefits outperform susceptibility/severity.
-  Theory does not specify how to combine constructs; less predictive of behavior than intention.
-- **TPB:** Intention prediction is strong; behavior prediction is weaker and intention–behavior
-  correlation decays over time. PBC conflates self-efficacy with actual controllability.
-- **EPPM:** Well-supported in communication research; most tests use self-report; rare behavioral
-  registration outcomes. Fear-control vs danger-control distinction is theoretically clean but
-  empirically harder to measure.
-- **COM-B / BCW:** Widely used in health policy; the framework is taxonomic rather than
-  predictive; does not specify which intervention functions produce the largest effects.
-- **Presumed-consent evidence:** Cross-country comparisons are observational. Causal claims about
-  opt-out *causing* higher donation rates are contested.
-- **BIT RCT (2013):** Strong internal validity (large n, true randomization). External validity:
-  UK context, single online touchpoint; reciprocity effect may not generalize identically across
-  cultures or settings.
+- **HBM:** Moderate predictive validity; barriers/benefits outperform susceptibility/severity. Doesn't specify how to combine constructs; less predictive of behavior than intention.
+- **TPB:** Intention prediction strong; behavior prediction weaker and intention–behavior correlation decays over time. PBC conflates self-efficacy with actual controllability.
+- **EPPM:** Well-supported in communication research; most tests use self-report; rare behavioral registration outcomes. Fear-control vs danger-control distinction theoretically clean but empirically harder to measure.
+- **COM-B / BCW:** Widely used in health policy; framework taxonomic rather than predictive; doesn't specify which intervention functions produce largest effects.
+- **Presumed-consent evidence:** Cross-country comparisons observational. Causal claims about opt-out *causing* higher donation rates contested.
+- **BIT RCT (2013):** Strong internal validity (large n, true randomization). External validity: UK context, single online touchpoint; reciprocity effect may not generalize identically across cultures or settings.
 
 ---
 

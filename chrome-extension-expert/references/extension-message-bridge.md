@@ -1,8 +1,6 @@
 <!-- hub-reference-banner -->
-> **Reference file — part of the `chrome-extension-expert` hub.** Formerly the standalone `extension-message-bridge` skill.
-> Sibling topics in this family are now reference files under the hubs (`chrome-extension-expert`) — **not** standalone
-> skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
-> skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
+> **Reference file — part of the `chrome-extension-expert` hub.** Formerly standalone `extension-message-bridge` skill.
+> Sibling topics now reference files under hubs (`chrome-extension-expert`) — **not** standalone skills. Ignore "use X skill" / `related_skills` / SKIP pointers naming bare sibling skill; load `references/<name>.md` from owning hub (see hub's "Cross-hub map").
 
 ---
 
@@ -46,18 +44,18 @@ related_skills:
 | Channel | API | Use when | Wakes suspended SW? |
 |---------|-----|----------|---------------------|
 | One-shot (ext-internal) | `chrome.runtime.sendMessage` | Request/response to SW | Yes |
-| One-shot (to tab) | `chrome.tabs.sendMessage(tabId)` | SW → specific tab's content script | N/A |
+| One-shot (to tab) | `chrome.tabs.sendMessage(tabId)` | SW → tab content script | N/A |
 | Long-lived port | `chrome.runtime.connect` | Streaming / multi-step | Yes (on connect) |
 | Cross-frame | `window.postMessage` | iframe↔parent, MAIN↔ISOLATED | N/A |
 | Same-document | `CustomEvent` on `document` | CS module↔CS module | N/A |
 | Storage broadcast | `chrome.storage.onChanged` | Settings propagation | N/A |
 
 **Golden rules:**
-1. Prefer one-shot `sendMessage` over ports — it wakes a terminated SW automatically.
-2. Never use `async` directly on an `onMessage` listener — wrap in sync outer + async IIFE.
+1. Prefer one-shot `sendMessage` over ports — wakes terminated SW automatically.
+2. Never use `async` directly on `onMessage` listener — wrap in sync outer + async IIFE.
 3. Always validate `event.data.source` on `postMessage` listeners.
 4. Always catch "Receiving end does not exist" on broadcasts.
-5. Handle `port.onDisconnect` — ports die when the SW terminates.
+5. Handle `port.onDisconnect` — ports die when SW terminates.
 
 ## Context topology
 
@@ -105,7 +103,7 @@ const state   = await sendMessage('MCA_GET_TRACKING_STATE');
 
 ## Pattern 2: SW dispatch table (async handler)
 
-The **only correct pattern** for async `onMessage` handlers in MV3:
+**Only correct pattern** for async `onMessage` handlers in MV3:
 
 ```js
 // --- In service-worker.js ---
@@ -191,7 +189,7 @@ document.addEventListener('mca:context-updated', (e) => {
 });
 ```
 
-No serialization overhead; `detail` can hold live object references. Cannot cross context boundaries.
+No serialization overhead; `detail` holds live object refs. Cannot cross context boundaries.
 
 ## Pattern 6: iframe ↔ parent postMessage bridge
 
@@ -229,7 +227,7 @@ window.addEventListener('message', (event) => {
 });
 ```
 
-**Security note on `'*'` targetOrigin:** acceptable for non-sensitive UI coordination when both sides validate `data.source`. For messages carrying tokens or PII, check `event.origin` against the known `chrome-extension://<id>` origin instead.
+**Security note on `'*'` targetOrigin:** OK for non-sensitive UI coordination when both sides validate `data.source`. For tokens/PII, check `event.origin` against known `chrome-extension://<id>` origin.
 
 ## Pattern 7: Long-lived port (chrome.runtime.connect)
 
@@ -273,7 +271,7 @@ window.addEventListener('message', (event) => {
 
 ## MV3 service worker considerations
 
-**One-shot messages wake the SW; ports do not** — if the SW terminates while a port is open, the port disconnects. Always implement `onDisconnect` + reconnect.
+**One-shot messages wake SW; ports don't** — SW terminates while port open → port disconnects. Always implement `onDisconnect` + reconnect.
 
 **Keepalive strategies:**
 ```js
@@ -333,17 +331,17 @@ async function sendRuntimeMessage(message) {
 ## Troubleshooting
 
 **"Could not establish connection. Receiving end does not exist."**
-- Broadcast: catch and log at debug level — expected when no extension pages are open.
+- Broadcast: catch + log at debug level — expected when no pages open.
 - Tab-targeted: content script not injected. Catch and re-inject.
-- Check `content_scripts.matches` covers the target URL.
+- Check `content_scripts.matches` covers target URL.
 
-**"Extension context invalidated"** — Extension updated/reloaded. Set a flag on first occurrence; stop further `chrome.runtime` calls. Optionally show a "please refresh" banner.
+**"Extension context invalidated"** — Extension updated/reloaded. Set flag on first occurrence; stop further `chrome.runtime` calls. Optionally show "please refresh" banner.
 
 **`sendResponse` ignored / response is `undefined`**
 - Listener used `async` function (returns Promise, not `true`).
-- `return true` placed after an `await` (too late — channel already closed).
-- Fix: sync outer function, async IIFE pattern shown in Pattern 2.
+- `return true` placed after `await` (too late — channel already closed).
+- Fix: sync outer + async IIFE (Pattern 2).
 
-**Port disconnects immediately** — `onConnect` handler didn't store a reference to the port. Store it in a Map before the handler returns.
+**Port disconnects immediately** — `onConnect` handler didn't store port ref. Store in Map before handler returns.
 
-**Messages arrive out of order** — Multiple rapid `sendMessage` calls are independent. Add sequence numbers or use a long-lived port where ordering is guaranteed.
+**Messages arrive out of order** — Multiple rapid `sendMessage` calls independent. Add sequence numbers or use long-lived port (ordering guaranteed).

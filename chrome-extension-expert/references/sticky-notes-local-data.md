@@ -1,8 +1,8 @@
 <!-- hub-reference-banner -->
-> **Reference file — part of the `chrome-extension-expert` hub.** Formerly the standalone `sticky-notes-local-data` skill.
-> Sibling topics in this family are now reference files under the hubs (`chrome-extension-expert`) — **not** standalone
-> skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
-> skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
+> **Reference file — part of the `chrome-extension-expert` hub.** Formerly standalone `sticky-notes-local-data` skill.
+> Sibling topics now reference files under hubs (`chrome-extension-expert`) — **not** standalone
+> skills. Ignore "use the X skill" / `related_skills` / SKIP pointers below naming bare sibling
+> skills; load that topic's `references/<name>.md` from owning hub (see hub's "Cross-hub map").
 
 ---
 
@@ -56,13 +56,13 @@ related:
 
 # Sticky Notes with Local Data Persistence
 
-Patterns for building a Chrome extension note-taking surface backed by `chrome.storage.local`, with popout windows, contenteditable editing, debounced auto-save, organizational features, and cross-context sync.
+Patterns for Chrome extension note-taking backed by `chrome.storage.local` — popout windows, contenteditable editing, debounced auto-save, organization, cross-context sync.
 
 ---
 
 ## 1. Note Data Model
 
-Design a flat, ID-keyed schema that serializes cleanly to chrome.storage.
+Flat ID-keyed schema, serializes cleanly to chrome.storage.
 
 ```js
 // note-schema.js — canonical note shape
@@ -83,7 +83,7 @@ function createNote(overrides = {}) {
 }
 ```
 
-**Storage key convention:** store all notes under a single top-level key (`stickyNotes`) to allow atomic bulk reads/writes and avoid key collisions.
+**Storage key convention:** store all notes under single top-level key (`stickyNotes`) — atomic bulk reads/writes, no key collisions.
 
 ```js
 // { stickyNotes: { [noteId]: NoteObject, ... }, stickyMeta: { nextOrder: 5 } }
@@ -125,7 +125,7 @@ async function saveAllNotes(notesObj) {
 }
 ```
 
-**Sharing across contexts:** Extension pages (popup, popout, options, dashboard) share the same origin — import as an ES module. Service workers use `importScripts`. Content scripts must route through `chrome.runtime.sendMessage` to the service worker.
+**Sharing across contexts:** Extension pages (popup, popout, options, dashboard) share origin — import as ES module. Service workers use `importScripts`. Content scripts route through `chrome.runtime.sendMessage` to service worker.
 
 ### Error handling
 
@@ -151,7 +151,7 @@ async function saveNoteSafe(note) {
 | Per-item limit | None for local | Unlike sync (8 KB per item) |
 | Unlimited storage | Add `"unlimitedStorage"` permission | For heavy collections with embedded images |
 
-Always store a `plainText` field alongside `body` so full-text search never parses HTML at query time.
+Always store `plainText` alongside `body` — full-text search never parses HTML at query time.
 
 ---
 
@@ -240,7 +240,7 @@ function stripHtml(html) {
 
 ### Safe DOM content loading
 
-When loading saved note HTML back into the editor, sanitize first to prevent stored-XSS.
+Loading saved note HTML into editor: sanitize first to prevent stored-XSS.
 
 ```js
 // Option A: DOMPurify (recommended when bundling is an option)
@@ -322,9 +322,9 @@ window.addEventListener('beforeunload', () => autoSave.flush());
 
 | Delay | Tradeoff |
 |---|---|
-| 300 ms | Near-instant save; higher storage write frequency |
+| 300 ms | Near-instant save; higher write frequency |
 | 800 ms | Good balance for typical typing speed (recommended) |
-| 1500 ms | Minimal writes; user may notice delay in indicator |
+| 1500 ms | Minimal writes; user may notice indicator delay |
 
 ---
 
@@ -367,7 +367,7 @@ async function searchNotes(query) {
 
 ## 7. Cross-Context Sync
 
-Use `chrome.storage.onChanged` as the single sync primitive across popup, popout, dashboard, and content script overlay.
+Use `chrome.storage.onChanged` as single sync primitive across popup, popout, dashboard, content script overlay.
 
 ```js
 // sync-listener.js — imported by every UI context
@@ -408,7 +408,7 @@ onNotesChanged((allNotes, changedIds) => {
 
 ### Conflict-avoidance rule
 
-Because chrome.storage writes are last-writer-wins, only the *focused* editor should auto-save. Unfocused popouts pause their debounce timer and re-read on focus.
+chrome.storage writes are last-writer-wins — only *focused* editor auto-saves. Unfocused popouts pause debounce, re-read on focus.
 
 ```js
 window.addEventListener('blur', () => autoSave.cancel());
@@ -452,7 +452,7 @@ window.addEventListener('focus', () => {
 
 ## 10. Testing Considerations
 
-- **Unit-test the CRUD layer** by mocking `chrome.storage.local` with a plain object and verifying get/set/delete round-trips.
-- **Unit-test the debounce** with fake timers (`vi.useFakeTimers()` in Vitest) — assert callback fires once after the delay and not on every input.
-- **E2E-test the popout** with Playwright's `launchPersistentContext` to load the extension, open the popout via `chrome.windows.create`, type into the contenteditable, and verify storage was updated.
-- **Cross-context sync test:** open two extension pages, edit in one, and assert the other receives the `onChanged` update within one second.
+- **Unit-test CRUD layer** — mock `chrome.storage.local` with plain object, verify get/set/delete round-trips.
+- **Unit-test debounce** — fake timers (`vi.useFakeTimers()` in Vitest), assert callback fires once after delay, not on every input.
+- **E2E-test popout** — Playwright `launchPersistentContext`, load extension, open popout via `chrome.windows.create`, type into contenteditable, verify storage updated.
+- **Cross-context sync test** — open two extension pages, edit in one, assert other receives `onChanged` update within one second.

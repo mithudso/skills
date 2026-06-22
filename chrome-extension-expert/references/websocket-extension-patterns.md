@@ -1,8 +1,6 @@
 <!-- hub-reference-banner -->
-> **Reference file — part of the `chrome-extension-expert` hub.** Formerly the standalone `websocket-extension-patterns` skill.
-> Sibling topics in this family are now reference files under the hubs (`chrome-extension-expert`) — **not** standalone
-> skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
-> skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
+> **Reference file — part of `chrome-extension-expert` hub.** Formerly standalone `websocket-extension-patterns` skill.
+> Sibling topics now reference files under hub (`chrome-extension-expert`) — **not** standalone skills. Ignore "use X skill" / `related_skills` / SKIP pointers naming bare sibling skills; load `references/<name>.md` from owning hub (see hub's "Cross-hub map").
 
 ---
 
@@ -47,23 +45,23 @@ related_skills:
 
 # WebSocket Extension Patterns
 
-Expert reference for WebSocket and Socket.IO real-time connections inside Chrome MV3 extensions, covering service worker lifecycle challenges, keepalive strategies, offscreen document delegation, reconnection state machines, and message buffering.
+Expert reference for WebSocket and Socket.IO real-time connections inside Chrome MV3 extensions — service worker lifecycle, keepalive, offscreen document delegation, reconnection state machines, message buffering.
 
 ## Overview
 
-Chrome MV3 replaced persistent background pages with ephemeral service workers that terminate after 30 seconds of inactivity. This conflicts with WebSocket connections, which expect a long-lived runtime. Since Chrome 116, WebSocket message activity resets the SW idle timer, making in-SW WebSockets viable when combined with keepalive discipline. For use cases that cannot guarantee regular message flow, offscreen documents provide a longer-lived alternative host.
+Chrome MV3 replaced persistent background pages with ephemeral service workers — terminate after 30s inactivity. Conflicts with WebSocket connections expecting long-lived runtime. Chrome 116+: WebSocket message activity resets SW idle timer, making in-SW WebSockets viable with keepalive discipline. Sparse message flows → offscreen documents.
 
 ## Where to Host the Connection
 
 | Hosting Context | Lifetime | Best For | Drawbacks |
 |---|---|---|---|
 | **Service worker** (Chrome 116+) | Active while messages flow every <30s | Server-push-heavy feeds, chat | Dies on idle; requires keepalive pings |
-| **Offscreen document** | Until explicitly closed or Chrome reclaims it | Persistent subscriptions, audio/media streaming | One offscreen doc per extension; `chrome.runtime` messaging only |
-| **Content script** | Tied to the page lifetime | Page-specific real-time features | Lost on navigation; no `chrome.storage.session` |
+| **Offscreen document** | Until explicitly closed or Chrome reclaims | Persistent subscriptions, audio/media streaming | One offscreen doc per extension; `chrome.runtime` messaging only |
+| **Content script** | Tied to page lifetime | Page-specific real-time features | Lost on navigation; no `chrome.storage.session` |
 | **Popup / sidepanel** | Open while user interacts | Short-lived UI-driven connections | Closes when user clicks away |
 | **chrome.alarms + polling** | Indefinite (alarm-driven) | Low-frequency updates (<1/min) | Not real-time; 30s minimum alarm period |
 
-**Decision rule:** If the server sends data more than once per 25 seconds, host the WebSocket in the service worker with a keepalive. If messages are sparse or unpredictable, use an offscreen document or fall back to polling.
+**Decision rule:** Server sends >1 message per 25s → host WebSocket in SW with keepalive. Sparse/unpredictable messages → offscreen document or polling.
 
 ---
 
@@ -71,23 +69,23 @@ Chrome MV3 replaced persistent background pages with ephemeral service workers t
 
 ### SW Idle Timer and WebSocket Activity (Chrome 116+)
 
-Starting Chrome 116, sending or receiving a WebSocket message resets the service worker's 30-second idle timer. Before Chrome 116, WebSocket activity did NOT prevent termination.
+Chrome 116+: sending/receiving WebSocket message resets SW 30s idle timer. Before Chrome 116, WebSocket activity did NOT prevent termination.
 
 **Critical thresholds:**
-- Idle timeout: 30 seconds of no events/API calls/WS messages
-- Operation timeout: 5 minutes per single handler invocation
-- Fetch timeout: 30 seconds for `fetch()` to receive the first byte
+- Idle timeout: 30s — no events/API calls/WS messages
+- Operation timeout: 5min per handler invocation
+- Fetch timeout: 30s for `fetch()` first byte
 
 ### The 5-Minute Port Reset
 
-Chrome resets `chrome.runtime` long-lived ports every 5 minutes. If your architecture relays WebSocket data over a runtime port, handle `onDisconnect` and re-establish the port.
+Chrome resets `chrome.runtime` long-lived ports every 5min. Architecture relaying WebSocket data over runtime port → handle `onDisconnect`, re-establish port.
 
 ### Offscreen Document Constraints
 
 - Requires `"offscreen"` permission in manifest.json
-- Only ONE offscreen document per extension at a time
-- Only `chrome.runtime` messaging APIs are available
-- Must specify a `reason` from the allowed enum (e.g., `WORKERS`, `BLOBS`, `DOM_SCRAPING`)
+- ONE offscreen doc per extension
+- Only `chrome.runtime` messaging APIs available
+- Must specify `reason` from allowed enum (e.g., `WORKERS`, `BLOBS`, `DOM_SCRAPING`)
 
 ---
 
@@ -106,7 +104,7 @@ Chrome resets `chrome.runtime` long-lived ports every 5 minutes. If your archite
 }
 ```
 
-**CSP rules:** `wss://` endpoints must be explicitly listed in `connect-src`. Wildcards work for subdomains: `wss://*.example.com`. `ws://` (unencrypted) is blocked in MV3.
+**CSP rules:** `wss://` endpoints must be in `connect-src`. Wildcards ok for subdomains: `wss://*.example.com`. `ws://` (unencrypted) blocked in MV3.
 
 ### Service Worker Implementation
 
@@ -219,13 +217,13 @@ function flushBuffer() {
 }
 ```
 
-For a durable buffer that survives SW termination, persist to `chrome.storage.session` instead (see Outbound Buffer section below).
+Durable buffer surviving SW termination → persist to `chrome.storage.session` (see Outbound Buffer section below).
 
 ---
 
 ## Offscreen Document Pattern
 
-Use when: Socket.IO client (requires DOM globals), sparse message patterns, audio/video streaming, or when you need `setTimeout`/`setInterval` without alarm workarounds.
+Use when: Socket.IO client (requires DOM globals), sparse message patterns, audio/video streaming, need `setTimeout`/`setInterval` without alarm workarounds.
 
 ### Manifest
 
@@ -316,7 +314,7 @@ chrome.runtime.onInstalled.addListener(ensureOffscreen);
 
 ## Socket.IO Configuration
 
-Socket.IO requires DOM globals (`document`, `XMLHttpRequest`). It cannot run in a service worker. Host in an offscreen document.
+Socket.IO requires DOM globals (`document`, `XMLHttpRequest`) — cannot run in SW. Host in offscreen document.
 
 ### Socket.IO in an Offscreen Document
 
@@ -356,11 +354,11 @@ chrome.runtime.onMessage.addListener((msg) => {
 
 | Option | Value | Why |
 |---|---|---|
-| `transports` | `['websocket']` | Skip polling; avoids CORS preflight in extension context |
+| `transports` | `['websocket']` | Skip polling; avoid CORS preflight in extension |
 | `reconnectionAttempts` | `10`–`20` | Enough retries for transient outages |
 | `reconnectionDelayMax` | `30000` | 30s cap |
-| `randomizationFactor` | `0.3` | Jitter to prevent thundering herd after server restart |
-| `auth` | callback function | Fetch fresh token from SW on each connect attempt |
+| `randomizationFactor` | `0.3` | Jitter, prevent thundering herd after server restart |
+| `auth` | callback function | Fetch fresh token from SW on each connect |
 
 ### Socket.IO Disconnect Reasons
 
@@ -435,7 +433,7 @@ async function restoreState() {
 
 ## Alarm-Based Polling (Alternative)
 
-When true real-time is not required (updates every 30s–5min are acceptable):
+When real-time not required (updates every 30s–5min ok):
 
 ```javascript
 const POLL_ALARM = 'poll-updates';
@@ -514,11 +512,11 @@ ws.onmessage = (event) => {
 
 | Anti-pattern | Fix |
 |---|---|
-| `setTimeout` for reconnection | Use `chrome.alarms` — `setTimeout` is lost when SW terminates |
-| Connection state in global variables only | Persist to `chrome.storage.session` — globals reset on SW restart |
-| No keepalive on quiet connections | Send a ping every 20s; server silence for 30s kills the SW |
-| Socket.IO directly in the service worker | Socket.IO requires DOM globals; host in offscreen document |
-| Forgetting the 5-minute port reset | Handle `port.onDisconnect` and re-establish the port |
+| `setTimeout` for reconnection | Use `chrome.alarms` — `setTimeout` lost when SW terminates |
+| Connection state in global vars only | Persist to `chrome.storage.session` — globals reset on SW restart |
+| No keepalive on quiet connections | Ping every 20s; 30s server silence kills SW |
+| Socket.IO in service worker | Socket.IO requires DOM globals; host in offscreen document |
+| Forgetting 5-minute port reset | Handle `port.onDisconnect`, re-establish port |
 | Creating multiple offscreen documents | Chrome enforces one per extension; check with `getContexts()` first |
 
 ---
@@ -527,11 +525,11 @@ ws.onmessage = (event) => {
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| WebSocket connects then immediately closes | No keepalive (SW goes idle); CSP blocks WSS URL; server auth failure | Add 20s keepalive; add `connect-src wss://...` to CSP; check `event.code` + `reason` in `onclose` |
+| WebSocket connects then immediately closes | No keepalive (SW idle); CSP blocks WSS URL; server auth failure | Add 20s keepalive; add `connect-src wss://...` to CSP; check `event.code` + `reason` in `onclose` |
 | Service worker keeps restarting | Normal idle termination (30s); unhandled exception crashes SW | Persist state to `chrome.storage.session`; add top-level error handler |
 | Offscreen document silently disappears | Chrome reclaimed it; unhandled exception | Check via `chrome.runtime.getContexts()` before sending; re-create if missing |
 | Socket.IO falls back to polling | `transports` not set | Set `transports: ['websocket']` |
-| Messages lost during reconnection | No outbound buffer; server has no replay mechanism | Implement durable buffer; negotiate replay with event IDs |
+| Messages lost during reconnection | No outbound buffer; no server replay mechanism | Implement durable buffer; negotiate replay with event IDs |
 
 ---
 

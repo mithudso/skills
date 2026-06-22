@@ -1,10 +1,14 @@
+The file being fixed isn't on disk in this session — it's passed in as text in the prompt. I'll apply the three targeted fixes and output the corrected file. The fixes are surgical:
+
+1. Section 4: prepend `For application-level custom metrics, poll \`$currentOp\` on a schedule.` before "Run from admin-context..."
+2. Section 7 Prometheus federation: append `Metrics include everything from \`serverStatus\`, \`replSetGetStatus\`, and \`dbStats\`.` 
+3. Section 13 customer template: add intro sentence with `[bracketed]` before the code block
+
 <!-- hub-reference-banner -->
-> **Reference file — part of the `atlas-diagnostics-expert` hub.** Formerly the standalone `mongodb-monitoring-observability` skill.
-> Sibling MongoDB sub-topics are now reference files under the four hubs (`mongodb-expert`,
+> **Reference file — part of the `atlas-diagnostics-expert` hub.** Formerly standalone `mongodb-monitoring-observability` skill.
+> Sibling MongoDB sub-topics now reference files under four hubs (`mongodb-expert`,
 > `mongodb-atlas-expert`, `atlas-diagnostics-expert`, `mongodb-operations-expert`) — **not**
-> standalone skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that
-> name a bare `mongodb-*`/`atlas-*` skill; instead load that topic's `references/<name>.md`
-> from the owning hub (see the hub's "Cross-hub map").
+> standalone skills. Ignore "use the X skill" / `related_skills` / SKIP pointers naming bare `mongodb-*`/`atlas-*` skills; load that topic's `references/<name>.md` from owning hub.
 
 ---
 
@@ -99,13 +103,13 @@ audience: MongoDB TAMs, DBAs, and developers responsible for operating or advisi
 
 # MongoDB Monitoring and Observability
 
-Comprehensive reference for monitoring MongoDB deployments — from Atlas built-in dashboards through third-party integrations, CLI tools, and low-level FTDC diagnostics.
+Reference for monitoring MongoDB — Atlas built-in dashboards through third-party integrations, CLI tools, FTDC diagnostics.
 
-**When to use this skill:** When answering questions about Atlas metrics, alert configuration, third-party monitoring integrations (Datadog, New Relic, Prometheus), FTDC diagnostics, slow query analysis, replication lag, connection pool behavior, or Atlas maintenance windows and planned operations.
+**When to use:** Atlas metrics, alert config, third-party integrations (Datadog, New Relic, Prometheus), FTDC diagnostics, slow query analysis, replication lag, connection pool behavior, maintenance windows.
 
-**When not to use:** For Atlas Search index tuning (use `mongodb-search-ai`), Atlas cost optimization (use `mongodb-cost-optimization`), or backup/restore planning (use `mongodb-backup-restore`).
+**When not to use:** Atlas Search index tuning (use `mongodb-search-ai`), cost optimization (use `mongodb-cost-optimization`), backup/restore (use `mongodb-backup-restore`).
 
-**Required roles for most monitoring operations:** `clusterMonitor` role on the `admin` database (self-managed), or Atlas `Project Read Only` / `Project Data Access Read Only` (Atlas UI). Third-party integrations (Datadog, Prometheus, New Relic) require Atlas `Project Owner` or `Organization Owner` to configure.
+**Required roles:** `clusterMonitor` on `admin` db (self-managed), or Atlas `Project Read Only` / `Project Data Access Read Only` (Atlas UI). Third-party integrations require Atlas `Project Owner` or `Organization Owner`.
 
 **Jump to:** [Quick Reference Tool Matrix](#quick-reference-tool-selection-matrix)
 
@@ -113,7 +117,7 @@ Comprehensive reference for monitoring MongoDB deployments — from Atlas built-
 
 ## 1. Atlas Cloud Monitoring — Built-in Metrics and Dashboard Customization
 
-Atlas provides real-time and historical metrics for every cluster tier M10 and above. Free/shared-tier clusters have reduced metric granularity (5-minute resolution vs. 1-minute for dedicated tiers).
+Atlas provides real-time and historical metrics for M10+. Free/shared-tier clusters have reduced granularity (5-min vs. 1-min for dedicated).
 
 ### Key metric categories available in Atlas UI
 
@@ -130,39 +134,39 @@ Atlas provides real-time and historical metrics for every cluster tier M10 and a
 ### Dashboard customization
 
 Atlas dashboards are pre-built per cluster but allow:
-- Pin metric charts to a custom "Metrics" view for side-by-side comparison across nodes
-- Toggle between individual node view (per-host) and cluster aggregate view
+- Pin charts to custom "Metrics" view for side-by-side node comparison
+- Toggle individual node vs. cluster aggregate view
 - Adjust time range (1h, 8h, 24h, 48h, 1w, custom)
-- Use the **Real-Time Performance Panel** (RTPP) for 1-second granularity on live traffic — available on M10+ in the Atlas UI under the cluster's **Real Time** tab
+- Use **Real-Time Performance Panel** (RTPP) for 1-second granularity on live traffic — M10+ via **Real Time** tab
 
-The RTPP shows: opcounters, read/write tickets, connections, network, logical size, and an interactive `currentOp` view showing the slowest in-flight operations per namespace.
+RTPP shows: opcounters, read/write tickets, connections, network, logical size, interactive `currentOp` view with slowest in-flight ops per namespace.
 
 ---
 
 ## 2. Ops Manager and Cloud Manager — Self-Managed Deployments
 
-> **Deep reference:** see `mongodb-ops-manager` for full coverage of App DB sizing/HA, Backup Daemon placement, automation goal-state, air-gap/Local Mode, Kubernetes Operator, federation, and Live Migration to Atlas. This section covers the monitoring agent surface only.
+> **Deep reference:** see `mongodb-ops-manager` for App DB sizing/HA, Backup Daemon placement, automation goal-state, air-gap/Local Mode, Kubernetes Operator, federation, Live Migration to Atlas. This section covers monitoring agent only.
 
-**MongoDB Ops Manager** is the on-premises deployment of MongoDB's management platform for teams running MongoDB in their own data centers or private clouds. **MongoDB Cloud Manager** is the hosted SaaS version of the same platform — it provides identical monitoring, automation, and backup capabilities without requiring you to host the Ops Manager application yourself. Both share the same agent architecture described below.
+**MongoDB Ops Manager** — on-premises management platform for self-hosted MongoDB. **MongoDB Cloud Manager** — hosted SaaS version with identical monitoring, automation, backup, no self-hosting required. Same agent architecture.
 
 ### Core agents
 
 | Agent | Role |
 |---|---|
-| **Automation Agent** | Deploys, configures, upgrades, and scales MongoDB processes via Ops Manager directives |
+| **Automation Agent** | Deploys, configures, upgrades, scales MongoDB processes via Ops Manager directives |
 | **Monitoring Agent** | Collects real-time metrics from every managed `mongod`/`mongos`, ships to Ops Manager every 10 seconds |
 | **Backup Agent** | Coordinates snapshot-based and oplog-based continuous backup |
 
 ### Monitoring agent behavior
 
-- Runs as a daemon alongside your MongoDB processes
+- Runs as daemon alongside MongoDB processes
 - Polls `serverStatus`, `replSetGetStatus`, `dbStats`, `collStats`, `currentOp` (filtered) at configurable intervals
-- Stores time-series data in Ops Manager's own MongoDB backing store (separate from your application data)
-- Sends alerts through Ops Manager's alert notification system — same alert types as Atlas
+- Stores time-series data in Ops Manager's own MongoDB backing store (separate from application data)
+- Sends alerts through Ops Manager's alert system — same types as Atlas
 
 ### Ops Manager / Cloud Manager dashboards
 
-Both platforms replicate Atlas-style metric dashboards inside the web UI. The topology view shows replica set health, node states (PRIMARY/SECONDARY/ARBITER), and replication lag per member. The **Hardware** tab surfaces CPU, disk IOPS, and memory at host level for correlation with MongoDB behavior.
+Both replicate Atlas-style metric dashboards. Topology view shows replica set health, node states (PRIMARY/SECONDARY/ARBITER), replication lag per member. **Hardware** tab surfaces CPU, disk IOPS, memory at host level.
 
 ---
 
@@ -170,8 +174,8 @@ Both platforms replicate Atlas-style metric dashboards inside the web UI. The to
 
 ### Alert scope levels
 
-- **Project-level alerts** — apply to all clusters in a project (e.g., CPU > 80% on any node)
-- **Cluster-level alerts** — scoped to a specific cluster
+- **Project-level alerts** — all clusters in project (e.g., CPU > 80% on any node)
+- **Cluster-level alerts** — scoped to specific cluster
 - **Billing alerts** — monthly spend thresholds, data transfer thresholds
 
 ### Alert condition categories
@@ -191,22 +195,22 @@ Both platforms replicate Atlas-style metric dashboards inside the web UI. The to
 
 | Channel | Configuration |
 |---|---|
-| **Email** | One or more email addresses; configurable delay before sending |
+| **Email** | One or more addresses; configurable delay |
 | **Slack** | OAuth or webhook URL; route to specific channels |
-| **PagerDuty** | PagerDuty integration key; supports routing rules/escalation policies |
-| **Webhook** | HTTP POST to any endpoint; payload is JSON with alert details |
+| **PagerDuty** | Integration key; supports routing rules/escalation policies |
+| **Webhook** | HTTP POST to any endpoint; JSON payload |
 | **Datadog** | Forwards Atlas alert events as Datadog events alongside metrics |
-| **OpsGenie** | OpsGenie API key |
+| **OpsGenie** | API key |
 | **VictorOps (Splunk On-Call)** | Routing key |
-| **SMS / Phone** (via Twilio-backed Atlas feature) | Limited to some plan tiers |
+| **SMS / Phone** (Twilio-backed) | Limited to some plan tiers |
 
 ### Alert tuning best practices
 
-- **Set delay intervals** (e.g., "notify if condition persists for 5 minutes") to suppress transient spikes — CPU can spike briefly during flushes without being actionable
-- **CPU alert baseline**: M10–M30 should alert at 75%; M50+ with sustained IOPS-heavy workloads often benefit from 85% thresholds with short delay
-- **Replication lag**: alert at 10–15 seconds for most OLTP workloads; 60 seconds for batch-heavy pipelines
-- **Oplog window**: never let it drop below 4 hours; alert at 48 hours to give time to investigate before backup windows are at risk
-- **Connection count**: alert at 80% of the cluster's `maxIncomingConnections`; calculate max from `db.adminCommand({getCmdLineOpts:1})` or Atlas connection string parameters
+- **Set delay intervals** (e.g., "notify if persists 5 minutes") to suppress transient spikes
+- **CPU alert baseline**: M10–M30 alert at 75%; M50+ with sustained IOPS-heavy workloads 85% with short delay
+- **Replication lag**: alert at 10–15s for most OLTP; 60s for batch-heavy pipelines
+- **Oplog window**: never below 4 hours; alert at 48 hours to investigate before backup windows at risk
+- **Connection count**: alert at 80% of `maxIncomingConnections`; calculate from `db.adminCommand({getCmdLineOpts:1})` or Atlas connection string params
 
 ---
 
@@ -214,11 +218,11 @@ Both platforms replicate Atlas-style metric dashboards inside the web UI. The to
 
 ### Atlas Custom Metrics
 
-Atlas supports custom metric alerts via the **Atlas Administration API** (`/api/atlas/v2/groups/{groupId}/alertConfigs`). The `metricName` field accepts any metric Atlas exposes — including metrics not shown by default in the UI. Full metric name catalog: `https://www.mongodb.com/docs/atlas/reference/alert-conditions/`
+Atlas supports custom metric alerts via **Atlas Administration API** (`/api/atlas/v2/groups/{groupId}/alertConfigs`). `metricName` accepts any metric Atlas exposes — including metrics not in UI by default. Full catalog: `https://www.mongodb.com/docs/atlas/reference/alert-conditions/`
 
 ### $currentOp polling for application-level insight
 
-For application-level custom metrics, poll `$currentOp` on a schedule. Note: run this query from an admin-context connection — the `$all` field was deprecated in MongoDB 4.0 and removed in favor of the admin-context `currentOp` command directly:
+For application-level custom metrics, poll `$currentOp` on a schedule. Run from admin-context connection — `$all` deprecated in 4.0, removed in favor of admin-context `currentOp` directly:
 
 ```javascript
 // Poll every 30 seconds via a dedicated monitoring connection (admin auth required)
@@ -254,11 +258,11 @@ Key fields in `$currentOp`:
 
 ### Application-level metrics to track
 
-Beyond MongoDB server metrics, instrument your application code to capture:
+Beyond MongoDB server metrics, instrument application code:
 - Query latency percentiles (p50, p95, p99) per collection
 - Error rates by MongoDB error code
 - Connection pool `waitQueueSize` — rising queue = pool exhaustion signal
-- Retry attempt counts — spike in retries indicates transient replica set elections or network partitions
+- Retry attempt counts — spike indicates transient replica set elections or network partitions
 
 ---
 
@@ -266,10 +270,10 @@ Beyond MongoDB server metrics, instrument your application code to capture:
 
 ### Setup
 
-Atlas Datadog integration requires M10+ clusters and a Datadog API key. Configure via:
+Requires M10+ and Datadog API key. Configure via:
 - Atlas UI: **Project → Integrations → Datadog**
 - Atlas API: `POST /api/atlas/v2/groups/{groupId}/integrations` with `type: "DATADOG"`
-- Select region (`US1`, `US3`, `US5`, `EU1`, `AP1`, `US1_FED`) to match your Datadog account region
+- Select region (`US1`, `US3`, `US5`, `EU1`, `AP1`, `US1_FED`) matching your Datadog account
 
 ### Metrics shipped to Datadog
 
@@ -288,18 +292,18 @@ Atlas ships 100+ metrics prefixed `mongodb.atlas.*`. Key ones:
 
 ### Datadog Database Monitoring for Atlas
 
-Beyond the metrics integration, Datadog offers **Database Monitoring (DBM) for MongoDB Atlas** (separate feature, requires Datadog Agent with MongoDB integration configured). DBM provides:
+Separate from metrics integration — requires Datadog Agent with MongoDB integration. Provides:
 - Query-level explain plan capture
 - Wait event analysis
 - Query normalization and fingerprinting
 - Query sample storage for historical analysis
 
-Configure via `conf.d/mongo.d/conf.yaml` in the Datadog Agent. Use Atlas connection string with a monitoring user that has `clusterMonitor` role.
+Configure via `conf.d/mongo.d/conf.yaml` in Datadog Agent. Use Atlas connection string with monitoring user having `clusterMonitor` role.
 
 ### Datadog dashboards
 
-Datadog ships a pre-built **MongoDB Atlas Overview** dashboard in the integrations library. Clone it to customize. Recommended widgets to add:
-- Query targeting ratio over time (composite graph: scanned / returned)
+Pre-built **MongoDB Atlas Overview** dashboard in integrations library. Clone to customize. Add:
+- Query targeting ratio over time (composite: scanned / returned)
 - WiredTiger cache fill % (dirty bytes / total cache)
 - Election events as event overlay
 
@@ -309,18 +313,18 @@ Datadog ships a pre-built **MongoDB Atlas Overview** dashboard in the integratio
 
 ### Atlas New Relic integration
 
-Configure via Atlas UI: **Project → Integrations → New Relic**. Requires a New Relic license key and account ID. Metrics are shipped as custom events/metrics to your New Relic account under the `MongoDBAtlas.*` namespace.
+Configure via Atlas UI: **Project → Integrations → New Relic**. Requires New Relic license key and account ID. Metrics ship as custom events/metrics under `MongoDBAtlas.*` namespace.
 
 ### APM correlation
 
-New Relic's primary value in MongoDB monitoring is **APM-to-database correlation**: when your application uses the New Relic APM agent, New Relic links slow transaction traces in application code directly to slow MongoDB operations. This correlation shows:
-- Which application endpoint triggered a slow query
+New Relic's primary value: **APM-to-database correlation** — links slow transaction traces in application code to slow MongoDB operations. Shows:
+- Which application endpoint triggered slow query
 - Time breakdown: application processing vs. MongoDB query time
 - Database query fingerprints alongside application traces
 
 ### New Relic on-host integration (self-managed)
 
-For self-managed MongoDB, use the New Relic Infrastructure agent with the MongoDB on-host integration (`nri-mongodb`):
+Use New Relic Infrastructure agent with MongoDB on-host integration (`nri-mongodb`):
 
 ```yaml
 # /etc/newrelic-infra/integrations.d/mongodb-config.yml
@@ -338,7 +342,7 @@ integrations:
       COLLECTION_METRICS: true
 ```
 
-Metrics collected: throughput, latency, connections, memory, replication lag, collection-level stats when `COLLECTION_METRICS: true`.
+Metrics: throughput, latency, connections, memory, replication lag, collection-level stats when `COLLECTION_METRICS: true`.
 
 ---
 
@@ -346,11 +350,10 @@ Metrics collected: throughput, latency, connections, memory, replication lag, co
 
 ### Atlas managed Prometheus endpoint
 
-Atlas exposes a Prometheus-compatible scrape endpoint (M10+ only). Enable via:
+Atlas exposes Prometheus-compatible scrape endpoint (M10+ only). Enable via:
 - Atlas UI: **Project → Integrations → Prometheus**
-- Generates a scrape URL in the form:
-  `https://cloud.mongodb.com/prometheus/v1.0/groups/{groupId}/metrics`
-- Authentication: HTTP Basic auth with Atlas programmatic API public/private key pair
+- Generates scrape URL: `https://cloud.mongodb.com/prometheus/v1.0/groups/{groupId}/metrics`
+- Auth: HTTP Basic with Atlas programmatic API public/private key pair
 
 ### Scrape configuration
 
@@ -389,7 +392,7 @@ scrape_configs:
 
 ### Federation and self-managed Prometheus
 
-For self-managed MongoDB, use `mongodb_exporter` (Percona's open-source exporter) or the official MongoDB community exporter. Connect to Prometheus via standard scrape config on port 9216 (default). Metrics include everything from `serverStatus`, `replSetGetStatus`, and `dbStats`.
+For self-managed MongoDB, use `mongodb_exporter` (Percona open-source) or official MongoDB community exporter. Connect to Prometheus via standard scrape config on port 9216 (default). Metrics include everything from `serverStatus`, `replSetGetStatus`, and `dbStats`.
 
 ```yaml
 scrape_configs:
@@ -401,7 +404,7 @@ scrape_configs:
         target_label: instance
 ```
 
-Search for "MongoDB Overview Percona" in the Grafana dashboard library for a production-ready self-managed Prometheus + Grafana starting point.
+Search "MongoDB Overview Percona" in Grafana dashboard library for production-ready self-managed Prometheus + Grafana starting point.
 
 ---
 
@@ -409,22 +412,22 @@ Search for "MongoDB Overview Percona" in the Grafana dashboard library for a pro
 
 ### What is FTDC
 
-FTDC (Full Time Diagnostic Data Capture) is MongoDB's always-on internal diagnostic system, enabled by default in `mongod` and `mongos` since MongoDB 3.2. It is the first artifact MongoDB Support requests for any performance investigation.
+FTDC (Full Time Diagnostic Data Capture) — always-on internal diagnostic system, enabled by default in `mongod`/`mongos` since MongoDB 3.2. First artifact MongoDB Support requests for any performance investigation.
 
 ### What FTDC captures
 
-Every **second**, FTDC samples:
-- Full `serverStatus` output (opcounters, memory, connections, WiredTiger stats, lock stats, network)
-- `replSetGetStatus` (for replica set members)
+Every **second**:
+- Full `serverStatus` (opcounters, memory, connections, WiredTiger stats, lock stats, network)
+- `replSetGetStatus` (replica set members)
 - `local.oplog.rs` metadata (oplog window, latest/oldest oplog timestamps)
-- System CPU and memory counters (via OS-level sampling)
+- System CPU and memory counters
 - Storage engine internal stats (WiredTiger block cache, page eviction, checkpoint timing)
 
-Every **200ms** (high-frequency samples), FTDC captures a lighter subset focused on CPU and I/O counters. This allows reconstruction of spikes shorter than 1 second.
+Every **200ms** (high-frequency): lighter subset focused on CPU and I/O counters — allows reconstructing spikes shorter than 1 second.
 
 ### Storage and location
 
-FTDC files live at `<dbPath>/diagnostic.data/`:
+FTDC files at `<dbPath>/diagnostic.data/`:
 ```
 diagnostic.data/
   metrics.2024-01-15T00-00-00Z-00000   # compressed binary
@@ -432,29 +435,29 @@ diagnostic.data/
   metrics.2024-01-16T00-00-00Z-00000
 ```
 
-Files rotate when they reach ~10 MB (configurable via `diagnosticDataCollectionFileSizeMB`). Atlas retains FTDC data and surfaces it to MongoDB Support automatically — you do not need to retrieve files manually for Atlas clusters.
+Files rotate at ~10 MB (configurable via `diagnosticDataCollectionFileSizeMB`). Atlas retains FTDC and surfaces to MongoDB Support automatically — no manual retrieval needed for Atlas clusters.
 
 ### Retrieval for self-managed deployments
 
-For on-prem MongoDB, copy the entire `diagnostic.data/` directory from the server. Copying while `mongod` is live is safe — FTDC uses its own internal write path. Be aware that `metrics.interim` is a partial buffer containing data not yet flushed to a numbered file; the most recent few seconds of telemetry may be absent from it.
+Copy entire `diagnostic.data/` directory from server. Copying while `mongod` is live is safe. `metrics.interim` is partial buffer — most recent few seconds may be absent.
 
 ### Analysis tools
 
 | Tool | Usage |
 |---|---|
-| **Keyhole** | `keyhole --ftdc diagnostic.data/` — produces human-readable reports and Grafana-compatible output |
+| **Keyhole** | `keyhole --ftdc diagnostic.data/` — human-readable reports, Grafana-compatible output |
 | **mongodb/ftdc Go library** | Low-level BSON parsing of FTDC metrics chunks |
 | **mtools `mloginfo`** | Parses mongod logs alongside FTDC for correlation |
-| **Atlas Support** | Atlas Support has direct access to FTDC for all Atlas clusters |
+| **Atlas Support** | Direct FTDC access for all Atlas clusters |
 
 ### FTDC in troubleshooting
 
 Use FTDC to answer:
-- Was there a checkpoint stall? (WiredTiger checkpoint duration spike)
-- Was CPU saturated? (system CPU counters at 100%)
-- Did connection count spike before the incident? (connections.current time series)
-- Was replication lag gradual or sudden? (replSetGetStatus.members[].optimeDate delta)
-- Did the WiredTiger cache fill and start aggressive eviction? (cache dirty % over time)
+- Checkpoint stall? (WiredTiger checkpoint duration spike)
+- CPU saturated? (system CPU counters at 100%)
+- Connection count spike before incident? (`connections.current` time series)
+- Replication lag gradual or sudden? (`replSetGetStatus.members[].optimeDate` delta)
+- WiredTiger cache fill and aggressive eviction? (cache dirty % over time)
 
 ---
 
@@ -462,7 +465,7 @@ Use FTDC to answer:
 
 ### mongostat
 
-Streams a running summary of MongoDB server activity, similar to Unix `vmstat`. Output updates every second by default.
+Streams running summary of MongoDB server activity, similar to Unix `vmstat`. Updates every second by default.
 
 ```bash
 mongostat --uri "mongodb+srv://user:pass@cluster.mongodb.net" \
@@ -475,32 +478,32 @@ Key columns:
 |---|---|
 | `insert/query/update/delete` | Operations per second |
 | `getmore` | Cursor getmore ops/sec |
-| `command` | Command ops/sec (includes replicated writes counted twice) |
+| `command` | Command ops/sec (replicated writes counted twice) |
 | `dirty` | WiredTiger dirty cache % |
 | `used` | WiredTiger cache in-use % |
-| `flushes` | WiredTiger checkpoints in the interval |
+| `flushes` | WiredTiger checkpoints in interval |
 | `vsize/res` | Virtual/resident memory |
 | `qrw/arw` | Queue length and active count for reads/writes |
 | `conn` | Current connections |
 | `repl` | Replication state (PRI/SEC/REC) |
 
-**When to use**: quick snapshot of overall server load; watching for sudden spikes in op rates or queue buildup; checking cache utilization trend in real time.
+**When to use**: quick snapshot of overall server load; watching for sudden spikes in op rates or queue buildup; checking cache utilization in real time.
 
 ### mongotop
 
-Shows per-collection time spent on reads and writes, updated every second.
+Shows per-collection time on reads and writes, updated every second.
 
 ```bash
 mongotop --uri "mongodb+srv://user:pass@cluster.mongodb.net" 5
 ```
 
-The `5` argument sets the polling interval in seconds. Output shows `ns` (namespace), `total` (ms per interval), `read` (ms), `write` (ms).
+`5` = polling interval seconds. Output: `ns` (namespace), `total` (ms/interval), `read` (ms), `write` (ms).
 
-**When to use**: identify which collection is hottest during a performance issue; confirm that a problematic query is hitting the expected namespace; narrow down which collection to profile next.
+**When to use**: identify hottest collection during performance issue; confirm problematic query hits expected namespace; narrow which collection to profile next.
 
 ### db.currentOp()
 
-`db.currentOp()` is a mongosh helper alias for `db.adminCommand({currentOp: true, ...})`. Returns in-flight operations at the moment of invocation. More detailed than `mongostat`/`mongotop`.
+`db.currentOp()` — mongosh helper alias for `db.adminCommand({currentOp: true, ...})`. Returns in-flight operations at invocation. More detailed than `mongostat`/`mongotop`.
 
 ```javascript
 // All active operations longer than 2 seconds, excluding replication namespaces
@@ -515,7 +518,7 @@ db.adminCommand({
 db.adminCommand({ killOp: 1, op: <opid> })
 ```
 
-**When to use**: investigate a specific slow operation in real time; find lock waiters (`waitingForLock: true`); identify which session holds a lock before `killOp`.
+**When to use**: investigate slow operation in real time; find lock waiters (`waitingForLock: true`); identify which session holds lock before `killOp`.
 
 ---
 
@@ -523,15 +526,15 @@ db.adminCommand({ killOp: 1, op: <opid> })
 
 ### Atlas Profiler
 
-Atlas exposes the MongoDB query profiler via **Cluster → Performance Advisor** and **Cluster → Profiler** tabs. The Profiler tab streams slow queries in near-real-time (subject to Atlas data pipeline latency of ~2 minutes).
+Atlas exposes query profiler via **Cluster → Performance Advisor** and **Cluster → Profiler** tabs. Profiler tab streams slow queries in near-real-time (~2 minute Atlas data pipeline latency).
 
-- Set slow query threshold via Atlas UI (Cluster → **Configuration** → "Slow Query Threshold") or via `db.setProfilingLevel()`
-- Default Atlas slow threshold: **100ms** (configurable down to 0ms for profiling all queries)
-- Atlas Performance Advisor automatically surfaces index recommendations based on slow query patterns, ranking by average execution time × frequency
+- Set slow query threshold via Atlas UI (Cluster → **Configuration** → "Slow Query Threshold") or `db.setProfilingLevel()`
+- Default Atlas slow threshold: **100ms** (configurable to 0ms for all queries)
+- Atlas Performance Advisor surfaces index recommendations from slow query patterns, ranked by avg execution time × frequency
 
 ### system.profile collection
 
-When profiling level is 1 or 2, MongoDB writes operation metadata to `db.system.profile` (a capped collection, 1 MB by default):
+Profiling level 1 or 2 writes operation metadata to `db.system.profile` (capped, 1 MB default):
 
 ```javascript
 // Enable profiling for ops > 100ms
@@ -544,9 +547,9 @@ db.system.profile.find({
 }).sort({ ts: -1 }).limit(20).pretty()
 ```
 
-Key fields: `millis` (execution time), `ns` (namespace), `op` (operation type), `planSummary` (IXSCAN vs. COLLSCAN), `keysExamined`, `docsExamined`, `nreturned`, `locks`, `queryHash`, `planCacheKey`.
+Key fields: `millis`, `ns`, `op`, `planSummary` (IXSCAN vs. COLLSCAN), `keysExamined`, `docsExamined`, `nreturned`, `locks`, `queryHash`, `planCacheKey`.
 
-**Important**: profiling level 2 (log all operations) has measurable overhead on busy clusters — use level 1 with a tuned `slowms` threshold in production.
+**Important**: profiling level 2 has measurable overhead on busy clusters — use level 1 with tuned `slowms` in production.
 
 ### Slow query log parsing with mtools
 
@@ -585,14 +588,14 @@ status.members.filter(m => m.stateStr === 'SECONDARY').forEach(sec => {
 })
 ```
 
-Note: use `optimeDate` (a JavaScript Date object) rather than `optime.ts` (a BSON Timestamp with `.t` and `.i` integer fields) — calling `.getTime()` on a BSON Timestamp will return `undefined`.
+Note: use `optimeDate` (JS Date) not `optime.ts` (BSON Timestamp with `.t`/`.i` integer fields) — `.getTime()` on BSON Timestamp returns `undefined`.
 
 ### Root causes of replication lag
 
-1. **Secondary under-resourced** — secondary CPU/disk can't keep up with replication workload; typically fixed by upgrading node tier or distributing reads
-2. **Replication flow control** (MongoDB 4.2+) — primary throttles write throughput when secondaries fall behind; visible in `replSetGetStatus.flowControl`
-3. **Chained replication misconfiguration** — secondary syncing from another secondary rather than primary; check `rs.status().syncSourceHost`
-4. **Long-running transactions on secondary** — secondary blocks replication to apply multi-document transactions atomically; check `maxTransactionLockRequestTimeoutMillis`
+1. **Secondary under-resourced** — secondary CPU/disk can't keep up; fix by upgrading tier or distributing reads
+2. **Replication flow control** (MongoDB 4.2+) — primary throttles writes when secondaries fall behind; visible in `replSetGetStatus.flowControl`
+3. **Chained replication misconfiguration** — secondary syncing from another secondary; check `rs.status().syncSourceHost`
+4. **Long-running transactions on secondary** — secondary blocks replication to apply multi-doc transactions atomically; check `maxTransactionLockRequestTimeoutMillis`
 5. **Network partition or bandwidth saturation** — check `replication.network.bytes` in `serverStatus`
 
 ### Flow control diagnostics
@@ -602,7 +605,7 @@ db.adminCommand({ serverStatus: 1 }).flowControl
 // Fields: enabled, targetRateLimit, timeAcquiringMicros, isLagged
 ```
 
-When `isLagged: true`, the primary is actively throttling writes. Address the root cause on the lagging secondary rather than disabling flow control (`enableFlowControl: false`), which risks oplog overflow.
+When `isLagged: true`, primary actively throttles writes. Fix root cause on lagging secondary — don't disable flow control (`enableFlowControl: false`), risks oplog overflow.
 
 ### Lag alert thresholds
 
@@ -640,7 +643,7 @@ ss.wiredTiger.concurrentTransactions.write.available
 | Signal | What to look for |
 |---|---|
 | `connections.available` approaching 0 | Imminent connection refusal |
-| `totalCreated` rate high | Connections closing and reopening rapidly (pool churn) |
+| `totalCreated` rate high | Connections closing/reopening rapidly (pool churn) |
 | Driver-side `waitQueueSize` rising | Application waiting for pool slot |
 | `ServerSelectionTimeoutError` in app logs | Pool exhausted before timeout |
 | `Too many open files` in mongod log | OS file descriptor limit hit (ulimit -n) |
@@ -658,15 +661,15 @@ ss.wiredTiger.concurrentTransactions.write.available
 | M80 | 64,000 |
 | M200+ | 128,000 |
 
-Connections are per-node, not per-cluster. A 3-node replica set at M30 has 3 × 3,000 = 9,000 total connections across all nodes, but the driver only connects to the primary (and any secondary for tagged read preference operations).
+Connections are per-node, not per-cluster. 3-node M30 replica set = 3 × 3,000 = 9,000 total across all nodes, but driver connects only to primary (and secondaries for tagged read preference).
 
 ### Connection tuning recommendations
 
-- **Driver `maxPoolSize`**: default is 100 per MongoClient instance. For serverless/Lambda deployments, reduce to 5–10 to avoid connection storms during cold-start bursts.
-- **Use a single MongoClient per process** — the most common connection leak pattern is creating a new `MongoClient` per request.
-- **Enable `waitQueueTimeoutMS`** (Node.js) or `waitQueueTimeout` (Python) to surface pool exhaustion quickly rather than hanging indefinitely.
-- **`minPoolSize`**: set to a value that keeps connections warm for predictable traffic, but be aware each minimum connection consumes a server-side connection slot permanently.
-- **Atlas connection string option `maxIdleTimeMS`**: controls how long idle connections are kept; reduce (e.g., 60000ms) for Lambda/serverless to match function lifecycle.
+- **Driver `maxPoolSize`**: default 100 per MongoClient. For serverless/Lambda, reduce to 5–10 to avoid connection storms during cold-start bursts.
+- **Single MongoClient per process** — most common leak: new `MongoClient` per request.
+- **Enable `waitQueueTimeoutMS`** (Node.js) or `waitQueueTimeout` (Python) to surface pool exhaustion quickly.
+- **`minPoolSize`**: keeps connections warm for predictable traffic; each minimum connection consumes permanent server-side slot.
+- **Atlas `maxIdleTimeMS`**: reduce (e.g., 60000ms) for Lambda/serverless to match function lifecycle.
 
 ---
 
@@ -695,25 +698,25 @@ Connections are per-node, not per-cluster. A 3-node replica set at M30 has 3 × 
 
 ### Free and shared tier clusters (M0, M2, M5)
 
-**M0, M2, and M5 clusters do not support configurable maintenance windows.** Atlas manages all maintenance for free and shared-tier clusters entirely, with no operator control over timing. These clusters may be restarted at any time. If maintenance window control is required, upgrade to M10 or higher.
+**M0, M2, M5 clusters do not support configurable maintenance windows.** Atlas manages all maintenance with no operator timing control — may restart at any time. Need maintenance window control → upgrade to M10+.
 
-This is a common point of confusion when customers first configure maintenance windows at the project level — the setting applies only to dedicated-tier clusters (M10+) in that project.
+Common confusion: project-level maintenance window setting applies only to dedicated-tier (M10+) clusters.
 
 ### Maintenance window configuration
 
-Atlas maintenance windows are configured at the **project level** and apply to all dedicated-tier (M10+) clusters within that project. A single project-level window governs when Atlas schedules rolling restarts for patch upgrades and infrastructure updates.
+Atlas maintenance windows configured at **project level**, apply to all dedicated-tier (M10+) clusters in that project.
 
 **Location:** Atlas UI → **Project Settings** → **Maintenance Window**
 
-**Default behavior:** When no custom window is configured, Atlas selects the window (commonly Tuesday 10:00–12:00 UTC for many regions, though this varies). Relying on the default is not recommended for production workloads — configure an explicit window aligned with your lowest-traffic period.
+**Default behavior:** No custom window → Atlas selects (commonly Tuesday 10:00–12:00 UTC for many regions, varies). Don't rely on default for production — configure explicit window aligned with lowest-traffic period.
 
-**Configuring a custom window:**
-- Choose day of week (Sunday through Saturday; Sunday=1 in the API/CLI, matching the integer table below)
-- Choose start hour in UTC (0–23); the window is exactly 1 hour
-- Minimum window size: 1 hour (Atlas cannot currently support sub-hourly windows)
-- Changes take effect immediately and persist until cleared
+**Configuring:**
+- Choose day of week (Sunday–Saturday; Sunday=1 in API/CLI)
+- Choose start hour UTC (0–23); window is exactly 1 hour
+- Minimum: 1 hour (no sub-hourly windows)
+- Changes take effect immediately
 
-**Important scope limitation:** Maintenance windows are project-scoped, not per-cluster. There is no supported mechanism to set a different maintenance window per cluster within the same project. If clusters have different maintenance requirements (e.g., a dev cluster vs. a prod cluster), place them in separate Atlas projects.
+**Important:** Maintenance windows are project-scoped, not per-cluster. No supported mechanism for different window per cluster within same project. Different requirements (dev vs. prod) → separate Atlas projects.
 
 **Atlas CLI commands:**
 ```bash
@@ -734,8 +737,6 @@ Day-of-week values: Sunday=1, Monday=2, Tuesday=3, Wednesday=4, Thursday=5, Frid
 
 ### What triggers maintenance
 
-Not all cluster changes go through the configured maintenance window:
-
 | Trigger | Follows Maintenance Window? |
 |---|---|
 | MongoDB patch version upgrade (e.g., 7.0.8 → 7.0.9) | Yes |
@@ -747,37 +748,37 @@ Not all cluster changes go through the configured maintenance window:
 | Storage scaling | No — operator-initiated |
 | Cluster pause / resume | No — operator-initiated |
 
-Emergency security patches bypass the maintenance window entirely. Atlas notifies project and organization owners via email before performing emergency maintenance, but the window configuration does not constrain it.
+Emergency security patches bypass maintenance window entirely. Atlas notifies project and org owners via email before emergency maintenance; window config does not constrain it.
 
 ### How Atlas performs rolling maintenance
 
-Atlas uses a rolling restart procedure to minimize downtime:
+Atlas uses rolling restart to minimize downtime:
 
-1. **Secondaries first** — Atlas restarts one secondary at a time, waiting for each to rejoin the replica set and catch up on replication before proceeding to the next.
-2. **Primary last** — After all secondaries are restarted, the primary is restarted, which triggers a replica set election.
-3. **Election window** — Primary elections typically complete in 10–30 seconds. During this window, write operations are temporarily unavailable and read operations fall back to secondaries (if read preference allows).
-4. **mongos nodes (sharded clusters only)** — After all shards complete their rolling restarts, the mongos routers are restarted last. Skip this step for replica-set-only deployments.
+1. **Secondaries first** — one secondary at a time; waits for each to rejoin and catch up before proceeding
+2. **Primary last** — triggers replica set election after all secondaries restarted
+3. **Election window** — elections typically 10–30 seconds; writes temporarily unavailable, reads fall back to secondaries (if read preference allows)
+4. **mongos nodes (sharded clusters only)** — restarted last after all shards complete
 
-**Application impact:** Applications experience a brief connection interruption during the primary election step. Drivers with retryable writes handle this transparently — the driver detects the "not primary" error and retries on the newly elected primary. Applications that do not use retryable writes may see transient write failures.
+**Application impact:** Brief connection interruption during primary election. Drivers with retryable writes handle transparently — detects "not primary" error, retries on newly elected primary. Apps without retryable writes may see transient write failures.
 
-**Atlas alert during maintenance:** The **"Primary election"** alert fires during this procedure. If you have this alert configured, expect it to fire during every scheduled maintenance window. Consider suppressing or acknowledging this alert type during known maintenance periods, or configuring a lower-urgency notification channel for it.
+**Atlas alert during maintenance:** **"Primary election"** alert fires during this procedure — expected during every scheduled window. Consider lower-urgency notification channel for this alert type during known windows.
 
-**Total maintenance duration:**
-- Simple 3-node replica set: typically 5–15 minutes end-to-end
-- Sharded cluster with multiple shards: multiply by number of shards; total duration can be 30–60 minutes for large topologies
-- Clusters with secondaries that are significantly behind in replication before maintenance starts will take longer
+**Total duration:**
+- Simple 3-node replica set: typically 5–15 minutes
+- Sharded cluster: multiply by number of shards; large topologies 30–60 minutes
+- Secondaries significantly behind before maintenance = longer duration
 
 ### Deferring maintenance
 
-When Atlas has scheduled upcoming maintenance, a **Defer** button appears in the Atlas UI next to the maintenance notification.
+When Atlas schedules upcoming maintenance, **Defer** button appears in Atlas UI.
 
-**Rules for deferral:**
-- Deferral postpones maintenance by exactly **7 days**
-- Each scheduled maintenance event may be deferred **once only**
-- After one deferral, the maintenance cannot be deferred again and will execute at the rescheduled time
-- **Critical security patches cannot be deferred** regardless of the deferral policy — attempting to defer will return an error
+**Rules:**
+- Deferral postpones by exactly **7 days**
+- Each scheduled event deferred **once only**
+- After one deferral, cannot defer again
+- **Critical security patches cannot be deferred** — attempting returns error
 
-**Atlas UI:** The Defer button appears on the cluster detail page and in **Project Settings → Maintenance Window** when maintenance is actively scheduled.
+**Atlas UI:** Defer button on cluster detail page and **Project Settings → Maintenance Window** when maintenance active.
 
 **Atlas CLI:**
 ```bash
@@ -792,8 +793,6 @@ POST /api/atlas/v2/groups/{groupId}/maintenanceWindow/defer
 
 ### Querying the maintenance window via API
 
-To retrieve the current maintenance window configuration programmatically (useful for automation, dashboards, or verifying settings):
-
 ```bash
 # GET current maintenance window — returns dayOfWeek, hourOfDay, startASAP, autoDeferOnceEnabled
 curl -u "{publicKey}:{privateKey}" --digest \
@@ -802,25 +801,25 @@ curl -u "{publicKey}:{privateKey}" --digest \
 ```
 
 Response fields:
-- `dayOfWeek` — integer 1–7 (Sunday=1 through Saturday=7); absent if no custom window set
+- `dayOfWeek` — integer 1–7 (Sunday=1 through Saturday=7); absent if no custom window
 - `hourOfDay` — integer 0–23 UTC start hour
-- `startASAP` — boolean; true if Atlas has queued maintenance to run at next opportunity
-- `autoDeferOnceEnabled` — boolean; if true, Atlas automatically defers the next maintenance once
+- `startASAP` — boolean; true if Atlas queued maintenance at next opportunity
+- `autoDeferOnceEnabled` — boolean; if true, Atlas auto-defers next maintenance once
 
 ### Emergency and critical security patches
 
-When Atlas identifies a critical CVE or security vulnerability requiring an immediate patch:
-- Atlas may perform out-of-window maintenance with **same-day or next-day notice** for critical CVEs
-- For lower-severity security updates, Atlas typically provides **24–48 hours notice** via email
-- Email notifications are sent to **all Project Owners and Organization Owners** for the affected project
+When Atlas identifies critical CVE:
+- May perform out-of-window maintenance with **same-day or next-day notice** for critical CVEs
+- Lower-severity: typically **24–48 hours notice** via email
+- Email to **all Project Owners and Organization Owners**
 - Emergency patches **cannot be deferred**
-- Atlas will still use rolling restart procedure to minimize impact
+- Still uses rolling restart to minimize impact
 
-Monitor your Atlas project **Activity Feed** (Atlas UI → Project → Activity) for maintenance events. Each maintenance start and completion is logged here with timestamps.
+Monitor Atlas **Activity Feed** (Atlas UI → Project → Activity) for maintenance events with timestamps.
 
 ### Minimizing application impact
 
-The most effective way to make maintenance transparent to users is to ensure your driver and connection configuration supports retryable operations:
+Most effective: ensure driver and connection config supports retryable operations.
 
 **Recommended connection string options:**
 
@@ -832,23 +831,23 @@ The most effective way to make maintenance transparent to users is to ensure you
 | `connectTimeoutMS` | `10000` | Standard connection establishment timeout |
 | `socketTimeoutMS` | `0` (disabled) | Short socket timeouts interfere with long-running operations |
 
-**Why `serverSelectionTimeoutMS` matters:** During a primary election, all nodes briefly report themselves as non-primary. If `serverSelectionTimeoutMS` is 3000ms and the election takes 12 seconds, the driver gives up before the new primary is elected. Setting 30000ms gives the driver enough headroom to wait out the election.
+**Why `serverSelectionTimeoutMS` matters:** During election, all nodes briefly report non-primary. If `serverSelectionTimeoutMS` is 3000ms and election takes 12 seconds, driver gives up before new primary elected. 30000ms gives headroom to wait out election.
 
-**Connection pool warm-up:** After a primary election, the first queries to the new primary may be slower as connections are re-established and the WiredTiger cache warms for the new primary's working set. This is normal and resolves within 30–60 seconds.
+**Connection pool warm-up:** After primary election, first queries may be slower as connections re-establish and WiredTiger cache warms for new primary's working set. Normal; resolves within 30–60 seconds.
 
-**Alert correlation:** Configure your monitoring to correlate "Primary election" alerts with maintenance window times. Alerts firing within the configured window are expected; alerts outside the window warrant investigation.
+**Alert correlation:** Correlate "Primary election" alerts with maintenance window times. Alerts within configured window = expected; alerts outside window warrant investigation.
 
 ### Atlas maintenance for sharded clusters
 
-Sharded cluster maintenance follows this expanded sequence:
+Sharded cluster maintenance sequence:
 
-1. **Config server replica set** — the CSRS is restarted first (rolling restart of config server members)
-2. **Shard replica sets** — each shard is restarted in turn (rolling restart within each shard; shards are processed sequentially, not in parallel)
-3. **mongos routers** — all mongos instances are restarted last (can be done in parallel since mongos is stateless)
+1. **Config server replica set** — CSRS restarted first (rolling restart of config server members)
+2. **Shard replica sets** — each shard restarted in turn (rolling within each shard; shards processed sequentially, not parallel)
+3. **mongos routers** — all mongos instances restarted last (can be parallel since mongos is stateless)
 
-**Balancer behavior:** The chunk balancer is suspended during maintenance. Migrations that were in progress before maintenance began are allowed to complete; no new migrations are initiated until maintenance finishes. This avoids partial migrations stranded across a restart boundary.
+**Balancer behavior:** Chunk balancer suspended during maintenance. In-progress migrations allowed to complete; no new migrations until maintenance finishes. Avoids partial migrations across restart boundary.
 
-**Total time estimation for sharded clusters:** Multiply the per-shard restart time by the number of shards, then add config server and mongos restart time. A 4-shard cluster where each shard takes 10 minutes will take approximately 40–50 minutes for the shard restarts alone.
+**Total time estimation:** Multiply per-shard restart time by number of shards, add config server and mongos restart time. 4-shard cluster × 10 min/shard = ~40–50 minutes for shard restarts alone.
 
 ### Customer communication template
 
@@ -872,12 +871,12 @@ If you observe issues after [HH:MM] UTC, please contact [support channel / Slack
 
 **Placeholder guide:**
 - `[Day, Month DD YYYY]` — e.g., "Tuesday, June 10 2025"
-- `[HH:MM]–[HH:MM] UTC` — e.g., "02:00–03:00 UTC" (the configured 1-hour window)
+- `[HH:MM]–[HH:MM] UTC` — e.g., "02:00–03:00 UTC" (configured 1-hour window)
 - `[support channel / Slack #channel]` — your team's escalation path
 
-Key points every maintenance communication must include:
-- Specific UTC time window — never use vague language like "tonight" or "overnight"
-- Impact duration scoped to the election (< 30 seconds), not the full rolling restart
-- Explicit "no data loss" statement — customers frequently conflate restarts with data risk
-- Retryable writes note — acknowledges that non-retryable operations may see one transient error
-- Clear escalation path if issues persist after the window closes
+Every maintenance communication must include:
+- Specific UTC time window — never "tonight" or "overnight"
+- Impact scoped to election (< 30 seconds), not full rolling restart
+- Explicit "no data loss" statement — customers conflate restarts with data risk
+- Retryable writes note — non-retryable ops may see one transient error
+- Clear escalation path if issues persist after window closes

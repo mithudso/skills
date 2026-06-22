@@ -1,10 +1,10 @@
 <!-- hub-reference-banner -->
-> **Reference file — part of the `atlas-diagnostics-expert` hub.** Formerly the standalone `atlas-diagnostics-package` skill.
-> Sibling MongoDB sub-topics are now reference files under the four hubs (`mongodb-expert`,
+> **Reference file — part of the `atlas-diagnostics-expert` hub.** Formerly standalone `atlas-diagnostics-package` skill.
+> Sibling MongoDB sub-topics now reference files under four hubs (`mongodb-expert`,
 > `mongodb-atlas-expert`, `atlas-diagnostics-expert`, `mongodb-operations-expert`) — **not**
-> standalone skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that
-> name a bare `mongodb-*`/`atlas-*` skill; instead load that topic's `references/<name>.md`
-> from the owning hub (see the hub's "Cross-hub map").
+> standalone skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below naming
+> bare `mongodb-*`/`atlas-*` skill; instead load that topic's `references/<name>.md`
+> from owning hub (see hub's "Cross-hub map").
 
 ---
 
@@ -74,8 +74,7 @@ whenNotToUse:
 
 # Atlas Diagnostics Package
 
-Expert reference for the `@mdb-tam/atlas-diagnostics` package and the diagnostic-recommendation
-layer built on top of it.
+Expert reference for `@mdb-tam/atlas-diagnostics` package and diagnostic-recommendation layer.
 
 ## Package location and structure
 
@@ -135,12 +134,12 @@ const TOOL_REGISTRY = {
 
 ### Key design rules
 
-1. `toolId` is the object key (snake_case) and the stable identifier everywhere.
-2. `sourceCategory` is a single origin label; `displayCategories` is the array used for UI tab filtering.
-3. `urlTemplate` uses `{variable_name}` placeholders. The interpolation function URI-encodes each substituted value.
-4. `urlFallback` is returned when any placeholder variable is missing from the case context.
-5. `whenToUse` is a comma-separated string of keyword phrases. Each phrase is matched independently against normalized case text during highlighting.
-6. `steps` are short operator instructions shown in the recommendation card UI.
+1. `toolId` = object key (snake_case), stable identifier everywhere.
+2. `sourceCategory` = single origin label; `displayCategories` = array for UI tab filtering.
+3. `urlTemplate` uses `{variable_name}` placeholders. Interpolation function URI-encodes each substituted value.
+4. `urlFallback` returned when any placeholder variable missing from case context.
+5. `whenToUse` = comma-separated keyword phrases. Each matched independently against normalized case text during highlighting.
+6. `steps` = short operator instructions shown in recommendation card UI.
 
 ### Current category order
 
@@ -167,7 +166,7 @@ const CATEGORY_ORDER = [
 
 ### getDisplayCategories()
 
-Returns a defensive copy of `CATEGORY_ORDER`. Use for building category tabs.
+Returns defensive copy of `CATEGORY_ORDER`. Use for building category tabs.
 
 ```js
 import { getDisplayCategories } from '../background/diagnostic-registry.js';
@@ -177,7 +176,7 @@ const tabs = getDisplayCategories();
 
 ### getDiagnosticToolsRegistry()
 
-Returns a `structuredClone` of the full `TOOL_REGISTRY` object. Safe to mutate without affecting the canonical data.
+Returns `structuredClone` of full `TOOL_REGISTRY`. Safe to mutate without affecting canonical data.
 
 ```js
 const registry = getDiagnosticToolsRegistry();
@@ -187,7 +186,7 @@ const tool = registry.atlas_performance_advisor;
 
 ### buildDiagnosticToolsCatalogForPrompt()
 
-Returns a single multi-line string listing every tool in `toolId | name | Use when: ...` format. Injected into LLM analysis prompts so the model can suggest diagnostic tools by ID.
+Returns single multi-line string listing every tool in `toolId | name | Use when: ...` format. Injected into LLM analysis prompts so model can suggest diagnostic tools by ID.
 
 ```js
 const catalog = buildDiagnosticToolsCatalogForPrompt();
@@ -213,11 +212,11 @@ resolveToolUrl('nonexistent_tool', {});
 // { url: '', warning: 'Unknown diagnostic tool ID.', isDirect: false }
 ```
 
-Always check `isDirect` before treating a resolved URL as a valid deep link. When `isDirect` is false, the URL is the fallback.
+Always check `isDirect` before treating resolved URL as valid deep link. When `isDirect` is false, URL is fallback.
 
 ### getHighlightedDiagnosticTools(caseContext)
 
-Scores every registered tool against case text and marks each as `highlighted` (true/false) with a `whyRelevant` explanation string.
+Scores every registered tool against case text, marks each `highlighted` (true/false) with `whyRelevant` explanation string.
 
 ```js
 const caseContext = {
@@ -236,8 +235,8 @@ const relevant = tools.filter(t => t.highlighted);
 1. Combine subject + description + errorStrings + status into one haystack.
 2. Normalize to lowercase, strip non-alphanumeric except spaces.
 3. For each tool, split `whenToUse` on commas into keyword phrases.
-4. Test each normalized keyword against the haystack with word-boundary regex, falling back to substring inclusion.
-5. A tool is highlighted if at least one keyword matches.
+4. Test each normalized keyword against haystack with word-boundary regex, falling back to substring inclusion.
+5. Tool highlighted if at least one keyword matches.
 
 ### getDiagnosticToolsForCategory(category, caseContext)
 
@@ -245,7 +244,7 @@ Filters `getHighlightedDiagnosticTools` results by `displayCategories`. Pass `'A
 
 ### normalizeSuggestedDiagnosticTools(items)
 
-Takes the raw array from an LLM analysis response (may contain `toolId` or `tool_id`, bad shapes, unknown IDs, or nulls) and returns a clean, validated, enriched array. Maximum 10 results.
+Takes raw array from LLM analysis response (may contain `toolId` or `tool_id`, bad shapes, unknown IDs, or nulls), returns clean validated enriched array. Maximum 10 results.
 
 ```js
 normalizeSuggestedDiagnosticTools([
@@ -259,7 +258,7 @@ normalizeSuggestedDiagnosticTools([
 
 ### buildTsDiagUrl(caseContext)
 
-Constructs a ts-diag snapshot deep-link URL. Missing fields become empty query parameters rather than being omitted.
+Constructs ts-diag snapshot deep-link URL. Missing fields become empty query parameters rather than omitted.
 
 ```js
 buildTsDiagUrl({ caseNumber: '01581027', projectId: 'p1', orgId: 'o1', clusterId: 'c1', atlasHost: 'h1' });
@@ -291,12 +290,12 @@ const { scenarios, recommendations } = buildCaseDiagnosticRecommendations(caseRe
 
 ### Scenario derivation
 
-Scenarios are scored by:
+Scenarios scored by:
 1. **Keyword matches** against case evidence (subject 4×, analysis 3×, description 2×, comments 1×)
 2. **Tool category mapping** — highlighted tools add 2 points per matching category; LLM-suggested tools add 3 points
-3. Special boost for `atlas_search_explorer` mapping to the `search` scenario
+3. Special boost for `atlas_search_explorer` mapping to `search` scenario
 
-If no scenario scores above zero, a `general` fallback scenario is returned. UI code must handle this gracefully.
+No scenario scores above zero → `general` fallback returned. UI must handle gracefully.
 
 ### Recommendation types
 
@@ -309,15 +308,15 @@ If no scenario scores above zero, a `general` fallback scenario is returned. UI 
 ### Recommendation ranking order
 
 1. LLM-suggested tools (from `analysis.diagnosticTools`)
-2. Internal tools (Hub account page, TS Tools case page) when IDs are available
+2. Internal tools (Hub account page, TS Tools case page) when IDs available
 3. Repo recommendations ranked by scenario overlap (max 2)
 4. Keyword-highlighted tools not already included (max 3)
 5. Scenario-specific mongosh command (max 1)
-6. Deduplication and cap at 7 total recommendations
+6. Dedup and cap at 7 total
 
 ### URL resolution with case context
 
-Variable resolution priority: `tool.variables` fields take precedence over `caseRecord` fields (`accountId`, `snapshot.clusterName`, `caseNumber`). Action labels are inferred from resolved URL domain:
+Variable resolution priority: `tool.variables` fields take precedence over `caseRecord` fields (`accountId`, `snapshot.clusterName`, `caseNumber`). Action labels inferred from resolved URL domain:
 
 | Domain | Label |
 |--------|-------|
@@ -331,11 +330,11 @@ Variable resolution priority: `tool.variables` fields take precedence over `case
 
 ## Adding a new diagnostic tool
 
-1. Add the entry to `TOOL_REGISTRY` in `packages/atlas-diagnostics/src/index.js` (all fields required).
-2. If the tool needs a new category, add it to `CATEGORY_ORDER`.
-3. If the tool needs a new URL template variable, update `getToolVariables` in `case-diagnostic-recommendations.js`.
+1. Add entry to `TOOL_REGISTRY` in `packages/atlas-diagnostics/src/index.js` (all fields required).
+2. New category needed → add to `CATEGORY_ORDER`.
+3. New URL template variable needed → update `getToolVariables` in `case-diagnostic-recommendations.js`.
 4. Run tests: `cd packages/atlas-diagnostics && node --test`.
-5. Verify highlighting works for a case whose text matches a `whenToUse` keyword.
+5. Verify highlighting works for case text matching `whenToUse` keyword.
 
 ---
 
@@ -355,29 +354,29 @@ Test categories for any new tool or API change:
 
 ## Anti-patterns
 
-- **Do not** import `TOOL_REGISTRY` or `CATEGORY_ORDER` directly and mutate them. Always use the exported accessor functions that return clones or copies.
+- **Do not** import `TOOL_REGISTRY` or `CATEGORY_ORDER` directly and mutate. Always use exported accessor functions returning clones/copies.
 - **Do not** build diagnostic URLs by hand-concatenating strings. Always use `resolveToolUrl` so fallback handling, URI encoding, and warning generation stay consistent.
-- **Do not** duplicate the keyword-matching logic outside `getHighlightedDiagnosticTools`. The normalization and regex-fallback behavior must stay in one place.
+- **Do not** duplicate keyword-matching logic outside `getHighlightedDiagnosticTools`. Normalization and regex-fallback behavior must stay in one place.
 - **Do not** add scenario-scoring logic in UI code. Scenario derivation belongs in `case-diagnostic-recommendations.js`.
-- **Do not** skip the `isDirect` check on resolved URLs. Displaying a fallback URL without a warning misleads the operator.
-- **Do not** hardcode tool IDs in UI rendering code. Use the registry and let the highlighting/recommendation pipeline select tools dynamically.
-- **Do not** add new recommendation types without updating the dedup `id` prefix scheme (`tool:`, `repo:`, `command:`).
+- **Do not** skip `isDirect` check on resolved URLs. Displaying fallback URL without warning misleads operator.
+- **Do not** hardcode tool IDs in UI rendering code. Use registry, let highlighting/recommendation pipeline select tools dynamically.
+- **Do not** add new recommendation types without updating dedup `id` prefix scheme (`tool:`, `repo:`, `command:`).
 
 ## Common pitfalls
 
-1. **Mutating the registry.** Always use `getDiagnosticToolsRegistry()` (clones) or `getDisplayCategories()` (slices). Never import and modify `TOOL_REGISTRY` or `CATEGORY_ORDER` directly.
-2. **Assuming URL templates are complete.** Always check `isDirect` before treating a resolved URL as a valid deep link.
-3. **Forgetting to URI-encode.** The `interpolateTemplate` helper already calls `encodeURIComponent`. Do not double-encode.
-4. **Keyword ordering in `whenToUse`.** Place the most specific phrases first. The `whyRelevant` string lists matches in order, so specificity first produces better explanations.
-5. **Exceeding the 10-tool cap.** `normalizeSuggestedDiagnosticTools` silently caps at 10. Extras are dropped.
-6. **Missing the recommendation dedup.** The engine deduplicates by `id` (format `tool:{toolId}`, `repo:{repoId}`, or `command:{type}`). New recommendation sources must avoid collisions.
-7. **Scenario fallback.** When no scenario scores above zero, the engine returns a single `general` scenario. UI code must handle this gracefully.
+1. **Mutating registry.** Always use `getDiagnosticToolsRegistry()` (clones) or `getDisplayCategories()` (slices). Never import and modify `TOOL_REGISTRY` or `CATEGORY_ORDER` directly.
+2. **Assuming URL templates complete.** Always check `isDirect` before treating resolved URL as valid deep link.
+3. **Forgetting URI-encode.** `interpolateTemplate` helper already calls `encodeURIComponent`. Do not double-encode.
+4. **Keyword ordering in `whenToUse`.** Put most specific phrases first. `whyRelevant` string lists matches in order — specificity first produces better explanations.
+5. **Exceeding 10-tool cap.** `normalizeSuggestedDiagnosticTools` silently caps at 10. Extras dropped.
+6. **Missing recommendation dedup.** Engine deduplicates by `id` (format `tool:{toolId}`, `repo:{repoId}`, or `command:{type}`). New recommendation sources must avoid collisions.
+7. **Scenario fallback.** No scenario scores above zero → engine returns single `general` scenario. UI must handle gracefully.
 
 ---
 
 ## Atlas API patterns for Chrome extension diagnostics
 
-For full Atlas API endpoint documentation, see the `atlas-diagnostics-expert` skill. Key patterns:
+Full Atlas API endpoint docs in `atlas-diagnostics-expert` skill. Key patterns:
 
 | Endpoint pattern | Use |
 |-----------------|-----|
@@ -388,4 +387,4 @@ For full Atlas API endpoint documentation, see the `atlas-diagnostics-expert` sk
 | `GET .../alertConfigs` | Alert configs |
 | `GET .../alerts?status=OPEN` | Open alerts |
 
-**Auth in extensions:** Bearer tokens via `POST https://cloud.mongodb.com/api/oauth/token` (3600s TTL). The MDB Case Assistant uses a three-tier fallback: same-tab cookie fetch → extension fetch with cookies → bearer-token fallback.
+**Auth in extensions:** Bearer tokens via `POST https://cloud.mongodb.com/api/oauth/token` (3600s TTL). MDB Case Assistant uses three-tier fallback: same-tab cookie fetch → extension fetch with cookies → bearer-token fallback.

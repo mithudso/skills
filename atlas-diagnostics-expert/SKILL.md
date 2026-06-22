@@ -153,7 +153,7 @@ Move from **curated summary** to **raw evidence**:
 
 1. Start with fastest curated view (`ts-diag`, Atlas UI summaries, Performance Advisor, alerts, metrics)
 2. Gather focused artifacts (logs, FTDC, explain plans, profiler samples)
-3. Use specialized analyzers (`alexandria`, `t2`, SearchPlanIQ, `mtools`, Mongolyser) when first-pass surfaces insufficient
+3. Use specialized analyzers (`alexandria`, `t2`, SearchPlanIQ, `mtools`, Mongolyser) when first-pass insufficient
 4. Package findings into repeatable escalation record using Atlas Diagnostic Checklist and Template
 
 ### What the internal docs establish directly
@@ -344,7 +344,7 @@ Move from **curated summary** to **raw evidence**:
 - **High connections** → tier limits or pooling problem
 - **High execution time** → query/index investigation
 
-Atlas alerting is role-gated at org/project scope; severity levels: Critical, Error, Warning, Info. Alert state is diagnostic evidence, not just notification plumbing.
+Atlas alerting RBAC-gated at org/project scope; severity levels: Critical, Error, Warning, Info. Alert state is diagnostic evidence, not just notification plumbing.
 
 Performance Advisor works from slow-query evidence and suggests indexes based on query shape. Index recommendations still need read-vs-write tradeoff review before applying.
 
@@ -366,7 +366,7 @@ Useful KB categories for Atlas diagnostics:
 ## Standards for building new Atlas diagnostic tooling
 
 1. Prefer **public Atlas Admin APIs** first; use private/internal only when capability not exposed publicly.
-2. Decide consumer model up front: internal UI, CLI/programmatic tool, or agent-facing system. Don't assume one API shape fits every consumer.
+2. Decide consumer model up front: internal UI, CLI/programmatic tool, or agent-facing system. One API shape not fit every consumer.
 3. Use supported auth patterns: service accounts / OAuth, Digest for legacy Admin APIs, or approved internal auth flows.
 4. Make RBAC explicit — role annotations required, not implied.
 5. Add intentional rate limiting for fan-out or expensive diagnostic endpoints.

@@ -1,25 +1,36 @@
+The error: compressed has `chrome-extension-expert` once (in banner line 1) but original has it twice — also in banner line 2 as `(\`chrome-extension-expert\`)`.
+
+Fix: restore the inline code in line 2 of the hub-reference-banner.
+
+The compressed file content is in the prompt. I need to output the fixed version. The only change is in the second line of the banner:
+
+Original compressed: `> Sibling topics now reference files under hub — **not** standalone skills.`
+Fixed: `> Sibling topics now reference files under hub (\`chrome-extension-expert\`) — **not** standalone skills.`
+
+`★ Insight ─────────────────────────────────────`
+Compressing inline (no file path given) — applying rules manually: drop articles/hedging/verbose connectives, compress table cells, preserve all code blocks, backticks, URLs, headings exactly.
+`─────────────────────────────────────────────────`
+
 <!-- hub-reference-banner -->
-> **Reference file — part of the `chrome-extension-expert` hub.** Formerly the standalone `chrome-offscreen-documents` skill.
-> Sibling topics in this family are now reference files under the hubs (`chrome-extension-expert`) — **not** standalone
-> skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
-> skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
+> **Reference file — part of `chrome-extension-expert` hub.** Formerly standalone `chrome-offscreen-documents` skill.
+> Sibling topics now reference files under hub (`chrome-extension-expert`) — **not** standalone skills. Ignore "use the X skill" / `related_skills` / SKIP pointers naming bare sibling skills; load from `references/<name>.md` in owning hub (see hub's "Cross-hub map").
 
 ---
 
 ---
 name: chrome-offscreen-documents
 description: >
-  Chrome MV3 offscreen documents — creating, closing, silent audio keepalive,
-  DOM access from service workers, SSE/WebSocket hosting, debugging, and
+  Chrome MV3 offscreen docs — creating, closing, silent audio keepalive,
+  DOM access from service workers, SSE/WebSocket hosting, debugging,
   migrating from MV2 background pages.
-  TRIGGER: service worker needs DOM API (DOMParser, clipboard, canvas, localStorage,
-  audio), SW suspends mid-stream, implementing persistent SSE or WebSocket
-  connections in MV3, hosting LLM streaming fetch in a Chrome extension,
+  TRIGGER: SW needs DOM API (DOMParser, clipboard, canvas, localStorage,
+  audio), SW suspends mid-stream, persistent SSE or WebSocket in MV3,
+  LLM streaming fetch in Chrome extension,
   migrating MV2 background page DOM code to MV3.
-  SKIP: basic chrome.tabs, chrome.storage, or chrome.runtime messaging (use
+  SKIP: basic chrome.tabs, chrome.storage, chrome.runtime messaging (use
   chrome-dev), native messaging depth (use chrome-native-messaging), browser
-  automation or page inspection (use chrome-devtools-mcp).
-  See also: chrome-mv3-advanced (full advanced API surface including offscreen
+  automation/page inspection (use chrome-devtools-mcp).
+  See also: chrome-mv3-advanced (full advanced API incl. offscreen
   as Section 2+6), mv3-service-worker-expert (SW lifecycle), extension-e2e-testing
   (integration testing offscreen docs).
 version: 1.1.0
@@ -31,21 +42,21 @@ updated: 2026-05-29
 
 # Chrome MV3 Offscreen Documents
 
-Hidden DOM-enabled documents that Chrome extensions use to access browser APIs unavailable in service workers.
+Hidden DOM-enabled docs Chrome extensions use to access browser APIs unavailable in service workers.
 
 ## When NOT to Use
 
-- Need basic `chrome.tabs`, `chrome.storage`, `chrome.runtime` messaging, or SW fundamentals → use `chrome-dev` instead.
-- Need the full advanced MV3 API surface (native messaging, identity/OAuth, DNR, side panel, userScripts, tabCapture) → use `chrome-mv3-advanced`; it embeds this content as Section 2+6.
-- Need browser automation or page inspection (Playwright/Puppeteer) → use `chrome-devtools-mcp`.
+- Basic `chrome.tabs`, `chrome.storage`, `chrome.runtime` messaging or SW fundamentals → `chrome-dev`.
+- Full advanced MV3 API surface (native messaging, identity/OAuth, DNR, side panel, userScripts, tabCapture) → `chrome-mv3-advanced` (embeds this as Section 2+6).
+- Browser automation/page inspection (Playwright/Puppeteer) → `chrome-devtools-mcp`.
 
 ## Overview
 
-`chrome.offscreen` (Chrome 109+, MV3 only) creates a hidden HTML document with **full DOM access**. Service workers cannot touch DOM APIs — offscreen documents bridge that gap without opening visible UI.
+`chrome.offscreen` (Chrome 109+, MV3 only) creates hidden HTML doc with **full DOM access**. SWs can't touch DOM APIs — offscreen docs bridge gap without visible UI.
 
 **Permission required:** `"offscreen"` in `manifest.json`
-**One instance limit:** Only one offscreen document per extension per profile at a time. Incognito profiles get their own separate instance.
-**Only `chrome.runtime` APIs** are available inside the offscreen document — no tabs, storage, notifications, etc.
+**One instance limit:** One offscreen doc per extension per profile. Incognito gets separate instance.
+**Only `chrome.runtime` APIs** available inside offscreen doc — no tabs, storage, notifications, etc.
 
 ## Manifest Setup
 
@@ -57,7 +68,7 @@ Hidden DOM-enabled documents that Chrome extensions use to access browser APIs u
 }
 ```
 
-The offscreen HTML file must be **bundled with the extension** (no external URLs):
+Offscreen HTML must be **bundled with extension** (no external URLs):
 
 ```html
 <!-- offscreen.html -->
@@ -85,7 +96,7 @@ The offscreen HTML file must be **bundled with the extension** (no external URLs
 | `GEOLOCATION` | `navigator.geolocation` | Unlimited |
 | `TESTING` | Tests only | Unlimited |
 
-**Multiple reasons:** `reasons` accepts an array — declare every reason that applies:
+**Multiple reasons:** `reasons` accepts array — declare every applicable reason:
 ```js
 reasons: ['DOM_PARSER', 'CLIPBOARD', 'LOCAL_STORAGE']
 ```
@@ -94,7 +105,7 @@ reasons: ['DOM_PARSER', 'CLIPBOARD', 'LOCAL_STORAGE']
 
 ### Canonical Create Pattern (Chrome 116+)
 
-`chrome.runtime.getContexts()` requires Chrome 116+. For earlier Chrome, use the SW clients fallback below.
+`chrome.runtime.getContexts()` requires Chrome 116+. Earlier Chrome → SW clients fallback below.
 
 ```js
 // service-worker.js
@@ -136,7 +147,7 @@ async function closeOffscreen(path = 'offscreen.html') {
 }
 ```
 
-> `_creatingOffscreen` is module-level state that resets on every SW restart (~30s idle). It prevents concurrent `createDocument` calls *within one SW lifetime*. The `getContexts()` check handles the across-restart case.
+> `_creatingOffscreen` — module-level state, resets on SW restart (~30s idle). Prevents concurrent `createDocument` calls *within one SW lifetime*. `getContexts()` handles across-restart case.
 
 ### Fallback for Chrome < 116 (SW clients API)
 
@@ -152,7 +163,7 @@ async function offscreenExistsFallback(path) {
 
 ## Communication with the Service Worker
 
-Only `chrome.runtime` messaging is available. Use a `target` field to route messages.
+Only `chrome.runtime` messaging available. Use `target` field to route messages.
 
 ```js
 // service-worker.js
@@ -184,11 +195,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 ```
 
-**Ports (long-lived channel):** Use `chrome.runtime.connect()` from the offscreen document for bidirectional streaming without request/response polling.
+**Ports (long-lived channel):** Use `chrome.runtime.connect()` from offscreen doc for bidirectional streaming without request/response polling.
 
 ## Audio Keepalive Pattern
 
-`AUDIO_PLAYBACK` documents auto-close after 30 seconds of silence. Use a silent audio loop to persist indefinitely — the canonical pattern for hosting SSE/LLM streams.
+`AUDIO_PLAYBACK` docs auto-close after 30s silence. Silent audio loop → persist indefinitely. Canonical pattern for SSE/LLM streams.
 
 ```html
 <!-- offscreen.html -->
@@ -206,11 +217,11 @@ document.getElementById('keepalive').play().catch(() => {
 });
 ```
 
-**Why this works:** Chrome's AUDIO_PLAYBACK timer resets while audio is actively playing. A silent WAV loop counts as playing. This keeps the offscreen document (and any SSE/fetch streams it hosts) alive indefinitely.
+**Why this works:** Chrome's AUDIO_PLAYBACK timer resets while audio plays. Silent WAV loop counts as playing. Keeps offscreen doc (and any SSE/fetch streams) alive indefinitely.
 
 ## SSE and WebSocket Hosting
 
-Service workers suspend after ~30s idle. Offscreen documents persist. Host persistent connections in offscreen and forward events to the SW.
+SWs suspend after ~30s idle. Offscreen docs persist. Host persistent connections in offscreen, forward events to SW.
 
 ### SSE Pattern
 
@@ -298,11 +309,11 @@ function startWebSocket(url) {
 }
 ```
 
-**Note (Chrome 116+):** Active WebSocket connections in the service worker itself extend SW lifetime. Offscreen is only needed when the SW must sleep but the connection must persist.
+**Note (Chrome 116+):** Active WebSocket in SW itself extends SW lifetime. Offscreen needed only when SW must sleep but connection must persist.
 
 ## Multipurpose Offscreen Document
 
-Only one document can be open at a time. Route all use cases through a single document via message dispatch:
+One doc open at a time. Route all cases through single doc via message dispatch:
 
 ```js
 // offscreen.js — single doc handling multiple concerns
@@ -319,7 +330,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 ## Testing Offscreen Documents
 
-Offscreen documents cannot be tested directly in Node/Vitest — there is no DOM. Three strategies:
+Offscreen docs can't be tested directly in Node/Vitest — no DOM. Three strategies:
 
 **1. Export logic as pure functions (unit test separately):**
 ```js
@@ -345,13 +356,13 @@ globalThis.chrome = {
 };
 ```
 
-**3. Integration test via Playwright extension loading:** Load the unpacked extension in headless Chrome, send a `chrome.runtime.sendMessage` via `page.evaluate`, and assert on the response. See `extension-e2e-testing` skill.
+**3. Integration test via Playwright extension loading:** Load unpacked extension in headless Chrome, send `chrome.runtime.sendMessage` via `page.evaluate`, assert on response. See `extension-e2e-testing` skill.
 
 ## Debugging
 
-1. Open `chrome://extensions`, find your extension card, click the `offscreen.html` link — opens a dedicated DevTools window with full Elements, Console, Network, Sources panels.
-2. Alternatively: `chrome://inspect` → "Other" category → find and inspect the offscreen document.
-3. **DevTools not showing offscreen:** Bug in Chrome < 116 — update Chrome. If the document closes before you can inspect it, add a `setTimeout` delay before close, or relay logs via `chrome.runtime.sendMessage`.
+1. Open `chrome://extensions`, find extension card, click `offscreen.html` link — opens dedicated DevTools window with Elements, Console, Network, Sources.
+2. `chrome://inspect` → "Other" → find and inspect offscreen doc.
+3. **DevTools not showing offscreen:** Bug in Chrome < 116 — update Chrome. Doc closes before inspect → add `setTimeout` delay before close, or relay logs via `chrome.runtime.sendMessage`.
 
 **Console relay pattern for hard-to-catch bugs:**
 ```js
@@ -367,7 +378,7 @@ console.log = (...args) => {
 
 | MV2 Background page | MV3 replacement |
 |---|---|
-| `window`, `document`, DOM access | Offscreen document with appropriate reason |
+| `window`, `document`, DOM access | Offscreen doc with appropriate reason |
 | `localStorage` read/write | Offscreen (`LOCAL_STORAGE`) or migrate to `chrome.storage.local` |
 | `<audio>` playback | Offscreen (`AUDIO_PLAYBACK`) |
 | Persistent WebSocket/SSE | Offscreen (`WEB_RTC` or `WORKERS` + keepalive) |
@@ -381,14 +392,14 @@ console.log = (...args) => {
 | Mistake | Fix |
 |---|---|
 | Calling `createDocument` without checking if one exists | Always call `ensureOffscreen()` with `getContexts` check first |
-| Using relative path in `createDocument` URL | Use `chrome.runtime.getURL('offscreen.html')` for the full URL |
-| `createDocument` called concurrently from multiple event handlers | Use the `_creatingOffscreen` guard promise |
-| `AUDIO_PLAYBACK` document closes unexpectedly | Silent audio loop must be playing; check autoplay wasn't blocked |
-| Calling `chrome.storage` / `chrome.tabs` from offscreen | Only `chrome.runtime` is available; route via service worker |
-| `return false` from async message handler in offscreen | Return `true` to keep the message channel open for async `sendResponse` |
-| `chrome.offscreen.hasDocument()` not found | Method was removed after early experimental; use `runtime.getContexts()` |
+| Relative path in `createDocument` URL | Use `chrome.runtime.getURL('offscreen.html')` |
+| `createDocument` called concurrently from multiple event handlers | Use `_creatingOffscreen` guard promise |
+| `AUDIO_PLAYBACK` doc closes unexpectedly | Silent audio loop must play; check autoplay not blocked |
+| Calling `chrome.storage` / `chrome.tabs` from offscreen | Only `chrome.runtime` available; route via SW |
+| `return false` from async message handler in offscreen | Return `true` to keep channel open for async `sendResponse` |
+| `chrome.offscreen.hasDocument()` not found | Removed after early experimental; use `runtime.getContexts()` |
 | Trying to host `tabCapture` stream in offscreen | Only `tabCapture.getMediaStreamId` streams work; `desktopCapture` streams do not |
-| Calling `closeDocument()` when no document is open | Throws — always guard with `isOffscreenAlive()` check or wrap in try/catch |
+| Calling `closeDocument()` when no doc open | Throws — guard with `isOffscreenAlive()` or wrap in try/catch |
 
 ## Quick Decision Guide
 
@@ -398,8 +409,8 @@ console.log = (...args) => {
 | Write to clipboard | `CLIPBOARD` | `navigator.clipboard.writeText()` |
 | Play audio silently | `AUDIO_PLAYBACK` | 30s auto-close; silent loop extends |
 | Persistent SSE connection | `AUDIO_PLAYBACK` (with keepalive) | SW sleeps; offscreen persists |
-| Persistent WebSocket | `WEB_RTC` or `WORKERS` | Or use SW if Chrome 116+ WS keepalive suffices |
-| LLM streaming fetch | `AUDIO_PLAYBACK` (with keepalive) | Offscreen owns the stream; SW routes chunks |
+| Persistent WebSocket | `WEB_RTC` or `WORKERS` | SW if Chrome 116+ WS keepalive suffices |
+| LLM streaming fetch | `AUDIO_PLAYBACK` (with keepalive) | Offscreen owns stream; SW routes chunks |
 | Scrape embedded iframe | `DOM_SCRAPING` | Embed iframe, read its DOM |
 | `localStorage` (MV2 migration) | `LOCAL_STORAGE` | Migrate data then switch to `chrome.storage.local` |
 | Blob/object URLs | `BLOBS` | `URL.createObjectURL()` |

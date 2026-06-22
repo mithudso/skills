@@ -1,8 +1,8 @@
 <!-- hub-reference-banner -->
-> **Reference file — part of the `chrome-extension-expert` hub.** Formerly the standalone `chrome-native-messaging` skill.
-> Sibling topics in this family are now reference files under the hubs (`chrome-extension-expert`) — **not** standalone
-> skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
-> skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
+> **Reference file — part of the `chrome-extension-expert` hub.** Formerly standalone `chrome-native-messaging` skill.
+> Sibling topics now reference files under hubs (`chrome-extension-expert`) — **not** standalone
+> skills. Ignore "use the X skill" / `related_skills` / SKIP pointers naming bare sibling
+> skill; load topic's `references/<name>.md` from owning hub (see hub's "Cross-hub map").
 
 ---
 
@@ -33,24 +33,24 @@ updated: 2026-05-29
 
 ## Overview
 
-Chrome extensions communicate with local native applications via **stdin/stdout using a 4-byte length prefix** (native byte order, little-endian on all common platforms) followed by a UTF-8 JSON payload. The native host is a standalone executable registered via a manifest file placed in an OS-specific directory — it is not bundled inside the extension.
+Chrome extensions communicate with local native apps via **stdin/stdout using 4-byte length prefix** (native byte order, little-endian on all common platforms) + UTF-8 JSON payload. Native host = standalone executable registered via manifest placed in OS-specific directory — not bundled inside extension.
 
 ## Protocol — 4-Byte Framing
 
-Every message in both directions uses the same wire format:
+Same wire format both directions:
 
 ```
 [4 bytes: uint32, native byte order][N bytes: UTF-8 JSON payload]
 ```
 
-- Length prefix is a **32-bit unsigned integer in native byte order** (little-endian on x86/x64/ARM; use `@I` in Python struct, `readUInt32LE`/`writeUInt32LE` in Node.js Buffer)
-- **Max message native host → Chrome:** 1 MB (1,048,576 bytes) — Chrome rejects larger responses
+- Length prefix = **32-bit unsigned integer, native byte order** (little-endian on x86/x64/ARM; use `@I` in Python struct, `readUInt32LE`/`writeUInt32LE` in Node.js Buffer)
+- **Max message native host → Chrome:** 1 MB (1,048,576 bytes) — Chrome rejects larger
 - **Max message Chrome → native host:** 64 MiB
-- Debug output **must** go to **stderr only** — any bytes on stdout corrupt the framing
+- Debug output **must** go to **stderr only** — any stdout bytes corrupt framing
 
 ## Host Manifest
 
-Place a JSON file named `com.company.app.json` in the OS-specific directory below.
+Place JSON file named `com.company.app.json` in OS-specific directory below.
 
 ```json
 {
@@ -88,14 +88,14 @@ Place a JSON file named `com.company.app.json` in the OS-specific directory belo
 
 ### Windows
 
-Registry key value points to the manifest JSON file path:
+Registry key value points to manifest JSON file path:
 
 ```
 HKEY_CURRENT_USER\SOFTWARE\Google\Chrome\NativeMessagingHosts\com.my_company.my_app
   (Default) = "C:\path\to\com.my_company.my_app.json"
 ```
 
-Also register under `HKEY_LOCAL_MACHINE` for system-wide access. On 64-bit Windows, Chrome checks the 32-bit registry hive (`HKLM\SOFTWARE\WOW6432Node\Google\Chrome\NativeMessagingHosts\...`) first.
+Also register under `HKEY_LOCAL_MACHINE` for system-wide access. On 64-bit Windows, Chrome checks 32-bit registry hive (`HKLM\SOFTWARE\WOW6432Node\Google\Chrome\NativeMessagingHosts\...`) first.
 
 ## Python Host Implementation
 
@@ -193,7 +193,7 @@ function sendMessage(msg) {
 
 ## install.sh Registration Script (macOS/Linux)
 
-A shell script is the standard way to register the host manifest with the correct extension ID and absolute path:
+Shell script = standard way to register host manifest with correct extension ID and absolute path:
 
 ```bash
 #!/bin/bash
@@ -230,10 +230,10 @@ echo "Installed: ${HOSTS_DIR}/${HOST_NAME}.json"
 echo "IMPORTANT: Restart Chrome after installation."
 ```
 
-Run this script after any change to host code or path:
-1. Re-run `install.sh <extension-id>` if the path or `allowed_origins` changed
-2. **Restart Chrome** — native host manifests are read at Chrome startup, not on extension reload
-3. Re-run the install step when Chrome assigns a new unpacked extension ID
+Re-run after any host code or path change:
+1. Re-run `install.sh <extension-id>` if path or `allowed_origins` changed
+2. **Restart Chrome** — manifests read at Chrome startup, not extension reload
+3. Re-run install when Chrome assigns new unpacked extension ID
 
 ## MV3 Service Worker Integration
 
@@ -247,7 +247,7 @@ Declare permission in `manifest.json`:
 const response = await chrome.runtime.sendNativeMessage('com.my_company.my_app', { cmd: 'ping' });
 ```
 
-**Persistent connection** (host lives until port is destroyed — keeps SW alive):
+**Persistent connection** (host lives until port destroyed — keeps SW alive):
 ```javascript
 const port = chrome.runtime.connectNative('com.my_company.my_app');
 
@@ -266,10 +266,10 @@ port.postMessage({ cmd: 'start' });
 ```
 
 **Key constraints:**
-- `connectNative` is only available in **extension pages and service worker** — not in content scripts
-- An open `connectNative` port keeps the MV3 service worker alive as long as the port remains connected
-- `sendNativeMessage` starts a new host process per call; only the **first response** is delivered — the host should write one response then exit cleanly
-- To find the extension ID for `allowed_origins` during development: open `chrome://extensions`, enable Developer mode, copy the ID shown under the extension name
+- `connectNative` only available in **extension pages and service worker** — not content scripts
+- Open `connectNative` port keeps MV3 service worker alive while port connected
+- `sendNativeMessage` starts new host process per call; only **first response** delivered — host should write one response then exit cleanly
+- To find extension ID for `allowed_origins` during dev: open `chrome://extensions`, enable Developer mode, copy ID under extension name
 
 ## Error Reference
 
@@ -284,29 +284,29 @@ port.postMessage({ cmd: 'start' });
 
 ## Debugging
 
-1. Check `chrome://extensions` → click "Errors" on the extension card for native messaging errors
-2. Start Chrome from terminal on macOS/Linux to see stderr output from the host in the shell
+1. Check `chrome://extensions` → click "Errors" on extension card for native messaging errors
+2. Start Chrome from terminal on macOS/Linux to see host stderr in shell
 3. **Windows**: launch Chrome with `--enable-logging`; logs in `%LOCALAPPDATA%\Google\Chrome\User Data\chrome_debug.log`
 4. Validate manifest JSON: `python3 -m json.tool com.my_company.my_app.json`
 5. Test host in isolation: `echo -ne '\x09\x00\x00\x00{"cmd":1}' | python3 host.py`
 
 ## Security Considerations
 
-1. **Extension ID validation**: Chrome enforces `allowed_origins` at the OS level — the host only starts if the calling extension is listed. No wildcards allowed.
-2. **Input sanitization**: Validate all JSON fields received from the extension. Content scripts are less trusted than the service worker and can be compromised by malicious pages.
+1. **Extension ID validation**: Chrome enforces `allowed_origins` at OS level — host only starts if calling extension listed. No wildcards.
+2. **Input sanitization**: Validate all JSON fields from extension. Content scripts less trusted than service worker; can be compromised by malicious pages.
 3. **Minimal `allowed_origins`**: one entry per legitimate extension.
-4. **Host executable permissions**: `chmod 755`; do not make writable by untrusted users.
-5. **No localhost server needed**: native messaging is a direct process pipe — do not expose an HTTP port just for this purpose.
-6. **First argument is the caller origin**: Chrome passes `chrome-extension://ID` as the first CLI argument — use it to double-check the caller when `allowed_origins` contains multiple entries.
+4. **Host executable permissions**: `chmod 755`; not writable by untrusted users.
+5. **No localhost server needed**: native messaging = direct process pipe — don't expose HTTP port for this.
+6. **First argument is caller origin**: Chrome passes `chrome-extension://ID` as first CLI arg — use to double-check caller when `allowed_origins` has multiple entries.
 
 ## Common Mistakes
 
 - Printing debug text to **stdout** breaks framing — always use stderr
 - Omitting **`sys.stdout.buffer.flush()`** after each write causes Chrome to hang
-- Using Python **text mode** instead of binary mode on Windows (missing `-u` flag)
-- Setting `path` to a **relative path** on macOS/Linux (must be absolute)
-- Manifest filename **not matching** the `name` field (e.g., `com.foo.bar.json` for name `com.foo.bar`)
-- Calling `connectNative` from a **content script** (not allowed — route through service worker)
+- Python **text mode** instead of binary mode on Windows (missing `-u` flag)
+- `path` set to **relative path** on macOS/Linux (must be absolute)
+- Manifest filename **not matching** `name` field (e.g., `com.foo.bar.json` for name `com.foo.bar`)
+- Calling `connectNative` from **content script** (not allowed — route through service worker)
 - Exceeding **1 MB** response size — use compact JSON `separators=(',', ':')`
 
 ## Sources

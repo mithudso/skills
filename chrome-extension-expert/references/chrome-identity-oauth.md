@@ -1,8 +1,8 @@
 <!-- hub-reference-banner -->
-> **Reference file — part of the `chrome-extension-expert` hub.** Formerly the standalone `chrome-identity-oauth` skill.
-> Sibling topics in this family are now reference files under the hubs (`chrome-extension-expert`) — **not** standalone
-> skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
-> skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
+> **Reference file — part of the `chrome-extension-expert` hub.** Formerly standalone `chrome-identity-oauth` skill.
+> Sibling topics now reference files under hubs (`chrome-extension-expert`) — **not** standalone
+> skills. Ignore "use the X skill" / `related_skills` / SKIP pointers naming bare sibling
+> skills; load that topic's `references/<name>.md` from owning hub (see hub's "Cross-hub map").
 
 ---
 
@@ -51,7 +51,7 @@ updated: 2026-05-29
 }
 ```
 
-The `oauth2` block is only used by `getAuthToken`. For `launchWebAuthFlow`, omit it and manage client IDs in code.
+`oauth2` block only used by `getAuthToken`. For `launchWebAuthFlow`, omit it and manage client IDs in code.
 
 ## Decision Guide: getAuthToken vs launchWebAuthFlow
 
@@ -63,13 +63,13 @@ Need to auth with Google only?
   NO  → launchWebAuthFlow + PKCE (only option for non-Google)
 ```
 
-**Use `getAuthToken` when:** Google-only, Chrome-only, zero token management code is acceptable, and the `oauth2` manifest section is acceptable.
+**Use `getAuthToken` when:** Google-only, Chrome-only, zero token management code acceptable, `oauth2` manifest section acceptable.
 
-**Use `launchWebAuthFlow` when:** non-Google provider, cross-browser compatibility, need refresh tokens (getAuthToken manages them internally and does not expose them), or need full control over the PKCE flow.
+**Use `launchWebAuthFlow` when:** non-Google provider, cross-browser compatibility, need refresh tokens (getAuthToken manages internally, does not expose them), or need full PKCE control.
 
 ## getAuthToken — Google-Only Fast Path
 
-`getAuthToken` handles the full OAuth flow internally for Google accounts. It manages token caching, refresh, and consent prompts automatically.
+`getAuthToken` handles full OAuth flow internally for Google accounts. Manages token caching, refresh, consent prompts automatically.
 
 ```js
 // --- service-worker.js (MV3) ---
@@ -98,10 +98,10 @@ async function fetchGoogleProfile() {
 ```
 
 **Key behaviors:**
-- `getAuthToken({ interactive: false })` is cheap and returns the cached token when valid
-- Token refresh is automatic — when the cached token expires, the next call silently fetches a new one
+- `getAuthToken({ interactive: false })` cheap, returns cached token when valid
+- Token refresh automatic — expired cached token silently fetches new one
 - `getAuthToken` does **not** work in Brave or all Chromium forks — Chrome proper only
-- The `oauth2.client_id` must be a Chrome App type credential in Google Cloud Console
+- `oauth2.client_id` must be Chrome App type credential in Google Cloud Console
 
 **Incremental scopes:**
 ```js
@@ -113,7 +113,7 @@ chrome.identity.getAuthToken({
 
 ## launchWebAuthFlow — Universal OAuth
 
-`launchWebAuthFlow` opens a browser popup to any OAuth provider. When the provider redirects back to the extension's redirect URI, the popup closes and the final URL is returned.
+`launchWebAuthFlow` opens browser popup to any OAuth provider. When provider redirects to extension's redirect URI, popup closes and final URL returned.
 
 ### Redirect URI
 
@@ -124,9 +124,9 @@ const redirectUriWithPath = chrome.identity.getRedirectURL('oauth2');
 // => "https://<extension-id>.chromiumapp.org/oauth2"
 ```
 
-Register this URI with your OAuth provider. For Google, use a **Web Application** credential (not Chrome App).
+Register this URI with your OAuth provider. For Google, use **Web Application** credential (not Chrome App).
 
-**Dev vs prod extension IDs:** An unpacked extension gets a different ID each load unless pinned with the `"key"` field in manifest.json. Register both redirect URIs during development, or pin the key:
+**Dev vs prod extension IDs:** Unpacked extension gets different ID each load unless pinned with `"key"` field in manifest.json. Register both redirect URIs during development, or pin the key:
 ```json
 { "key": "MIIBIjANBgkqh...<your-public-key>..." }
 ```
@@ -142,7 +142,7 @@ chrome.identity.launchWebAuthFlow({ url, interactive: true });
 chrome.identity.launchWebAuthFlow({ url, interactive: false });
 ```
 
-When `interactive: false` and the provider uses JS redirects, add timeout options:
+When `interactive: false` and provider uses JS redirects, add timeout options:
 ```js
 chrome.identity.launchWebAuthFlow({
   url: authUrl.toString(),
@@ -154,7 +154,7 @@ chrome.identity.launchWebAuthFlow({
 
 ## PKCE Authorization Code Flow (Recommended)
 
-PKCE (Proof Key for Code Exchange, RFC 7636) is the recommended flow for Chrome extensions — extensions cannot securely store a client secret.
+PKCE (Proof Key for Code Exchange, RFC 7636) recommended for Chrome extensions — extensions cannot securely store client secret.
 
 ### PKCE Helpers
 
@@ -257,7 +257,7 @@ async function loginWithPKCE(config) {
 | `access_token` + `expires_at` | `chrome.storage.session` | Cleared on browser close; fast access from SW |
 | PKCE `code_verifier` | Local variable only | Never persisted; single-use within one auth flow |
 
-**Content script access to session storage:** By default, `chrome.storage.session` is only accessible from the service worker. To allow content scripts to read session data:
+**Content script access to session storage:** By default, `chrome.storage.session` only accessible from service worker. To allow content scripts to read session data:
 ```js
 // In service-worker.js, at top level or in the 'install' handler:
 chrome.storage.session.setAccessLevel({
@@ -338,7 +338,7 @@ async function logout() {
 
 ### Proactive Refresh with chrome.alarms
 
-Service workers terminate after ~30 seconds of inactivity. Use `chrome.alarms` for proactive renewal:
+Service workers terminate after ~30s inactivity. Use `chrome.alarms` for proactive renewal:
 
 ```js
 const REFRESH_ALARM = 'oauth-token-refresh';
@@ -365,7 +365,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 
 ### Concurrency-Safe Refresh
 
-When multiple contexts request a token simultaneously, coalesce refresh calls:
+Multiple contexts requesting token simultaneously — coalesce refresh calls:
 
 ```js
 let refreshPromise = null;
@@ -390,7 +390,7 @@ async function getAccessTokenSafe() {
 
 ### GitHub
 
-GitHub does not support PKCE natively. Token exchange requires a client secret server-side.
+GitHub no native PKCE support. Token exchange requires client secret server-side.
 
 ```js
 async function loginWithGitHub() {
@@ -424,7 +424,7 @@ async function loginWithGitHub() {
 
 ### Azure AD / Entra ID
 
-Azure supports public clients — exchange directly without a client secret.
+Azure supports public clients — exchange directly, no client secret needed.
 
 ```js
 async function loginWithAzure() {
@@ -472,7 +472,7 @@ async function loginWithAzure() {
 
 ### Okta
 
-Okta supports PKCE natively — exchange directly without a client secret.
+Okta supports PKCE natively — exchange directly, no client secret needed.
 
 ```js
 async function loginWithOkta() {
@@ -519,27 +519,27 @@ async function loginWithOkta() {
 
 | Practice | Rule |
 |---|---|
-| **PKCE over implicit** | Always use authorization code + S256. Implicit flow exposes tokens in URL fragments and is deprecated by OAuth 2.1. |
-| **No client_secret in extension** | Extensions are public clients — never embed a secret. |
-| **State parameter** | Always generate a random `state`, include it in the auth URL, and verify it in the response. |
+| **PKCE over implicit** | Always use authorization code + S256. Implicit flow exposes tokens in URL fragments; deprecated by OAuth 2.1. |
+| **No client_secret in extension** | Extensions are public clients — never embed secret. |
+| **State parameter** | Always generate random `state`, include in auth URL, verify in response. |
 | **Store `expires_at` not `expires_in`** | Absolute timestamps survive SW restarts; relative offsets do not. |
 | **60-300s expiry buffer** | Check `expires_at > Date.now() + buffer` to avoid races. |
-| **Redirect URI from API** | Always use `chrome.identity.getRedirectURL()` — never hardcode the URI. |
-| **Scope minimization** | Request minimum scopes for current operation; add more via incremental authorization. |
-| **Encrypt sensitive tokens** | For high-security needs, wrap the refresh token with AES-GCM before storing in `chrome.storage.local`. |
+| **Redirect URI from API** | Always use `chrome.identity.getRedirectURL()` — never hardcode URI. |
+| **Scope minimization** | Request minimum scopes for current operation; add via incremental authorization. |
+| **Encrypt sensitive tokens** | For high-security needs, wrap refresh token with AES-GCM before storing in `chrome.storage.local`. |
 
 ## Troubleshooting
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| `redirect_uri_mismatch` | URI not registered with OAuth provider | Add `chrome.identity.getRedirectURL()` output to your OAuth client config |
-| `getAuthToken` returns `OAuth2 not granted or revoked` | User revoked consent | Call `removeCachedAuthToken`, then retry with `interactive: true` |
+| `redirect_uri_mismatch` | URI not registered with OAuth provider | Add `chrome.identity.getRedirectURL()` output to OAuth client config |
+| `getAuthToken` returns `OAuth2 not granted or revoked` | User revoked consent | Call `removeCachedAuthToken`, retry with `interactive: true` |
 | `launchWebAuthFlow` hangs on non-Google provider | Provider uses JS redirect after page load | Set `abortOnLoadForNonInteractive: false` and `timeoutMsForNonInteractive: 5000` |
 | Token gone after browser restart | Stored in `chrome.storage.session` | Move refresh_token to `chrome.storage.local` |
 | SW dies mid-refresh | fetch() exceeds 30s or no activity | Keep token exchanges under 30s; use offscreen doc for complex flows |
-| `getAuthToken` fails in Brave/Edge | Chrome-only API | Switch to `launchWebAuthFlow` for cross-browser compatibility |
-| Duplicate refresh calls | Multiple contexts trigger refresh simultaneously | Use the coalescing lock pattern |
-| `invalid_grant` on refresh | Refresh token revoked or expired | Clear stored tokens and force re-authentication |
+| `getAuthToken` fails in Brave/Edge | Chrome-only API | Switch to `launchWebAuthFlow` for cross-browser |
+| Duplicate refresh calls | Multiple contexts trigger refresh simultaneously | Use coalescing lock pattern |
+| `invalid_grant` on refresh | Refresh token revoked or expired | Clear stored tokens, force re-authentication |
 | Redirect URI works in dev but not prod | Extension ID differs between unpacked and CWS | Pin `"key"` in manifest.json or register both redirect URIs |
 
 ## Manifest Quick Reference
@@ -568,4 +568,4 @@ async function loginWithOkta() {
 }
 ```
 
-`host_permissions` are needed for direct `fetch()` calls to token endpoints. If proxying through your own backend, list your backend's origin instead.
+`host_permissions` needed for direct `fetch()` to token endpoints. If proxying through own backend, list backend's origin instead.

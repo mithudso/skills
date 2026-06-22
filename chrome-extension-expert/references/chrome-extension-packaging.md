@@ -1,33 +1,31 @@
 <!-- hub-reference-banner -->
-> **Reference file — part of the `chrome-extension-expert` hub.** Formerly the standalone `chrome-extension-packaging` skill.
-> Sibling topics in this family are now reference files under the hubs (`chrome-extension-expert`) — **not** standalone
-> skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
-> skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
+> **Reference file — part of the `chrome-extension-expert` hub.** Formerly standalone `chrome-extension-packaging` skill.
+> Sibling topics now reference files under hubs (`chrome-extension-expert`) — **not** standalone skills. Ignore "use the X skill" / `related_skills` / SKIP pointers naming bare sibling skills; load `references/<name>.md` from owning hub (see "Cross-hub map").
 
 ---
 
 ---
 name: chrome-extension-packaging
-description: Chrome extension packaging and distribution -- build pipelines (webpack/vite/CRXJS), manifest validation, Chrome Web Store publishing, version management, CI/CD workflows, code signing, privacy disclosure, and update mechanisms. Use when building, reviewing, or automating Chrome extension build/publish workflows.
+description: Chrome extension packaging + distribution — build pipelines (webpack/vite/CRXJS), manifest validation, CWS publishing, version management, CI/CD, code signing, privacy disclosure, update mechanisms. Use when building/reviewing/automating Chrome extension build/publish workflows.
 version: 1.1.0
 category: developer
 tags: [chrome-extension, build, packaging, cws, ci-cd, publishing, manifest-v3]
 whenToUse:
-  - User asks how to package a Chrome extension for the Web Store
-  - User needs a CI/CD pipeline for extension build/test/publish
-  - User asks about manifest.json validation or required fields
-  - User wants to automate CWS uploads via GitHub Actions
-  - User asks about Chrome extension version bumping strategies
-  - User needs to set up code signing or manage .pem keys
-  - User asks about CWS review process, rejection reasons, or privacy disclosure
-  - User asks about self-hosted extension updates vs CWS-managed updates
-  - User is choosing a build tool (vite/webpack/esbuild) for an extension project
+  - Package extension for Web Store
+  - CI/CD pipeline for extension build/test/publish
+  - manifest.json validation or required fields
+  - Automate CWS uploads via GitHub Actions
+  - Version bumping strategies
+  - Code signing or .pem key management
+  - CWS review process, rejection reasons, or privacy disclosure
+  - Self-hosted vs CWS-managed updates
+  - Choose build tool (vite/webpack/esbuild)
 whenNotToUse:
-  - User asks about extension runtime behavior (use mv3-service-worker-expert)
-  - User asks about content script injection or DOM manipulation (use chrome-dev)
-  - User asks about extension security review (use chrome-extension-security-reviewer)
-  - User asks about E2E testing for extensions (use extension-e2e-testing)
-  - General npm/library packaging unrelated to Chrome extensions (use code-packaging)
+  - Extension runtime behavior → mv3-service-worker-expert
+  - Content script injection or DOM manipulation → chrome-dev
+  - Security review → chrome-extension-security-reviewer
+  - E2E testing → extension-e2e-testing
+  - General npm/library packaging → code-packaging
 relatedSkills: [chrome-dev, mv3-service-worker-expert, chrome-extension-security-reviewer, extension-e2e-testing, code-packaging]
 ---
 
@@ -35,22 +33,18 @@ relatedSkills: [chrome-dev, mv3-service-worker-expert, chrome-extension-security
 
 ## Overview
 
-This skill covers the full lifecycle of packaging and distributing a Chrome extension:
-from local build pipelines through manifest validation, ZIP packaging, Chrome Web
-Store (CWS) submission, code signing, privacy disclosure, version management, and
-CI/CD automation. All guidance targets Manifest V3 (MV2 was deprecated June 2025).
+Covers full lifecycle: build pipelines → manifest validation → ZIP packaging → CWS submission → code signing → privacy disclosure → version management → CI/CD. All guidance targets Manifest V3 (MV2 deprecated June 2025).
 
-Key principle: the `manifest.json` is the single source of truth for the extension
-runtime. Every build, validation, and publish step revolves around it.
+Key: `manifest.json` = single source of truth for extension runtime. All build/validation/publish steps revolve around it.
 
 ### When to use this skill
 
-- Packaging an extension for CWS upload or self-hosted distribution
-- Setting up or reviewing a build pipeline (vite, webpack, esbuild) for an extension
-- Validating manifest.json fields, permissions, or CSP
-- Automating build/test/publish via CI/CD (GitHub Actions)
-- Managing version bumps, code signing keys, or .pem files
-- Preparing privacy disclosures and permission justifications for CWS review
+- Package extension for CWS upload or self-hosted distribution
+- Setup/review build pipeline (vite/webpack/esbuild)
+- Validate manifest.json fields, permissions, or CSP
+- Automate build/test/publish via CI/CD (GitHub Actions)
+- Manage version bumps, code signing keys, or .pem files
+- Prepare privacy disclosures + permission justifications for CWS review
 
 ### When NOT to use this skill
 
@@ -91,15 +85,15 @@ Need to package a Chrome extension?
 |----------|---------|-----------|
 | Unpacked directory | Local development, `chrome://extensions` load | Dev loop |
 | `.zip` | CWS upload, CI artifact | Publishing |
-| `.crx` | Signed package for self-hosted distribution | Enterprise/sideload |
-| `.pem` | RSA private key that determines extension ID | Signing, key continuity |
+| `.crx` | Signed package, self-hosted dist | Enterprise/sideload |
+| `.pem` | RSA private key, determines extension ID | Signing, key continuity |
 
 ### Manifest V3 constraints that affect packaging
 
-- No remote code execution -- all JS must be bundled in the package.
-- Service workers replace persistent background pages (idle timeout ~30s).
+- No remote code execution — all JS must be bundled.
+- Service workers replace persistent background pages (idle ~30s).
 - `content_security_policy.extension_pages` cannot allow `unsafe-eval` or remote script sources.
-- `host_permissions` are declared separately from `permissions`.
+- `host_permissions` declared separately from `permissions`.
 - `web_accessible_resources` require explicit `matches` patterns.
 
 ---
@@ -108,8 +102,7 @@ Need to package a Chrome extension?
 
 ### 1. No build (vanilla JS)
 
-Suitable for extensions with plain JS, HTML, and CSS -- no transpilation needed.
-The repo root IS the extension directory. Load unpacked directly.
+Plain JS/HTML/CSS, no transpilation. Repo root = extension directory. Load unpacked directly.
 
 ```
 my-extension/
@@ -121,12 +114,11 @@ my-extension/
 ```
 
 Validation: `node --check src/background/service-worker.js` for syntax errors.
-Packaging: zip the directory excluding dev files (see ZIP Packaging below).
+Packaging: zip directory, exclude dev files (see ZIP Packaging).
 
 ### 2. Vite + CRXJS (recommended for new projects)
 
-CRXJS (`@crxjs/vite-plugin`) reads `manifest.json` as the entry point and
-auto-discovers background scripts, content scripts, popup, options, and other pages.
+CRXJS (`@crxjs/vite-plugin`) reads `manifest.json` as entry point, auto-discovers background/content scripts, popup, options, other pages.
 
 ```js
 // vite.config.js
@@ -143,14 +135,13 @@ export default defineConfig({
 });
 ```
 
-Features: true HMR for popup/options/content scripts, automatic
-`web_accessible_resources` generation, static asset handling.
+Features: true HMR for popup/options/content scripts, automatic `web_accessible_resources` generation, static asset handling.
 
 Install: `npm i -D @crxjs/vite-plugin`
 
 ### 3. Vite (manual config, no CRXJS)
 
-When you need full control or CRXJS does not fit your project shape.
+Full control or CRXJS doesn't fit project shape.
 
 ```js
 // vite.config.js
@@ -178,13 +169,11 @@ export default defineConfig({
 });
 ```
 
-Copy `manifest.json` into `dist/` during build (use `vite-plugin-static-copy`
-or a custom plugin).
+Copy `manifest.json` into `dist/` during build (use `vite-plugin-static-copy` or custom plugin).
 
 ### 4. Webpack
 
-Still viable for complex legacy setups. Use `copy-webpack-plugin` to bring
-`manifest.json` and static assets into the output directory.
+Still viable for complex legacy setups. Use `copy-webpack-plugin` to copy `manifest.json` + static assets to output dir.
 
 ```js
 // webpack.config.js
@@ -217,8 +206,7 @@ module.exports = {
 
 ### 5. esbuild (fast, minimal)
 
-Good for service worker and content script bundling when you do not need
-HTML processing.
+Good for service worker + content script bundling without HTML processing.
 
 ```js
 // build.mjs
@@ -252,7 +240,7 @@ await esbuild.build({
 
 ## Manifest Validation
 
-### Required fields (extension will not load without these)
+### Required fields (extension won't load without these)
 
 ```json
 {
@@ -334,18 +322,17 @@ echo "OK: manifest validation passed"
 
 ### Permissions audit checklist
 
-- Request only the minimum permissions needed for core functionality.
+- Request minimum permissions for core functionality.
 - Move optional features behind `chrome.permissions.request()` (optional_permissions).
 - Prefer `activeTab` over broad host patterns when click-triggered access suffices.
-- Every permission declared in manifest.json must have a written justification
-  ready for the CWS privacy practices tab.
+- Every manifest.json permission needs written justification for CWS privacy practices tab.
 - `<all_urls>` and `webRequest`/`webRequestBlocking` trigger manual review.
 
 ### Content Security Policy rules (MV3)
 
-- Default: `script-src 'self'; object-src 'self'` -- sufficient for most extensions.
+- Default: `script-src 'self'; object-src 'self'` — sufficient for most extensions.
 - Cannot use `unsafe-eval`, `unsafe-inline`, or remote script sources.
-- Sandbox pages can use a more relaxed policy via `content_security_policy.sandbox`.
+- Sandbox pages can use relaxed policy via `content_security_policy.sandbox`.
 - Wasm: add `script-src 'self' 'wasm-unsafe-eval'` if you ship WebAssembly.
 
 ---
@@ -356,9 +343,9 @@ echo "OK: manifest validation passed"
 
 1. **Developer account**: one-time $5 registration fee at https://chrome.google.com/webstore/devconsole
 2. **Extension ZIP**: see ZIP Packaging below.
-3. **Store listing assets**: 128x128 icon, at least one 1280x800 screenshot, promotional tile (440x280).
-4. **Privacy policy URL**: required if extension uses any permissions or collects data.
-5. **Permissions justification**: text explanation for every declared permission.
+3. **Store listing assets**: 128x128 icon, 1+ 1280x800 screenshots, promotional tile (440x280).
+4. **Privacy policy URL**: required if extension uses permissions or collects data.
+5. **Permissions justification**: text for every declared permission.
 
 ### Submission workflow
 
@@ -372,22 +359,21 @@ echo "OK: manifest validation passed"
 | Track | Mechanism | Typical duration |
 |-------|-----------|-----------------|
 | Fast (automated) | Malware scan, policy pattern matching | Under 1 hour |
-| Manual | Human reviewer examines code and listing | 1-3 business days |
+| Manual | Human reviews code + listing | 1-3 business days |
 | Extended | Complex permissions, prior violations, surges | Up to 7+ days |
 
 ### Common rejection reasons (>70% of rejections)
 
-1. **Obfuscated or minified code without source maps** -- provide readable source or source map.
+1. **Obfuscated/minified code without source maps** — provide readable source or source map.
 2. **Over-broad permissions** without justification.
-3. **Incomplete listing** -- missing screenshots, description, or privacy policy.
-4. **Privacy policy mismatch** -- listing says "collects browsing data" but policy omits it.
+3. **Incomplete listing** — missing screenshots, description, or privacy policy.
+4. **Privacy policy mismatch** — listing says "collects browsing data" but policy omits it.
 5. **Unused permissions** declared in manifest.
-6. **Remote code loading** -- MV3 forbids this entirely.
+6. **Remote code loading** — forbidden in MV3.
 
 ### Enterprise publishing (2026)
 
-Organization publishing allows approval-gated private distribution across organizations.
-Extensions still pass standard CWS review. Useful for internal enterprise tools.
+Approval-gated private distribution across organizations. Extensions still pass standard CWS review. Useful for internal enterprise tools.
 
 ---
 
@@ -399,9 +385,9 @@ Extensions still pass standard CWS review. Useful for internal enterprise tools.
 major.minor.patch.build
 ```
 
-- 1 to 4 dot-separated integers (no text, no semver prerelease labels).
+- 1-4 dot-separated integers (no text, no semver prerelease labels).
 - Each integer: 0-65535.
-- CWS rejects uploads with a version <= the currently published version.
+- CWS rejects version <= currently published.
 
 ### Strategies
 
@@ -433,7 +419,7 @@ echo "Version bumped: $CURRENT -> $NEW_VER"
 
 #### Semantic release automation
 
-Use `semantic-release` with a Chrome extension plugin:
+Use `semantic-release` with Chrome extension plugin:
 
 ```json
 {
@@ -467,10 +453,9 @@ major.minor.patch.build
 
 ### What to include
 
-- `manifest.json` (must be at ZIP root, not inside a subdirectory)
-- All files referenced by manifest: service worker, content scripts, popup HTML/JS/CSS,
-  options page, icons, `_locales/`, `web_accessible_resources`
-- Any runtime dependencies bundled into the output
+- `manifest.json` (must be at ZIP root, not inside subdirectory)
+- All files referenced by manifest: service worker, content scripts, popup HTML/JS/CSS, options page, icons, `_locales/`, `web_accessible_resources`
+- Runtime dependencies bundled into output
 
 ### What to exclude
 
@@ -527,8 +512,8 @@ echo "Packaged: $OUTFILE ($(du -h "$OUTFILE" | cut -f1))"
 
 ### Size considerations
 
-- No hard CWS size limit, but Chrome enforces a 4 GB per-file upload limit.
-- Smaller packages review faster and install faster.
+- No hard CWS size limit; Chrome enforces 4 GB per-file cap.
+- Smaller packages = faster review + install.
 - Minify JS/CSS in production builds. Strip source maps unless needed for debugging.
 
 ---
@@ -537,10 +522,10 @@ echo "Packaged: $OUTFILE ($(du -h "$OUTFILE" | cut -f1))"
 
 ### How CRX signing works
 
-1. First packaging generates an RSA key pair and saves the private key as `.pem`.
-2. The extension ID is derived from a hash of the public key -- same key = same ID.
-3. Every subsequent version must be signed with the same `.pem` to retain the ID.
-4. If the `.pem` is lost, the extension ID changes and users must reinstall.
+1. First packaging generates RSA key pair, saves private key as `.pem`.
+2. Extension ID = hash of public key — same key = same ID.
+3. Every version must use same `.pem` to retain ID.
+4. Lost `.pem` = different extension ID, users must reinstall.
 
 ### Packaging a CRX from command line
 
@@ -566,10 +551,10 @@ google-chrome --pack-extension=./dist --pack-extension-key=./my-extension.pem
 ### Key management best practices
 
 - **Never commit `.pem` files** to version control.
-- Store the PEM as a GitHub Actions secret or in a vault (1Password, AWS Secrets Manager).
-- Back up the PEM in at least two secure locations -- loss means a different extension ID.
-- For CWS-only distribution, you do not need a `.pem` -- CWS manages signing.
-- For self-hosted distribution, the `.pem` is essential for update continuity.
+- Store PEM as GitHub Actions secret or in vault (1Password, AWS Secrets Manager).
+- Back up PEM in 2+ secure locations — loss = different extension ID.
+- CWS-only: no `.pem` needed — CWS manages signing.
+- Self-hosted: `.pem` essential for update continuity.
 
 ---
 
@@ -683,11 +668,11 @@ jobs:
 
 ### CWS API credentials setup
 
-1. Create a project in Google Cloud Console.
-2. Enable the Chrome Web Store API.
+1. Create project in Google Cloud Console.
+2. Enable Chrome Web Store API.
 3. Create OAuth 2.0 credentials (Desktop app type).
-4. Generate a refresh token using the OAuth consent flow.
-5. Store `client_id`, `client_secret`, `refresh_token`, and `extension_id` as GitHub Actions secrets.
+4. Generate refresh token via OAuth consent flow.
+5. Store `client_id`, `client_secret`, `refresh_token`, `extension_id` as GitHub Actions secrets.
 
 ### Version-gated publish safety
 
@@ -709,7 +694,7 @@ jobs:
 
 ### Data usage disclosure (CWS dashboard)
 
-You must declare each data type your extension collects or accesses:
+Declare each data type collected or accessed:
 
 | Data type | Example triggers |
 |-----------|-----------------|
@@ -725,8 +710,8 @@ You must declare each data type your extension collects or accesses:
 
 ### Limited Use certification
 
-A binding declaration that you will:
-- Only use data for the extension's user-facing features.
+Binding declaration:
+- Use data only for extension's user-facing features.
 - Not transfer data for advertising or to data brokers.
 - Not sell user data.
 - Restrict human review of user data except for security/compliance/legal.
@@ -754,10 +739,10 @@ from the support portal. Data stays local to the extension.
 
 ### CWS-managed updates (default)
 
-- Extensions installed from CWS auto-update via Chrome's built-in mechanism.
-- Chrome checks for updates every few hours.
-- Developer has no control over update timing or rollout speed.
-- No `update_url` field needed in manifest -- CWS handles it.
+- CWS-installed extensions auto-update via Chrome's built-in mechanism.
+- Chrome checks every few hours.
+- No control over update timing or rollout speed.
+- No `update_url` needed — CWS handles it.
 
 ### Self-hosted updates (enterprise/sideload)
 
@@ -768,7 +753,7 @@ Add to manifest.json:
 }
 ```
 
-Host an update manifest XML:
+Host update manifest XML:
 ```xml
 <?xml version='1.0' encoding='UTF-8'?>
 <gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
@@ -779,8 +764,7 @@ Host an update manifest XML:
 </gupdate>
 ```
 
-Chrome polls this URL every few hours. If the XML version > installed version,
-Chrome downloads and installs the new CRX.
+Chrome polls URL every few hours. XML version > installed version → Chrome downloads + installs new CRX.
 
 ### Choosing an update strategy
 
@@ -797,23 +781,23 @@ Chrome downloads and installs the new CRX.
 
 ## Anti-Patterns
 
-1. **Committing `.pem` files** -- exposes signing key; attacker can publish malicious updates.
-2. **Using `<all_urls>` when `activeTab` suffices** -- triggers manual review, erodes user trust.
-3. **Minifying without source maps in dev** -- impossible to debug CWS rejection feedback.
-4. **Hardcoding version** in multiple places -- manifest.json should be the single source; derive others.
-5. **Skipping manifest validation in CI** -- broken manifests waste CWS review cycles.
-6. **Uploading node_modules in the ZIP** -- massively inflated package, guaranteed slow review.
-7. **Using dynamic code evaluation** -- MV3 CSP blocks eval and dynamic code construction; extension will not load.
-8. **Forgetting to bump version before CWS upload** -- API rejects same-or-lower version.
-9. **No privacy policy for permission-using extensions** -- immediate CWS rejection.
-10. **Declaring permissions you do not use** -- reviewers flag unused permissions.
+1. **Committing `.pem` files** — exposes signing key; attacker can publish malicious updates.
+2. **Using `<all_urls>` when `activeTab` suffices** — triggers manual review, erodes user trust.
+3. **Minifying without source maps in dev** — can't debug CWS rejection feedback.
+4. **Hardcoding version in multiple places** — `manifest.json` = single source; derive others.
+5. **Skipping manifest validation in CI** — broken manifests waste CWS review cycles.
+6. **Uploading `node_modules` in ZIP** — massively inflated, guaranteed slow review.
+7. **Dynamic code evaluation** — MV3 CSP blocks eval + dynamic code; extension won't load.
+8. **Forgetting version bump before CWS upload** — API rejects same-or-lower version.
+9. **No privacy policy for permission-using extensions** — immediate rejection.
+10. **Declaring unused permissions** — reviewers flag them.
 
 ---
 
 ## Troubleshooting
 
 ### "Invalid package" on CWS upload
-- Ensure `manifest.json` is at the ZIP root, not nested in a subdirectory.
+- Ensure `manifest.json` at ZIP root, not nested.
 - Validate JSON syntax: `python3 -m json.tool manifest.json`.
 - Confirm `manifest_version` is `3`.
 
@@ -827,18 +811,18 @@ Chrome downloads and installs the new CRX.
 - Check for high-risk permissions (`debugger`, `cookies`, broad host patterns).
 - Ensure no obfuscated code (minified is fine if readable patterns remain).
 - Verify privacy policy URL resolves and covers declared data types.
-- Check the developer dashboard for specific rejection feedback.
+- Check developer dashboard for specific rejection feedback.
 
 ### Version rejected by CWS API
-- Published version must be strictly less than uploaded version.
-- Use the version check script above before uploading.
-- If testing, use the `.build` segment (e.g., `1.0.0.1`, `1.0.0.2`).
+- Published version must be < uploaded version.
+- Use version check script above before uploading.
+- If testing, use `.build` segment (e.g., `1.0.0.1`, `1.0.0.2`).
 
 ### Self-hosted update not applying
-- Verify `update_url` in manifest points to a reachable XML file.
-- Confirm XML `version` attribute is higher than the installed version.
-- Check that `appid` matches the extension's actual ID.
-- Ensure the CRX file at `codebase` URL is downloadable and correctly signed.
+- Verify `update_url` in manifest points to reachable XML file.
+- Confirm XML `version` > installed version.
+- Check `appid` matches extension's actual ID.
+- Ensure CRX file at `codebase` URL is downloadable and correctly signed.
 
 ---
 
