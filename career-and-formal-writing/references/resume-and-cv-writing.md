@@ -58,6 +58,8 @@ The applicant tracking system parses your file before a human reads it. Failure 
 - **Non-standard fonts** can render as glyph junk. Use Arial, Calibri, Helvetica, or Georgia at 10-12pt.
 - **PDF vs DOCX** — both work if text-selectable. Image-only PDFs (scanned, exported from design tools) fail the parse. Test with copy-paste.
 
+For per-vendor parsing rules (Workday, Greenhouse, Lever, Taleo), keyword density strategy, scoring tools (Jobscan, Resume Worded, Teal), and service/hourly worker ATS guidance, load `references/ats-resume-optimization.md` from this hub.
+
 ### 4. Role tailoring
 
 A single master resume cannot win across every application. For each target role: (a) reorder bullets so the top 3 in each job align with the target JD's stated priorities, (b) swap in keywords from the JD into the skills section, (c) rewrite the summary in the language the JD uses. Tailoring is the single highest-impact move; recruiter studies put callback-rate lift at 30-60% for tailored vs generic.

@@ -27,11 +27,12 @@ whenNotToUse:
   - "decide which NEW skills to build for a domain (use concept-family-explorer)"
   - "structural lint of a single skill (use meta-validate.mjs directly)"
   - "optimize a prompt (use prompt-deep-optimizer / phe)"
-version: 1.2.0
+version: 1.3.0
 category: meta
-updated: 2026-06-11
+updated: 2026-06-28
 metadata:
   changelog:
+    - "2026-06-28 v1.2.0->v1.3.0 — Phase 3 step 9 + Phase 4 step 1 gate: regenerate the consolidated SKILLS-INDEX (node gen-skills-index.mjs) after the tree mutates, then --check it in VERIFY, so the cross-family index never drifts after a rebalance"
     - "2026-06-11 v1.0.0->v1.1.0 — canonical-contract adoption: tiering-aware folds (tier.mjs
       demote, never raw rm), full crossroute re-file sequence, snapshot+rollback, tree-health
       telemetry, contract exit statuses, two-tier desc cap (sko Pass M); concept-tree crosswalk
@@ -176,6 +177,10 @@ the canonical contract:
 8. Add new hub ids to `SELECTED_SKILLS` in
    `~/Documents/GitHub/mdb-context-hub/scripts/skill-pack.config.mjs`, then `npm run sync:skills`
    (regenerates the live registry; review-required — different repo, user commits).
+9. **Refresh the consolidated index.** The tree just changed (folds, re-files, new hubs/families),
+   so the cross-family `SKILLS-INDEX.{json,md}` is stale. Run
+   `node ~/.claude/skill-consolidation/gen-skills-index.mjs` to regenerate it from the new tree
+   state. Non-blocking: on error, note `index: skipped (<reason>)` and continue.
 
 ## Phase 4 — VERIFY
 
@@ -184,6 +189,9 @@ the canonical contract:
    Re-capture the Phase-1 tree-health numbers and report the delta — that delta is the rebalance's
    evidence. Append the run's tree-health rows to `optimizer-telemetry.jsonl`
    (`artifact_type: "skill-tree"`, `pass: "tree-health"`) per the canonical telemetry schema.
+   Then gate index freshness: `node ~/.claude/skill-consolidation/gen-skills-index.mjs --check`
+   must exit 0 (Phase 3 step 9 regenerated it); a `STALE` exit means the regen did not run — re-run
+   it without `--check` and re-gate.
 2. **Scored routing-probe replay** (the documented gate link-checks alone don't satisfy): replay
    the touched family's persisted CQ corpus (`~/.claude/skill-consolidation/evals/<family>.cq.md`)
    plus 1 new probe this run — dispatch each as a fresh-context subagent question with NO hint

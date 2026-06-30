@@ -13,6 +13,7 @@ description: >-
   regulation generalities (Basel, SR 11-7, BCBS 239) -> fsi-banking-
   regulatory-context; generic big-bank IT archetype -> big-bank-IT;
   TPRM/procurement as a discipline -> enterprise-vendor-management-and-tprm;
+  Goldman Sachs account -> goldman-sachs-account-intelligence;
   MongoDB/Atlas config -> mongodb-* hubs; EBR/QBR/POV mechanics -> tam-
   operations; a Chase retail/depositor/FDIC question -> personal-banking.
 version: 1.1.0

@@ -13,8 +13,8 @@ description: >-
   stay here); machine-generated or DSPy-compiled prompts; skill files → skill-optimizer; prose
   documents → ddo / document-critique.
 category: developer
-version: 2.4.0
-updated: 2026-06-15
+version: 2.6.0
+updated: 2026-06-23
 whenToUse:
   - "optimize this system prompt"
   - "my production prompt produces inconsistent output"
@@ -23,6 +23,9 @@ whenToUse:
   - "prompt deep optimizer"
   - "audit a prompt for injection vulnerabilities"
   - "what optimization algorithm should I use for this prompt"
+  - "optimize this prompt/policy/config against eval cases with must-pass checks"
+  - "run a champion-challenger held-out loop on this system prompt"
+  - "improve this support-assistant prompt and promote only if it beats the holdout"
 keywords:
   - prompt optimization
   - system prompt
@@ -35,6 +38,12 @@ keywords:
   - MIPROv2
   - prompt injection
   - intent preservation
+  - champion-challenger
+  - held-out eval
+  - holdout
+  - must-pass checks
+  - empirical prompt optimization
+  - policy optimization
 related_skills:
   - skill-optimizer
   - prompt-helper-optimizer
@@ -42,6 +51,8 @@ related_skills:
   - ph
 metadata:
   changelog: |
+    2026-06-23 v2.5.0->2.6.0 — Empirical mode is now default-on (gated auto-promote + persist) per the new § Default policy in ~/.claude/skill-consolidation/champion-challenger.md: when eval cases + must-pass checks are present the champion–challenger loop runs without a trigger, auto-promotes through the unchanged gate (holdout margin + must-pass veto), and persists the champion across runs (prior champion archived for rollback). Mandatory holdout rotation / promotion-budget / gate-noise to prevent reusable-holdout overfitting. Honest guarantee = monotonically non-decreasing on the holdout, not "better every run". Opt out: --dry-run/--no-promote/--structural-only. Loud no-eval fallback. Per operator request.
+    2026-06-23 v2.4.0->2.5.0 — added Empirical mode (champion–challenger held-out loop): a data-driven alternative/companion to the structural audit loop for a prompt, policy, or config — persist champion+score, working set, untouched holdout, must-pass checks, [budget], target; one change per round driven by a working-set failure; promote challenger only if it beats champion on holdout by ≥[margin] without weakening any must-pass check (must-pass = veto); stop at target/budget/no-progress; return winner, scores, experiment log, remaining failures. Full mechanics in references/champion-challenger.md; wired into Algorithm awareness (relationship to Pass P), Invocation (--empirical/--eval/--holdout/--must-pass), whenToUse, keywords. Description left at 975-char cap (trigger surfaced via whenToUse/keywords). Per operator request 2026-06-23.
     2026-06-15 v2.3.0->2.4.0 — sko Pass J High fixed: body 11,255->6,595 tok (under the 10k hard ceiling, at the 6k soft budget); Step 2 per-pass A-P definitions extracted to references/audit-passes.md and Step 6 verify/output mechanics to references/output-spec.md (9-item output-order checklist kept inline). Pass B Medium: description now states "16-pass audit in 5 parallel bundles" and the prose-doc SKIP routes to "ddo / document-critique". Pass H 10/10 pos, 1/10 neg (predicted). I/K/L clean; em-dash density Low (skipped).
     2026-06-11 v2.3.0 — 2026-06-11 family-audit implementation: worked examples extracted to references/worked-examples.md; blind re-audit gate (6a0) on CLEAN exits; 5-field intent checklist with finding-justified deltas (6a, Step 4, glossary); behavioral smoke test (6a2) + fourth success criterion; cross-model gate stub (6a.5, default OFF); small-artifact profile (<~600 tokens, 3 merged groups, cap 3); Step 5 exit condition 7 (--budget-minutes / BUDGET_EXHAUSTED) + best-of-pool delivery on non-clean exits; convergence_check.py cited for edit distance (fabricated percentages removed); subagent timeout language fixed to error/empty-result; Pass O skip-row Medium conditioned on absent self-check; GEPA row corrected (Agrawal et al. 2025, arXiv:2507.19457) + canonical KB pointer; variant registration (6b item 9) + telemetry citing line; composed-artifact scoping in Step 1; ~600-token /ph tiebreaker + /pdo command shim + --max-iter outer-loop support; duplicate metadata.version field removed (top-level version is the single source of truth)
     2026-05-31 v2.2.1 — patch release; changelog entry reconstructed 2026-06-11 (the original v2.2.1 line was missing — see audit rec progressive-disclosure-split)
@@ -59,7 +70,7 @@ Iteratively optimizes prompts in code that run repeatedly — system prompts, ag
 
 **Key distinction:** prompt in code = production software. Must be correct, unambiguous, efficient, reliable under repeated execution with variable inputs. Runs multi-pass audit across 16 domains in 5 parallel-dispatch bundles, applies every Medium+ fix, loops until zero Critical/High/Medium findings or convergence proven.
 
-**Algorithm awareness:** Structural-only optimization (audit → rewrite → re-audit). When training data exists, final output includes Algorithm recommendation from Pass P via Step 6c decision table, or `structural-only` verdict when no training data.
+**Algorithm awareness:** Structural-only optimization (audit → rewrite → re-audit). When training data exists, final output includes Algorithm recommendation from Pass P via Step 6c decision table, or `structural-only` verdict when no training data. When eval cases plus must-pass checks exist, **Empirical mode** (§ Empirical mode) is the built-in harness that runs a single-edit champion–challenger climb gated by an untouched holdout; Pass P still names the heavier learned algorithm (APE/OPRO/…) when one fits.
 
 **Success criteria:**
 1. Final rewrite passes all applicable passes at zero Critical/High/Medium, OR documented convergence/oscillation/cap exit fires (Step 5).
@@ -96,6 +107,7 @@ If prompt is one-off/exploratory AND under ~600 tokens, stop: "This prompt is be
 - Inline: paste prompt after `/pdo`
 - File: `/pdo path/to/file.md` or `/pdo src/prompts/system.txt`
 - Variable: `/pdo` then describe where prompt lives
+- Empirical mode (default-on): when eval cases + must-pass checks are present (`--eval=<path>`, `--holdout=<path>`, `--must-pass=<path>`, optional `--margin=<n>`/`--target=<n>`), the champion–challenger held-out loop (§ Empirical mode) runs automatically, auto-promotes through the gate, and persists the champion across runs. Opt out: `--dry-run`/`--no-promote` (loop, no persist) or `--structural-only` (skip empirical). Honest guarantee: monotonically non-decreasing on the holdout, not "better every run" — see § Default policy in the contract.
 
 If no prompt provided, ask once: "Paste the prompt to optimize, or give me a file path."
 
@@ -351,6 +363,32 @@ Run full verify-and-output on every invocation. Detailed gate mechanics — **6a
 9. **Variant registration** (library prompts only; skipped under orchestrator that owns save stage).
 
 After output, append telemetry rows per canonical Telemetry schema in `~/.claude/skill-consolidation/convergence-and-severity.md` (one JSONL row per executed pass; fail-safe append), and flag any iteration ≥ 3 that closed zero Medium+ findings as wasted.
+
+---
+
+## Empirical mode — champion–challenger held-out loop
+
+Runs **by default** whenever the artifact ships with **eval cases** (labeled inputs + expected behavior) and **must-pass checks** — the gated promotion auto-runs and persists (no `--empirical` trigger; opt out with `--dry-run`/`--structural-only`). With no eval cases + must-pass checks it falls back to the structural loop and says so (`cannot auto-improve`). Optimizes a **prompt, policy, or configuration** (a support-assistant system prompt is one case) by data-driven hill-climbing instead of the structural audit loop (Steps 2–5). Composable: run the structural loop first for a clean champion, then this loop to climb on real cases. Full mechanics — split discipline, scoring, noise handling, anti-patterns, worked example — in `references/champion-challenger.md` (the prompt-specific specialization of the cross-optimizer contract `~/.claude/skill-consolidation/champion-challenger.md`); read it before running this mode.
+
+**Persist (the run's state):**
+- **champion** — current best artifact, plus its **score** on the holdout.
+- **working set** — cases used to *find failures and drive edits*; the only split you may inspect when choosing a change.
+- **holdout** — untouched cases, *never* read to pick an edit, only to gate promotion. Selecting an edit off the holdout is the one fatal error — it overfits and the reported gain evaporates in production.
+- **must-pass checks** — hard binary invariants (safety refusals, output schema/format, required disclaimers) that may never regress.
+- **[budget]** — round cap and/or wall-clock/cost, per the Budget contract in `~/.claude/skill-consolidation/convergence-and-severity.md`.
+- **target** — score that ends the run early when reached.
+
+**Each round (one change only):**
+1. Score the champion on the working set; collect failures.
+2. Pick **one** recorded failure; make **one** targeted change → challenger. (One variable per round so every promotion is attributable.)
+3. Run must-pass checks, then score the challenger on the **holdout**.
+4. **Promotion gate** — promote the challenger to champion **iff** it beats the champion on the holdout by **≥ [margin]** AND weakens **no** must-pass check. `[margin]` guards against eval noise; a must-pass regression is a veto that overrides any holdout gain. Otherwise discard the challenger, keep the champion, and log why.
+
+Only the champion carries forward, so the climb is monotonic on the holdout — it can't drift backward.
+
+**Stop on any:** target reached · budget exhausted · **no progress** (K rounds with no promotion, default K = 3).
+
+**Return:** winner (final champion) · scores (champion + every challenger, holdout + must-pass) · experiment log (per round: failure addressed → change made → holdout Δ → promote/reject + reason) · remaining failures (open on working + holdout — never report a winner as done while failures remain unlisted).
 
 ---
 

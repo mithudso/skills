@@ -6,8 +6,8 @@ description: >
   TRIGGER: "review this doc", "critique this spec", "is this good enough to ship", "fact-check", "clean up generator artifacts", "second pair of eyes", "keep going until no findings remain", "make this sound human", "audit this KB article", "validate this runbook".
   SKIP: writing or drafting a new document from scratch (use writing-expert); review target is source code not prose (use software-engineering-patterns); document is a pure machine-readable artifact (YAML/JSON/CSV) with no prose claims; document is under ~10 lines.
 origin: local
-version: 5.1.0
-updated: "2026-06-11"
+version: 5.3.0
+updated: "2026-06-23"
 category: developer
 tags: [document-review, critique, fact-check, runbook, RFC, hallucination-guard, anti-ai-ism, voice]
 related_skills:
@@ -285,6 +285,19 @@ At the end of the run, append one telemetry row per executed pass per the canoni
 **Fragment mode:** if the document is a fragment (missing persona, explicit task, or output contract), ask once: "Is the surrounding prompt assumed to provide the persona/output contract?" If yes, suppress Passes 1, 4, 8 on the missing elements and prefix findings `[fragment]`. In non-interactive mode, default to full mode and log it.
 
 **Truncated document:** flag at Pass 1 as **major**: "Document appears truncated — findings limited to visible content." Proceed on visible content.
+
+---
+
+## Empirical Mode — Champion–Challenger Held-Out Loop
+
+Data-driven companion to the structural Convergence Loop (above). **On by default** when the document ships with an **eval set** (reader questions, a scoring rubric, or readability targets) plus **must-pass checks**: the gated promotion auto-runs and persists the champion across runs — no trigger; opt out with `--dry-run`/`--structural-only`. With no eval set + must-pass it falls back to the multipass critique and says so (`cannot auto-improve`). Mechanics — persisted state, split discipline, one-change-per-round, margin-gated promotion + must-pass veto, stop conditions, output — are the shared contract `~/.claude/skill-consolidation/champion-challenger.md` (**cite, don't restate**). Compose: run the multipass critique first for a clean champion, then climb on real reader data.
+
+document-critique calibration:
+
+- **Score** = rubric score (LLM-as-judge) or a readability metric on a **held-out** set of reader questions/sections.
+- **Must-pass (veto)** = every factual claim still source-backed (Pass 11.5), required sections present, reading level ≤ the stated ceiling — any regression vetoes promotion regardless of rubric gain.
+- **Eval surface** = a held-out reader-question set / reviewer rubric that never drives an edit, only gates promotion.
+- **One change per round** (one section, one claim, one structural move) so each promotion is attributable; the held-out set is never read to choose the edit.
 
 ---
 

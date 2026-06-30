@@ -10,7 +10,7 @@ description: >-
   & affect (emotion regulation, emotional intelligence/labor); performance & resilience (growth
   mindset, grit, flow, self-efficacy, burnout); personality (Big Five, HEXACO, MBTI critique, Dark
   Triad); moral psychology. SKIP: customer-facing comms drafting → content-and-marketing-writing /
-  executive-comms.
+  executive-comms. SKIP: clinical PD / ADHD / autism depth → psychology.
 name: applied-psychology
 ---
 # Applied Human Psychology (hub)

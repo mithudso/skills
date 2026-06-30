@@ -1,11 +1,11 @@
 ---
 name: legal
-version: "1.1.0"
+version: "1.3.0"
 updated: "2026-06-22"
 category: legal
-model: claude-opus-4-8
-effort: high
-description: "Hub for NC criminal law, drug law, criminal defense, drug rehabilitation, parole/probation, and bail/bond; routes to spokes. Educational, NOT legal or attorney advice (as of 2026). TRIGGER: NC criminal charges or arrest; drug schedules (GS Ch.90); bail/bond/pretrial release (GS 15A-531-547); NC criminal defense (indigent defense, open-file discovery, plea); structured sentencing; NC parole/probation/post-release supervision; NC drug rehabilitation, MAT, harm reduction, naloxone, syringe exchange; 42 CFR Part 2; Good Samaritan overdose immunity; bond forfeiture, bail bondsman licensure. SKIP: family/estate/civil/tax/immigration/contract law → consult a licensed NC attorney; consumer debt → consumer-credit-and-debt; NC business/nonprofit → venture-business / venture-nonprofit-cause; NC real estate → venture-business (refs/venture-nc-real-estate-law.md)."
+model: claude-sonnet-4-6
+effort: medium
+description: "Hub for NC criminal law, drug law, criminal defense, rehabilitation, parole/probation, bail/bond, and recording laws; routes to spokes. Educational, NOT legal or attorney advice (as of 2026). TRIGGER: NC criminal charges or arrest; drug schedules (GS Ch.90); bail/bond/pretrial release (GS 15A-531-547); NC criminal defense (indigent defense, open-file discovery, plea); structured sentencing; NC parole/probation/post-release supervision; NC drug rehabilitation, MAT, harm reduction, naloxone, syringe exchange; 42 CFR Part 2; Good Samaritan overdose immunity; bond forfeiture, bail bondsman licensure; NC recording laws, one-party consent, GS 15A-287, recording police NC, wiretapping NC. SKIP: family/estate/civil/tax/immigration/contract law → consult a licensed NC attorney; consumer debt → consumer-credit-and-debt; NC business/nonprofit → venture-business / venture-nonprofit-cause; NC real estate → venture-business (references/venture-nc-real-estate-law.md)."
 tags:
   - north-carolina
   - criminal-law
@@ -54,9 +54,11 @@ related_skills:
   - nc-criminal-defense
   - nc-drug-rehabilitation-treatment
   - nc-parole-probation
+  - nc-recording-laws
   - consumer-credit-and-debt
 metadata:
   changelog:
+    - "2026-06-22 sko v1.2.0->v1.3.0 — 2 Medium: aligned drug-treatment-court (GS 7A-790) & involuntary-SUD-commitment (GS 122C-281) cites to spoke; model/effort opus/high->sonnet/medium (routing hub, light judgment); refs/->references/. Pass H 10/10 pos predicted."
     - "2026-06-22 sko v1.0.0->v1.1.0 — 4 Medium fixes: added model/effort (Step 4.6), corrected venture-nc-* SKIP targets to hub-aware form, removed duplicate ASCII domain-map tree, fixed category custom->legal. Pass H 10/10 pos, 0/10 neg (predicted)."
 ---
 # NC Legal (hub)
@@ -76,8 +78,9 @@ Front door for **North Carolina criminal law, drug law, defense, rehabilitation,
 | Spoke | Owns | Activate when |
 |---|---|---|
 | `nc-criminal-defense` | Arrest/charge process, rights, plea, trial, Alford plea, expungement, NC criminal procedure (GS 15A), 4th/5th/6th Amendment | User faces NC criminal charge or asks about defense process |
-| `nc-drug-rehabilitation-treatment` | MAT/OTP regulation (42 CFR Part 8), buprenorphine, SAMHSA, NC DHHS SUD licensing, drug court (GS 7A-272), involuntary SUD commitment (GS 122C-280), 42 CFR Part 2 confidentiality, Medicaid/LME-MCO, peer support | User asks about NC addiction treatment, MAT, or SUD system |
+| `nc-drug-rehabilitation-treatment` | MAT/OTP regulation (42 CFR Part 8), buprenorphine, SAMHSA, NC DHHS SUD licensing, drug treatment court (GS 7A-790), involuntary SUD commitment (GS 122C-281), 42 CFR Part 2 confidentiality, Medicaid/LME-MCO, peer support | User asks about NC addiction treatment, MAT, or SUD system |
 | `nc-parole-probation` | NC probation conditions/violation/revocation, parole, post-release supervision (PRS), DAC/OPUS, electronic monitoring, swift-certain sanctions, reentry | User on or facing NC supervision |
+| `nc-recording-laws` | One-party consent (GS 15A-287), criminal/civil penalties, recording police (First Amendment/Sharpe), attorney-client recording, AI/Plaud devices, video/voyeurism (GS 14-202), body cameras, ECPA, courthouse rules | User asks about NC recording laws, wiretapping, surveillance, or audio/video consent |
 
 ### Reference sub-files
 

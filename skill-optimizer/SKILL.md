@@ -21,9 +21,9 @@ whenToUse:
   - "wire up peer deferral references for this skill"
   - "structural-only skill pass, skip the content rewrite"
   - "recommend which model and effort this skill should run under"
-version: 2.9.0
+version: 2.12.0
 category: meta
-updated: 2026-06-21
+updated: 2026-06-28
 model: claude-opus-4-8
 effort: xhigh
 triggers:
@@ -57,6 +57,9 @@ related_skills:
   - skill-creator
 metadata:
   changelog:
+    - "2026-06-28 sko v2.11.0->v2.12.0: added Step 7.7 — after the Step 7.5 compress, regenerate the consolidated skill-library index (node ~/.claude/skill-consolidation/gen-skills-index.mjs) and gate it with --check, so SKILLS-INDEX.{json,md} never drifts after an optimize run; non-blocking, outcome reported in Step 8. Per operator request"
+    - "2026-06-23 sko v2.10.0->v2.11.0: Empirical mode now default-on (gated auto-promote + persist) per § Default policy in the shared contract — when an eval corpus + must-pass invariants are present the gate auto-runs and persists the champion across runs (prior archived for rollback); mandatory holdout rotation/budget/noise to prevent reusable-holdout overfitting; honest guarantee = monotonically non-decreasing on the held-out Pass H split, not 'better every run'; opt out --dry-run/--no-promote/--structural-only. Per operator request"
+    - "2026-06-23 sko v2.9.0->v2.10.0: added Empirical mode (champion–challenger held-out loop) section citing the new shared contract ~/.claude/skill-consolidation/champion-challenger.md — formalizes the promotion gate (holdout margin + must-pass veto, one change/round) around the existing Pass H trigger-accuracy eval; calibration names score=Pass H held-out accuracy, must-pass=Pass I/M/G+L invariants. Per operator request"
     - "2026-06-21 sko v2.8.0->v2.9.0: added Step 7.5 caveman-compress pass — compresses SKILL.md after hub sync to reduce per-invocation tokens; --no-compress flag; skips hub-category skills; compress outcome in Step 8 report"
     - "2026-06-21 sko v2.7.0->v2.8.0: added Step 4.6 model/effort recommendation — best-guesses run-under model+effort by cognitive-load tier and writes advisory `model`/`effort` frontmatter keys; Pass G validates them; `--model`/`--effort` override; runs in --meta"
     - "2026-06-15 sko v2.6.0->v2.7.0: Pass H 10/10 pos, 10/10 neg (predicted); fixed 1 High (Pass J: extracted Pass A-O defs to references/passes.md, body ~14k->~7.2k tok) + 1 Medium (Pass K em-dash density); 0 banned terms"
@@ -277,6 +280,16 @@ After Step 7 sync, run `/caveman-compress` on the target `SKILL.md` to reduce pe
 - If `caveman:caveman-compress` is unavailable or returns an error, record `compress: skipped (unavailable or failed)` and continue — this step is non-blocking; its failure does not affect Step 7 sync or Step 8 report accuracy.
 - Record outcome in Step 8 report: `compress: done (n → m lines)` or `compress: skipped (<reason>)`.
 
+### Step 7.7 — Refresh the skill-library index (SKILLS-INDEX)
+
+This run changed the target's `description`/`triggers`/`version` (and Step 7.5 changed its byte size), so the consolidated cross-family index at `~/.claude/skill-consolidation/SKILLS-INDEX.{json,md}` is now stale. This is the post-completion hook that keeps that index fresh:
+
+- **Regenerate:** run `node ~/.claude/skill-consolidation/gen-skills-index.mjs`. It re-reads every `SKILL.md` (bounded parallel pass) and rewrites both `SKILLS-INDEX.json` and `SKILLS-INDEX.md`.
+- **Gate:** then run `node ~/.claude/skill-consolidation/gen-skills-index.mjs --check`; it must exit 0. A non-zero (`STALE`) exit means the regenerate did not land — re-run the regenerate once and re-gate.
+- **Runs in `--meta` and under `--no-sync`** — the index is a local artifact independent of the hub, and `--meta` still changes frontmatter/version, so a refresh is always warranted. It is skipped only when the generator is absent.
+- **Non-blocking:** if the generator is unavailable or errors, record `index: skipped (<reason>)` and continue — this step never affects the Step 7 sync or the Step 8 report's accuracy.
+- Record outcome in Step 8 report: `index: refreshed (N skills)` or `index: skipped (<reason>)`.
+
 ### Step 8 — Report
 
 Output in this exact order:
@@ -317,6 +330,8 @@ When the sync gate withheld the writes, the table carries `sync withheld: N High
 
 **Compress outcome** (Step 7.5) — one line: `compress: done (n → m lines)` or `compress: skipped (<reason>)`.
 
+**Index refresh** (Step 7.7) — one line: `index: refreshed (N skills)` or `index: skipped (<reason>)`.
+
 **Model/effort recommendation** (Step 4.6) — one line: `model: <id> · effort: <level> (tier: <matched tier>; <heuristic | caller-pinned>) — <one-sentence rationale>`.
 
 **Snapshot & rollback** — one line with the literal restore command per the contract's pre-write snapshot guardrail: `cp ~/.claude/skill-consolidation/backups/<skill>-<ts>/<filename> <path>`.
@@ -330,6 +345,17 @@ When the sync gate withheld the writes, the table carries `sync withheld: N High
 **Trigger-eval queries used** (collapsed by default; expanded only if caller requests).
 
 If no Medium+ findings exist, say so in one line and skip the rest.
+
+## Empirical mode — champion–challenger held-out loop
+
+skill-optimizer already runs this loop in part: **Pass H** is a 20-query trigger-accuracy eval with a persisted held-out corpus (`~/.claude/skill-consolidation/evals/<skill-id>.eval.jsonl`). Empirical mode names the promotion gate around it explicitly, per the shared contract `~/.claude/skill-consolidation/champion-challenger.md` (**cite, don't restate**). It is **on by default** when an eval corpus + must-pass invariants are present: the gated promotion auto-runs and persists the champion (the optimized skill + its eval state) across runs — no trigger; opt out with `--dry-run`/`--structural-only`.
+
+Calibration:
+
+- **Score** = Pass H trigger accuracy on a **held-out** split of the eval corpus (≥ 9/10 positives, ≤ 1/10 false positives).
+- **Must-pass (veto)** = no Pass I peer-collision regression; description ≤ 1000 chars (Pass M cap); frontmatter parses (Pass G/L). Any regression vetoes promotion regardless of trigger-accuracy gain.
+- **Eval surface** = the persisted eval corpus, with a frozen held-out split that never drives a description/routing edit, only gates promotion.
+- **One change per round** (one description rewrite, one whenToUse phrasing, one SKIP edge) so each promotion is attributable. Never tune the description against the held-out queries — that is exactly the overfitting the eval exists to catch.
 
 ## Constraints
 

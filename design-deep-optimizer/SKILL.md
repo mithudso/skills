@@ -13,8 +13,8 @@ description: >-
   prose (document-critique); code logic (code-deep-optimizer); photographic or AI-generated-image
   critique.
 origin: local
-version: 1.0.1
-updated: "2026-06-16"
+version: 1.2.0
+updated: "2026-06-23"
 category: developer
 tags: [design-critique, optimizer, convergence-loop, ui-ux, accessibility, visual-design, verify-gate]
 related_skills:
@@ -40,6 +40,8 @@ whenNotToUse:
   - "aesthetic critique of a photograph or AI-generated image (out of scope)"
 metadata:
   changelog: |
+    2026-06-23 v1.1.0->1.2.0 — Empirical mode now default-on (gated auto-promote + persist) per § Default policy in the shared contract — for code-backed designs with held-out metrics + must-pass checks the gate auto-runs and persists the champion across runs (prior archived for rollback); mandatory holdout rotation/budget/noise vs reusable-holdout overfitting; honest guarantee = monotonically non-decreasing on the held-out metric, not "better every run"; opt out --dry-run/--no-promote/--structural-only; image/URL/spec inputs stay critique-only. Per operator request.
+    2026-06-23 v1.0.1->1.1.0 — added Empirical mode (champion–challenger held-out loop) section citing the new shared contract ~/.claude/skill-consolidation/champion-challenger.md; calibration: score = held-out a11y/aesthetic metric (axe pass rate, contrast pass count, computational-aesthetic score), must-pass veto = WCAG AA contrast on all text + no axe criticals + brand-token parity. Per operator request.
     2026-06-16 v1.0.0 — created via concept-family-explorer Phase B + skill-creator. Orchestrates
     the 6 visual-design knowledge spokes built in the same run. Input-adaptive: auto-fix
     convergence loop for code-backed designs, critique-only for image/URL/spec. Pending
@@ -229,6 +231,17 @@ Inherited from the contract, design-specialized:
 - **Pre-write snapshot (code mode)** to `~/.claude/skill-consolidation/backups/<target>-<ts>/` plus
   `<file>.iter<N>` copies before each iteration's writes; the report ends with the literal restore
   command.
+
+## Empirical mode — champion–challenger held-out loop
+
+Data-driven companion to the structural convergence loop (§ Convergence). **On by default** for code-backed designs that ship with measurable design metrics on a **held-out** set of screens/states plus **must-pass checks**: the gated promotion auto-runs and persists the champion design across runs — no trigger; opt out with `--dry-run`/`--structural-only`. Image/URL/spec inputs are critique-only with no apply loop, so empirical mode stays off and says so (`cannot auto-improve`). Mechanics — persisted state, split discipline, one-change-per-round, margin-gated promotion + must-pass veto, stop conditions, output — are the shared contract `~/.claude/skill-consolidation/champion-challenger.md` (**cite, don't restate**). The § Verify gate (re-render + contrast + axe) already supplies the measurement; this names the promotion gate around it.
+
+Calibration:
+
+- **Score** = a measured a11y / aesthetic metric (axe pass rate, contrast pass count, computational-aesthetic score) on a **held-out** set of screens / viewport states / component instances.
+- **Must-pass (veto)** = WCAG AA contrast on all text; no axe criticals; brand-token parity. Any regression vetoes promotion regardless of the aesthetic-score gain.
+- **Eval surface** = held-out screens / viewport states that never drive an edit, only gate promotion.
+- **One change per round** (one token, one component, one layout move) so each promotion is attributable. Image/URL/spec inputs are critique-only and have no apply loop — empirical mode needs a code-backed, re-renderable design.
 
 ## Report format
 

@@ -12,7 +12,9 @@ description: >-
   residency, segregation-of-duties; FSI cloud adoption, proof burden (SOC
   2/SIG/CAIQ), build-vs-buy. SKIP: CONSUMER finance/banking -> consumer-finance,
   personal-banking; MongoDB compliance config -> mongodb-compliance;
-  third-party-risk/DORA -> enterprise-vendor-management-and-tprm; buying-committee
+  third-party-risk/DORA -> enterprise-vendor-management-and-tprm; GenAI/AI
+  model-risk governance (SR 11-7/SR 26-2, NIST AI RMF, EU AI Act for an LLM
+  deployment) -> bank-genai-model-risk-governance; buying-committee
   psychology -> applied-psychology; trading/markets -> trading-and-investing.
 version: 1.1.0
 updated: 2026-06-18

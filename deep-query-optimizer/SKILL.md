@@ -40,6 +40,9 @@ exists), `/dqo` applies fixes and verifies them against real plans; when it is *
 | `--annotate` | Emit findings as `-- dqo: [SEV] — …` comments above each clause instead of rewriting; write to `<file>.annotated.sql`; never touch the original. |
 | `--report` | Write the full findings + before/after plans to `<file>.dqo-report.md`. |
 | `--no-verify` | Skip EXPLAIN even if a connection exists (force critique-only). |
+| `--empirical` | Force the champion–challenger held-out loop (§ Empirical mode); already default-on when a connection + held-out parameter sets + must-pass checks are present. |
+| `--dry-run` / `--no-promote` | Run the empirical loop but report the would-be promotion without persisting the champion query. |
+| `--structural-only` | Skip empirical mode; run only the structural convergence loop. |
 
 `--annotate` and `--read-only` never modify the original and run exactly one iteration.
 
@@ -114,6 +117,17 @@ Optional `--cross-model` exit gate per `cross-model-gate.md`.
 3. **Final rewritten query** (in place / printed).
 4. **Recommended indexes** — `CREATE INDEX` DDL block, with the rationale (which predicate/sort it serves) and a note to test on non-prod first.
 5. **Before/after plan** summary when connected.
+
+## Empirical mode — champion–challenger held-out loop
+
+Data-driven companion to the structural convergence loop (Steps 3–6). **On by default** when you can run the query against representative data with **held-out parameter sets** plus **must-pass checks**: the gated promotion auto-runs and persists the champion query across runs — no trigger; opt out with `--dry-run`/`--structural-only`. Without a connection / eval params it falls back to the structural loop and says so (`cannot auto-improve`). Mechanics — persisted state, split discipline, one-change-per-round, margin-gated promotion + must-pass veto, stop conditions, output — are the shared contract `~/.claude/skill-consolidation/champion-challenger.md` (**cite, don't restate**). Step 5 verify (EXPLAIN ANALYZE + result-set equivalence) already supplies the measurement; this just names the promotion gate around it.
+
+Calibration:
+
+- **Score** = measured plan cost / runtime (EXPLAIN ANALYZE) on a **held-out** set of parameter bindings.
+- **Must-pass (veto)** = result set byte-identical to the baseline query; no full-scan or cost regression on the reserved params. Any regression vetoes promotion regardless of the median-runtime gain.
+- **Eval surface** = representative parameter bindings run against a copy/replica; the held-out bindings never drive a rewrite, only gate promotion.
+- **One rewrite per round** (one predicate, one index, one join reorder) so each promotion is attributable. Always measure on a copy/replica, never prod.
 
 ## Routing & deferral
 

@@ -1,7 +1,7 @@
 ---
 name: ai-rag-retrieval
 description: >-
-  RAG & retrieval sub-hub (ai-agent family). TRIGGER: Retrieval-Augmented Generation architecture (chunking, embeddings, hybrid search, reranking, query transformation, evaluation); advanced RAG patterns (self-RAG, corrective, GraphRAG, agentic, adaptive); iterative/multi-step retrieval; AI datastores (vector & graph databases). SKIP: agent orchestration → ai-agents-orchestration; model training/serving → ai-llm-model-layer; MCP/SDK/prompting → ai-mcp-sdk-prompting.
+  RAG & retrieval sub-hub (ai-agent family). TRIGGER: Retrieval-Augmented Generation architecture (chunking, embeddings, hybrid search, reranking, query transformation, evaluation); advanced RAG patterns (self-RAG, corrective, GraphRAG, agentic, adaptive); iterative/multi-step retrieval; AI datastores (vector & graph databases). SKIP: agent orchestration → ai-agents-orchestration; model training/serving → ai-llm-model-layer; MCP/SDK/prompting → ai-mcp-sdk-prompting; RAG prompt-injection/lethal-trifecta defense → rag-prompt-injection-defense; embedding inversion / vector-store leakage → embedding-inversion-threat-model; Atlas Vector Search tenant/PII isolation → atlas-vector-search-pii-isolation.
 origin: local
 ---
 # ai-rag-retrieval

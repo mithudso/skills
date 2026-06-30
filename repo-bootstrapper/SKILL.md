@@ -2,8 +2,8 @@
 name: repo-bootstrapper
 description: "TRIGGER: bootstrap, audit, or bring a repo to mdb-tam standard; create or update CLAUDE.md/AGENTS.md/docs suite; initialize operations infrastructure; generate high_signal_file_index.json or codebase-overview.md. Creates or upgrades any repository to the full mdb-tam standard. Refreshes every meta document the repo carries — CLAUDE.md, AGENTS.md, README.md indices, .github/, .vscode/, .editorconfig, .gitignore, dependabot, CODEOWNERS, issue/PR templates, CI workflows — plus the docs/ suite and operations infrastructure (operations-registry.js, tool-inventory.json, CI drift check, 5-standard external-call audit). SKIP: pure code review or bug fix (use the /code-review command); pure security audit (use security-reviewer); code-pattern extraction without meta-doc work (use repo-pattern-scanner); repos not following mdb-tam conventions."
 origin: local
-version: "5.1.0"
-updated: "2026-06-09"
+version: "5.2.0"
+updated: "2026-06-23"
 tags: [repo, bootstrap, mdb-tam, documentation, meta-docs, operations-registry, claude-md, agents-md, ci, dotfiles]
 keywords: [bootstrap, mdb-tam, CLAUDE.md, AGENTS.md, operations-registry, tool-inventory, docs-suite, audit, ideal-repo, standard-file-manifest]
 related_skills: [software-engineering-patterns, security-review, devops-containers-cicd]
@@ -23,6 +23,7 @@ whenNotToUse:
   - "operator has flagged the repo as read-only"
   - "pure security audit — use security-reviewer"
   - "code-pattern extraction only — use repo-pattern-scanner"
+  - "production-log or runtime-error triage — root-cause a live error and open a remediation PR (use the error-monitor-remediator agent)"
 ---
 
 # Repo Bootstrapper & Standards Maintainer
@@ -44,6 +45,7 @@ Generates and maintains the full mdb-tam file standard for any repository.
 - **Pure code review or bug hunting** — use the `/code-review` command
 - **Pure security audit** — use `security-reviewer`
 - **Code-pattern extraction without meta-doc work** — use `repo-pattern-scanner`
+- **Production-log / runtime-error triage** — review prod logs, root-cause a live error, verify a fix, open a remediation PR → the `error-monitor-remediator` agent (rule book: `docs/error-monitoring-guide.md`). This skill is a static meta-doc/standards maintainer with no telemetry access; it audits whether logging and test docs meet the standard, it does not read production logs or open PRs from runtime errors.
 - **Repo not following mdb-tam conventions** — surface what the standard would require and ask before writing
 - **Read-only or locked repo** — report findings only; do not write any files
 - **No clean working tree** — verify `git status` is clean or operator has acknowledged the risk before writing
@@ -134,7 +136,7 @@ Every repo that meets this standard must have ALL of the following files.
 | `docs/COMPONENTS.md` | All major modules — purpose, API, dependencies |
 | `docs/SECURITY.md` | Threat model, auth, secrets, STRIDE mitigations |
 | `docs/MCP.md` | MCP servers, tools, auth, usage examples |
-| `docs/TESTING.md` | Test strategy, suites, coverage targets, CI gates |
+| `docs/TESTING.md` | Test strategy, suites, coverage targets, CI gates. Coverage target = **meaningful coverage of important and changed/risky paths** with real assertions on behavior and observable effects (including logs per `docs/logging.md`) — explicitly **not a blanket 100% line mandate** (rewards assertion-free coverage-gaming). State the numeric target and CI gate the repo actually enforces. (Writing the tests is code-fix work → route to `code-deep-optimizer` pass T1.) |
 | `README.md` | Project overview, quick start, links to all docs |
 
 ### Reference and Index
@@ -156,7 +158,7 @@ Every repo that meets this standard must have ALL of the following files.
 ### Operational Reference
 | File | Purpose |
 |---|---|
-| `docs/logging.md` | Logging approach, levels, sensitive data rules |
+| `docs/logging.md` | Logging approach, levels, sensitive data rules. Audit that **important code paths emit useful, structured, tested logs** — error/catch branches, every external call (request + outcome), security events, and state transitions. Unlogged error paths and silent failures are a **major** finding; secrets/PII in log output are **blocking**. (Adding the missing logs in code is code-fix work → route to `code-deep-optimizer` pass S5.) |
 | `docs/caching-and-optimization.md` | Cache layers, invalidation, performance patterns |
 | `docs/runbooks/*.md` | One file per recurring operational procedure |
 | `docs/external-calls.md` | Inventory of every external call with logger, test, doc, retry policy |

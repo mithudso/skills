@@ -2,7 +2,7 @@
 name: nc-criminal-defense
 description: >-
   NC criminal law hub — bail/bond, drug law, DWI, juvenile, mental health, DV, sex crimes, procedure, sentencing, expungement. NOT legal advice. TRIGGER: NC bail bond GS 15A-531-545, drug law (trafficking GS 90-95(h), PWIMSD, habitual felon, conditional discharge GS 90-96, marijuana 2026), NC DWI GS 20-138.1 (implied consent, Intox EC-IR II, ignition interlock GS 20-17.8, habitual DWI GS 20-138.5), juvenile justice GS 7B (Raise the Age, YDC), competency GS 15A-1001, NGRI GS 15A-959, domestic violence DVPO GS 50B, sex crimes GS 14-27, SORN, expungement GS 15A-145, collateral consequences, post-conviction MAR GS 15A-1411. SKIP: federal criminal → federal resource; civil/family → consumer-credit-and-debt; NC business → venture-nc-*; probation/parole → nc-parole-probation; SUD/MAT → nc-drug-rehabilitation-treatment.
-version: "1.6.0"
+version: "1.6.1"
 updated: "2026-06-22"
 category: legal
 model: claude-opus-4-8
@@ -146,6 +146,7 @@ metadata:
     - nc-sex-crime-defense
     - nc-sentencing-advocacy
   changelog:
+    - "2026-06-22 sko v1.6.0->v1.6.1 — Medium: reconciled spoke accounting (25 researched refs + 8 planned stubs = 33 metadata.spokes); fixed body 'Remaining spokes (3)'->(8); added missing nc-juvenile-drug-offenses stub row to body. Pass M desc 821<=1000. Pass H 10/10 pos predicted."
     - "2026-06-22 sko v1.5.0->v1.6.0 — concept-family-explorer pass 3: 7 new spokes added (nc-expungement-record-sealing, nc-juvenile-justice, nc-mental-health-defense, nc-post-conviction-relief, nc-collateral-consequences, nc-domestic-violence-defense, nc-sex-crime-defense); description TRIGGER, keywords, whenToUse expanded; nc-juvenile-justice moved to Criminal Procedure section; metadata.spokes updated; spoke count 22->25"
     - "2026-06-22 sko v1.4.0->v1.5.0 — Medium: description TRIGGER expanded with DWI sub-topics (GS 20-138.1, implied consent GS 20-16.2, Intox EC-IR II, civil revocation, ignition interlock GS 20-17.8, habitual DWI GS 20-138.5); 5 DWI keywords added; 8 DWI-specific whenToUse entries added; spoke count corrected 14->18; nc-structured-sentencing description clarified DWI uses GS 20-179 (see nc-dwi-defense)"
     - "2026-06-22 sko v1.3.1->v1.4.0 — High: routing table links added for 9 new drug-law spokes; stale 'Available now: 2 spokes' line updated to accurate count; Medium: description updated with conditional discharge/marijuana/designer drugs triggers; 3 new keywords; 5 new whenToUse entries; nc-drug-rehabilitation-treatment added to SKIP and related_skills; whenNotToUse SUD treatment entry added"
@@ -183,6 +184,7 @@ North Carolina criminal law — bail & bond, drug offenses, procedure, rights, a
 | [nc-federal-csa-vs-nc-law](references/nc-federal-csa-vs-nc-law.md) | Federal CSA vs NC schedules, Federal Analogue Act vs GS 90-89.1, federal prosecution in NC, federal mandatory minimums |
 | nc-search-seizure-drug-cases | 4th Amendment in NC drug cases, suppression motions |
 | nc-good-samaritan-harm-reduction | GS 90-96.2 overdose immunity; for SUD treatment law see nc-drug-rehabilitation-treatment |
+| nc-juvenile-drug-offenses | Drug offenses in the NC juvenile delinquency system (planned stub) |
 
 ### Criminal Procedure & Specialized Defense Spokes
 
@@ -205,7 +207,7 @@ North Carolina criminal law — bail & bond, drug offenses, procedure, rights, a
 | [nc-sex-crime-defense](references/nc-sex-crime-defense.md) | GS 14-27.20–27.36 Article 7B offenses, close-in-age Romeo-Juliet exemption, sex offender registration SORN GS Art. 27A, Adam Walsh/SORNA, residency restrictions, rape shield Rule 412, registration termination petition |
 | nc-sentencing-advocacy | Mitigating factors, sentencing hearings, advocacy |
 
-**Available as researched references (25 spokes):** nc-bail-and-bond, nc-bail-bondsmen-licensure, nc-bond-forfeiture-remission, nc-pretrial-services-reform, nc-controlled-substance-schedules, nc-structured-sentencing, nc-open-file-discovery, nc-indigent-defense, nc-drug-trafficking-thresholds, nc-simple-possession-pwimsd, nc-habitual-felon, nc-drug-treatment-courts, nc-drug-paraphernalia-law, nc-designer-drugs-synthetic-cannabinoids, nc-conditional-discharge-90-96, nc-marijuana-cannabis-status, nc-federal-csa-vs-nc-law, nc-dwi-defense, nc-expungement-record-sealing, nc-juvenile-justice, nc-mental-health-defense, nc-post-conviction-relief, nc-collateral-consequences, nc-domestic-violence-defense, nc-sex-crime-defense. Remaining spokes (3) are planned stubs.
+**Available as researched references (25 spokes):** nc-bail-and-bond, nc-bail-bondsmen-licensure, nc-bond-forfeiture-remission, nc-pretrial-services-reform, nc-controlled-substance-schedules, nc-structured-sentencing, nc-open-file-discovery, nc-indigent-defense, nc-drug-trafficking-thresholds, nc-simple-possession-pwimsd, nc-habitual-felon, nc-drug-treatment-courts, nc-drug-paraphernalia-law, nc-designer-drugs-synthetic-cannabinoids, nc-conditional-discharge-90-96, nc-marijuana-cannabis-status, nc-federal-csa-vs-nc-law, nc-dwi-defense, nc-expungement-record-sealing, nc-juvenile-justice, nc-mental-health-defense, nc-post-conviction-relief, nc-collateral-consequences, nc-domestic-violence-defense, nc-sex-crime-defense. Remaining spokes (8) are planned stubs.
 
 **Cross-hub:** Post-conviction supervision (probation, parole, post-release) → [nc-parole-probation](../nc-parole-probation/SKILL.md). SUD treatment law framework (harm reduction statutes GS 90-96.2, MAT/OTP regulation, 42 CFR Part 2 confidentiality, involuntary commitment) → [nc-drug-rehabilitation-treatment](../nc-drug-rehabilitation-treatment/SKILL.md).
 

@@ -822,6 +822,13 @@ db.articles.aggregate([
 [Source: MongoDB Docs -- Hybrid Search](https://www.mongodb.com/docs/atlas/atlas-vector-search/hybrid-search/)
 [Source: MongoDB Docs -- Vector Search with Full-Text Search](https://www.mongodb.com/docs/atlas/atlas-vector-search/hybrid-search/vector-search-with-full-text-search/)
 
+> **Securing search/AI for regulated (FSI/PII) data:** entitlement-filtering a
+> RAG corpus, tenant/PII isolation, and the encryption-vs-searchable-vector
+> constraint are covered in the `atlas-vector-search-pii-isolation` skill;
+> prompt-injection defense for the LLM layer in `rag-prompt-injection-defense`;
+> why the stored embedding is itself sensitive in `embedding-inversion-threat-model`;
+> and bank model-risk/governance in `bank-genai-model-risk-governance`.
+
 ---
 
 ## 4. Auto Embedding (Voyage AI Integration)
