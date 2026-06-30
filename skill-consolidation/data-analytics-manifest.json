@@ -1,0 +1,624 @@
+{
+  "family": "data-analytics",
+  "builtAt": "2026-05-31T04:52:38.589Z",
+  "hubs": {
+    "da-1-foundations-theory": {
+      "keepExisting": true,
+      "title": "Data Analysis Foundations & Theory (hub)",
+      "spokes": [
+        {
+          "spoke": "da-1-1-definitions-scope",
+          "referenceFile": "references/da-1-1-definitions-scope.md",
+          "routingLine": "Defines what \"data analysis\" means and where its boundaries sit, as the",
+          "srcBytes": 9562
+        },
+        {
+          "spoke": "da-1-1-1-data-analysis-vs-analytics-vs-data",
+          "referenceFile": "references/da-1-1-1-data-analysis-vs-analytics-vs-data.md",
+          "routingLine": "Disambiguates four overlapping terms — data analysis, data analytics, data",
+          "srcBytes": 12160
+        },
+        {
+          "spoke": "da-1-1-2-analysis-vs-synthesis",
+          "referenceFile": "references/da-1-1-2-analysis-vs-synthesis.md",
+          "routingLine": "Distinguishes analysis (breaking a whole into parts to understand it) from",
+          "srcBytes": 8822
+        },
+        {
+          "spoke": "da-1-1-3-quantitative-vs-qualitative-analysis",
+          "referenceFile": "references/da-1-1-3-quantitative-vs-qualitative-analysis.md",
+          "routingLine": "Foundational distinction between quantitative and qualitative analysis as a",
+          "srcBytes": 8083
+        },
+        {
+          "spoke": "da-1-2-measurement-theory",
+          "referenceFile": "references/da-1-2-measurement-theory.md",
+          "routingLine": "Measurement theory as the foundational layer of data analysis — how numbers",
+          "srcBytes": 19137
+        },
+        {
+          "spoke": "da-1-2-1-levels-of-measurement",
+          "referenceFile": "references/da-1-2-1-levels-of-measurement.md",
+          "routingLine": "Stevens' levels (scales) of measurement — nominal, ordinal, interval, ratio —",
+          "srcBytes": 11546
+        },
+        {
+          "spoke": "da-1-2-1-1-nominal",
+          "referenceFile": "references/da-1-2-1-1-nominal.md",
+          "routingLine": "The NOMINAL level of measurement (Stevens 1946) — the lowest scale type, where",
+          "srcBytes": 12375
+        },
+        {
+          "spoke": "da-1-2-1-2-ordinal",
+          "referenceFile": "references/da-1-2-1-2-ordinal.md",
+          "routingLine": "The ordinal level of measurement in Stevens' measurement theory — ranked",
+          "srcBytes": 11206
+        },
+        {
+          "spoke": "da-1-2-1-3-interval",
+          "referenceFile": "references/da-1-2-1-3-interval.md",
+          "routingLine": "The interval level of measurement in Stevens' levels-of-measurement hierarchy",
+          "srcBytes": 9436
+        },
+        {
+          "spoke": "da-1-2-1-4-ratio",
+          "referenceFile": "references/da-1-2-1-4-ratio.md",
+          "routingLine": "The ratio level of measurement in Stevens' levels-of-measurement hierarchy",
+          "srcBytes": 11226
+        },
+        {
+          "spoke": "da-1-2-2-discrete-vs-continuous-variables",
+          "referenceFile": "references/da-1-2-2-discrete-vs-continuous-variables.md",
+          "routingLine": "Distinguishes discrete from continuous variables as a measurement-theory",
+          "srcBytes": 7925
+        },
+        {
+          "spoke": "da-1-2-3-reliability-validity",
+          "referenceFile": "references/da-1-2-3-reliability-validity.md",
+          "routingLine": "Measurement-theory treatment of reliability and validity: whether a measure is",
+          "srcBytes": 15090
+        },
+        {
+          "spoke": "da-1-2-4-operationalization-constructs",
+          "referenceFile": "references/da-1-2-4-operationalization-constructs.md",
+          "routingLine": "The measurement-theory step that turns an abstract idea into something you can",
+          "srcBytes": 16850
+        },
+        {
+          "spoke": "da-1-3-probability-theory",
+          "referenceFile": "references/da-1-3-probability-theory.md",
+          "routingLine": "Foundational probability theory as the mathematical basis for data analysis and",
+          "srcBytes": 12031
+        },
+        {
+          "spoke": "da-1-3-1-random-variables",
+          "referenceFile": "references/da-1-3-1-random-variables.md",
+          "routingLine": "Foundational probability-theory treatment of random variables: the formal",
+          "srcBytes": 12523
+        },
+        {
+          "spoke": "da-1-3-2-probability-mass-density-functions",
+          "referenceFile": "references/da-1-3-2-probability-mass-density-functions.md",
+          "routingLine": "Foundational probability-theory treatment of probability mass functions (PMF)",
+          "srcBytes": 15219
+        },
+        {
+          "spoke": "da-1-3-3-probability-distributions",
+          "referenceFile": "references/da-1-3-3-probability-distributions.md",
+          "routingLine": "Foundational probability-theory treatment of a probability DISTRIBUTION: the",
+          "srcBytes": 13591
+        },
+        {
+          "spoke": "da-1-3-3-1-normal",
+          "referenceFile": "references/da-1-3-3-1-normal.md",
+          "routingLine": "The Normal (Gaussian) distribution as a named continuous probability",
+          "srcBytes": 11225
+        },
+        {
+          "spoke": "da-1-3-3-2-binomial",
+          "referenceFile": "references/da-1-3-3-2-binomial.md",
+          "routingLine": "The binomial distribution as a named probability distribution in data-analysis",
+          "srcBytes": 12002
+        },
+        {
+          "spoke": "da-1-3-3-3-poisson",
+          "referenceFile": "references/da-1-3-3-3-poisson.md",
+          "routingLine": "The Poisson distribution as a named probability distribution in data-analysis",
+          "srcBytes": 10365
+        },
+        {
+          "spoke": "da-1-3-3-4-exponential",
+          "referenceFile": "references/da-1-3-3-4-exponential.md",
+          "routingLine": "The exponential distribution as a named continuous probability distribution in",
+          "srcBytes": 8746
+        },
+        {
+          "spoke": "da-1-3-3-5-uniform",
+          "referenceFile": "references/da-1-3-3-5-uniform.md",
+          "routingLine": "The uniform distribution as a named member of the probability-distribution",
+          "srcBytes": 10149
+        },
+        {
+          "spoke": "da-1-3-4-joint-marginal-conditional-probability",
+          "referenceFile": "references/da-1-3-4-joint-marginal-conditional-probability.md",
+          "routingLine": "Joint, marginal, and conditional probability as the core relationships among",
+          "srcBytes": 11873
+        },
+        {
+          "spoke": "da-1-3-5-bayes-theorem",
+          "referenceFile": "references/da-1-3-5-bayes-theorem.md",
+          "routingLine": "Bayes' theorem as a result of probability theory within Foundations & Theory of",
+          "srcBytes": 9151
+        },
+        {
+          "spoke": "da-1-3-6-law-of-large-numbers",
+          "referenceFile": "references/da-1-3-6-law-of-large-numbers.md",
+          "routingLine": "The Law of Large Numbers (LLN) in probability theory — the result that the",
+          "srcBytes": 12318
+        },
+        {
+          "spoke": "da-1-3-7-central-limit-theorem",
+          "referenceFile": "references/da-1-3-7-central-limit-theorem.md",
+          "routingLine": "The central limit theorem (CLT) as a foundation of probability theory: why the",
+          "srcBytes": 8617
+        },
+        {
+          "spoke": "da-1-3-8-expectation-variance-covariance",
+          "referenceFile": "references/da-1-3-8-expectation-variance-covariance.md",
+          "routingLine": "Probability-theory foundations of expectation (expected value / mean), variance,",
+          "srcBytes": 9995
+        },
+        {
+          "spoke": "da-1-4-statistical-inference-foundations",
+          "referenceFile": "references/da-1-4-statistical-inference-foundations.md",
+          "routingLine": "Foundations of statistical inference as a data-analysis topic: how you reason",
+          "srcBytes": 16898
+        },
+        {
+          "spoke": "da-1-4-1-population-vs-sample",
+          "referenceFile": "references/da-1-4-1-population-vs-sample.md",
+          "routingLine": "Foundational statistical-inference distinction between a population (the whole",
+          "srcBytes": 11411
+        },
+        {
+          "spoke": "da-1-4-2-sampling-distributions-standard-error",
+          "referenceFile": "references/da-1-4-2-sampling-distributions-standard-error.md",
+          "routingLine": "The sampling distribution of a statistic (mean or proportion) and the standard",
+          "srcBytes": 10900
+        },
+        {
+          "spoke": "da-1-4-3-frequentist-vs-bayesian-paradigms",
+          "referenceFile": "references/da-1-4-3-frequentist-vs-bayesian-paradigms.md",
+          "routingLine": "The two competing schools of statistical inference — frequentist and Bayesian —",
+          "srcBytes": 13859
+        },
+        {
+          "spoke": "da-1-4-4-estimation-theory",
+          "referenceFile": "references/da-1-4-4-estimation-theory.md",
+          "routingLine": "Point-estimation theory for statistical inference foundations — the three",
+          "srcBytes": 11021
+        },
+        {
+          "spoke": "da-1-5-information-theory",
+          "referenceFile": "references/da-1-5-information-theory.md",
+          "routingLine": "Information-theoretic measures for data analysis foundations — Shannon entropy,",
+          "srcBytes": 10546
+        },
+        {
+          "spoke": "da-1-6-epistemology-of-data",
+          "referenceFile": "references/da-1-6-epistemology-of-data.md",
+          "routingLine": "The epistemology of data for data analysis — how data come to count as",
+          "srcBytes": 13783
+        },
+        {
+          "spoke": "da-1-6-1-correlation-vs-causation",
+          "referenceFile": "references/da-1-6-1-correlation-vs-causation.md",
+          "routingLine": "Epistemology of data analysis: why a statistical association between two",
+          "srcBytes": 15364
+        },
+        {
+          "spoke": "da-1-6-2-inductive-vs-deductive-reasoning",
+          "referenceFile": "references/da-1-6-2-inductive-vs-deductive-reasoning.md",
+          "routingLine": "Epistemology of data analysis: how inductive, deductive, and abductive",
+          "srcBytes": 14279
+        },
+        {
+          "spoke": "da-1-6-3-reproducibility-replicability",
+          "referenceFile": "references/da-1-6-3-reproducibility-replicability.md",
+          "routingLine": "Epistemology-of-data concept covering reproducibility and replicability as",
+          "srcBytes": 14394
+        }
+      ]
+    },
+    "da-2-data-analysis-lifecycle": {
+      "keepExisting": true,
+      "title": "Data Analysis Lifecycle & Process (hub)",
+      "spokes": [
+        {
+          "spoke": "da-2-1-process-frameworks",
+          "referenceFile": "references/da-2-1-process-frameworks.md",
+          "routingLine": "Expert knowledge on structured process frameworks for data analysis — specifically CRISP-DM, KDD,",
+          "srcBytes": 16253
+        },
+        {
+          "spoke": "da-2-1-1-crisp-dm",
+          "referenceFile": "references/da-2-1-1-crisp-dm.md",
+          "routingLine": "Expert knowledge of CRISP-DM (Cross-Industry Standard Process for Data Mining) as a process framework within the data analysis lifecycle. Covers the…",
+          "srcBytes": 16172
+        },
+        {
+          "spoke": "da-2-1-2-kdd",
+          "referenceFile": "references/da-2-1-2-kdd.md",
+          "routingLine": "Expert knowledge of the KDD (Knowledge Discovery in Databases) process framework as a structured data analysis lifecycle methodology. Covers the original…",
+          "srcBytes": 11072
+        },
+        {
+          "spoke": "da-2-1-3-semma",
+          "referenceFile": "references/da-2-1-3-semma.md",
+          "routingLine": "Expert knowledge of the SEMMA process framework for data mining, as positioned within the",
+          "srcBytes": 13511
+        },
+        {
+          "spoke": "da-2-1-4-osemn",
+          "referenceFile": "references/da-2-1-4-osemn.md",
+          "routingLine": "Expert knowledge of the OSEMN process framework for data science projects.",
+          "srcBytes": 12189
+        },
+        {
+          "spoke": "da-2-1-5-tdsp",
+          "referenceFile": "references/da-2-1-5-tdsp.md",
+          "routingLine": "Expert knowledge of TDSP (Team Data Science Process) as a process framework within the",
+          "srcBytes": 15316
+        },
+        {
+          "spoke": "da-2-2-problem-framing",
+          "referenceFile": "references/da-2-2-problem-framing.md",
+          "routingLine": "Expert knowledge on problem framing as the opening phase of the data analysis lifecycle — the practice of translating a vague business challenge into a…",
+          "srcBytes": 13910
+        },
+        {
+          "spoke": "da-2-2-1-business-research-question-definition",
+          "referenceFile": "references/da-2-2-1-business-research-question-definition.md",
+          "routingLine": "Expert knowledge for defining and formulating business and research questions at the start of a data analysis project, within the Problem Framing stage of…",
+          "srcBytes": 12805
+        },
+        {
+          "spoke": "da-2-2-2-hypothesis-formulation",
+          "referenceFile": "references/da-2-2-2-hypothesis-formulation.md",
+          "routingLine": "Expert knowledge on hypothesis formulation as practiced in the data analysis lifecycle",
+          "srcBytes": 13441
+        },
+        {
+          "spoke": "da-2-2-3-success-metrics-kpis",
+          "referenceFile": "references/da-2-2-3-success-metrics-kpis.md",
+          "routingLine": "Defines how to select, specify, and validate success metrics and KPIs during the",
+          "srcBytes": 20362
+        },
+        {
+          "spoke": "da-2-2-4-scoping-feasibility",
+          "referenceFile": "references/da-2-2-4-scoping-feasibility.md",
+          "routingLine": "Guides scoping and feasibility assessment for a data analysis or analytics project",
+          "srcBytes": 17050
+        },
+        {
+          "spoke": "da-2-4-documentation-reproducibility",
+          "referenceFile": "references/da-2-4-documentation-reproducibility.md",
+          "routingLine": "Documentation and reproducibility practices as they apply to the data analysis lifecycle: computational notebooks (Jupyter, R Markdown, Quarto), data and…",
+          "srcBytes": 21025
+        },
+        {
+          "spoke": "da-2-5-stakeholder-communication-handoff",
+          "referenceFile": "references/da-2-5-stakeholder-communication-handoff.md",
+          "routingLine": "Stakeholder communication and handoff as it appears in the data analysis lifecycle.",
+          "srcBytes": 23134
+        }
+      ]
+    },
+    "da-3-data-acquisition-sampling": {
+      "keepExisting": true,
+      "title": "Data Acquisition, Collection & Sampling (hub)",
+      "spokes": [
+        {
+          "spoke": "da-3-1-data-sources",
+          "referenceFile": "references/da-3-1-data-sources.md",
+          "routingLine": "Expert knowledge on data sources as a category within data collection &",
+          "srcBytes": 14720
+        },
+        {
+          "spoke": "da-3-1-1-primary-vs-secondary",
+          "referenceFile": "references/da-3-1-1-primary-vs-secondary.md",
+          "routingLine": "Domain knowledge for Data Analysis taxonomy node 3.1.1: Primary vs. Secondary data sources,",
+          "srcBytes": 17747
+        },
+        {
+          "spoke": "da-3-1-2-internal-vs-external",
+          "referenceFile": "references/da-3-1-2-internal-vs-external.md",
+          "routingLine": "Expert guidance on the internal-vs-external dimension of data sources in analysis projects.",
+          "srcBytes": 17107
+        },
+        {
+          "spoke": "da-3-1-3-structured-semi-structured-unstructured",
+          "referenceFile": "references/da-3-1-3-structured-semi-structured-unstructured.md",
+          "routingLine": "Expert knowledge on structured, semi-structured, and unstructured data as data source types in the context of data collection and acquisition. Covers…",
+          "srcBytes": 19479
+        },
+        {
+          "spoke": "da-3-2-collection-methods",
+          "referenceFile": "references/da-3-2-collection-methods.md",
+          "routingLine": "Categorical overview and comparison of data collection methods across the full taxonomy:",
+          "srcBytes": 20734
+        },
+        {
+          "spoke": "da-3-2-5-web-scraping-crawling",
+          "referenceFile": "references/da-3-2-5-web-scraping-crawling.md",
+          "routingLine": "Web scraping and crawling as a primary data collection method in the data analysis lifecycle.",
+          "srcBytes": 19834
+        },
+        {
+          "spoke": "da-3-2-6-apis-data-feeds",
+          "referenceFile": "references/da-3-2-6-apis-data-feeds.md",
+          "routingLine": "Domain knowledge for collecting data via APIs and structured data feeds for analysis purposes.",
+          "srcBytes": 19820
+        },
+        {
+          "spoke": "da-3-2-7-web-app-analytics-instrumentation",
+          "referenceFile": "references/da-3-2-7-web-app-analytics-instrumentation.md",
+          "routingLine": "Event instrumentation for web and mobile apps. Covers the full lifecycle from",
+          "srcBytes": 21885
+        },
+        {
+          "spoke": "da-3-data-collection-acquisition",
+          "referenceFile": "references/da-3-data-collection-acquisition.md",
+          "routingLine": "Overview and orientation skill for Data Collection & Acquisition — the third stage of the Data",
+          "srcBytes": 18855
+        }
+      ]
+    },
+    "da-analytical-methods": {
+      "keepExisting": false,
+      "title": "Data Analytical Methods (cleaning, EDA, modeling, ML, causal, time-series)",
+      "spokes": [
+        {
+          "spoke": "da-4-data-cleaning-preparation",
+          "referenceFile": "references/da-4-data-cleaning-preparation.md",
+          "routingLine": "Data cleaning and preparation as the disciplined transformation of raw,",
+          "srcBytes": 49102
+        },
+        {
+          "spoke": "da-5-exploratory-data-analysis",
+          "referenceFile": "references/da-5-exploratory-data-analysis.md",
+          "routingLine": "Exploratory Data Analysis — the Tukey-rooted discipline of looking at data",
+          "srcBytes": 15417
+        },
+        {
+          "spoke": "da-6-statistical-modeling",
+          "referenceFile": "references/da-6-statistical-modeling.md",
+          "routingLine": "Statistical modeling for data analysis — inference-first treatment of linear regression (OLS, Gauss-Markov, diagnostics), logistic regression (logit link…",
+          "srcBytes": 21813
+        },
+        {
+          "spoke": "da-7-machine-learning",
+          "referenceFile": "references/da-7-machine-learning.md",
+          "routingLine": "Curriculum reference for Machine Learning — section 7 of the data analysis curriculum. Covers the ML taxonomy (supervised, unsupervised, reinforcement…",
+          "srcBytes": 33357
+        },
+        {
+          "spoke": "da-12-ab-testing-causal-inference",
+          "referenceFile": "references/da-12-ab-testing-causal-inference.md",
+          "routingLine": "A/B testing and causal inference — randomized experiments (sample size, power,",
+          "srcBytes": 17003
+        },
+        {
+          "spoke": "da-15-forecasting",
+          "referenceFile": "references/da-15-forecasting.md",
+          "routingLine": "Forecasting — going deeper than the time-series treatment in",
+          "srcBytes": 15285
+        },
+        {
+          "spoke": "da-16-anomaly-detection",
+          "referenceFile": "references/da-16-anomaly-detection.md",
+          "routingLine": "Anomaly detection methods for the working analyst — statistical (z-score,",
+          "srcBytes": 15381
+        },
+        {
+          "spoke": "da-17-feature-engineering-and-feature-stores",
+          "referenceFile": "references/da-17-feature-engineering-and-feature-stores.md",
+          "routingLine": "Feature engineering taxonomy (numerical transforms, encoding, datetime, interactions, polynomial, target encoding), automated feature engineering…",
+          "srcBytes": 21871
+        },
+        {
+          "spoke": "da-23-customer-lifetime-value",
+          "referenceFile": "references/da-23-customer-lifetime-value.md",
+          "routingLine": "Probabilistic / statistical Customer Lifetime Value (CLV) modeling — the",
+          "srcBytes": 19653
+        },
+        {
+          "spoke": "da-24-survival-analysis",
+          "referenceFile": "references/da-24-survival-analysis.md",
+          "routingLine": "Survival analysis / time-to-event modeling — its own discipline, distinct",
+          "srcBytes": 25407
+        },
+        {
+          "spoke": "da-25-bayesian-data-analysis",
+          "referenceFile": "references/da-25-bayesian-data-analysis.md",
+          "routingLine": "Applied Bayesian data analysis and probabilistic programming workflow — the",
+          "srcBytes": 18310
+        },
+        {
+          "spoke": "da-31-conformal-prediction-uq",
+          "referenceFile": "references/da-31-conformal-prediction-uq.md",
+          "routingLine": "Conformal prediction and distribution-free uncertainty quantification — the",
+          "srcBytes": 18008
+        },
+        {
+          "spoke": "da-32-causal-discovery",
+          "referenceFile": "references/da-32-causal-discovery.md",
+          "routingLine": "Causal discovery / structure learning — learning the causal DAG itself from",
+          "srcBytes": 18295
+        },
+        {
+          "spoke": "da-33-prescriptive-analytics",
+          "referenceFile": "references/da-33-prescriptive-analytics.md",
+          "routingLine": "Prescriptive analytics / decision science — turning predictions and data into",
+          "srcBytes": 21944
+        },
+        {
+          "spoke": "da-38-recommender-systems-and-ranking",
+          "referenceFile": "references/da-38-recommender-systems-and-ranking.md",
+          "routingLine": "Recommender systems and learning-to-rank as a data-analysis discipline —",
+          "srcBytes": 24063
+        }
+      ]
+    },
+    "da-data-engineering-platform": {
+      "keepExisting": false,
+      "title": "Data Engineering & Analytics Platform (pipelines, OLAP, modeling, governance)",
+      "spokes": [
+        {
+          "spoke": "da-10-tools-and-languages",
+          "referenceFile": "references/da-10-tools-and-languages.md",
+          "routingLine": "Languages and tools the data analyst actually reaches for in 2026 — Python",
+          "srcBytes": 13599
+        },
+        {
+          "spoke": "da-13-data-engineering-and-pipelines",
+          "referenceFile": "references/da-13-data-engineering-and-pipelines.md",
+          "routingLine": "Data engineering for analysts and data engineers in 2026 — workflow",
+          "srcBytes": 15360
+        },
+        {
+          "spoke": "da-14-streaming-analytics",
+          "referenceFile": "references/da-14-streaming-analytics.md",
+          "routingLine": "Streaming analytics — continuous, low-latency processing of unbounded event",
+          "srcBytes": 20111
+        },
+        {
+          "spoke": "da-18-semantic-layer-headless-bi",
+          "referenceFile": "references/da-18-semantic-layer-headless-bi.md",
+          "routingLine": "Semantic layer and headless BI for governed, reusable business metrics —",
+          "srcBytes": 22518
+        },
+        {
+          "spoke": "da-19-data-observability",
+          "referenceFile": "references/da-19-data-observability.md",
+          "routingLine": "Data observability as a discipline — the five pillars (freshness, volume,",
+          "srcBytes": 19458
+        },
+        {
+          "spoke": "da-20-reverse-etl-operational-analytics",
+          "referenceFile": "references/da-20-reverse-etl-operational-analytics.md",
+          "routingLine": "Reverse ETL and operational analytics — activating modeled warehouse/lakehouse",
+          "srcBytes": 19056
+        },
+        {
+          "spoke": "da-28-realtime-olap-databases",
+          "referenceFile": "references/da-28-realtime-olap-databases.md",
+          "routingLine": "Real-time OLAP and analytical database engines — the query/storage layer that",
+          "srcBytes": 22761
+        },
+        {
+          "spoke": "da-29-dimensional-data-modeling",
+          "referenceFile": "references/da-29-dimensional-data-modeling.md",
+          "routingLine": "Analytical & warehouse data modeling — Kimball dimensional modeling (facts,",
+          "srcBytes": 26308
+        },
+        {
+          "spoke": "da-30-data-governance-catalogs",
+          "referenceFile": "references/da-30-data-governance-catalogs.md",
+          "routingLine": "Data governance, catalogs, and discovery as a discipline — DAMA-DMBOK & DCAM",
+          "srcBytes": 20788
+        },
+        {
+          "spoke": "da-37-data-finops-cost-optimization",
+          "referenceFile": "references/da-37-data-finops-cost-optimization.md",
+          "routingLine": "FinOps and cost optimization for data/analytics platforms (warehouses,",
+          "srcBytes": 20185
+        },
+        {
+          "spoke": "da-41-knowledge-graphs-and-semantic-analytics",
+          "referenceFile": "references/da-41-knowledge-graphs-and-semantic-analytics.md",
+          "routingLine": "Knowledge graphs and semantic analytics as a data-analysis discipline — the",
+          "srcBytes": 22204
+        }
+      ]
+    },
+    "da-applied-and-communication": {
+      "keepExisting": false,
+      "title": "Applied Analytics, Visualization, Communication & Ethics",
+      "spokes": [
+        {
+          "spoke": "da-8-data-visualization",
+          "referenceFile": "references/da-8-data-visualization.md",
+          "routingLine": "Data Visualization as a discipline — the principled translation of quantitative and",
+          "srcBytes": 43803
+        },
+        {
+          "spoke": "da-9-reporting-communication",
+          "referenceFile": "references/da-9-reporting-communication.md",
+          "routingLine": "Expert knowledge of Reporting and Communication as the final phase of the data analysis",
+          "srcBytes": 31781
+        },
+        {
+          "spoke": "da-11-ethics-and-privacy",
+          "referenceFile": "references/da-11-ethics-and-privacy.md",
+          "routingLine": "Data ethics and privacy for the working analyst — bias and fairness (including",
+          "srcBytes": 16236
+        },
+        {
+          "spoke": "da-21-product-analytics",
+          "referenceFile": "references/da-21-product-analytics.md",
+          "routingLine": "Product analytics as an analytical discipline — turning event data into",
+          "srcBytes": 22063
+        },
+        {
+          "spoke": "da-22-marketing-mix-modeling",
+          "referenceFile": "references/da-22-marketing-mix-modeling.md",
+          "routingLine": "Marketing Mix Modeling (MMM) and incrementality measurement — adstock/carryover,",
+          "srcBytes": 15538
+        },
+        {
+          "spoke": "da-26-geospatial-analytics",
+          "referenceFile": "references/da-26-geospatial-analytics.md",
+          "routingLine": "Geospatial / spatial analytics for general (non-MongoDB) workflows — vector vs",
+          "srcBytes": 21606
+        },
+        {
+          "spoke": "da-27-network-graph-analytics",
+          "referenceFile": "references/da-27-network-graph-analytics.md",
+          "routingLine": "Network and graph analytics as a data-analysis discipline — representing data",
+          "srcBytes": 15305
+        },
+        {
+          "spoke": "da-34-cohort-retention-analytics",
+          "referenceFile": "references/da-34-cohort-retention-analytics.md",
+          "routingLine": "Cohort and retention analytics for data analysts — acquisition vs behavioral",
+          "srcBytes": 23655
+        },
+        {
+          "spoke": "da-35-synthetic-data-generation",
+          "referenceFile": "references/da-35-synthetic-data-generation.md",
+          "routingLine": "Synthetic data generation as a discipline — generating artificial records that",
+          "srcBytes": 22373
+        },
+        {
+          "spoke": "da-36-text-analytics-nlp",
+          "referenceFile": "references/da-36-text-analytics-nlp.md",
+          "routingLine": "Applied text analytics and NLP for analysts — turning unstructured text",
+          "srcBytes": 18068
+        },
+        {
+          "spoke": "da-39-augmented-analytics-llm-assisted",
+          "referenceFile": "references/da-39-augmented-analytics-llm-assisted.md",
+          "routingLine": "Augmented analytics and LLM-assisted analysis — letting AI plan, query,",
+          "srcBytes": 19920
+        },
+        {
+          "spoke": "da-40-pricing-and-revenue-analytics",
+          "referenceFile": "references/da-40-pricing-and-revenue-analytics.md",
+          "routingLine": "Pricing and revenue analytics for data analysts — estimating how price drives",
+          "srcBytes": 26389
+        }
+      ]
+    }
+  }
+}

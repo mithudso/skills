@@ -1,0 +1,246 @@
+{
+  "family": "misc-catch-all",
+  "builtAt": "2026-06-21T06:46:20.473Z",
+  "hubs": {
+    "misc-catch-all": {
+      "keepExisting": false,
+      "title": "Misc / Catch-All (unfiled standalone skills)",
+      "spokes": [
+        {
+          "spoke": "10gen",
+          "referenceFile": "references/10gen.md",
+          "routingLine": "10gen GitHub repo intelligence for case-tracker and troubleshooting Chrome extension work.",
+          "srcBytes": 14919
+        },
+        {
+          "spoke": "api-design-patterns",
+          "referenceFile": "references/api-design-patterns.md",
+          "routingLine": "API design expert for REST, GraphQL, and gRPC. Covers resource modeling, Richardson",
+          "srcBytes": 30666
+        },
+        {
+          "spoke": "backprop",
+          "referenceFile": "references/backprop.md",
+          "routingLine": "Bug → spec protocol. When a bug is found or a test fails, trace the cause,",
+          "srcBytes": 2658
+        },
+        {
+          "spoke": "build",
+          "referenceFile": "references/build.md",
+          "routingLine": "Plan-then-execute implementation against SPEC.md. Native single-thread",
+          "srcBytes": 3271
+        },
+        {
+          "spoke": "case-mcp-server-guide",
+          "referenceFile": "references/case-mcp-server-guide.md",
+          "routingLine": "Guidance for starting, using, and troubleshooting the MDB Case Assistant local case MCP server and its mdb_case_* tool surface.",
+          "srcBytes": 5089
+        },
+        {
+          "spoke": "caveman",
+          "referenceFile": "references/caveman.md",
+          "routingLine": "Caveman encoding for SPEC.md and spec-adjacent writes. Loaded by /spec, /build,",
+          "srcBytes": 2941
+        },
+        {
+          "spoke": "check",
+          "referenceFile": "references/check.md",
+          "routingLine": "Read-only drift detector. Diffs SPEC.md against current code and reports",
+          "srcBytes": 2720
+        },
+        {
+          "spoke": "coding-standards",
+          "referenceFile": "references/coding-standards.md",
+          "routingLine": "Baseline cross-project coding conventions for naming, readability, immutability, error handling, and code-quality review. Covers JavaScript, TypeScript, and…",
+          "srcBytes": 8265
+        },
+        {
+          "spoke": "dash-docsets",
+          "referenceFile": "references/dash-docsets.md",
+          "routingLine": "Dash (Kapeli) docset ecosystem — the offline API-documentation format and its tooling.",
+          "srcBytes": 10610
+        },
+        {
+          "spoke": "deep-query-optimizer",
+          "referenceFile": "references/deep-query-optimizer.md",
+          "routingLine": "SQL member of the deep-optimizer family: a multi-pass review-and-fix optimizer for a",
+          "srcBytes": 10248
+        },
+        {
+          "spoke": "deep-research-methods",
+          "referenceFile": "references/deep-research-methods.md",
+          "routingLine": "Research methodology expert: question decomposition, query formulation, source evaluation",
+          "srcBytes": 20854
+        },
+        {
+          "spoke": "deepen",
+          "referenceFile": "references/deepen.md",
+          "routingLine": "Optional design-improvement pass for when you have spare usage to drain. Finds",
+          "srcBytes": 4072
+        },
+        {
+          "spoke": "design-deep-optimizer",
+          "referenceFile": "references/design-deep-optimizer.md",
+          "routingLine": "Multi-stage design & image critique-and-fix optimizer for graphic/brand & UI/UX screens; sibling",
+          "srcBytes": 17150
+        },
+        {
+          "spoke": "diagrams-as-code",
+          "referenceFile": "references/diagrams-as-code.md",
+          "routingLine": "",
+          "srcBytes": 13334
+        },
+        {
+          "spoke": "document-critique",
+          "referenceFile": "references/document-critique.md",
+          "routingLine": "Multipass document review agent that surfaces and fixes findings through passes 0–14 plus sub-passes 10.5 and 11.5 (intent through human-voice rephrasing…",
+          "srcBytes": 24522
+        },
+        {
+          "spoke": "draft-review-revise-loop",
+          "referenceFile": "references/draft-review-revise-loop.md",
+          "routingLine": "Meta-skill — explicit three-pass workflow for any prose document: draft → review against",
+          "srcBytes": 12697
+        },
+        {
+          "spoke": "emotional-design-and-visual-trust",
+          "referenceFile": "references/emotional-design-and-visual-trust.md",
+          "routingLine": "The affective / first-impression / trust axis of graphic-and-UI critique — \"does this design feel",
+          "srcBytes": 63439
+        },
+        {
+          "spoke": "find-skills",
+          "referenceFile": "references/find-skills.md",
+          "routingLine": "Helps users discover and install agent skills when they ask questions like \"how do I do X\", \"find a skill for X\", \"is there a skill that can...\", or express…",
+          "srcBytes": 5446
+        },
+        {
+          "spoke": "graph-network-3d-visualization",
+          "referenceFile": "references/graph-network-3d-visualization.md",
+          "routingLine": "Drawing and laying out graphs/networks and 3D node-link scenes in the browser — the rendering/layout layer, not analytics.",
+          "srcBytes": 13914
+        },
+        {
+          "spoke": "grill-me",
+          "referenceFile": "references/grill-me.md",
+          "routingLine": "Calibrated grilling session for stress-testing a plan, design, idea, or decision. First assesses the user's topic knowledge, confidence, and desired…",
+          "srcBytes": 6479
+        },
+        {
+          "spoke": "grill",
+          "referenceFile": "references/grill.md",
+          "routingLine": "Calibrated interrogation of a fuzzy idea before it becomes a spec. Asks one",
+          "srcBytes": 3322
+        },
+        {
+          "spoke": "javascript-node-html-css-debugging-expert",
+          "referenceFile": "references/javascript-node-html-css-debugging-expert.md",
+          "routingLine": "JavaScript, Node.js, HTML, and CSS debugging expert: breakpoints (all 8 Chrome DevTools types),",
+          "srcBytes": 38820
+        },
+        {
+          "spoke": "kill-the-AI-ism",
+          "referenceFile": "references/kill-the-AI-ism.md",
+          "routingLine": "Diagnostic skill for detecting and replacing generator artifacts (\"AI-isms\") in prose.",
+          "srcBytes": 12607
+        },
+        {
+          "spoke": "kubernetes-networking",
+          "referenceFile": "references/kubernetes-networking.md",
+          "routingLine": "Kubernetes workloads, networking, and platform engineering expert. Covers core",
+          "srcBytes": 26328
+        },
+        {
+          "spoke": "mindmaps-and-concept-maps",
+          "referenceFile": "references/mindmaps-and-concept-maps.md",
+          "routingLine": "Structural and programmatic reference for hierarchical knowledge diagrams: Buzan radial single-root mind maps vs. Novak labeled-edge concept maps…",
+          "srcBytes": 15417
+        },
+        {
+          "spoke": "monday-board-audit",
+          "referenceFile": "references/monday-board-audit.md",
+          "routingLine": "Full Monday.com board audit-and-update prompt for a customer account — the execution body",
+          "srcBytes": 29840
+        },
+        {
+          "spoke": "mongodb-kb",
+          "referenceFile": "references/mongodb-kb.md",
+          "routingLine": "MongoDB Knowledge Base article index for troubleshooting, customer support, and escalation",
+          "srcBytes": 46029
+        },
+        {
+          "spoke": "offer-design-and-value-proposition",
+          "referenceFile": "references/offer-design-and-value-proposition.md",
+          "routingLine": "Design compelling offers and value propositions — the strategy layer beneath marketing copy. Covers Osterwalder's Value Proposition Canvas (jobs/pains/gains…",
+          "srcBytes": 19731
+        },
+        {
+          "spoke": "okta-expert",
+          "referenceFile": "references/okta-expert.md",
+          "routingLine": "Okta platform expert reference — Identity Engine, redirect vs embedded auth,",
+          "srcBytes": 33987
+        },
+        {
+          "spoke": "programmatic-charting-libraries",
+          "referenceFile": "references/programmatic-charting-libraries.md",
+          "routingLine": "",
+          "srcBytes": 15675
+        },
+        {
+          "spoke": "repo-file-analyzer",
+          "referenceFile": "references/repo-file-analyzer.md",
+          "routingLine": "Recursively analyze a repo file-by-file, generating per-file summaries (purpose, exports, dependencies), and upload each entry to the mdb-context-hub…",
+          "srcBytes": 13905
+        },
+        {
+          "spoke": "research",
+          "referenceFile": "references/research.md",
+          "routingLine": "Gather external knowledge the spec needs and distill it into §R — the durable",
+          "srcBytes": 3178
+        },
+        {
+          "spoke": "review",
+          "referenceFile": "references/review.md",
+          "routingLine": "Adversarial senior review of the spec before any code is written. Constructs a",
+          "srcBytes": 3934
+        },
+        {
+          "spoke": "skill-folder-sync",
+          "referenceFile": "references/skill-folder-sync.md",
+          "routingLine": "Compare two .claude/skills folders and one-way sync them, hub-and-spoke aware.",
+          "srcBytes": 5441
+        },
+        {
+          "spoke": "skill-lookup",
+          "referenceFile": "references/skill-lookup.md",
+          "routingLine": "Search, retrieve, and install Agent Skills from the prompts.chat registry using MCP tools. Use when the user asks to find skills, browse skill catalogs…",
+          "srcBytes": 4139
+        },
+        {
+          "spoke": "social-marketing-and-cbsm",
+          "referenceFile": "references/social-marketing-and-cbsm.md",
+          "routingLine": "Apply social marketing and CBSM to public-good behavior change. Andreasen's",
+          "srcBytes": 28765
+        },
+        {
+          "spoke": "spec",
+          "referenceFile": "references/spec.md",
+          "routingLine": "Create, amend, or backprop bugs into SPEC.md at repo root. Sole mutator",
+          "srcBytes": 3499
+        },
+        {
+          "spoke": "webcrypto-vault-reviewer",
+          "referenceFile": "references/webcrypto-vault-reviewer.md",
+          "routingLine": "Web Crypto API security review and implementation patterns — SubtleCrypto, PBKDF2 key derivation",
+          "srcBytes": 18767
+        },
+        {
+          "spoke": "wordcloud-generation",
+          "referenceFile": "references/wordcloud-generation.md",
+          "routingLine": "",
+          "srcBytes": 16126
+        }
+      ]
+    }
+  }
+}

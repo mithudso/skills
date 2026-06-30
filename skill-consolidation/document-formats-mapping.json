@@ -1,0 +1,20 @@
+{
+  "family": "document-formats",
+  "skillsRoot": "__HOME__/.claude/skills",
+  "standalone": [],
+  "hubs": {
+    "document-formats": {
+      "keepExisting": false,
+      "title": "Document & File Formats (PDF, Word, Excel, PowerPoint, CSV, JSON, draw.io)",
+      "spokes": [
+        "pdf",
+        "docx",
+        "xlsx",
+        "pptx",
+        "csv",
+        "json-advanced",
+        "drawio-diagrams"
+      ]
+    }
+  }
+}

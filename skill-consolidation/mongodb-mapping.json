@@ -1,0 +1,103 @@
+{
+  "family": "mongodb",
+  "skillsRoot": "__HOME__/.claude/skills",
+  "standalone": ["mongodb-kb", "10gen"],
+  "hubs": {
+    "mongodb-expert": {
+      "keepExisting": true,
+      "title": "MongoDB Expert (core data plane & engine)",
+      "spokes": [
+        "mongodb-developer",
+        "mongodb-aggregation-pipeline",
+        "mongodb-aggregation-stages-deep",
+        "mongodb-indexes-deep",
+        "mongodb-query-performance",
+        "mongodb-schema-design",
+        "mongodb-transactions",
+        "mongodb-change-streams",
+        "mongodb-time-series",
+        "mongodb-geospatial",
+        "mongodb-views-materialized-views",
+        "mongodb-bson-types",
+        "mongodb-error-codes",
+        "mongodb-connection-string",
+        "mongodb-driver-internals",
+        "mongodb-drivers-k8s",
+        "mongodb-wiredtiger",
+        "mongodb-wiredtiger-internals",
+        "mongodb-mongosh",
+        "mongodb-database-tools",
+        "mongodb-multi-tenancy",
+        "mongodb-sharding",
+        "mongodb-replication",
+        "mongodb-compass"
+      ]
+    },
+    "mongodb-atlas-expert": {
+      "keepExisting": true,
+      "title": "MongoDB Atlas Expert (cloud platform)",
+      "spokes": [
+        "mongodb-atlas-app-services",
+        "mongodb-atlas-azure",
+        "mongodb-atlas-charts",
+        "mongodb-atlas-cli",
+        "mongodb-atlas-data-federation",
+        "mongodb-atlas-device-sdk",
+        "mongodb-atlas-federated-auth",
+        "mongodb-atlas-flex-serverless",
+        "mongodb-atlas-gcp",
+        "mongodb-atlas-global-clusters",
+        "mongodb-atlas-iac",
+        "mongodb-atlas-iam-rbac",
+        "mongodb-atlas-kubernetes-operator",
+        "mongodb-atlas-multicloud",
+        "mongodb-atlas-online-archive",
+        "mongodb-atlas-search",
+        "mongodb-atlas-search-nodes",
+        "mongodb-atlas-service-accounts",
+        "mongodb-atlas-stream-processing",
+        "mongodb-atlas-terraform",
+        "mongodb-atlas-triggers-functions",
+        "mongodb-atlas-vector-search",
+        "mongodb-search-ai",
+        "mongodb-bi-connector",
+        "mongodb-aws-networking",
+        "mongodb-realm-mobile-sync",
+        "mongodb-analytics-node"
+      ]
+    },
+    "atlas-diagnostics-expert": {
+      "keepExisting": true,
+      "title": "Atlas Diagnostics Expert (live diagnostics & performance)",
+      "spokes": [
+        "atlas-diagnostics-package",
+        "mongodb-performance-troubleshooting",
+        "mongodb-performance-benchmarking",
+        "mongodb-monitoring-observability",
+        "mongodb-capacity-planning"
+      ]
+    },
+    "mongodb-operations-expert": {
+      "keepExisting": false,
+      "title": "MongoDB Operations Expert (ops, reliability & data movement)",
+      "spokes": [
+        "mongodb-backup-restore",
+        "mongodb-disaster-recovery",
+        "mongodb-ops-manager",
+        "mongodb-upgrade-paths",
+        "mongodb-migration-patterns",
+        "mongosync",
+        "mongodb-mongosync",
+        "mongodb-relational-migrator",
+        "mongodb-cdc-architecture",
+        "mongodb-data-lifecycle",
+        "mongodb-security-architecture",
+        "mongodb-encryption",
+        "mongodb-compliance",
+        "mongodb-cost-optimization",
+        "mongodb-kafka-connector",
+        "mongodb-spark-connector"
+      ]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+# TEMPLATE — Linux systemd user path watch. setup.sh renders it to
+# ~/.config/systemd/user/skills-embed.path, replacing __HOME__.
+# Triggers skills-embed.service whenever the skills directory changes.
+[Unit]
+Description=Watch ~/.claude/skills and trigger an index/embeddings refresh
+
+[Path]
+PathModified=__HOME__/.claude/skills
+Unit=skills-embed.service
+
+[Install]
+WantedBy=default.target

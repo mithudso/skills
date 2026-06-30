@@ -110,7 +110,7 @@ AWS offers 15+ purpose-built database services. The core principle: **no single 
 |---|---|---|
 | Relational | RDS (PostgreSQL, MySQL, MariaDB, Oracle, SQL Server) | Traditional OLTP, complex joins |
 | Relational (enhanced) | Aurora (PostgreSQL/MySQL compatible) | High-throughput production relational |
-| Distributed relational | Aurora DSQL | Active-active multi-region SQL (GA Dec 2025) |
+| Distributed relational | Aurora DSQL | Active-active multi-region SQL (GA May 2025) |
 | Key-value / Document | DynamoDB | Millions of req/s, known access patterns |
 | In-memory | ElastiCache (Redis/Valkey, Memcached) | Sub-ms caching, sessions, rate limiting |
 | Document | DocumentDB | Simple CRUD on AWS — check compatibility first |
@@ -193,7 +193,9 @@ max_capacity: 128  # ACU — set based on peak workload + buffer
 
 ### Aurora DSQL
 
-Fully serverless, distributed SQL database for active-active multi-region writes. Reached general availability December 2025.
+Fully serverless, distributed SQL database for active-active multi-region writes. Previewed at re:Invent (December 2024) and reached general availability **May 27, 2025**.
+
+> For the Aurora engine deep-dive (storage architecture, 6-way quorum, Serverless v2 internals, Global Database, and Aurora DSQL's OCC/snapshot-isolation model) see the sibling reference `aws-aurora.md`. This file remains the cross-engine "which AWS database?" decision guide.
 
 **Key properties:**
 - Active-active multi-region writes with strong consistency

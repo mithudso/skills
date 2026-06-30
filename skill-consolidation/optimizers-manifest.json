@@ -1,0 +1,36 @@
+{
+  "family": "optimizers",
+  "builtAt": "2026-06-21T05:34:00.000Z",
+  "hubs": {
+    "code-deep-optimizer": {
+      "keepExisting": true,
+      "title": "Code Deep Optimizer (source file & repo review+fix loop)",
+      "spokes": []
+    },
+    "document-critique": {
+      "keepExisting": true,
+      "title": "Document Critique (prose multi-pass review+fix loop)",
+      "spokes": []
+    },
+    "prompt-deep-optimizer": {
+      "keepExisting": true,
+      "title": "Prompt Deep Optimizer (production prompt audit+fix loop)",
+      "spokes": []
+    },
+    "skill-optimizer": {
+      "keepExisting": true,
+      "title": "Skill Optimizer (SKILL.md quality audit+fix loop)",
+      "spokes": []
+    },
+    "deep-query-optimizer": {
+      "keepExisting": true,
+      "title": "Deep Query Optimizer (SQL multi-pass rewrite+verify loop)",
+      "spokes": []
+    },
+    "design-deep-optimizer": {
+      "keepExisting": true,
+      "title": "Design Deep Optimizer (graphic/brand & UI/UX critique+fix loop)",
+      "spokes": []
+    }
+  }
+}
