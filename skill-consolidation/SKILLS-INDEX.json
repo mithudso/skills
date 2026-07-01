@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-06-30T23:22:01.469Z",
+  "generatedAt": "2026-07-01T00:14:55.623Z",
   "schemaVersion": 1,
   "skillsRoot": "~/.claude/skills",
   "counts": {
-    "total": 578,
-    "topLevel": 125,
+    "total": 580,
+    "topLevel": 127,
     "foldedSpokes": 453,
     "families": 30
   },
@@ -50,6 +50,7 @@
       "nc-parole-probation",
       "nc-recording-laws",
       "okta-incident-response",
+      "postgresql-expert",
       "programming-languages",
       "prompt-helper-optimizer",
       "psychology",
@@ -63,6 +64,7 @@
       "psychology-stress-trauma",
       "rag-prompt-injection-defense",
       "repo-bootstrapper",
+      "secrets-and-key-management",
       "service-industry-job-hunting",
       "service-industry-resume-and-interview",
       "skill-tree-architect",
@@ -72,30 +74,26 @@
       "volunteer-and-prosocial-motivation"
     ],
     "ai-agent": [
-      "transformer-architecture",
-      "agent-council",
-      "agent-ecosystem",
-      "agentic-rl",
-      "ai-datastores",
-      "autonomous-loops",
-      "llm-compression",
-      "llm-routing-cascades",
-      "multimodal-llm-architecture",
       "a2a-interop",
       "advanced-rag-patterns",
+      "agent-council",
+      "agent-ecosystem",
       "agent-harness-construction",
       "agent-memory-architecture",
       "agent-planning-patterns",
       "agent-reliability-and-guardrails",
       "agent-state-and-durable-execution",
       "agent-workflow-builder_ai_toolkit",
+      "agentic-rl",
       "ai-agents-orchestration",
+      "ai-datastores",
       "ai-languages",
       "ai-llm-model-layer",
       "ai-mcp-sdk-prompting",
       "ai-rag-retrieval",
       "ai-redteaming-tooling",
       "anthropic-sdk",
+      "autonomous-loops",
       "coding-agents",
       "computer-use-and-gui-agents",
       "continuous-learning-v2",
@@ -104,6 +102,7 @@
       "eval-driven-development",
       "iterative-retrieval",
       "llm-alignment-post-training",
+      "llm-compression",
       "llm-context-engineering",
       "llm-fine-tuning-peft",
       "llm-gpu-kernels",
@@ -112,30 +111,33 @@
       "llm-models",
       "llm-observability",
       "llm-pretraining-scaling-laws",
+      "llm-routing-cascades",
       "mcp-builder",
       "mcp-servers",
       "mcp-tool-search-optimizer",
       "multi-agent-orchestration",
+      "multimodal-llm-architecture",
       "prompt-engineering",
       "prompt-lookup",
       "rag-architecture",
       "reasoning-models",
       "rlhf-infrastructure",
+      "transformer-architecture",
       "voice-realtime-agents"
     ],
     "aws-cloud": [
-      "aws-core",
       "aws-ai-ml",
       "aws-cloud",
+      "aws-core",
       "aws-serverless",
       "databases-aws-cockroach-indexeddb"
     ],
     "blockchain": [
       "bitcoin-protocol-expert",
+      "blockchain",
       "blockchain-economics",
       "ethereum-protocol-expert",
       "smart-contract-security",
-      "blockchain",
       "solana-account-model-and-state",
       "solana-sealevel-and-svm"
     ],
@@ -181,10 +183,10 @@
       "us-consumer-credit-and-debt-law"
     ],
     "consumer-finance": [
-      "health-insurance-and-coverage",
       "budgeting-and-saving",
       "consumer-finance",
       "estate-planning-and-wills",
+      "health-insurance-and-coverage",
       "investing-and-retirement",
       "medical-debt-and-billing",
       "personal-banking",
@@ -193,9 +195,9 @@
       "student-loans"
     ],
     "content-ingestion-extraction": [
-      "doc-store-bootstrapper",
       "content-ingestion-extraction",
       "doc-archaeology",
+      "doc-store-bootstrapper",
       "document-deconstructor",
       "dom-scraping-resilience",
       "granola-transcription",
@@ -203,8 +205,6 @@
       "using-plaud-mcp"
     ],
     "data-analytics": [
-      "da-9-reporting-communication",
-      "da-8-data-visualization",
       "da-1-1-1-data-analysis-vs-analytics-vs-data",
       "da-1-1-2-analysis-vs-synthesis",
       "da-1-1-3-quantitative-vs-qualitative-analysis",
@@ -303,33 +303,35 @@
       "da-5-exploratory-data-analysis",
       "da-6-statistical-modeling",
       "da-7-machine-learning",
+      "da-8-data-visualization",
+      "da-9-reporting-communication",
       "da-analytical-methods",
       "da-applied-and-communication",
       "da-data-engineering-platform"
     ],
     "deep-research": [
-      "deep-research-methods",
-      "deep-research"
+      "deep-research",
+      "deep-research-methods"
     ],
     "devops": [
-      "kubernetes-networking",
-      "docker-containers",
-      "ebpf-observability",
-      "immutable-atomic-linux",
-      "linux-networking-stack",
       "cicd-pipelines",
       "code-packaging",
       "devops-containers-cicd",
       "devops-linux-admin",
       "devops-linux-internals",
       "devops-observability",
+      "docker-containers",
+      "ebpf-observability",
       "git-workflows",
+      "immutable-atomic-linux",
       "io-uring-async-io",
+      "kubernetes-networking",
       "linux-boot-init",
       "linux-cgroups-namespaces",
       "linux-kernel-architecture",
       "linux-mac-privilege",
       "linux-memory-numa",
+      "linux-networking-stack",
       "linux-package-management",
       "linux-perf-tracing",
       "linux-sandboxing-confinement",
@@ -355,7 +357,6 @@
     ],
     "frontend": [
       "accessibility-ux-reviewer",
-      "web-design",
       "frontend-design",
       "frontend-design-ui-ux-expert",
       "frontend-ui",
@@ -363,7 +364,8 @@
       "mobile-ios-design",
       "react-nextjs",
       "ui-ux-pro-max",
-      "vanilla-js-ui-reviewer"
+      "vanilla-js-ui-reviewer",
+      "web-design"
     ],
     "integration": [
       "aha-api",
@@ -377,22 +379,20 @@
       "slack-dev"
     ],
     "lang": [
-      "nodejs-concurrency-internals",
-      "javascript-node-html-css-debugging-expert",
-      "typescript-advanced-types",
-      "javascript-nodejs",
-      "nodejs-typescript-and-runtime-features",
-      "pydantic-v2",
-      "python-patterns",
       "compose-multiplatform-patterns",
       "cpython-performance-profiling",
       "cpython-runtime-internals",
       "go-patterns",
+      "javascript-node-html-css-debugging-expert",
+      "javascript-nodejs",
       "javascript-runtimes-deno-bun-edge",
       "lang-go-and-mobile",
       "lang-js-ts",
       "lang-python",
+      "nodejs-concurrency-internals",
       "nodejs-native-addons-napi",
+      "nodejs-typescript-and-runtime-features",
+      "pydantic-v2",
       "python-app-packaging",
       "python-ast-codegen",
       "python-cli-tui",
@@ -401,9 +401,11 @@
       "python-in-browser-wasm",
       "python-logging-observability",
       "python-metaprogramming",
+      "python-patterns",
       "python-static-type-checking",
       "python-supply-chain-security",
       "python-testing",
+      "typescript-advanced-types",
       "typescript-expert",
       "uv-python-toolchain",
       "v8-engine-internals",
@@ -473,30 +475,29 @@
       "systematic-review-research-integrity"
     ],
     "security-review": [
-      "okta-expert",
-      "security-reviewer",
       "http-security-headers",
-      "security-compliance-auditor",
       "okta-admin-hardening",
+      "okta-expert",
       "okta-identity-governance",
       "okta-itdr-session-security",
       "okta-phishing-resistant-auth",
       "okta-zero-trust-device",
-      "security-review"
+      "security-compliance-auditor",
+      "security-review",
+      "security-reviewer"
     ],
     "software": [
-      "coding-standards",
-      "api-design-patterns",
-      "code-reviewer",
-      "express-patterns",
-      "testing-and-vitest-expert",
       "alarm-scheduler-patterns",
+      "api-design-patterns",
       "auth-checker-patterns",
       "backend-patterns",
+      "code-reviewer",
       "coding-patterns",
+      "coding-standards",
       "debugging",
       "debugging-strategies",
       "diagnostic-registry-patterns",
+      "express-patterns",
       "glean-llm-client-patterns",
       "indexeddb-patterns",
       "job-scheduling-patterns",
@@ -512,25 +513,26 @@
       "software-engineering-patterns",
       "sse-streaming-patterns",
       "template-config-patterns",
+      "testing-and-vitest-expert",
       "web-auth-patterns",
       "webapp-testing"
     ],
     "tam-operations": [
-      "ts-tools-support-api",
-      "tam-expertise",
-      "monday-board-audit",
-      "customer-file-consolidator",
-      "operator-report-generator",
-      "tam-account-reports",
       "account-artifacts-collector",
       "account-health-scorer",
       "autoremediation",
       "case-timeline-visualization",
       "case-tracker",
+      "customer-file-consolidator",
+      "monday-board-audit",
+      "operator-report-generator",
       "slack-subscription-auditor",
+      "tam-account-reports",
+      "tam-expertise",
+      "tam-operations",
       "tam-reference",
-      "tstools-reference",
-      "tam-operations"
+      "ts-tools-support-api",
+      "tstools-reference"
     ],
     "technical-instruction": [
       "assessment-certification-design",
@@ -570,16 +572,6 @@
       "venture-startup-fundraising-deck-model"
     ],
     "writing": [
-      "document-critique",
-      "kill-the-AI-ism",
-      "ddo",
-      "draft-review-revise-loop",
-      "resume-and-cv-writing",
-      "okr-writing",
-      "one-pager-writing",
-      "performance-review-writing",
-      "proposal-and-grant-writing",
-      "support-ticket-writing",
       "academic-and-citation-writing",
       "accessibility-writing",
       "agent-plan-writing",
@@ -599,6 +591,9 @@
       "content-and-marketing-writing",
       "cover-letter-writing",
       "crisis-pr-writing",
+      "ddo",
+      "document-critique",
+      "draft-review-revise-loop",
       "editing-and-revision",
       "email-craft",
       "error-message-craft",
@@ -611,6 +606,7 @@
       "inclusive-language",
       "interview-and-conversational",
       "job-description-writing",
+      "kill-the-AI-ism",
       "knowledge-base-authoring",
       "legal-adjacent-writing",
       "localization-friendly-writing",
@@ -619,7 +615,10 @@
       "negotiation-and-persuasion",
       "newsletter-writing",
       "nps-response-writing",
+      "okr-writing",
+      "one-pager-writing",
       "op-ed-writing",
+      "performance-review-writing",
       "pitch-deck-writing",
       "plain-language",
       "policy-and-governance-writing",
@@ -628,10 +627,12 @@
       "prd-writing",
       "press-release-writing",
       "profile-writing",
+      "proposal-and-grant-writing",
       "public-speaking-and-presentations",
       "realtime-writing-under-pressure",
       "reference-doc-writing",
       "release-blog-and-launch-narrative",
+      "resume-and-cv-writing",
       "rfc-and-design-docs",
       "rhetorical-frameworks-deep",
       "runbook-craft",
@@ -639,6 +640,7 @@
       "spec-writing",
       "speech-writing",
       "storytelling-and-narrative",
+      "support-ticket-writing",
       "survey-question-writing",
       "technical-writing-craft",
       "tutorial-writing",
@@ -649,1464 +651,6 @@
     ]
   },
   "skills": [
-    {
-      "id": "document-critique",
-      "name": "document-critique",
-      "kind": "top-level",
-      "isHub": true,
-      "hub": "writing-expert",
-      "family": "writing",
-      "version": "5.3.0",
-      "updated": "2026-06-23",
-      "origin": "local",
-      "summary": "Multipass document review agent that surfaces and fixes findings through passes 0–14 plus sub-passes 10.5 and 11.5 (intent through human-voice rephrasing, incl. authoritative verification and adversarial/hallucination guard) with a convergence loop until no medium-or-higher findings remain",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "writing-expert",
-        "software-engineering-patterns",
-        "tam-operations",
-        "mongodb-expert",
-        "security-review"
-      ],
-      "rankAccess30d": 39,
-      "srcBytes": 26048,
-      "path": "~/.claude/skills/document-critique/SKILL.md"
-    },
-    {
-      "id": "okta-expert",
-      "name": "okta-expert",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "security-review",
-      "family": "security-review",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "security-review"
-      ],
-      "rankAccess30d": 23,
-      "srcBytes": 34450,
-      "path": "~/.claude/skills/security-review/references/okta-expert.md"
-    },
-    {
-      "id": "deep-research-methods",
-      "name": "deep-research-methods",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "deep-research",
-      "family": "deep-research",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "deep-research"
-      ],
-      "rankAccess30d": 12,
-      "srcBytes": 21323,
-      "path": "~/.claude/skills/deep-research/references/deep-research-methods.md"
-    },
-    {
-      "id": "ts-tools-support-api",
-      "name": "ts-tools-support-api",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "tam-operations",
-      "family": "tam-operations",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "tam-operations"
-      ],
-      "rankAccess30d": 10,
-      "srcBytes": 22106,
-      "path": "~/.claude/skills/tam-operations/references/ts-tools-support-api.md"
-    },
-    {
-      "id": "kill-the-AI-ism",
-      "name": "kill-the-AI-ism",
-      "kind": "top-level",
-      "isHub": false,
-      "hub": "writing-expert",
-      "family": "writing",
-      "version": "1.2.0",
-      "updated": "2026-06-11",
-      "origin": "local",
-      "summary": "Diagnostic skill for detecting and replacing generator artifacts (\"AI-isms\") in prose",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "writing-expert",
-        "document-critique"
-      ],
-      "rankAccess30d": 8,
-      "srcBytes": 12607,
-      "path": "~/.claude/skills/kill-the-AI-ism/SKILL.md"
-    },
-    {
-      "id": "tam-expertise",
-      "name": "tam-expertise",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "tam-operations",
-      "family": "tam-operations",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "tam-operations"
-      ],
-      "rankAccess30d": 8,
-      "srcBytes": 4827,
-      "path": "~/.claude/skills/tam-operations/references/tam-expertise.md"
-    },
-    {
-      "id": "monday-board-audit",
-      "name": "monday-board-audit",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "tam-operations",
-      "family": "tam-operations",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "tam-operations"
-      ],
-      "rankAccess30d": 6,
-      "srcBytes": 30308,
-      "path": "~/.claude/skills/tam-operations/references/monday-board-audit.md"
-    },
-    {
-      "id": "coding-standards",
-      "name": "coding-standards",
-      "kind": "top-level",
-      "isHub": false,
-      "hub": "software-engineering-patterns",
-      "family": "software",
-      "version": "1.1.0",
-      "updated": "2026-05-29",
-      "origin": "ECC",
-      "summary": "Baseline cross-project coding conventions for naming, readability, immutability, error handling, and code-quality review. Covers JavaScript, TypeScript, and general principles (KISS, DRY, YAGNI). Use when enforcing consistency, reviewing code for quality, onboarding contributors, or applying naming and formatting rules",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "software-engineering-patterns",
-        "frontend-ui",
-        "lang-js-ts"
-      ],
-      "rankAccess30d": 5,
-      "srcBytes": 7961,
-      "path": "~/.claude/skills/coding-standards/SKILL.md"
-    },
-    {
-      "id": "ddo",
-      "name": "ddo",
-      "kind": "top-level",
-      "isHub": false,
-      "hub": "writing-expert",
-      "family": "writing",
-      "version": "1.5.0",
-      "updated": "2026-06-24",
-      "origin": null,
-      "summary": "Document Deep Optimizer — full multi-pass document critique that applies every",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "writing-expert"
-      ],
-      "rankAccess30d": 5,
-      "srcBytes": 32561,
-      "path": "~/.claude/skills/ddo/SKILL.md"
-    },
-    {
-      "id": "nodejs-concurrency-internals",
-      "name": "nodejs-concurrency-internals",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "lang-js-ts",
-      "family": "lang",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "lang-js-ts"
-      ],
-      "rankAccess30d": 5,
-      "srcBytes": 23160,
-      "path": "~/.claude/skills/lang-js-ts/references/nodejs-concurrency-internals.md"
-    },
-    {
-      "id": "da-9-reporting-communication",
-      "name": "da-9-reporting-communication",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "da-applied-and-communication",
-      "family": "data-analytics",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "da-applied-and-communication"
-      ],
-      "rankAccess30d": 4,
-      "srcBytes": 31164,
-      "path": "~/.claude/skills/da-applied-and-communication/references/da-9-reporting-communication.md"
-    },
-    {
-      "id": "javascript-node-html-css-debugging-expert",
-      "name": "javascript-node-html-css-debugging-expert",
-      "kind": "top-level",
-      "isHub": false,
-      "hub": "lang-js-ts",
-      "family": "lang",
-      "version": "1.1",
-      "updated": "2026-05-29",
-      "origin": null,
-      "summary": "JavaScript, Node.js, HTML, and CSS debugging expert: breakpoints (all 8 Chrome DevTools types),",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "lang-js-ts",
-        "software-engineering-patterns",
-        "devops-linux-admin"
-      ],
-      "rankAccess30d": 4,
-      "srcBytes": 38820,
-      "path": "~/.claude/skills/javascript-node-html-css-debugging-expert/SKILL.md"
-    },
-    {
-      "id": "kubernetes-networking",
-      "name": "kubernetes-networking",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "devops-containers-cicd",
-      "family": "devops",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "devops-containers-cicd"
-      ],
-      "rankAccess30d": 4,
-      "srcBytes": 27072,
-      "path": "~/.claude/skills/devops-containers-cicd/references/kubernetes-networking.md"
-    },
-    {
-      "id": "api-design-patterns",
-      "name": "api-design-patterns",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "software-engineering-patterns",
-      "family": "software",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "software-engineering-patterns"
-      ],
-      "rankAccess30d": 3,
-      "srcBytes": 31232,
-      "path": "~/.claude/skills/software-engineering-patterns/references/api-design-patterns.md"
-    },
-    {
-      "id": "customer-file-consolidator",
-      "name": "customer-file-consolidator",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "tam-operations",
-      "family": "tam-operations",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "tam-operations"
-      ],
-      "rankAccess30d": 3,
-      "srcBytes": 15688,
-      "path": "~/.claude/skills/tam-operations/references/customer-file-consolidator.md"
-    },
-    {
-      "id": "da-8-data-visualization",
-      "name": "da-8-data-visualization",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "da-applied-and-communication",
-      "family": "data-analytics",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "da-applied-and-communication"
-      ],
-      "rankAccess30d": 3,
-      "srcBytes": 41951,
-      "path": "~/.claude/skills/da-applied-and-communication/references/da-8-data-visualization.md"
-    },
-    {
-      "id": "draft-review-revise-loop",
-      "name": "draft-review-revise-loop",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "writing-expert",
-      "family": "writing",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "writing-expert"
-      ],
-      "rankAccess30d": 3,
-      "srcBytes": 13279,
-      "path": "~/.claude/skills/writing-expert/references/draft-review-revise-loop.md"
-    },
-    {
-      "id": "operator-report-generator",
-      "name": "operator-report-generator",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "tam-operations",
-      "family": "tam-operations",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "tam-operations"
-      ],
-      "rankAccess30d": 3,
-      "srcBytes": 18838,
-      "path": "~/.claude/skills/tam-operations/references/operator-report-generator.md"
-    },
-    {
-      "id": "tam-account-reports",
-      "name": "tam-account-reports",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "tam-operations",
-      "family": "tam-operations",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "tam-operations"
-      ],
-      "rankAccess30d": 3,
-      "srcBytes": 24966,
-      "path": "~/.claude/skills/tam-operations/references/tam-account-reports.md"
-    },
-    {
-      "id": "options-trading-and-strategies",
-      "name": "options-trading-and-strategies",
-      "kind": "top-level",
-      "isHub": false,
-      "hub": "trading-and-investing",
-      "family": "trading-and-investing",
-      "version": "1.0.0",
-      "updated": "2026-06-16",
-      "origin": null,
-      "summary": "SPOKE of trading-and-investing — listed equity/ETF & index OPTIONS for a US retail participant. Educational ONLY, NOT financial/investment/tax advice; a long option can lose 100% of its premium and short (naked) options carry large or unlimited risk (2026)",
-      "triggers": [
-        "calls vs puts, strike/expiration/premium, the 100-share multiplier, intrinsic vs extrinsic value, moneyness (ITM/ATM/OTM), American vs European, exercise & assignment, the options chain, open interest vs volume, LEAPS/weeklies/0DTE",
-        "the Greeks (delta/gamma/theta/vega/rho)",
-        "implied vs realized volatility, IV rank/percentile, vol smile/skew, VIX, conceptual Black-Scholes",
-        "strategies (long call/put, covered call, cash-secured put, protective put, vertical/credit/debit spreads, straddle/strangle, iron condor, butterfly, calendar/diagonal)",
-        "defined- vs undefined-risk",
-        "assignment, pin & ex-dividend early-assignment risk",
-        "options approval levels & margin",
-        "bid/ask & liquidity."
-      ],
-      "skip": [
-        "futures/forwards/swaps → derivatives-futures-and-swaps",
-        "position sizing/stops/Kelly → trading-risk-management",
-        "charting/indicators/entry timing → technical-analysis",
-        "wash-sale/Section-1256/trader-tax detail → trading-regulation-compliance-and-taxes",
-        "long-term passive/retirement investing → investing-and-retirement."
-      ],
-      "peers": [
-        "trading-and-investing",
-        "derivatives-futures-and-swaps",
-        "trading-risk-management",
-        "technical-analysis",
-        "trading-regulation-compliance-and-taxes",
-        "investing-and-retirement"
-      ],
-      "rankAccess30d": 2,
-      "srcBytes": 17197,
-      "path": "~/.claude/skills/options-trading-and-strategies/SKILL.md"
-    },
-    {
-      "id": "resume-and-cv-writing",
-      "name": "resume-and-cv-writing",
-      "kind": "top-level",
-      "isHub": false,
-      "hub": "career-and-formal-writing",
-      "family": "writing",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "Resume and CV writing — X-Y-Z achievement-bullet formula (\"Accomplished X as measured by Y by doing Z\" — Laszlo Bock / Google), quantification discipline, ATS parse-friendly formatting (single-column, standard headings, no tables/text-boxes/graphics), role tailoring, cover-letter complement, the skills-section debate, LinkedIn vs resume tone, academic CV vs industry resume distinction, employment-gap explanation, senior-IC vs management-track positioning, and the portfolio/resume convention split. TRIGGER when the user is writing or revising a resume, CV, cover letter, LinkedIn summary, achievement bullet, or asks about ATS, applicant tracking systems, X-Y-Z bullets, employment gaps, IC-vs-manager track resumes, academic-to-industry transitions, or \"is my resume ATS-friendly\". SKIP for grant or proposal writing (use proposal-and-grant-writing), generic technical/business prose (use writing-expert), sales or marketing conversion copy (use sales-and-marketing-copy — resume positioning is not conversion copy), structural rhetoric like BLUF or Minto pyramid (use rhetorical-frameworks-deep), executive-level comms unrelated to job search (use executive-comms)",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "career-and-formal-writing"
-      ],
-      "rankAccess30d": 2,
-      "srcBytes": 17203,
-      "path": "~/.claude/skills/resume-and-cv-writing/SKILL.md"
-    },
-    {
-      "id": "security-reviewer",
-      "name": "security-reviewer",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "security-review",
-      "family": "security-review",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "security-review"
-      ],
-      "rankAccess30d": 2,
-      "srcBytes": 7955,
-      "path": "~/.claude/skills/security-review/references/security-reviewer.md"
-    },
-    {
-      "id": "transformer-architecture",
-      "name": "transformer-architecture",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "ai-llm-model-layer",
-      "family": "ai-agent",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "ai-llm-model-layer"
-      ],
-      "rankAccess30d": 2,
-      "srcBytes": 29720,
-      "path": "~/.claude/skills/ai-llm-model-layer/references/transformer-architecture.md"
-    },
-    {
-      "id": "typescript-advanced-types",
-      "name": "typescript-advanced-types",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "lang-js-ts",
-      "family": "lang",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "lang-js-ts"
-      ],
-      "rankAccess30d": 2,
-      "srcBytes": 26179,
-      "path": "~/.claude/skills/lang-js-ts/references/typescript-advanced-types.md"
-    },
-    {
-      "id": "accessibility-ux-reviewer",
-      "name": "accessibility-ux-reviewer",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "frontend-ui",
-      "family": "frontend",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "frontend-ui"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 10222,
-      "path": "~/.claude/skills/frontend-ui/references/accessibility-ux-reviewer.md"
-    },
-    {
-      "id": "account-artifacts-collector",
-      "name": "account-artifacts-collector",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "tam-operations",
-      "family": "tam-operations",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "tam-operations"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 13936,
-      "path": "~/.claude/skills/tam-operations/references/account-artifacts-collector.md"
-    },
-    {
-      "id": "account-health-scorer",
-      "name": "account-health-scorer",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "tam-operations",
-      "family": "tam-operations",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "tam-operations"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 19195,
-      "path": "~/.claude/skills/tam-operations/references/account-health-scorer.md"
-    },
-    {
-      "id": "agent-council",
-      "name": "agent-council",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "ai-agents-orchestration",
-      "family": "ai-agent",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "ai-agents-orchestration"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 11923,
-      "path": "~/.claude/skills/ai-agents-orchestration/references/agent-council.md"
-    },
-    {
-      "id": "agent-ecosystem",
-      "name": "agent-ecosystem",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "ai-agents-orchestration",
-      "family": "ai-agent",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "ai-agents-orchestration"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 15410,
-      "path": "~/.claude/skills/ai-agents-orchestration/references/agent-ecosystem.md"
-    },
-    {
-      "id": "agentic-rl",
-      "name": "agentic-rl",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "ai-llm-model-layer",
-      "family": "ai-agent",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "ai-llm-model-layer"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 30303,
-      "path": "~/.claude/skills/ai-llm-model-layer/references/agentic-rl.md"
-    },
-    {
-      "id": "ai-datastores",
-      "name": "ai-datastores",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "ai-rag-retrieval",
-      "family": "ai-agent",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "ai-rag-retrieval"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 19367,
-      "path": "~/.claude/skills/ai-rag-retrieval/references/ai-datastores.md"
-    },
-    {
-      "id": "autonomous-loops",
-      "name": "autonomous-loops",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "ai-agents-orchestration",
-      "family": "ai-agent",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "ai-agents-orchestration"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 24197,
-      "path": "~/.claude/skills/ai-agents-orchestration/references/autonomous-loops.md"
-    },
-    {
-      "id": "autoremediation",
-      "name": "autoremediation",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "tam-operations",
-      "family": "tam-operations",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "tam-operations"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 6815,
-      "path": "~/.claude/skills/tam-operations/references/autoremediation.md"
-    },
-    {
-      "id": "aws-core",
-      "name": "aws-core",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "aws-cloud",
-      "family": "aws-cloud",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "aws-cloud"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 24394,
-      "path": "~/.claude/skills/aws-cloud/references/aws-core.md"
-    },
-    {
-      "id": "bitcoin-protocol-expert",
-      "name": "bitcoin-protocol-expert",
-      "kind": "top-level",
-      "isHub": false,
-      "hub": "blockchain",
-      "family": "blockchain",
-      "version": "1.0.1",
-      "updated": "2026-06-16",
-      "origin": null,
-      "summary": "Bitcoin protocol & ecosystem expert — base-layer mechanics, upgrades, and the L2/metaprotocol landscape",
-      "triggers": [
-        "the UTXO model & coin selection",
-        "tx structure (txid/wtxid, weight/vbytes, implicit fees)",
-        "Bitcoin Script & addresses (P2PKH/P2SH/P2WPKH/P2WSH/P2TR, multisig, CLTV/CSV, bech32/bech32m)",
-        "block/header structure & Merkle root",
-        "PoW mining, difficulty retargeting, the halving & 21M cap",
-        "mempool & fees (sat/vByte, RBF, CPFP, TRUC)",
-        "SegWit, Taproot/Schnorr/MAST, soft-fork activation",
-        "Lightning (channels, HTLCs, routing, BOLTs)",
-        "ordinals, BRC-20, Runes",
-        "BitVM & the Bitcoin-L2/restaking frontier (sidechains, drivechains, covenants, Babylon)",
-        "full nodes, wallets, UTXO-vs-account design."
-      ],
-      "skip": [
-        "consensus theory (PoW-as-a-class, BFT, PoS, finality) → distributed-systems-consensus",
-        "crypto-primitive math (ECDSA/Schnorr/SHA-256) → blockchain-crypto-primitives",
-        "token-economics/valuation → blockchain-economics",
-        "other whole chains (Ethereum/Solana) → per-chain skills",
-        "MongoDB → mongodb-* hubs."
-      ],
-      "peers": [
-        "distributed-systems-consensus",
-        "blockchain-crypto-primitives",
-        "blockchain-economics",
-        "per-chain",
-        "mongodb",
-        "blockchain"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 9851,
-      "path": "~/.claude/skills/bitcoin-protocol-expert/SKILL.md"
-    },
-    {
-      "id": "blockchain-economics",
-      "name": "blockchain-economics",
-      "kind": "top-level",
-      "isHub": false,
-      "hub": "blockchain",
-      "family": "blockchain",
-      "version": "1.0.0",
-      "updated": "2026-06-16",
-      "origin": null,
-      "summary": "Blockchain economics & cryptoeconomics — the incentive/mechanism layer above protocol mechanics",
-      "triggers": [
-        "tokenomics (issuance/emission schedules, inflation/disinflation, burns/sinks, ultrasound-money debate, vesting & unlock cliffs, fair-launch vs VC, airdrops, utility/governance/security-token taxonomy + Howey, the token-velocity / MV=PQ problem)",
-        "cryptoeconomics & mechanism design (incentive-compatibility, the security budget & 51%/cost-of-attack economics, staking economics — real yield/slashing/liquid staking/restaking, PoS-vs-PoW economic security, Schelling points, the verifier's dilemma)",
-        "fee-market design (EIP-1559 base fee & why it's not a pure auction, priority fees, EIP-4844 blob fees, Solana local fee markets, first-vs-second-price TFM)",
-        "MEV (arbitrage/sandwich/liquidation/JIT, the searcher→builder→relay→proposer supply chain, PBS & enshrined-PBS, Flashbots/MEV-Boost, order-flow auctions, intents/solvers, encrypted mempools)",
-        "governance economics (token-weighted/quadratic/conviction voting, vote-buying & bribe markets, DAO treasuries)."
-      ],
-      "skip": [
-        "DeFi protocol mechanics/AMM math → defi",
-        "consensus theory/safety proofs → distributed-systems-consensus",
-        "per-chain protocol detail → bitcoin-protocol-expert / ethereum-protocol-expert",
-        "crypto-primitive math → blockchain-crypto-primitives",
-        "crypto investing/trading → investing-and-retirement / trading-and-investing (mechanism economics, NOT trading advice)."
-      ],
-      "peers": [
-        "defi",
-        "distributed-systems-consensus",
-        "bitcoin-protocol-expert",
-        "blockchain-crypto-primitives",
-        "investing-and-retirement",
-        "blockchain"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 12541,
-      "path": "~/.claude/skills/blockchain-economics/SKILL.md"
-    },
-    {
-      "id": "case-timeline-visualization",
-      "name": "case-timeline-visualization",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "tam-operations",
-      "family": "tam-operations",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "tam-operations"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 18298,
-      "path": "~/.claude/skills/tam-operations/references/case-timeline-visualization.md"
-    },
-    {
-      "id": "case-tracker",
-      "name": "case-tracker",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "tam-operations",
-      "family": "tam-operations",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "tam-operations"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 19914,
-      "path": "~/.claude/skills/tam-operations/references/case-tracker.md"
-    },
-    {
-      "id": "code-reviewer",
-      "name": "code-reviewer",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "software-engineering-patterns",
-      "family": "software",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "software-engineering-patterns"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 10303,
-      "path": "~/.claude/skills/software-engineering-patterns/references/code-reviewer.md"
-    },
-    {
-      "id": "doc-store-bootstrapper",
-      "name": "doc-store-bootstrapper",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "content-ingestion-extraction",
-      "family": "content-ingestion-extraction",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "content-ingestion-extraction"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 11014,
-      "path": "~/.claude/skills/content-ingestion-extraction/references/doc-store-bootstrapper.md"
-    },
-    {
-      "id": "docker-containers",
-      "name": "docker-containers",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "devops-containers-cicd",
-      "family": "devops",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "devops-containers-cicd"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 43716,
-      "path": "~/.claude/skills/devops-containers-cicd/references/docker-containers.md"
-    },
-    {
-      "id": "ebpf-observability",
-      "name": "ebpf-observability",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "devops-observability",
-      "family": "devops",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "devops-observability"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 17786,
-      "path": "~/.claude/skills/devops-observability/references/ebpf-observability.md"
-    },
-    {
-      "id": "ethereum-protocol-expert",
-      "name": "ethereum-protocol-expert",
-      "kind": "top-level",
-      "isHub": false,
-      "hub": "blockchain",
-      "family": "blockchain",
-      "version": "1.0.0",
-      "updated": "2026-06-16",
-      "origin": null,
-      "summary": "Ethereum protocol expert, how the chain works beneath the app layer (execution, consensus, scaling)",
-      "triggers": [
-        "the account model (EOA vs contract accounts, nonce/balance/storageRoot/codeHash, EIP-7702), world state & the Merkle-Patricia trie (RLP, Verkle debate)",
-        "the EVM (stack machine, opcodes, memory vs storage vs calldata, CALL/DELEGATECALL/STATICCALL/CREATE2, in-EVM gas, cold/warm access EIP-2929, precompiles)",
-        "the EIP-1559 fee market (base fee + priority fee + burn, typed txs, mempool, MEV-Boost/PBS, tx & block lifecycle, receipts)",
-        "Proof of Stake (Beacon Chain, the Merge, 32-ETH validators/staking/withdrawals, EIP-7251, slots/epochs/RANDAO, attestations, Gasper = Casper FFG + LMD-GHOST, slashing, finality/weak-subjectivity)",
-        "data & scaling (EIP-4844 blobs/proto-danksharding, KZG ceremony, data-availability sampling, PeerDAS, danksharding, the rollup-centric roadmap)",
-        "Layer-2 (optimistic vs ZK rollups, fraud vs validity proofs, sequencers, rollup vs validium, the 7-day challenge window, L2BEAT stages)."
-      ],
-      "skip": [
-        "Solidity/Vyper/Foundry/ERCs & contract DEVELOPMENT → ethereum-smart-contract-development",
-        "contract auditing/exploits → contract-security",
-        "SNARK/STARK & circuit MATH → zero-knowledge-proofs (here: only validity proofs' ROLE in scaling)",
-        "consensus theory (CAP/FLP/BFT proofs) → distributed-systems-consensus",
-        "crypto primitives (ECDSA, BLS, KZG math, Keccak) → blockchain-crypto-primitives",
-        "token-economics → blockchain-economics",
-        "other chains → per-chain skills",
-        "MongoDB → mongodb-* hubs."
-      ],
-      "peers": [
-        "ethereum-smart-contract-development",
-        "contract-security",
-        "zero-knowledge-proofs",
-        "distributed-systems-consensus",
-        "blockchain-crypto-primitives",
-        "blockchain-economics",
-        "per-chain",
-        "mongodb",
-        "blockchain"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 15027,
-      "path": "~/.claude/skills/ethereum-protocol-expert/SKILL.md"
-    },
-    {
-      "id": "express-patterns",
-      "name": "express-patterns",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "software-engineering-patterns",
-      "family": "software",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "software-engineering-patterns"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 10865,
-      "path": "~/.claude/skills/software-engineering-patterns/references/express-patterns.md"
-    },
-    {
-      "id": "health-insurance-and-coverage",
-      "name": "health-insurance-and-coverage",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "consumer-finance",
-      "family": "consumer-finance",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "consumer-finance"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 23047,
-      "path": "~/.claude/skills/consumer-finance/references/health-insurance-and-coverage.md"
-    },
-    {
-      "id": "http-security-headers",
-      "name": "http-security-headers",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "security-review",
-      "family": "security-review",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "security-review"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 26341,
-      "path": "~/.claude/skills/security-review/references/http-security-headers.md"
-    },
-    {
-      "id": "immutable-atomic-linux",
-      "name": "immutable-atomic-linux",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "devops-linux-internals",
-      "family": "devops",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "devops-linux-internals"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 21156,
-      "path": "~/.claude/skills/devops-linux-internals/references/immutable-atomic-linux.md"
-    },
-    {
-      "id": "javascript-nodejs",
-      "name": "javascript-nodejs",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "lang-js-ts",
-      "family": "lang",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "lang-js-ts"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 16299,
-      "path": "~/.claude/skills/lang-js-ts/references/javascript-nodejs.md"
-    },
-    {
-      "id": "linux-networking-stack",
-      "name": "linux-networking-stack",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "devops-linux-admin",
-      "family": "devops",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "devops-linux-admin"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 14871,
-      "path": "~/.claude/skills/devops-linux-admin/references/linux-networking-stack.md"
-    },
-    {
-      "id": "llm-compression",
-      "name": "llm-compression",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "ai-llm-model-layer",
-      "family": "ai-agent",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "ai-llm-model-layer"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 28798,
-      "path": "~/.claude/skills/ai-llm-model-layer/references/llm-compression.md"
-    },
-    {
-      "id": "llm-routing-cascades",
-      "name": "llm-routing-cascades",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "ai-llm-model-layer",
-      "family": "ai-agent",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "ai-llm-model-layer"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 15474,
-      "path": "~/.claude/skills/ai-llm-model-layer/references/llm-routing-cascades.md"
-    },
-    {
-      "id": "multimodal-llm-architecture",
-      "name": "multimodal-llm-architecture",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "ai-llm-model-layer",
-      "family": "ai-agent",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "ai-llm-model-layer"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 43650,
-      "path": "~/.claude/skills/ai-llm-model-layer/references/multimodal-llm-architecture.md"
-    },
-    {
-      "id": "nodejs-typescript-and-runtime-features",
-      "name": "nodejs-typescript-and-runtime-features",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "lang-js-ts",
-      "family": "lang",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "lang-js-ts"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 15765,
-      "path": "~/.claude/skills/lang-js-ts/references/nodejs-typescript-and-runtime-features.md"
-    },
-    {
-      "id": "okr-writing",
-      "name": "okr-writing",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "executive-comms",
-      "family": "writing",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "executive-comms"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 16911,
-      "path": "~/.claude/skills/executive-comms/references/okr-writing.md"
-    },
-    {
-      "id": "one-pager-writing",
-      "name": "one-pager-writing",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "executive-comms",
-      "family": "writing",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "executive-comms"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 18805,
-      "path": "~/.claude/skills/executive-comms/references/one-pager-writing.md"
-    },
-    {
-      "id": "performance-review-writing",
-      "name": "performance-review-writing",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "career-and-formal-writing",
-      "family": "writing",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "career-and-formal-writing"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 25267,
-      "path": "~/.claude/skills/career-and-formal-writing/references/performance-review-writing.md"
-    },
-    {
-      "id": "proposal-and-grant-writing",
-      "name": "proposal-and-grant-writing",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "executive-comms",
-      "family": "writing",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "executive-comms"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 15641,
-      "path": "~/.claude/skills/executive-comms/references/proposal-and-grant-writing.md"
-    },
-    {
-      "id": "pydantic-v2",
-      "name": "pydantic-v2",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "lang-python",
-      "family": "lang",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "lang-python"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 18027,
-      "path": "~/.claude/skills/lang-python/references/pydantic-v2.md"
-    },
-    {
-      "id": "python-patterns",
-      "name": "python-patterns",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "lang-python",
-      "family": "lang",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "lang-python"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 44508,
-      "path": "~/.claude/skills/lang-python/references/python-patterns.md"
-    },
-    {
-      "id": "security-compliance-auditor",
-      "name": "security-compliance-auditor",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "security-review",
-      "family": "security-review",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "security-review"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 12544,
-      "path": "~/.claude/skills/security-review/references/security-compliance-auditor.md"
-    },
-    {
-      "id": "slack-subscription-auditor",
-      "name": "slack-subscription-auditor",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "tam-operations",
-      "family": "tam-operations",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "tam-operations"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 26978,
-      "path": "~/.claude/skills/tam-operations/references/slack-subscription-auditor.md"
-    },
-    {
-      "id": "smart-contract-security",
-      "name": "smart-contract-security",
-      "kind": "top-level",
-      "isHub": false,
-      "hub": "blockchain",
-      "family": "blockchain",
-      "version": "1.0.0",
-      "updated": "2026-06-16",
-      "origin": null,
-      "summary": "Smart-contract security & auditing expert — finding, classifying, and preventing on-chain vulnerabilities on EVM (and Solana)",
-      "triggers": [
-        "reviewing/auditing a Solidity/Vyper/Rust contract for exploits",
-        "reentrancy (single-function, cross-function, cross-contract, read-only)",
-        "access-control failures, unprotected init/selfdestruct, tx.origin auth",
-        "integer over/underflow (pre-0.8 vs checked vs unchecked), rounding/precision, ERC-4626 inflation",
-        "oracle/price manipulation, flash-loan attacks",
-        "front-running/MEV-aware contract bugs",
-        "unchecked external calls, delegatecall/storage collision, signature replay/malleability, uninitialized proxies (UUPS), DoS/gas-griefing",
-        "the audit process (scoping, threat modeling, writing findings), SWC/SCWE/OWASP-SC-Top-10 taxonomy, severity rubrics (Immunefi/Code4rena/Sherlock)",
-        "security tooling (Slither, Mythril, Foundry invariant testing, Echidna, Medusa, Certora, Halmos, Ethernaut, Damn Vulnerable DeFi)",
-        "Solana-program pitfalls (missing signer/owner checks, account confusion, arbitrary CPI, Anchor constraints)",
-        "landmark exploits (The DAO, Parity, bridge hacks)."
-      ],
-      "skip": [
-        "Solidity/Vyper LANGUAGE syntax & general dev tooling → ethereum-smart-contract-development",
-        "EVM/protocol internals (opcodes, gas mechanics, state trie) → ethereum-protocol-expert",
-        "MEV economics/markets (PBS, builders, order-flow auctions) → blockchain-economics",
-        "consensus-layer attacks (51%, long-range, selfish mining) → distributed-systems-consensus",
-        "Rust/Anchor/Solana LANGUAGE surface (not security) → lang-rust",
-        "general web/app/infra appsec (OWASP web Top 10, CSP, SSRF) → security-review/security-reviewer."
-      ],
-      "peers": [
-        "ethereum-smart-contract-development",
-        "ethereum-protocol-expert",
-        "blockchain-economics",
-        "distributed-systems-consensus",
-        "lang-rust",
-        "security-review",
-        "blockchain"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 14965,
-      "path": "~/.claude/skills/smart-contract-security/SKILL.md"
-    },
-    {
-      "id": "support-ticket-writing",
-      "name": "support-ticket-writing",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "content-and-marketing-writing",
-      "family": "writing",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "content-and-marketing-writing"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 28798,
-      "path": "~/.claude/skills/content-and-marketing-writing/references/support-ticket-writing.md"
-    },
-    {
-      "id": "tam-reference",
-      "name": "tam-reference",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "tam-operations",
-      "family": "tam-operations",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "tam-operations"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 34077,
-      "path": "~/.claude/skills/tam-operations/references/tam-reference.md"
-    },
-    {
-      "id": "testing-and-vitest-expert",
-      "name": "testing-and-vitest-expert",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "software-engineering-patterns",
-      "family": "software",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "software-engineering-patterns"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 10079,
-      "path": "~/.claude/skills/software-engineering-patterns/references/testing-and-vitest-expert.md"
-    },
-    {
-      "id": "tstools-reference",
-      "name": "tstools-reference",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "tam-operations",
-      "family": "tam-operations",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "tam-operations"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 16976,
-      "path": "~/.claude/skills/tam-operations/references/tstools-reference.md"
-    },
-    {
-      "id": "web-design",
-      "name": "web-design",
-      "kind": "folded-spoke",
-      "isHub": false,
-      "hub": "frontend-ui",
-      "family": "frontend",
-      "version": null,
-      "updated": null,
-      "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [
-        "frontend-ui"
-      ],
-      "rankAccess30d": 1,
-      "srcBytes": 5014,
-      "path": "~/.claude/skills/frontend-ui/references/web-design.md"
-    },
     {
       "id": "10gen",
       "name": "10gen",
@@ -2188,6 +732,26 @@
       "path": "~/.claude/skills/physical-access-control/references/access-credentials-wiegand-osdp.md"
     },
     {
+      "id": "accessibility-ux-reviewer",
+      "name": "accessibility-ux-reviewer",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "frontend-ui",
+      "family": "frontend",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "frontend-ui"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 10222,
+      "path": "~/.claude/skills/frontend-ui/references/accessibility-ux-reviewer.md"
+    },
+    {
       "id": "accessibility-writing",
       "name": "accessibility-writing",
       "kind": "folded-spoke",
@@ -2208,6 +772,46 @@
       "path": "~/.claude/skills/writing-expert/references/accessibility-writing.md"
     },
     {
+      "id": "account-artifacts-collector",
+      "name": "account-artifacts-collector",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "tam-operations",
+      "family": "tam-operations",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "tam-operations"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 13936,
+      "path": "~/.claude/skills/tam-operations/references/account-artifacts-collector.md"
+    },
+    {
+      "id": "account-health-scorer",
+      "name": "account-health-scorer",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "tam-operations",
+      "family": "tam-operations",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "tam-operations"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 19195,
+      "path": "~/.claude/skills/tam-operations/references/account-health-scorer.md"
+    },
+    {
       "id": "advanced-rag-patterns",
       "name": "advanced-rag-patterns",
       "kind": "folded-spoke",
@@ -2226,6 +830,46 @@
       "rankAccess30d": 0,
       "srcBytes": 16652,
       "path": "~/.claude/skills/ai-rag-retrieval/references/advanced-rag-patterns.md"
+    },
+    {
+      "id": "agent-council",
+      "name": "agent-council",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "ai-agents-orchestration",
+      "family": "ai-agent",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "ai-agents-orchestration"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 11923,
+      "path": "~/.claude/skills/ai-agents-orchestration/references/agent-council.md"
+    },
+    {
+      "id": "agent-ecosystem",
+      "name": "agent-ecosystem",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "ai-agents-orchestration",
+      "family": "ai-agent",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "ai-agents-orchestration"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 15410,
+      "path": "~/.claude/skills/ai-agents-orchestration/references/agent-ecosystem.md"
     },
     {
       "id": "agent-harness-construction",
@@ -2366,6 +1010,26 @@
       "rankAccess30d": 0,
       "srcBytes": 9856,
       "path": "~/.claude/skills/ai-agents-orchestration/references/agent-workflow-builder_ai_toolkit.md"
+    },
+    {
+      "id": "agentic-rl",
+      "name": "agentic-rl",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "ai-llm-model-layer",
+      "family": "ai-agent",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "ai-llm-model-layer"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 30303,
+      "path": "~/.claude/skills/ai-llm-model-layer/references/agentic-rl.md"
     },
     {
       "id": "aha-api",
@@ -2532,6 +1196,26 @@
       "rankAccess30d": 0,
       "srcBytes": 22915,
       "path": "~/.claude/skills/writing-expert/references/ai-collaboration-writing.md"
+    },
+    {
+      "id": "ai-datastores",
+      "name": "ai-datastores",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "ai-rag-retrieval",
+      "family": "ai-agent",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "ai-rag-retrieval"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 19367,
+      "path": "~/.claude/skills/ai-rag-retrieval/references/ai-datastores.md"
     },
     {
       "id": "ai-languages",
@@ -2755,6 +1439,26 @@
       "path": "~/.claude/skills/writing-expert/references/anti-jargon-translator.md"
     },
     {
+      "id": "api-design-patterns",
+      "name": "api-design-patterns",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "software-engineering-patterns",
+      "family": "software",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "software-engineering-patterns"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 31232,
+      "path": "~/.claude/skills/software-engineering-patterns/references/api-design-patterns.md"
+    },
+    {
       "id": "api-docs-craft",
       "name": "api-docs-craft",
       "kind": "folded-spoke",
@@ -2976,6 +1680,46 @@
       "path": "~/.claude/skills/automated-job-applications/SKILL.md"
     },
     {
+      "id": "autonomous-loops",
+      "name": "autonomous-loops",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "ai-agents-orchestration",
+      "family": "ai-agent",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "ai-agents-orchestration"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 24197,
+      "path": "~/.claude/skills/ai-agents-orchestration/references/autonomous-loops.md"
+    },
+    {
+      "id": "autoremediation",
+      "name": "autoremediation",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "tam-operations",
+      "family": "tam-operations",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "tam-operations"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 6815,
+      "path": "~/.claude/skills/tam-operations/references/autoremediation.md"
+    },
+    {
       "id": "aws-ai-ml",
       "name": "aws-ai-ml",
       "kind": "folded-spoke",
@@ -3002,29 +1746,56 @@
       "isHub": true,
       "hub": null,
       "family": "aws-cloud",
-      "version": "1.1.0",
-      "updated": "2026-06-12",
+      "version": "1.2.0",
+      "updated": "2026-06-30",
       "origin": "local",
-      "summary": "AWS hub — infra, serverless, AI/ML, private connectivity, databases",
+      "summary": "AWS hub — infra, serverless, AI/ML, private connectivity, databases, security, identity",
       "triggers": [
-        "IAM (policies, roles, SCPs, federation), AWS CLI/SSO, boto3/aws-sdk, EC2/EBS/S3, VPC design, Well-Architected, CloudWatch/CloudTrail (aws-core)",
-        "Lambda, EventBridge, Step Functions, API Gateway, ECS/EKS Fargate, CDK/SAM/CloudFormation, serverless patterns (aws-serverless)",
-        "Bedrock & SageMaker — foundation models, agents, RAG, guardrails, training/endpoints (aws-ai-ml)",
-        "PrivateLink & VPC endpoints — interface/gateway/GWLB endpoints, endpoint services, private DNS/split-horizon, endpoint policies, PrivateLink vs peering vs Transit Gateway, endpoint troubleshooting (aws-privatelink-vpc-endpoints)",
-        "AWS databases — RDS/Aurora/DynamoDB/DocumentDB/Neptune, DocumentDB-vs-Atlas, CockroachDB, IndexedDB (databases-aws-cockroach-indexeddb)."
+        "IAM, CLI/SSO, boto3/aws-sdk, EC2/EBS/S3, VPC, Well-Architected, CloudWatch/CloudTrail (aws-core)",
+        "Lambda, EventBridge, Step Functions, API Gateway, ECS/EKS Fargate, CDK/SAM/CloudFormation (aws-serverless)",
+        "Bedrock & SageMaker — models, agents, RAG, guardrails (aws-ai-ml)",
+        "PrivateLink & VPC endpoints — interface/gateway/GWLB, endpoint services, private DNS/split-horizon, endpoint policies, vs peering/TGW, troubleshooting (aws-privatelink-vpc-endpoints)",
+        "AWS databases — RDS/Aurora/DynamoDB/DocumentDB/Neptune, DocumentDB-vs-Atlas, CockroachDB, IndexedDB (databases-aws-cockroach-indexeddb)",
+        "Aurora engine deep-dive — storage-compute separation, 6-way quorum, Serverless v2, Global Database, Aurora DSQL (aws-aurora)",
+        "security services — KMS, GuardDuty, Security Hub, Config, WAF/Shield, Macie, Inspector, Access Analyzer (aws-security-services)",
+        "secretless workload identity — IMDSv2, ECS task roles, EKS IRSA & Pod Identity, GitHub/GitLab OIDC, Roles Anywhere (aws-secretless-auth)."
       ],
       "skip": [
         "non-AWS cloud",
-        "MongoDB Atlas platform (incl. Atlas private endpoints) → mongodb-atlas-expert",
-        "Cloudflare R2 / R2-vs-S3 egress economics → cloudflare-platform."
+        "MongoDB Atlas platform → mongodb-atlas-expert",
+        "the PostgreSQL engine itself (MVCC, vacuum, planner, WAL) → postgresql-expert",
+        "Cloudflare R2/egress → cloudflare-platform",
+        "app/web code-level security review → security-review."
       ],
       "peers": [
         "mongodb-atlas-expert",
-        "cloudflare-platform"
+        "postgresql-expert",
+        "cloudflare-platform",
+        "security-review"
       ],
       "rankAccess30d": 0,
-      "srcBytes": 3081,
+      "srcBytes": 5033,
       "path": "~/.claude/skills/aws-cloud/SKILL.md"
+    },
+    {
+      "id": "aws-core",
+      "name": "aws-core",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "aws-cloud",
+      "family": "aws-cloud",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "aws-cloud"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 24394,
+      "path": "~/.claude/skills/aws-cloud/references/aws-core.md"
     },
     {
       "id": "aws-serverless",
@@ -3145,6 +1916,49 @@
       "path": "~/.claude/skills/big-bank-IT/SKILL.md"
     },
     {
+      "id": "bitcoin-protocol-expert",
+      "name": "bitcoin-protocol-expert",
+      "kind": "top-level",
+      "isHub": false,
+      "hub": "blockchain",
+      "family": "blockchain",
+      "version": "1.0.1",
+      "updated": "2026-06-16",
+      "origin": null,
+      "summary": "Bitcoin protocol & ecosystem expert — base-layer mechanics, upgrades, and the L2/metaprotocol landscape",
+      "triggers": [
+        "the UTXO model & coin selection",
+        "tx structure (txid/wtxid, weight/vbytes, implicit fees)",
+        "Bitcoin Script & addresses (P2PKH/P2SH/P2WPKH/P2WSH/P2TR, multisig, CLTV/CSV, bech32/bech32m)",
+        "block/header structure & Merkle root",
+        "PoW mining, difficulty retargeting, the halving & 21M cap",
+        "mempool & fees (sat/vByte, RBF, CPFP, TRUC)",
+        "SegWit, Taproot/Schnorr/MAST, soft-fork activation",
+        "Lightning (channels, HTLCs, routing, BOLTs)",
+        "ordinals, BRC-20, Runes",
+        "BitVM & the Bitcoin-L2/restaking frontier (sidechains, drivechains, covenants, Babylon)",
+        "full nodes, wallets, UTXO-vs-account design."
+      ],
+      "skip": [
+        "consensus theory (PoW-as-a-class, BFT, PoS, finality) → distributed-systems-consensus",
+        "crypto-primitive math (ECDSA/Schnorr/SHA-256) → blockchain-crypto-primitives",
+        "token-economics/valuation → blockchain-economics",
+        "other whole chains (Ethereum/Solana) → per-chain skills",
+        "MongoDB → mongodb-* hubs."
+      ],
+      "peers": [
+        "distributed-systems-consensus",
+        "blockchain-crypto-primitives",
+        "blockchain-economics",
+        "per-chain",
+        "mongodb",
+        "blockchain"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 9851,
+      "path": "~/.claude/skills/bitcoin-protocol-expert/SKILL.md"
+    },
+    {
       "id": "blockchain",
       "name": "blockchain",
       "kind": "top-level",
@@ -3177,6 +1991,43 @@
       "rankAccess30d": 0,
       "srcBytes": 5776,
       "path": "~/.claude/skills/blockchain/SKILL.md"
+    },
+    {
+      "id": "blockchain-economics",
+      "name": "blockchain-economics",
+      "kind": "top-level",
+      "isHub": false,
+      "hub": "blockchain",
+      "family": "blockchain",
+      "version": "1.0.0",
+      "updated": "2026-06-16",
+      "origin": null,
+      "summary": "Blockchain economics & cryptoeconomics — the incentive/mechanism layer above protocol mechanics",
+      "triggers": [
+        "tokenomics (issuance/emission schedules, inflation/disinflation, burns/sinks, ultrasound-money debate, vesting & unlock cliffs, fair-launch vs VC, airdrops, utility/governance/security-token taxonomy + Howey, the token-velocity / MV=PQ problem)",
+        "cryptoeconomics & mechanism design (incentive-compatibility, the security budget & 51%/cost-of-attack economics, staking economics — real yield/slashing/liquid staking/restaking, PoS-vs-PoW economic security, Schelling points, the verifier's dilemma)",
+        "fee-market design (EIP-1559 base fee & why it's not a pure auction, priority fees, EIP-4844 blob fees, Solana local fee markets, first-vs-second-price TFM)",
+        "MEV (arbitrage/sandwich/liquidation/JIT, the searcher→builder→relay→proposer supply chain, PBS & enshrined-PBS, Flashbots/MEV-Boost, order-flow auctions, intents/solvers, encrypted mempools)",
+        "governance economics (token-weighted/quadratic/conviction voting, vote-buying & bribe markets, DAO treasuries)."
+      ],
+      "skip": [
+        "DeFi protocol mechanics/AMM math → defi",
+        "consensus theory/safety proofs → distributed-systems-consensus",
+        "per-chain protocol detail → bitcoin-protocol-expert / ethereum-protocol-expert",
+        "crypto-primitive math → blockchain-crypto-primitives",
+        "crypto investing/trading → investing-and-retirement / trading-and-investing (mechanism economics, NOT trading advice)."
+      ],
+      "peers": [
+        "defi",
+        "distributed-systems-consensus",
+        "bitcoin-protocol-expert",
+        "blockchain-crypto-primitives",
+        "investing-and-retirement",
+        "blockchain"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 12541,
+      "path": "~/.claude/skills/blockchain-economics/SKILL.md"
     },
     {
       "id": "brand-voice-guide-writing",
@@ -3281,6 +2132,46 @@
       "rankAccess30d": 0,
       "srcBytes": 22835,
       "path": "~/.claude/skills/executive-comms/references/case-study-writing.md"
+    },
+    {
+      "id": "case-timeline-visualization",
+      "name": "case-timeline-visualization",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "tam-operations",
+      "family": "tam-operations",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "tam-operations"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 18298,
+      "path": "~/.claude/skills/tam-operations/references/case-timeline-visualization.md"
+    },
+    {
+      "id": "case-tracker",
+      "name": "case-tracker",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "tam-operations",
+      "family": "tam-operations",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "tam-operations"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 19914,
+      "path": "~/.claude/skills/tam-operations/references/case-tracker.md"
     },
     {
       "id": "caveman",
@@ -3797,6 +2688,26 @@
       "path": "~/.claude/skills/technical-writing-craft/references/code-plan-writing.md"
     },
     {
+      "id": "code-reviewer",
+      "name": "code-reviewer",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "software-engineering-patterns",
+      "family": "software",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "software-engineering-patterns"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 10303,
+      "path": "~/.claude/skills/software-engineering-patterns/references/code-reviewer.md"
+    },
+    {
       "id": "coding-agents",
       "name": "coding-agents",
       "kind": "folded-spoke",
@@ -3835,6 +2746,28 @@
       "rankAccess30d": 0,
       "srcBytes": 20297,
       "path": "~/.claude/skills/software-engineering-patterns/references/coding-patterns.md"
+    },
+    {
+      "id": "coding-standards",
+      "name": "coding-standards",
+      "kind": "top-level",
+      "isHub": false,
+      "hub": "software-engineering-patterns",
+      "family": "software",
+      "version": "1.1.0",
+      "updated": "2026-05-29",
+      "origin": "ECC",
+      "summary": "Baseline cross-project coding conventions for naming, readability, immutability, error handling, and code-quality review. Covers JavaScript, TypeScript, and general principles (KISS, DRY, YAGNI). Use when enforcing consistency, reviewing code for quality, onboarding contributors, or applying naming and formatting rules",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "software-engineering-patterns",
+        "frontend-ui",
+        "lang-js-ts"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 7961,
+      "path": "~/.claude/skills/coding-standards/SKILL.md"
     },
     {
       "id": "cognitive-task-analysis",
@@ -3923,15 +2856,33 @@
       "isHub": false,
       "hub": null,
       "family": null,
-      "version": null,
-      "updated": null,
+      "version": "1.5.0",
+      "updated": "2026-06-15",
       "origin": null,
-      "summary": "",
-      "triggers": [],
-      "skip": [],
-      "peers": [],
+      "summary": "Gap-discovery layer ABOVE /dr: map a subject's full conceptual family (parent domain, siblings, sub-concepts, adjacent/cross-over fields, frontier), surface useful/novel concepts you're MISSING, score each via the da-* skills, then loop /dr on every viable gap until the concept tree saturates; finishes with skill-optimizer + prompt-deep-optimizer",
+      "triggers": [
+        "'what am I missing about X', 'map the concept space/family of X', 'find adjacent/sibling concepts to X', 'what skills should I build around X', 'saturate/complete my coverage of X', 'expand my concept tree for X', 'explore the conceptual neighborhood of X'."
+      ],
+      "skip": [
+        "researching a topic you ALREADY named → /dr",
+        "cited web report with no skill-building → deep-research",
+        "create ONE skill interactively → skill-creator",
+        "audit/improve one existing skill → skill-optimizer",
+        "optimize one prompt → phe / prompt-deep-optimizer."
+      ],
+      "peers": [
+        "deep-research",
+        "skill-optimizer",
+        "prompt-deep-optimizer",
+        "skill-tree-architect",
+        "skill-creator",
+        "da-analytical-methods",
+        "da-applied-and-communication",
+        "prompt-helper-optimizer",
+        "phe"
+      ],
       "rankAccess30d": 0,
-      "srcBytes": 29099,
+      "srcBytes": 28791,
       "path": "~/.claude/skills/concept-family-explorer/SKILL.md"
     },
     {
@@ -4247,6 +3198,26 @@
       "rankAccess30d": 0,
       "srcBytes": 8137,
       "path": "~/.claude/skills/document-formats/references/csv.md"
+    },
+    {
+      "id": "customer-file-consolidator",
+      "name": "customer-file-consolidator",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "tam-operations",
+      "family": "tam-operations",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "tam-operations"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 15688,
+      "path": "~/.claude/skills/tam-operations/references/customer-file-consolidator.md"
     },
     {
       "id": "da-1-1-1-data-analysis-vs-analytics-vs-data",
@@ -6267,6 +5238,46 @@
       "path": "~/.claude/skills/da-analytical-methods/references/da-7-machine-learning.md"
     },
     {
+      "id": "da-8-data-visualization",
+      "name": "da-8-data-visualization",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "da-applied-and-communication",
+      "family": "data-analytics",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "da-applied-and-communication"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 41951,
+      "path": "~/.claude/skills/da-applied-and-communication/references/da-8-data-visualization.md"
+    },
+    {
+      "id": "da-9-reporting-communication",
+      "name": "da-9-reporting-communication",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "da-applied-and-communication",
+      "family": "data-analytics",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "da-applied-and-communication"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 31164,
+      "path": "~/.claude/skills/da-applied-and-communication/references/da-9-reporting-communication.md"
+    },
+    {
       "id": "da-analytical-methods",
       "name": "da-analytical-methods",
       "kind": "top-level",
@@ -6446,8 +5457,28 @@
         "aws-cloud"
       ],
       "rankAccess30d": 0,
-      "srcBytes": 41768,
+      "srcBytes": 42092,
       "path": "~/.claude/skills/aws-cloud/references/databases-aws-cockroach-indexeddb.md"
+    },
+    {
+      "id": "ddo",
+      "name": "ddo",
+      "kind": "top-level",
+      "isHub": false,
+      "hub": "writing-expert",
+      "family": "writing",
+      "version": "1.5.0",
+      "updated": "2026-06-24",
+      "origin": null,
+      "summary": "Document Deep Optimizer — full multi-pass document critique that applies every",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "writing-expert"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 32561,
+      "path": "~/.claude/skills/ddo/SKILL.md"
     },
     {
       "id": "debt-collectors-and-fdcpa-rights",
@@ -6609,6 +5640,26 @@
       "rankAccess30d": 0,
       "srcBytes": 15042,
       "path": "~/.claude/skills/deep-research/SKILL.md"
+    },
+    {
+      "id": "deep-research-methods",
+      "name": "deep-research-methods",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "deep-research",
+      "family": "deep-research",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "deep-research"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 21323,
+      "path": "~/.claude/skills/deep-research/references/deep-research-methods.md"
     },
     {
       "id": "design-deep-optimizer",
@@ -6994,6 +6045,70 @@
       "path": "~/.claude/skills/content-ingestion-extraction/references/doc-archaeology.md"
     },
     {
+      "id": "doc-store-bootstrapper",
+      "name": "doc-store-bootstrapper",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "content-ingestion-extraction",
+      "family": "content-ingestion-extraction",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "content-ingestion-extraction"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 11014,
+      "path": "~/.claude/skills/content-ingestion-extraction/references/doc-store-bootstrapper.md"
+    },
+    {
+      "id": "docker-containers",
+      "name": "docker-containers",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "devops-containers-cicd",
+      "family": "devops",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "devops-containers-cicd"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 43716,
+      "path": "~/.claude/skills/devops-containers-cicd/references/docker-containers.md"
+    },
+    {
+      "id": "document-critique",
+      "name": "document-critique",
+      "kind": "top-level",
+      "isHub": true,
+      "hub": "writing-expert",
+      "family": "writing",
+      "version": "5.3.0",
+      "updated": "2026-06-23",
+      "origin": "local",
+      "summary": "Multipass document review agent that surfaces and fixes findings through passes 0–14 plus sub-passes 10.5 and 11.5 (intent through human-voice rephrasing, incl. authoritative verification and adversarial/hallucination guard) with a convergence loop until no medium-or-higher findings remain",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "writing-expert",
+        "software-engineering-patterns",
+        "tam-operations",
+        "mongodb-expert",
+        "security-review"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 26048,
+      "path": "~/.claude/skills/document-critique/SKILL.md"
+    },
+    {
       "id": "document-deconstructor",
       "name": "document-deconstructor",
       "kind": "folded-spoke",
@@ -7076,6 +6191,26 @@
       "path": "~/.claude/skills/content-ingestion-extraction/references/dom-scraping-resilience.md"
     },
     {
+      "id": "draft-review-revise-loop",
+      "name": "draft-review-revise-loop",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "writing-expert",
+      "family": "writing",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "writing-expert"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 13279,
+      "path": "~/.claude/skills/writing-expert/references/draft-review-revise-loop.md"
+    },
+    {
       "id": "drawio-diagrams",
       "name": "drawio-diagrams",
       "kind": "folded-spoke",
@@ -7094,6 +6229,26 @@
       "rankAccess30d": 0,
       "srcBytes": 28632,
       "path": "~/.claude/skills/document-formats/references/drawio-diagrams.md"
+    },
+    {
+      "id": "ebpf-observability",
+      "name": "ebpf-observability",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "devops-observability",
+      "family": "devops",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "devops-observability"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 17786,
+      "path": "~/.claude/skills/devops-observability/references/ebpf-observability.md"
     },
     {
       "id": "editing-and-revision",
@@ -7292,6 +6447,50 @@
       "path": "~/.claude/skills/consumer-finance/references/estate-planning-and-wills.md"
     },
     {
+      "id": "ethereum-protocol-expert",
+      "name": "ethereum-protocol-expert",
+      "kind": "top-level",
+      "isHub": false,
+      "hub": "blockchain",
+      "family": "blockchain",
+      "version": "1.0.0",
+      "updated": "2026-06-16",
+      "origin": null,
+      "summary": "Ethereum protocol expert, how the chain works beneath the app layer (execution, consensus, scaling)",
+      "triggers": [
+        "the account model (EOA vs contract accounts, nonce/balance/storageRoot/codeHash, EIP-7702), world state & the Merkle-Patricia trie (RLP, Verkle debate)",
+        "the EVM (stack machine, opcodes, memory vs storage vs calldata, CALL/DELEGATECALL/STATICCALL/CREATE2, in-EVM gas, cold/warm access EIP-2929, precompiles)",
+        "the EIP-1559 fee market (base fee + priority fee + burn, typed txs, mempool, MEV-Boost/PBS, tx & block lifecycle, receipts)",
+        "Proof of Stake (Beacon Chain, the Merge, 32-ETH validators/staking/withdrawals, EIP-7251, slots/epochs/RANDAO, attestations, Gasper = Casper FFG + LMD-GHOST, slashing, finality/weak-subjectivity)",
+        "data & scaling (EIP-4844 blobs/proto-danksharding, KZG ceremony, data-availability sampling, PeerDAS, danksharding, the rollup-centric roadmap)",
+        "Layer-2 (optimistic vs ZK rollups, fraud vs validity proofs, sequencers, rollup vs validium, the 7-day challenge window, L2BEAT stages)."
+      ],
+      "skip": [
+        "Solidity/Vyper/Foundry/ERCs & contract DEVELOPMENT → ethereum-smart-contract-development",
+        "contract auditing/exploits → contract-security",
+        "SNARK/STARK & circuit MATH → zero-knowledge-proofs (here: only validity proofs' ROLE in scaling)",
+        "consensus theory (CAP/FLP/BFT proofs) → distributed-systems-consensus",
+        "crypto primitives (ECDSA, BLS, KZG math, Keccak) → blockchain-crypto-primitives",
+        "token-economics → blockchain-economics",
+        "other chains → per-chain skills",
+        "MongoDB → mongodb-* hubs."
+      ],
+      "peers": [
+        "ethereum-smart-contract-development",
+        "contract-security",
+        "zero-knowledge-proofs",
+        "distributed-systems-consensus",
+        "blockchain-crypto-primitives",
+        "blockchain-economics",
+        "per-chain",
+        "mongodb",
+        "blockchain"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 15027,
+      "path": "~/.claude/skills/ethereum-protocol-expert/SKILL.md"
+    },
+    {
       "id": "eval-driven-development",
       "name": "eval-driven-development",
       "kind": "folded-spoke",
@@ -7379,6 +6578,26 @@
       "rankAccess30d": 0,
       "srcBytes": 14482,
       "path": "~/.claude/skills/technical-writing-craft/references/explanation-doc-writing.md"
+    },
+    {
+      "id": "express-patterns",
+      "name": "express-patterns",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "software-engineering-patterns",
+      "family": "software",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "software-engineering-patterns"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 10865,
+      "path": "~/.claude/skills/software-engineering-patterns/references/express-patterns.md"
     },
     {
       "id": "extension-e2e-testing",
@@ -7861,6 +7080,26 @@
       "path": "~/.claude/skills/health-behavior-change-and-donor-registration/SKILL.md"
     },
     {
+      "id": "health-insurance-and-coverage",
+      "name": "health-insurance-and-coverage",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "consumer-finance",
+      "family": "consumer-finance",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "consumer-finance"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 23047,
+      "path": "~/.claude/skills/consumer-finance/references/health-insurance-and-coverage.md"
+    },
+    {
       "id": "home-mortgage-lending",
       "name": "home-mortgage-lending",
       "kind": "folded-spoke",
@@ -7921,6 +7160,26 @@
       "path": "~/.claude/skills/frontend-ui/references/html-css.md"
     },
     {
+      "id": "http-security-headers",
+      "name": "http-security-headers",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "security-review",
+      "family": "security-review",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "security-review"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 26341,
+      "path": "~/.claude/skills/security-review/references/http-security-headers.md"
+    },
+    {
       "id": "human-performance-technology",
       "name": "human-performance-technology",
       "kind": "folded-spoke",
@@ -7959,6 +7218,26 @@
       "rankAccess30d": 0,
       "srcBytes": 20079,
       "path": "~/.claude/skills/consumer-credit-and-debt/references/identity-theft-and-credit-fraud.md"
+    },
+    {
+      "id": "immutable-atomic-linux",
+      "name": "immutable-atomic-linux",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "devops-linux-internals",
+      "family": "devops",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "devops-linux-internals"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 21156,
+      "path": "~/.claude/skills/devops-linux-internals/references/immutable-atomic-linux.md"
     },
     {
       "id": "improving-and-rebuilding-credit",
@@ -8178,6 +7457,48 @@
       "path": "~/.claude/skills/ai-rag-retrieval/references/iterative-retrieval.md"
     },
     {
+      "id": "javascript-node-html-css-debugging-expert",
+      "name": "javascript-node-html-css-debugging-expert",
+      "kind": "top-level",
+      "isHub": false,
+      "hub": "lang-js-ts",
+      "family": "lang",
+      "version": "1.1",
+      "updated": "2026-05-29",
+      "origin": null,
+      "summary": "JavaScript, Node.js, HTML, and CSS debugging expert: breakpoints (all 8 Chrome DevTools types),",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "lang-js-ts",
+        "software-engineering-patterns",
+        "devops-linux-admin"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 38820,
+      "path": "~/.claude/skills/javascript-node-html-css-debugging-expert/SKILL.md"
+    },
+    {
+      "id": "javascript-nodejs",
+      "name": "javascript-nodejs",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "lang-js-ts",
+      "family": "lang",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "lang-js-ts"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 16299,
+      "path": "~/.claude/skills/lang-js-ts/references/javascript-nodejs.md"
+    },
+    {
       "id": "javascript-runtimes-deno-bun-edge",
       "name": "javascript-runtimes-deno-bun-edge",
       "kind": "folded-spoke",
@@ -8316,6 +7637,27 @@
       "path": "~/.claude/skills/document-formats/references/json-advanced.md"
     },
     {
+      "id": "kill-the-AI-ism",
+      "name": "kill-the-AI-ism",
+      "kind": "top-level",
+      "isHub": false,
+      "hub": "writing-expert",
+      "family": "writing",
+      "version": "1.2.0",
+      "updated": "2026-06-11",
+      "origin": "local",
+      "summary": "Diagnostic skill for detecting and replacing generator artifacts (\"AI-isms\") in prose",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "writing-expert",
+        "document-critique"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 12607,
+      "path": "~/.claude/skills/kill-the-AI-ism/SKILL.md"
+    },
+    {
       "id": "knowledge-base-authoring",
       "name": "knowledge-base-authoring",
       "kind": "folded-spoke",
@@ -8380,6 +7722,26 @@
       "rankAccess30d": 0,
       "srcBytes": 9687,
       "path": "~/.claude/skills/kql-kusto-query-language/SKILL.md"
+    },
+    {
+      "id": "kubernetes-networking",
+      "name": "kubernetes-networking",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "devops-containers-cicd",
+      "family": "devops",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "devops-containers-cicd"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 27072,
+      "path": "~/.claude/skills/devops-containers-cicd/references/kubernetes-networking.md"
     },
     {
       "id": "lang-go-and-mobile",
@@ -8726,6 +8088,26 @@
       "path": "~/.claude/skills/devops-linux-internals/references/linux-memory-numa.md"
     },
     {
+      "id": "linux-networking-stack",
+      "name": "linux-networking-stack",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "devops-linux-admin",
+      "family": "devops",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "devops-linux-admin"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 14871,
+      "path": "~/.claude/skills/devops-linux-admin/references/linux-networking-stack.md"
+    },
+    {
       "id": "linux-package-management",
       "name": "linux-package-management",
       "kind": "folded-spoke",
@@ -8864,6 +8246,26 @@
       "rankAccess30d": 0,
       "srcBytes": 27592,
       "path": "~/.claude/skills/ai-llm-model-layer/references/llm-alignment-post-training.md"
+    },
+    {
+      "id": "llm-compression",
+      "name": "llm-compression",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "ai-llm-model-layer",
+      "family": "ai-agent",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "ai-llm-model-layer"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 28798,
+      "path": "~/.claude/skills/ai-llm-model-layer/references/llm-compression.md"
     },
     {
       "id": "llm-context-engineering",
@@ -9024,6 +8426,26 @@
       "rankAccess30d": 0,
       "srcBytes": 37976,
       "path": "~/.claude/skills/ai-llm-model-layer/references/llm-pretraining-scaling-laws.md"
+    },
+    {
+      "id": "llm-routing-cascades",
+      "name": "llm-routing-cascades",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "ai-llm-model-layer",
+      "family": "ai-agent",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "ai-llm-model-layer"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 15474,
+      "path": "~/.claude/skills/ai-llm-model-layer/references/llm-routing-cascades.md"
     },
     {
       "id": "localization-friendly-writing",
@@ -9348,6 +8770,26 @@
       "path": "~/.claude/skills/integration-clients/references/monday-api.md"
     },
     {
+      "id": "monday-board-audit",
+      "name": "monday-board-audit",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "tam-operations",
+      "family": "tam-operations",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "tam-operations"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 30308,
+      "path": "~/.claude/skills/tam-operations/references/monday-board-audit.md"
+    },
+    {
       "id": "monday-dev",
       "name": "monday-dev",
       "kind": "folded-spoke",
@@ -9602,6 +9044,26 @@
       "rankAccess30d": 0,
       "srcBytes": 22522,
       "path": "~/.claude/skills/ai-agents-orchestration/references/multi-agent-orchestration.md"
+    },
+    {
+      "id": "multimodal-llm-architecture",
+      "name": "multimodal-llm-architecture",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "ai-llm-model-layer",
+      "family": "ai-agent",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "ai-llm-model-layer"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 43650,
+      "path": "~/.claude/skills/ai-llm-model-layer/references/multimodal-llm-architecture.md"
     },
     {
       "id": "mv3-service-worker-expert",
@@ -9880,6 +9342,26 @@
       "path": "~/.claude/skills/software-engineering-patterns/references/nodejs-backend-frameworks.md"
     },
     {
+      "id": "nodejs-concurrency-internals",
+      "name": "nodejs-concurrency-internals",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "lang-js-ts",
+      "family": "lang",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "lang-js-ts"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 23160,
+      "path": "~/.claude/skills/lang-js-ts/references/nodejs-concurrency-internals.md"
+    },
+    {
       "id": "nodejs-native-addons-napi",
       "name": "nodejs-native-addons-napi",
       "kind": "folded-spoke",
@@ -9918,6 +9400,26 @@
       "rankAccess30d": 0,
       "srcBytes": 10839,
       "path": "~/.claude/skills/devops-observability/references/nodejs-observability.md"
+    },
+    {
+      "id": "nodejs-typescript-and-runtime-features",
+      "name": "nodejs-typescript-and-runtime-features",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "lang-js-ts",
+      "family": "lang",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "lang-js-ts"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 15765,
+      "path": "~/.claude/skills/lang-js-ts/references/nodejs-typescript-and-runtime-features.md"
     },
     {
       "id": "north-carolina-credit-and-debt-law",
@@ -9980,6 +9482,26 @@
       "path": "~/.claude/skills/misc-catch-all/references/offer-design-and-value-proposition.md"
     },
     {
+      "id": "okr-writing",
+      "name": "okr-writing",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "executive-comms",
+      "family": "writing",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "executive-comms"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 16911,
+      "path": "~/.claude/skills/executive-comms/references/okr-writing.md"
+    },
+    {
       "id": "okta-admin-hardening",
       "name": "okta-admin-hardening",
       "kind": "folded-spoke",
@@ -9998,6 +9520,26 @@
       "rankAccess30d": 0,
       "srcBytes": 21934,
       "path": "~/.claude/skills/security-review/references/okta-admin-hardening.md"
+    },
+    {
+      "id": "okta-expert",
+      "name": "okta-expert",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "security-review",
+      "family": "security-review",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "security-review"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 34450,
+      "path": "~/.claude/skills/security-review/references/okta-expert.md"
     },
     {
       "id": "okta-identity-governance",
@@ -10106,6 +9648,26 @@
       "path": "~/.claude/skills/security-review/references/okta-zero-trust-device.md"
     },
     {
+      "id": "one-pager-writing",
+      "name": "one-pager-writing",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "executive-comms",
+      "family": "writing",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "executive-comms"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 18805,
+      "path": "~/.claude/skills/executive-comms/references/one-pager-writing.md"
+    },
+    {
       "id": "op-ed-writing",
       "name": "op-ed-writing",
       "kind": "folded-spoke",
@@ -10126,6 +9688,26 @@
       "path": "~/.claude/skills/content-and-marketing-writing/references/op-ed-writing.md"
     },
     {
+      "id": "operator-report-generator",
+      "name": "operator-report-generator",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "tam-operations",
+      "family": "tam-operations",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "tam-operations"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 18838,
+      "path": "~/.claude/skills/tam-operations/references/operator-report-generator.md"
+    },
+    {
       "id": "ops-registry-patterns",
       "name": "ops-registry-patterns",
       "kind": "folded-spoke",
@@ -10144,6 +9726,46 @@
       "rankAccess30d": 0,
       "srcBytes": 32714,
       "path": "~/.claude/skills/software-engineering-patterns/references/ops-registry-patterns.md"
+    },
+    {
+      "id": "options-trading-and-strategies",
+      "name": "options-trading-and-strategies",
+      "kind": "top-level",
+      "isHub": false,
+      "hub": "trading-and-investing",
+      "family": "trading-and-investing",
+      "version": "1.0.0",
+      "updated": "2026-06-16",
+      "origin": null,
+      "summary": "SPOKE of trading-and-investing — listed equity/ETF & index OPTIONS for a US retail participant. Educational ONLY, NOT financial/investment/tax advice; a long option can lose 100% of its premium and short (naked) options carry large or unlimited risk (2026)",
+      "triggers": [
+        "calls vs puts, strike/expiration/premium, the 100-share multiplier, intrinsic vs extrinsic value, moneyness (ITM/ATM/OTM), American vs European, exercise & assignment, the options chain, open interest vs volume, LEAPS/weeklies/0DTE",
+        "the Greeks (delta/gamma/theta/vega/rho)",
+        "implied vs realized volatility, IV rank/percentile, vol smile/skew, VIX, conceptual Black-Scholes",
+        "strategies (long call/put, covered call, cash-secured put, protective put, vertical/credit/debit spreads, straddle/strangle, iron condor, butterfly, calendar/diagonal)",
+        "defined- vs undefined-risk",
+        "assignment, pin & ex-dividend early-assignment risk",
+        "options approval levels & margin",
+        "bid/ask & liquidity."
+      ],
+      "skip": [
+        "futures/forwards/swaps → derivatives-futures-and-swaps",
+        "position sizing/stops/Kelly → trading-risk-management",
+        "charting/indicators/entry timing → technical-analysis",
+        "wash-sale/Section-1256/trader-tax detail → trading-regulation-compliance-and-taxes",
+        "long-term passive/retirement investing → investing-and-retirement."
+      ],
+      "peers": [
+        "trading-and-investing",
+        "derivatives-futures-and-swaps",
+        "trading-risk-management",
+        "technical-analysis",
+        "trading-regulation-compliance-and-taxes",
+        "investing-and-retirement"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 17197,
+      "path": "~/.claude/skills/options-trading-and-strategies/SKILL.md"
     },
     {
       "id": "pacs-access-control-architecture",
@@ -10204,6 +9826,26 @@
       "rankAccess30d": 0,
       "srcBytes": 8907,
       "path": "~/.claude/skills/software-engineering-patterns/references/performance-profiling-expert.md"
+    },
+    {
+      "id": "performance-review-writing",
+      "name": "performance-review-writing",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "career-and-formal-writing",
+      "family": "writing",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "career-and-formal-writing"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 25267,
+      "path": "~/.claude/skills/career-and-formal-writing/references/performance-review-writing.md"
     },
     {
       "id": "personal-banking",
@@ -10460,6 +10102,48 @@
       "rankAccess30d": 0,
       "srcBytes": 21241,
       "path": "~/.claude/skills/career-and-formal-writing/references/policy-and-governance-writing.md"
+    },
+    {
+      "id": "postgresql-expert",
+      "name": "postgresql-expert",
+      "kind": "top-level",
+      "isHub": false,
+      "hub": null,
+      "family": null,
+      "version": "1.0.0",
+      "updated": "2026-06-30",
+      "origin": null,
+      "summary": "PostgreSQL data-plane & engine hub — the open-source RDBMS beneath RDS/Aurora PostgreSQL, Supabase, Neon, and Citus",
+      "triggers": [
+        "MVCC & tuple visibility (xmin/xmax, snapshots, HOT updates, dead tuples), VACUUM/autovacuum, table & index bloat, transaction-ID wraparound & freezing",
+        "the query planner & EXPLAIN (ANALYZE, BUFFERS) — seq/index/index-only/bitmap scans, nested-loop/hash/merge joins, cost model, ANALYZE & extended statistics, planner GUCs",
+        "index design & access methods (B-tree, GIN, GiST, SP-GiST, BRIN, Hash, partial/expression/covering, skip scan)",
+        "WAL, checkpoints, PITR/base backup, streaming & logical replication, replication slots, sync commit, failover (Patroni)",
+        "declarative partitioning (range/list/hash, pruning, partitionwise join/agg)",
+        "rich types (JSONB, arrays, ranges), the extension model (PostGIS, pg_stat_statements, postgres_fdw, TimescaleDB, Citus) and pgvector for vector search",
+        "isolation levels (RC/RR/serializable SSI), locking, deadlocks",
+        "CTEs, window functions, MERGE",
+        "roles/privileges/RLS."
+      ],
+      "skip": [
+        "connection poolers (PgBouncer/PgCat/Pgpool) & read-write splitting middleware → database-proxies-query-middleware",
+        "AWS Aurora PostgreSQL platform/storage/Serverless v2/DSQL → aws-cloud (references/aws-aurora.md)",
+        "MongoDB engine/MQL → mongodb-expert",
+        "generic cross-dialect SQL tuning → deep-query-optimizer",
+        "dbt/warehouse modeling → da-data-engineering-platform",
+        "RAG retrieval architecture → ai-rag-retrieval."
+      ],
+      "peers": [
+        "database-proxies-query-middleware",
+        "aws-cloud",
+        "mongodb-expert",
+        "deep-query-optimizer",
+        "modeling",
+        "ai-rag-retrieval"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 10218,
+      "path": "~/.claude/skills/postgresql-expert/SKILL.md"
     },
     {
       "id": "postmortem-writing",
@@ -10724,6 +10408,26 @@
       "path": "~/.claude/skills/ai-mcp-sdk-prompting/references/prompt-lookup.md"
     },
     {
+      "id": "proposal-and-grant-writing",
+      "name": "proposal-and-grant-writing",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "executive-comms",
+      "family": "writing",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "executive-comms"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 15641,
+      "path": "~/.claude/skills/executive-comms/references/proposal-and-grant-writing.md"
+    },
+    {
       "id": "psychology",
       "name": "psychology",
       "kind": "top-level",
@@ -10961,6 +10665,26 @@
       "path": "~/.claude/skills/executive-comms/references/public-speaking-and-presentations.md"
     },
     {
+      "id": "pydantic-v2",
+      "name": "pydantic-v2",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "lang-python",
+      "family": "lang",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "lang-python"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 18027,
+      "path": "~/.claude/skills/lang-python/references/pydantic-v2.md"
+    },
+    {
       "id": "python-app-packaging",
       "name": "python-app-packaging",
       "kind": "folded-spoke",
@@ -11119,6 +10843,26 @@
       "rankAccess30d": 0,
       "srcBytes": 8401,
       "path": "~/.claude/skills/lang-python/references/python-metaprogramming.md"
+    },
+    {
+      "id": "python-patterns",
+      "name": "python-patterns",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "lang-python",
+      "family": "lang",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "lang-python"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 44508,
+      "path": "~/.claude/skills/lang-python/references/python-patterns.md"
     },
     {
       "id": "python-static-type-checking",
@@ -11494,6 +11238,26 @@
       "path": "~/.claude/skills/research-methodology/references/research-note-taking-pkm.md"
     },
     {
+      "id": "resume-and-cv-writing",
+      "name": "resume-and-cv-writing",
+      "kind": "top-level",
+      "isHub": false,
+      "hub": "career-and-formal-writing",
+      "family": "writing",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "Resume and CV writing — X-Y-Z achievement-bullet formula (\"Accomplished X as measured by Y by doing Z\" — Laszlo Bock / Google), quantification discipline, ATS parse-friendly formatting (single-column, standard headings, no tables/text-boxes/graphics), role tailoring, cover-letter complement, the skills-section debate, LinkedIn vs resume tone, academic CV vs industry resume distinction, employment-gap explanation, senior-IC vs management-track positioning, and the portfolio/resume convention split. TRIGGER when the user is writing or revising a resume, CV, cover letter, LinkedIn summary, achievement bullet, or asks about ATS, applicant tracking systems, X-Y-Z bullets, employment gaps, IC-vs-manager track resumes, academic-to-industry transitions, or \"is my resume ATS-friendly\". SKIP for grant or proposal writing (use proposal-and-grant-writing), generic technical/business prose (use writing-expert), sales or marketing conversion copy (use sales-and-marketing-copy — resume positioning is not conversion copy), structural rhetoric like BLUF or Minto pyramid (use rhetorical-frameworks-deep), executive-level comms unrelated to job search (use executive-comms)",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "career-and-formal-writing"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 17203,
+      "path": "~/.claude/skills/resume-and-cv-writing/SKILL.md"
+    },
+    {
       "id": "rfc-and-design-docs",
       "name": "rfc-and-design-docs",
       "kind": "folded-spoke",
@@ -11674,6 +11438,44 @@
       "path": "~/.claude/skills/software-engineering-patterns/references/salesforce-scraping-patterns.md"
     },
     {
+      "id": "secrets-and-key-management",
+      "name": "secrets-and-key-management",
+      "kind": "top-level",
+      "isHub": false,
+      "hub": null,
+      "family": null,
+      "version": "1.0.0",
+      "updated": "2026-07-01",
+      "origin": null,
+      "summary": "Foundational spine for the secure custody of secrets — the generate → store →",
+      "triggers": [],
+      "skip": [],
+      "peers": [],
+      "rankAccess30d": 0,
+      "srcBytes": 12617,
+      "path": "~/.claude/skills/secrets-and-key-management/SKILL.md"
+    },
+    {
+      "id": "security-compliance-auditor",
+      "name": "security-compliance-auditor",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "security-review",
+      "family": "security-review",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "security-review"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 12544,
+      "path": "~/.claude/skills/security-review/references/security-compliance-auditor.md"
+    },
+    {
       "id": "security-review",
       "name": "security-review",
       "kind": "top-level",
@@ -11712,6 +11514,26 @@
       "rankAccess30d": 0,
       "srcBytes": 4449,
       "path": "~/.claude/skills/security-review/SKILL.md"
+    },
+    {
+      "id": "security-reviewer",
+      "name": "security-reviewer",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "security-review",
+      "family": "security-review",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "security-review"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 7955,
+      "path": "~/.claude/skills/security-review/references/security-reviewer.md"
     },
     {
       "id": "sentry-monitoring",
@@ -11938,6 +11760,71 @@
       "rankAccess30d": 0,
       "srcBytes": 25818,
       "path": "~/.claude/skills/integration-clients/references/slack-dev.md"
+    },
+    {
+      "id": "slack-subscription-auditor",
+      "name": "slack-subscription-auditor",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "tam-operations",
+      "family": "tam-operations",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "tam-operations"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 26978,
+      "path": "~/.claude/skills/tam-operations/references/slack-subscription-auditor.md"
+    },
+    {
+      "id": "smart-contract-security",
+      "name": "smart-contract-security",
+      "kind": "top-level",
+      "isHub": false,
+      "hub": "blockchain",
+      "family": "blockchain",
+      "version": "1.0.0",
+      "updated": "2026-06-16",
+      "origin": null,
+      "summary": "Smart-contract security & auditing expert — finding, classifying, and preventing on-chain vulnerabilities on EVM (and Solana)",
+      "triggers": [
+        "reviewing/auditing a Solidity/Vyper/Rust contract for exploits",
+        "reentrancy (single-function, cross-function, cross-contract, read-only)",
+        "access-control failures, unprotected init/selfdestruct, tx.origin auth",
+        "integer over/underflow (pre-0.8 vs checked vs unchecked), rounding/precision, ERC-4626 inflation",
+        "oracle/price manipulation, flash-loan attacks",
+        "front-running/MEV-aware contract bugs",
+        "unchecked external calls, delegatecall/storage collision, signature replay/malleability, uninitialized proxies (UUPS), DoS/gas-griefing",
+        "the audit process (scoping, threat modeling, writing findings), SWC/SCWE/OWASP-SC-Top-10 taxonomy, severity rubrics (Immunefi/Code4rena/Sherlock)",
+        "security tooling (Slither, Mythril, Foundry invariant testing, Echidna, Medusa, Certora, Halmos, Ethernaut, Damn Vulnerable DeFi)",
+        "Solana-program pitfalls (missing signer/owner checks, account confusion, arbitrary CPI, Anchor constraints)",
+        "landmark exploits (The DAO, Parity, bridge hacks)."
+      ],
+      "skip": [
+        "Solidity/Vyper LANGUAGE syntax & general dev tooling → ethereum-smart-contract-development",
+        "EVM/protocol internals (opcodes, gas mechanics, state trie) → ethereum-protocol-expert",
+        "MEV economics/markets (PBS, builders, order-flow auctions) → blockchain-economics",
+        "consensus-layer attacks (51%, long-range, selfish mining) → distributed-systems-consensus",
+        "Rust/Anchor/Solana LANGUAGE surface (not security) → lang-rust",
+        "general web/app/infra appsec (OWASP web Top 10, CSP, SSRF) → security-review/security-reviewer."
+      ],
+      "peers": [
+        "ethereum-smart-contract-development",
+        "ethereum-protocol-expert",
+        "blockchain-economics",
+        "distributed-systems-consensus",
+        "lang-rust",
+        "security-review",
+        "blockchain"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 14965,
+      "path": "~/.claude/skills/smart-contract-security/SKILL.md"
     },
     {
       "id": "social-marketing-and-cbsm",
@@ -12243,6 +12130,26 @@
       "path": "~/.claude/skills/consumer-finance/references/student-loans.md"
     },
     {
+      "id": "support-ticket-writing",
+      "name": "support-ticket-writing",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "content-and-marketing-writing",
+      "family": "writing",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "content-and-marketing-writing"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 28798,
+      "path": "~/.claude/skills/content-and-marketing-writing/references/support-ticket-writing.md"
+    },
+    {
       "id": "survey-question-writing",
       "name": "survey-question-writing",
       "kind": "folded-spoke",
@@ -12303,6 +12210,46 @@
       "path": "~/.claude/skills/devops-linux-admin/references/systemd.md"
     },
     {
+      "id": "tam-account-reports",
+      "name": "tam-account-reports",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "tam-operations",
+      "family": "tam-operations",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "tam-operations"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 24966,
+      "path": "~/.claude/skills/tam-operations/references/tam-account-reports.md"
+    },
+    {
+      "id": "tam-expertise",
+      "name": "tam-expertise",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "tam-operations",
+      "family": "tam-operations",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "tam-operations"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 4827,
+      "path": "~/.claude/skills/tam-operations/references/tam-expertise.md"
+    },
+    {
       "id": "tam-operations",
       "name": "tam-operations",
       "kind": "top-level",
@@ -12340,6 +12287,26 @@
       "rankAccess30d": 0,
       "srcBytes": 9288,
       "path": "~/.claude/skills/tam-operations/SKILL.md"
+    },
+    {
+      "id": "tam-reference",
+      "name": "tam-reference",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "tam-operations",
+      "family": "tam-operations",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "tam-operations"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 34077,
+      "path": "~/.claude/skills/tam-operations/references/tam-reference.md"
     },
     {
       "id": "teaching-troubleshooting-diagnostic-reasoning",
@@ -12549,6 +12516,26 @@
       "path": "~/.claude/skills/devops-containers-cicd/references/terraform-kafka-infra.md"
     },
     {
+      "id": "testing-and-vitest-expert",
+      "name": "testing-and-vitest-expert",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "software-engineering-patterns",
+      "family": "software",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "software-engineering-patterns"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 10079,
+      "path": "~/.claude/skills/software-engineering-patterns/references/testing-and-vitest-expert.md"
+    },
+    {
       "id": "trading-and-investing",
       "name": "trading-and-investing",
       "kind": "top-level",
@@ -12600,6 +12587,66 @@
       "path": "~/.claude/skills/trading-and-investing/SKILL.md"
     },
     {
+      "id": "transformer-architecture",
+      "name": "transformer-architecture",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "ai-llm-model-layer",
+      "family": "ai-agent",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "ai-llm-model-layer"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 29720,
+      "path": "~/.claude/skills/ai-llm-model-layer/references/transformer-architecture.md"
+    },
+    {
+      "id": "ts-tools-support-api",
+      "name": "ts-tools-support-api",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "tam-operations",
+      "family": "tam-operations",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "tam-operations"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 22106,
+      "path": "~/.claude/skills/tam-operations/references/ts-tools-support-api.md"
+    },
+    {
+      "id": "tstools-reference",
+      "name": "tstools-reference",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "tam-operations",
+      "family": "tam-operations",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "tam-operations"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 16976,
+      "path": "~/.claude/skills/tam-operations/references/tstools-reference.md"
+    },
+    {
       "id": "tutorial-writing",
       "name": "tutorial-writing",
       "kind": "folded-spoke",
@@ -12618,6 +12665,26 @@
       "rankAccess30d": 0,
       "srcBytes": 12141,
       "path": "~/.claude/skills/technical-writing-craft/references/tutorial-writing.md"
+    },
+    {
+      "id": "typescript-advanced-types",
+      "name": "typescript-advanced-types",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "lang-js-ts",
+      "family": "lang",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "lang-js-ts"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 26179,
+      "path": "~/.claude/skills/lang-js-ts/references/typescript-advanced-types.md"
     },
     {
       "id": "typescript-expert",
@@ -13235,6 +13302,26 @@
       "rankAccess30d": 0,
       "srcBytes": 24046,
       "path": "~/.claude/skills/software-engineering-patterns/references/web-auth-patterns.md"
+    },
+    {
+      "id": "web-design",
+      "name": "web-design",
+      "kind": "folded-spoke",
+      "isHub": false,
+      "hub": "frontend-ui",
+      "family": "frontend",
+      "version": null,
+      "updated": null,
+      "origin": null,
+      "summary": "",
+      "triggers": [],
+      "skip": [],
+      "peers": [
+        "frontend-ui"
+      ],
+      "rankAccess30d": 0,
+      "srcBytes": 5014,
+      "path": "~/.claude/skills/frontend-ui/references/web-design.md"
     },
     {
       "id": "webapp-testing",
