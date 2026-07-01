@@ -127,6 +127,11 @@
           },
           {
             "type": "command",
+            "command": "__HOME__/.claude/hooks/auto-optimize-dispatcher.sh",
+            "timeout": 10
+          },
+          {
+            "type": "command",
             "command": "jq -r '.tool_input.file_path // \"\"' | { read -r f; [[ \"$f\" == __HOME__/.claude/skills/* ]] && rsync -a --delete __HOME__/.claude/skills/ /Volumes/mitch/.claude/skills/ 2>/dev/null || true; }",
             "statusMessage": "Syncing skills to volume...",
             "async": true

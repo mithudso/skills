@@ -176,6 +176,9 @@ else
     [ -d "$CC_DIR/$d" ] || continue
     while IFS= read -r f; do rel="${f#"$CC_DIR"/}"; install_cfg "$f" "$HOME/.claude/$rel"; done < <(find "$CC_DIR/$d" -type f)
   done
+  # hooks are invoked by bare path in settings.json, so they must stay executable;
+  # install_cfg writes via mktemp+mv which drops the exec bit — restore it here.
+  [ -d "$HOME/.claude/hooks" ] && find "$HOME/.claude/hooks" -type f -name '*.sh' -exec chmod +x {} + 2>/dev/null || true
   ok "config laid down (existing files backed up to *.bak-<ts>; ~/.claude/.env untouched)"
   warn "some hooks/MCP servers reference private repos you may not have — they no-op until present"
 fi
