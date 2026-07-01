@@ -46,8 +46,11 @@ try { yaml = (await import('js-yaml')).default; } catch { /* not installed here 
 
 // ---- args -----------------------------------------------------------------
 const argv = process.argv.slice(2);
+// Flags that consume the following token as their value; that value must not leak into `positional`
+// (otherwise `--skills-root <dir>` makes <dir> look like a second target and trips the guard below).
+const VALUE_FLAGS = new Set(['--cons-root', '--skills-root', '--desc-cap']);
 const flags = new Set(argv.filter((a) => a.startsWith('--')));
-const positional = argv.filter((a) => !a.startsWith('--'));
+const positional = argv.filter((a, i) => !a.startsWith('--') && !VALUE_FLAGS.has(argv[i - 1]));
 function flagVal(name) {
   const i = argv.indexOf(name);
   return i >= 0 && argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[i + 1] : null;
@@ -57,11 +60,16 @@ const doRegisterTier = flags.has('--register-tier');
 const doApply = flags.has('--apply');
 
 // Default to this script's own dir (portable, survives `git pull`); --cons-root still overrides.
-const CONS_ROOT = flagVal('--cons-root') || path.dirname(new URL(import.meta.url).pathname);
+const CONS_ROOT = flagVal('--cons-root') || path.dirname(fileURLToPath(import.meta.url));
 
 // skillsRoot is the parent of the skill-consolidation dir under the fixed repo layout
 // (<skillsRoot>/skill-consolidation); --skills-root still overrides for non-standard checkouts.
 const SKILLS_ROOT = flagVal('--skills-root') || path.dirname(CONS_ROOT);
+
+// tier-config.json enumerates the family manifests that participate in auto-tiering (check 6 below).
+const TIER_CONFIG_PATH = path.join(CONS_ROOT, 'tiering', 'tier-config.json');
+let tierConfig = null;
+try { tierConfig = JSON.parse(fs.readFileSync(TIER_CONFIG_PATH, 'utf8')); } catch { /* optional — check 6 reports absence */ }
 
 const target = positional[0];
 if (!target) {
