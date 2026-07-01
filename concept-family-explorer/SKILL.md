@@ -1,7 +1,3 @@
-The file isn't on disk here — the task asks me to return the fixed content. The missing `/dr` is in the intro Role paragraph: ORIGINAL has "done by `/dr`...the layer `/dr` does not do: decide" but COMPRESSED collapsed both into one sentence, dropping the second `/dr`.
-
-Here is the fixed compressed file:
-
 ---
 description: >-
   Gap-discovery layer ABOVE /dr: map a subject's full conceptual family (parent domain, siblings, sub-concepts, adjacent/cross-over fields, frontier), surface useful/novel concepts you're MISSING, score each via the da-* skills, then loop /dr on every viable gap until the concept tree saturates; finishes with skill-optimizer + prompt-deep-optimizer. TRIGGER: 'what am I missing about X', 'map the concept space/family of X', 'find adjacent/sibling concepts to X', 'what skills should I build around X', 'saturate/complete my coverage of X', 'expand my concept tree for X', 'explore the conceptual neighborhood of X'. SKIP: researching a topic you ALREADY named → /dr; cited web report with no skill-building → deep-research; create ONE skill interactively → skill-creator; audit/improve one existing skill → skill-optimizer; optimize one prompt → phe / prompt-deep-optimizer.

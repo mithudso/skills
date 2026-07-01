@@ -100,6 +100,21 @@ else
   exec env SKILLS_BOOTSTRAPPED=1 bash "$TARGET_DIR/setup.sh" $REEXEC
 fi
 
+# Bridge the legacy absolute path so skills/commands that hardcode
+# ~/.claude/skill-consolidation resolve to the vendored copy under this repo.
+BRIDGE="$HOME/.claude/skill-consolidation"
+mkdir -p "$HOME/.claude"
+if [ "$SC_DIR" = "$BRIDGE" ]; then
+  ok "vendored path is already the legacy path — no bridge needed"
+elif [ -L "$BRIDGE" ]; then
+  ln -sfn "$SC_DIR" "$BRIDGE" && ok "path bridge refreshed: $BRIDGE -> $SC_DIR"
+elif [ -e "$BRIDGE" ]; then
+  warn "$BRIDGE is a real path — left untouched (skills resolve it directly)"
+else
+  ln -s "$SC_DIR" "$BRIDGE" && ok "path bridge: $BRIDGE -> $SC_DIR" \
+    || warn "could not create $BRIDGE symlink — skills using the legacy path may fail"
+fi
+
 # ── 3. Node ≥ 18 ─────────────────────────────────────────────────────────────
 say "3/11 Node.js"
 if ! command -v node >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then brew install node || true; fi
