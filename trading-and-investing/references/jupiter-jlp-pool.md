@@ -49,7 +49,8 @@ tags:
 > claims whose former home (`dev.jup.ag/docs/old/perpetual-exchange/*`) now **404s** with no listed
 > replacement. That research pass also found **several body claims that contradict the live docs**; each
 > is recorded inside the relevant definition and flagged inline where it affects a stated fact. **Verify
-> every venue-specific claim against `docs.jup.ag` before relying on it.**
+> every venue-specific claim against `docs.jup.ag` before relying on it.** A research pass to close the
+> remaining gaps is queued — see `../SCHEDULED-RESEARCH.md`.
 
 
 **Scope.** The **liquidity-provider** side. For the trading venue itself — oracle execution, borrow fees, leverage and liquidation — see `references/jupiter-perps-trading.md`.
