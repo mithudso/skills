@@ -2,7 +2,7 @@
 
 A unified, comprehensive collection of **skills**, **workflows**, **prompts**, and **domain intelligence** for modern AI agent environments: **Google Antigravity**, **Gemini**, **Claude Code**, and **Claude**.
 
-> **Repository Status**: 385 Production Skills Cataloged & Indexed (Auto-Synchronized)
+> **Repository Status**: 378 Production Skills Cataloged & Indexed (Auto-Synchronized)
 
 ## Repository Overview
 
@@ -27,7 +27,6 @@ skills/
 | **Claude Code** | `156` | Deep engineering, infrastructure, AI orchestration, Firecrawl automation, psychology & analysis |
 | **Claude** | `33` | Standalone Claude workspace intelligence, security access trees, and prompt optimization |
 | **Claude (Archived)** | `9` | Specialized RFID, NFC, physical security, and trading strategy reference trees |
-| **Custom / MongoDB** | `7` | MongoDB Atlas connection, query optimization, stream processing, search & AI |
 | **Antigravity** | `3` | Antigravity CLI, IDE customizations, SDK orchestration, and permissioning |
 | **Custom / MQL Optimizer** | `2` | Deep MQL query optimization, execution plan analysis, and indexing |
 | **Custom / Customer Intelligence** | `1` | Enterprise account intelligence and incident response playbooks |
@@ -35,8 +34,8 @@ skills/
 ### By Domain Category
 | Category | Skills Count |
 | :--- | :---: |
-| **Science, Biology & Medicine** | `123` |
-| **Databases, Data Engineering & Analytics** | `78` |
+| **Science, Biology & Medicine** | `121` |
+| **Databases, Data Engineering & Analytics** | `73` |
 | **Frontend & Web Development** | `54` |
 | **Cloud, DevOps & Infrastructure** | `47` |
 | **AI, Agents & Prompt Engineering** | `28` |
