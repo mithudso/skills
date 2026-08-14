@@ -3850,6 +3850,28 @@
     "category": "Science, Biology & Medicine"
   },
   {
+    "name": "aws-cloud",
+    "description": "AWS hub \u2014 infra, serverless, AI/ML, private connectivity, databases, security, identity. TRIGGER: IAM, CLI/SSO, boto3/aws-sdk, EC2/EBS/S3, VPC, Well-Architected, CloudWatch/CloudTrail (aws-core); Lambda, EventBridge, Step Functions, API Gateway, ECS/EKS Fargate, CDK/SAM/CloudFormation (aws-serverless); Bedrock & SageMaker \u2014 models, agents, RAG, guardrails (aws-ai-ml); PrivateLink & VPC endpoints \u2014 interface/gateway/GWLB, endpoint services, private DNS/split-horizon, endpoint policies, vs peering/TGW, troubleshooting (aws-privatelink-vpc-endpoints); AWS databases \u2014 RDS/Aurora/DynamoDB/DocumentDB/Neptune, DocumentDB-vs-Atlas, CockroachDB, IndexedDB (databases-aws-cockroach-indexeddb); Aurora engine deep-dive \u2014 storage-compute separation, 6-way quorum, Serverless v2, Global Database, Aurora DSQL (aws-aurora); security services \u2014 KMS, GuardDuty, Security Hub, Config, WAF/Shield, Macie, Inspector, Access Analyzer (aws-security-services); secretless workload identity \u2014 IMDSv2, ECS task roles, EKS IRSA & Pod Identity, GitHub/GitLab OIDC, Roles Anywhere (aws-secretless-auth). SKIP: non-AWS cloud; MongoDB Atlas platform \u2192 mongodb-atlas-expert; the PostgreSQL engine itself (MVCC, vacuum, planner, WAL) \u2192 postgresql-expert; Cloudflare R2/egress \u2192 cloudflare-platform; app/web code-level security review \u2192 security-review.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/aws-cloud",
+    "category": "Databases, Data Engineering & Analytics"
+  },
+  {
+    "name": "bank-genai-model-risk-governance",
+    "description": "GenAI/LLM governance and model-risk framing for BANKS (FSI), for a MongoDB TAM advising banks on AI/LLM/vector-search. Educational, NOT legal/compliance advice. TRIGGER: model risk management for AI/LLM (SR 11-7 and its 2026 successor SR 26-2; effective challenge; model inventory); how MRM applies to non-deterministic GenAI & third-party/vendor models; NIST AI RMF 1.0 (GOVERN/MAP/MEASURE/MANAGE) and the Generative AI Profile (NIST-AI-600-1); EU AI Act (Reg 2024/1689) risk tiers, GPAI obligations, applicability timeline, credit-scoring as high-risk; validating a RAG/vector-search system. SKIP: company-specific account intel -> goldman-sachs-account-intelligence / jpmorgan-chase-account-intelligence; general FSI regulation -> fsi-banking-regulatory-context; vendor/third-party-risk -> enterprise-vendor-management-and-tprm; prompt-injection -> rag-prompt-injection-defense; security controls -> atlas-vector-search-pii-isolation / mongodb-operations-expert.",
+    "has_references": false,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/bank-genai-model-risk-governance",
+    "category": "Science, Biology & Medicine"
+  },
+  {
     "name": "bartending-career-track",
     "description": "Bartending career progression, certifications, competitions, and portfolio building \u2014 the full professional track from barback to F&B director. TRIGGER: bartending career path or ladder; barback to bartender promotion; bar manager or beverage director role; event bartending or freelance bartending; bartending certifications (TIPS, ServSafe Alcohol, state RBS/TABC/MAST/OLCC); Cicerone levels and costs; WSET spirits; BarSmarts; competitive bartending (Diageo World Class, Speed Rack, Bacardi Legacy, Bombay Sapphire Most Imaginative); USBG membership; event bartending licensing and insurance; cocktail menu portfolio; bartender resume conventions and volume metrics. SKIP: general resume writing, wine sommelier career (non-bartending), or food safety \u2192 career-and-formal-writing; restaurant management without bar focus \u2192 content-and-marketing-writing; finding bartending jobs or shift-gig platforms (Instawork, Qwick, GigSalad) \u2192 service-industry-job-hunting; service-industry resume craft, ATS design, trail shift prep, situational interview questions \u2192 service-industry-resume-and-interview.",
     "has_references": true,
@@ -3859,6 +3881,17 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/bartending-career-track",
     "category": "Frontend & Web Development"
+  },
+  {
+    "name": "big-bank-IT",
+    "description": "A large/global bank's IT estate \u2014 what it runs and how it's changing \u2014 so a MongoDB TAM or pre-sales engineer can speak credibly to bank architects. Vendor-neutral; educational. TRIGGER: core-banking, mainframe/COBOL estate and packaged cores (Temenos, Thought Machine, Mambu); system-of-record vs system-of-engagement; bank cloud posture and architect constraints (concentration, exit, portability, residency, sovereign cloud); trading infra and payments rails (RTGS, FedNow, ISO 20022); mainframe modernization (strangler-fig, batch windows); change-freeze, segregation-of-duties, regulated SDLC; resiliency & DR (RTO/RPO, active-active) and SRE; data platform & integration (lakehouse, Kafka/CDC, ESB/API). SKIP: why banks buy / the regulatory map -> fsi-banking-regulatory-context; a named bank -> jpmorgan-chase-account-intelligence; MongoDB config -> mongodb-* hubs; Linux/K8s/CI-CD -> devops-infra; DORA/TPRM -> enterprise-vendor-management-and-tprm; consumer banking -> personal-banking.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/big-bank-IT",
+    "category": "Databases, Data Engineering & Analytics"
   },
   {
     "name": "blockchain",
@@ -3905,6 +3938,28 @@
     "category": "Cloud, DevOps & Infrastructure"
   },
   {
+    "name": "cloudflare-platform",
+    "description": "Cloudflare platform from the network/infrastructure angle \u2014 orange-cloud reverse proxy effects on DNS answers, source IPs, TLS; authoritative DNS + 1.1.1.1; Tunnel (cloudflared); WARP; Access/ZTNA; Magic Transit/WAN; load balancing & Argo; Workers/R2 as infrastructure; caching & Cache Rules; 52x, cf-ray/trace debugging. TRIGGER: site behind Cloudflare misbehaving (520-526, cf-cache-status, cf-ray, /cdn-cgi/trace); origin sees only Cloudflare IPs (CF-Connecting-IP); SSL modes (Flexible vs Full strict), 525/526; proxied vs DNS-only, CNAME flattening, MX grey-cloud; 1.1.1.1/DoH no-ECS geo effects; cloudflared Tunnel + Access; WARP split tunnels & posture; Magic Transit BGP/GRE/MTU; LB steering & health checks; Argo; R2 zero-egress CDN origin; purge, tiered cache. SKIP: Workers JS runtime, compat flags, wrangler \u2192 lang-js-ts; DNS/BGP protocol internals \u2192 networking; host-level net tooling \u2192 devops-linux-admin; ZTNA concepts/NIST 800-207, Okta/IdP internals \u2192 security-review / okta-expert.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/cloudflare-platform",
+    "category": "Science, Biology & Medicine"
+  },
+  {
+    "name": "code-deep-optimizer",
+    "description": "Multi-stage review-and-fix optimizer for a source file or whole repo. Auto-detects languages, frameworks, and domains, activates matching reviewer skills, runs an 18-pass audit plus an opt-in advisory track (features, architecture, migration), applies every Medium+ fix in place, verifies via build/lint/tests (backing out regressions), and loops to convergence. TRIGGER: \"optimize this code\", \"run cdo\", \"deep code review and fix\", \"review and fix this file or repo\", \"audit this codebase and fix it until clean\", \"find and fix bugs in this repo\". SKIP: one-shot diff review \u2192 /code-review; prose or docs \u2192 document-critique; production prompt \u2192 prompt-deep-optimizer; skill file \u2192 skill-optimizer; pure formatting \u2192 the language's formatter; create-from-scratch tooling setup with no code to review \u2192 repo-bootstrapper; advisory-only ask with no code artifact \u2192 software-engineering-patterns or mongodb-operations-expert.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/code-deep-optimizer",
+    "category": "Databases, Data Engineering & Analytics"
+  },
+  {
     "name": "concept-family-explorer",
     "description": "Gap-discovery layer ABOVE /dr: map a subject's full conceptual family (parent domain, siblings, sub-concepts, adjacent/cross-over fields, frontier), surface useful/novel concepts you're MISSING, score each via the da-* skills, then loop /dr on every viable gap until the concept tree saturates; finishes with skill-optimizer + prompt-deep-optimizer. TRIGGER: 'what am I missing about X', 'map the concept space/family of X', 'find adjacent/sibling concepts to X', 'what skills should I build around X', 'saturate/complete my coverage of X', 'expand my concept tree for X', 'explore the conceptual neighborhood of X'. SKIP: researching a topic you ALREADY named \u2192 /dr; cited web report with no skill-building \u2192 deep-research; create ONE skill interactively \u2192 skill-creator; audit/improve one existing skill \u2192 skill-optimizer; optimize one prompt \u2192 phe / prompt-deep-optimizer.",
     "has_references": true,
@@ -3913,6 +3968,17 @@
     "platform": "Claude",
     "section": "claude/standalone",
     "rel_path": "claude/standalone/concept-family-explorer",
+    "category": "Databases, Data Engineering & Analytics"
+  },
+  {
+    "name": "consumer-credit-and-debt",
+    "description": "Hub for US consumer credit & debt \u2014 credit health, lending, collections, and governing law (federal + NC); routes to 11 spokes. Educational, NOT financial or legal advice (as of 2026). TRIGGER: credit reports or scores (FICO/VantageScore, bureaus); building or rebuilding credit; charge-offs, collections, settling debt, 1099-C; a collector contacting/suing me (FDCPA); home-mortgage or auto lending; predatory/high-cost loans (payday/title/rent-to-own); identity theft & credit fraud; consumer bankruptcy (Ch.7/13); US credit statutes (FCRA/FDCPA/ECOA/TILA/FCBA/CROA/EFTA) or NC debt law. SKIP: personal/household finance \u2014 student loans, banking, income taxes, insurance (personal & health), medical bills, budgeting, investing/retirement, estate planning & wills \u2192 consumer-finance (sibling hub); NC business/nonprofit/real-estate \u2192 venture-nc-business-formation-tax / venture-nc-nonprofit-formation / venture-nc-real-estate-law; business credit/D&B; MongoDB / TAM / data-analytics \u2192 own hubs.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/consumer-credit-and-debt",
     "category": "Databases, Data Engineering & Analytics"
   },
   {
@@ -4081,6 +4147,17 @@
     "category": "Science, Biology & Medicine"
   },
   {
+    "name": "devops-linux-internals",
+    "description": "Linux kernel & OS-internals sub-hub (devops family). TRIGGER: Linux kernel architecture, boot/init, memory & NUMA, storage & filesystems, virtualization/KVM, io_uring async I/O, cgroups v2 & namespaces (PID/mount/net/user/cgroup), sandboxing & confinement, immutable/atomic Linux, Linux/macOS privilege model. SKIP: sysadmin/systemd/packaging/shell/host-networking \u2192 devops-linux-admin; containers/k8s/CI-CD/IaC \u2192 devops-containers-cicd; logging/tracing/metrics/eBPF/perf \u2192 devops-observability.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/devops-linux-internals",
+    "category": "Science, Biology & Medicine"
+  },
+  {
     "name": "devops-observability",
     "description": "Observability, logging, tracing & performance sub-hub (devops family). TRIGGER: Node.js observability & OpenTelemetry instrumentation; Pino v9+ structured logging (child loggers, serializers, redaction); Sentry error monitoring & performance tracing; eBPF observability/networking/security (bpftrace/bcc, CO-RE/BTF/libbpf); Linux perf tracing & profiling. SKIP: container/CI-CD/IaC \u2192 devops-containers-cicd; Linux kernel/admin \u2192 devops-linux-internals / devops-linux-admin; Python-side logging (stdlib logging/structlog/loguru) \u2192 lang-python (references/python-logging-observability.md).",
     "has_references": true,
@@ -4101,6 +4178,17 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/diagnosis-methodology-backtest",
     "category": "Databases, Data Engineering & Analytics"
+  },
+  {
+    "name": "direct-response-and-sales-letter-copywriting",
+    "description": "Apply the long-form direct response canon: Schwartz's market sophistication/mass desire framework, sales letter anatomy (lead types, proof blocks, close, PS stack), fascination bullets, Sugarman's slippery slope readability, VSL scripting, and advertorial/native long-form pages; distinguishes split-test-validated findings from practitioner lore. TRIGGER: write or improve a long-form sales letter, VSL script, or sales page; market sophistication/awareness stages; craft a lead, headline, fascination bullets, proof block, guarantee, close, or PS stack; Schwartz/Bencivenga/Sugarman/Caples/Hopkins/Halbert; diagnose why a long-form piece underperforms; mechanism headline or benefit bullets. SKIP: short-form (AIDA/PAS/email/CTA) \u2192 sales-and-marketing-copy; offer design \u2192 offer-design-and-value-proposition; VOC/message-mining \u2192 conversion-copywriting-and-voice-of-customer; persuasion theory \u2192 persuasion-and-influence-psychology; urgency dark patterns \u2192 deceptive-design-and-dark-patterns.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/direct-response-and-sales-letter-copywriting",
+    "category": "Frontend & Web Development"
   },
   {
     "name": "document-formats",
@@ -4213,6 +4301,17 @@
     "category": "Security, Auth & Diagnostics"
   },
   {
+    "name": "goldman-sachs-account-intelligence",
+    "description": "Company-specific account intelligence on Goldman Sachs (GS) as a TECHNOLOGY BUYER, for a MongoDB TAM/seller. PUBLIC-SOURCE intel; verify before customer use (leadership/budgets/org-names decay fast). TRIGGER: prepping for a GS touchpoint, EBR, or account plan; GS segments (Global Banking & Markets, Asset & Wealth Management, Platform Solutions), tech spend/engineering scale, polycloud posture, AWM modernization, AI strategy (GS AI Assistant, Devin, OneGS), proprietary stack (SecDB/Slang, Legend/FINOS), tech leadership, consumer exit, MongoDB/Atlas-vs-DocumentDB signals, earnings signals. SKIP: FSI regulation (Basel, BCBS 239) -> fsi-banking-regulatory-context; bank GenAI model-risk governance -> bank-genai-model-risk-governance; big-bank IT archetype -> big-bank-IT; TPRM/procurement -> enterprise-vendor-management-and-tprm; MongoDB/Atlas config -> mongodb-* hubs; EBR/QBR/POV mechanics -> tam-operations; JPMorgan/Chase -> jpmorgan-chase-account-intelligence.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/goldman-sachs-account-intelligence",
+    "category": "Science, Biology & Medicine"
+  },
+  {
     "name": "harness-streamliner",
     "description": "Streamline and optimize the Claude Code harness config \u2014 settings.json, hooks, MCP servers, permissions, env, model, statusline \u2014 to cut redundancy, startup latency, and per-turn token overhead. Runs a read-only scan, then AUTO-APPLIES every Medium-or-higher config fix in place (timestamped backup first, jq-validated after, auto-restore on breakage) and reports what changed. Use this whenever the user wants to \"streamline / optimize / clean up / trim / tune / speed up my Claude setup or config\", mentions a bloated or slow settings.json, duplicate or redundant permission rules, dead or broken hooks, too many MCP servers eating context, high startup cost, or asks to audit ~/.claude (and project .claude/) for cruft. Covers user-level ~/.claude AND project-level .claude/settings*.json when a repo is in scope. Triggers on: \"/hso\", \"streamline my claude setup\", \"optimize my settings\", \"my config is bloated\", \"clean up my permissions\", \"audit my hooks\", \"reduce startup overhead\", \"too many mcp servers\". SKIP: skill body/triggering quality -> skill-optimizer; skill tree, count, placement, or tiering -> skill-tree-architect, /skill-tier, /sync-skills; prompt or agent-instruction quality -> prompt-deep-optimizer; a single precise setting change the user already named -> update-config.",
     "has_references": true,
@@ -4243,6 +4342,17 @@
     "platform": "Claude",
     "section": "claude/standalone",
     "rel_path": "claude/standalone/jpmorgan-chase-account-intelligence",
+    "category": "Databases, Data Engineering & Analytics"
+  },
+  {
+    "name": "kql-kusto-query-language",
+    "description": "Kusto Query Language (KQL) \u2014 the read-only, pipe-based query language across Azure Data Explorer (ADX), Azure Monitor / Log Analytics, Microsoft Sentinel, Defender XDR advanced hunting, Azure Resource Graph, and Microsoft Fabric Real-Time Intelligence (Eventhouse). Sibling of splunk-platform-spl and elasticsearch-opensearch under \"Log & event query languages\". TRIGGER: writing/debugging a KQL query; the tabular dataflow / pipe (|) model; operators (where, project, extend, summarize, join, union, parse, mv-expand, make-series, render, let, evaluate); time filtering (ago, bin, between, datetime/timespan); aggregations (count, dcount, percentile, arg_max, make_list); join kinds and the innerunique default surprise; KQL-vs-SQL / -vs-SPL translation; performance (time-bound first, has vs contains, column pushdown, materialize, broadcast/shuffle hints); per-product schema/scope differences (Sentinel/Defender/Log Analytics/ADX/Fabric); user-defined & stored functions; query vs management (. control) commands. SKIP: Splunk SPL \u2192 splunk-platform-spl; Elasticsearch ES|QL / OpenSearch PPL / Query DSL \u2192 elasticsearch-opensearch; telemetry routing/ingest (Cribl/Vector/Fluent Bit/OTel Collector) \u2192 telemetry-pipeline; OTel SDK, Pino, Sentry, eBPF \u2192 devops-observability; LogQL / Grafana Loki \u2192 logql-grafana-loki; ANSI SQL query tuning \u2192 deep-query-optimizer; general Azure platform/ARM/networking \u2192 Azure docs directly.",
+    "has_references": false,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/kql-kusto-query-language",
     "category": "Databases, Data Engineering & Analytics"
   },
   {
@@ -4312,6 +4422,28 @@
     "category": "Databases, Data Engineering & Analytics"
   },
   {
+    "name": "nc-criminal-defense",
+    "description": "NC criminal law hub \u2014 bail/bond, drug law, DWI, juvenile, mental health, DV, sex crimes, procedure, sentencing, expungement. NOT legal advice. TRIGGER: NC bail bond GS 15A-531-545, drug law (trafficking GS 90-95(h), PWIMSD, habitual felon, conditional discharge GS 90-96, marijuana 2026), NC DWI GS 20-138.1 (implied consent, Intox EC-IR II, ignition interlock GS 20-17.8, habitual DWI GS 20-138.5), juvenile justice GS 7B (Raise the Age, YDC), competency GS 15A-1001, NGRI GS 15A-959, domestic violence DVPO GS 50B, sex crimes GS 14-27, SORN, expungement GS 15A-145, collateral consequences, post-conviction MAR GS 15A-1411. SKIP: federal criminal \u2192 federal resource; civil/family \u2192 consumer-credit-and-debt; NC business \u2192 venture-nc-*; probation/parole \u2192 nc-parole-probation; SUD/MAT \u2192 nc-drug-rehabilitation-treatment.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/nc-criminal-defense",
+    "category": "Finance, Banking & Business"
+  },
+  {
+    "name": "nc-parole-probation",
+    "description": "NC parole, probation & community supervision hub \u2014 PRS, conditions, violations, electronic monitoring, CRV sanctions, DAC, reentry. Educational only, NOT legal advice. TRIGGER: NC probation/parole/post-release supervision PRSPC, NC CRV confinement-in-response-to-violation, NC absconder warrants ACE SOIU, NC ICAOS interstate compact, NC JMARC drug court, NC Justice Reinvestment Act JRA 2011, NC MAPP parole, NC medical geriatric parole GS 15A-1369, NC sex offender SORNA SBM, NC electronic monitoring GPS, NC day reporting DRC, NC-PASE risk assessment, NC evidence-based practices recidivism, NC Reentry 2030 SAVAN victim services, NC split sentence GS 15A-1351, NC probation length GS 15A-1342. SKIP: NC criminal trial/defense/pre-conviction \u2192 nc-criminal-defense (sentencing grids refs/nc-structured-sentencing.md; expungement refs/nc-expungement-record-sealing.md); SUD treatment/MAT/OTP \u2192 nc-drug-rehabilitation-treatment; specific case advice \u2192 consult a licensed NC attorney.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/nc-parole-probation",
+    "category": "Science, Biology & Medicine"
+  },
+  {
     "name": "nc-recording-laws",
     "description": "NC recording law (legal-family spoke) \u2014 one-party consent (GS 15A-287), criminal/civil penalties, audio vs video, recording police (First Amendment/Sharpe 4th Cir. 2023), attorney-client recording, AI/smart devices (Plaud), workplace, public meetings, body cameras (GS 132-1.4A), voyeurism (GS 14-202), ECPA, interstate calls. NOT legal advice (2026). TRIGGER: can I record a conversation in NC; recording phone calls NC; one-party consent North Carolina; GS 15A-287 wiretapping; recording police NC; NC video surveillance; GS 14-202 voyeurism; workplace recording NC; public meeting recording NC; body cam public records NC; illegal recording NC penalty; ECPA NC; attorney-client recording NC; Plaud/AI recorder legal NC; recording at NC courthouse. SKIP: NC drug charges \u2192 nc-criminal-defense; NC probation/parole \u2192 nc-parole-probation; federal wiretap prosecution \u2192 legal (no federal-criminal skill); NC civil privacy torts \u2192 licensed NC attorney.",
     "has_references": false,
@@ -4376,6 +4508,17 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/prompt-deep-optimizer",
     "category": "Cloud, DevOps & Infrastructure"
+  },
+  {
+    "name": "prompt-helper-optimizer",
+    "description": "One-off and exploratory prompt improvement \u2014 interprets a raw prompt, finds weaknesses, and rewrites it into an agent-ready instruction. Two aliases: /ph (review mode: critique + recommendations) and /phe (auto-execute mode: optimize, save, and immediately run the improved prompt). Algorithm-aware: recommends APE, OPRO, ProTeGi, TextGrad, EvoPrompt, DSPy/MIPROv2, GEPA, and BetterTogether when relevant. TRIGGER: \"improve/rewrite/optimize/critique this prompt\", \"/ph\", \"/phe\", \"which prompt algorithm should I use\", \"make this agent-ready\", \"strengthen this prompt\", \"rubber-duck this prompt\". SKIP: production or codebase system prompts needing multi-pass audit (use prompt-deep-optimizer /pdo); prompt engineering reference or learning questions (use the ai-mcp-sdk-prompting hub); retrieving saved prompts -> ai-mcp-sdk-prompting (references/prompt-lookup.md); optimizing MongoDB queries, Atlas indexes, SQL queries, code, or any non-prompt artifact; prompts longer than ~600 tokens (use /pdo).",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/prompt-helper-optimizer",
+    "category": "Databases, Data Engineering & Analytics"
   },
   {
     "name": "psychology",
@@ -4510,6 +4653,17 @@
     "category": "Science, Biology & Medicine"
   },
   {
+    "name": "software-engineering-patterns",
+    "description": "Language-agnostic software design/architecture/practice hub. TRIGGER: API design (REST/GraphQL/gRPC, versioning); backend & microservices patterns (decomposition, bounded contexts, strangler fig); Express/Fastify/NestJS/Hono selection; Python web frameworks (FastAPI/Django/Flask, ASGI/WSGI, uvicorn/gunicorn); design patterns (creational/structural/behavioral); coding standards; antipatterns & code smells; architecture docs (ISO 42010, ADRs, C4); code review (OWASP checklist); debugging & root-cause (5 Whys); performance profiling; SSE/streaming; job scheduling / MV3 alarms; auth-checker/web-auth; diagnostic registry; Vitest testing (vi mocks, coverage, snapshots, Jest\u2192Vitest); Playwright web/UI testing; repo reusable-pattern scanning; automated program repair & code auto-remediation (GenProg, patch generation, fault localization, RepairAgent, Agentless, patch overfitting). SKIP: language syntax/idioms \u2192 lang-python/lang-js-ts/lang-go-and-mobile; frontend/UI/CSS \u2192 frontend-ui; SaaS API clients (Jira/Slack/Salesforce/Monday) \u2192 integration-clients.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/software-engineering-patterns",
+    "category": "Security, Auth & Diagnostics"
+  },
+  {
     "name": "solve-case",
     "description": "End-to-end MongoDB/Atlas support-case solver. Orchestrates the mongodb-* and 10gen skills, the case and account MCPs, and the diagnostic and psychology agents into one workflow: identify the customer, run full troubleshooting and diagnosis (deep-diving any unknown), give a fact-based cited analysis, then craft a customer-psychology-informed reply bundled with blockers, tools used, who to talk to, an escalation call, and insights. TRIGGER: \"solve this case\", \"solve case <id|url>\", \"work this case end to end\", \"diagnose and respond to this MongoDB/Atlas case\", or taking a support case from intake to a drafted customer reply. SKIP: one narrow MongoDB symptom with no customer/response/escalation wrap-up (use atlas-diagnostics-expert or mongodb-kb); drafting a reply with no diagnosis (use content-and-marketing-writing); backtesting diagnosis methodologies (use diagnosis-methodology-backtest); building or auditing another skill (use skill-creator or skill-optimizer).",
     "has_references": true,
@@ -4554,6 +4708,17 @@
     "category": "Science, Biology & Medicine"
   },
   {
+    "name": "technical-writing-craft",
+    "description": "Technical & product writing hub \u2014 software docs, specs, engineering comms. Sentence mechanics & structure (Given/New, active voice, imperative mood, nominalization/zombie nouns, heading discipline, cohesion/coherence, RFC 2119, Di\u00e1taxis, show-first); style-guide grounded (Google, Microsoft WSG, Strunk & White, Williams). TRIGGER: technical writing, API docs, README, readability, passive voice, heading structure; how-to & tutorials; KB articles; reference & explanation docs; runbooks/on-call; specs; PRDs; RFCs & design docs; user stories & acceptance criteria; meeting minutes & ADRs; changelogs & release notes; error messages; microcopy/UI writing; commit & PR messages; code/agent plans; postmortems; incident/status-page comms. SKIP: general prose/voice/editing \u2192 writing-expert; exec/business/persuasion \u2192 executive-comms; marketing/PR/newsletters \u2192 content-and-marketing-writing; career/academic/legal/policy/survey \u2192 career-and-formal-writing.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/technical-writing-craft",
+    "category": "Security, Auth & Diagnostics"
+  },
+  {
     "name": "telemetry-pipeline",
     "description": "Telemetry / observability pipelines \u2014 the vendor-neutral processing layer (telemetry router) between telemetry SOURCES and DESTINATIONS (Splunk, Elasticsearch/OpenSearch, SIEMs, S3, data lakes) that collects, parses, enriches, routes, reduces, samples, and redacts logs/metrics/traces IN FLIGHT. TRIGGER: choosing/designing an observability pipeline or telemetry router; Cribl Stream (Sources/Routes/Pipelines/Functions/Packs, Leader+Workers, replay); the OpenTelemetry Collector AS A PIPELINE (receivers/processors/exporters/connectors, OTTL, agent vs gateway, tail_sampling, routing connector); Vector (VRL), Fluentd, Fluent Bit, Logstash (grok) and which to pick; SIEM/Splunk per-GB license-cost reduction (drop/trim/dedupe/sample/logs-to-metrics); PII redaction/masking in flight; schema normalization (OTel SemConv, ECS, Splunk CIM, OCSF); fan-out routing to many destinations; the observability data lake / tiered-telemetry pattern (full fidelity to cheap object storage, reduced subset to the SIEM) and replay/rehydration; whether you need a pipeline layer at all. SKIP: the Splunk platform/SPL that INGESTS this telemetry \u2192 splunk-platform-spl; Elasticsearch/OpenSearch engine & ELK stack \u2192 elasticsearch-opensearch; app-level OTel SDK instrumentation (generating spans/metrics in code), Pino, Sentry, eBPF \u2192 devops-observability hub; DATA-pipeline / data-QUALITY observability (freshness, volume, schema, lineage of analytical data \u2014 a DIFFERENT meaning of \"observability\") \u2192 da-data-engineering-platform.",
     "has_references": false,
@@ -4585,6 +4750,17 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/volunteer-and-prosocial-motivation",
     "category": "Science, Biology & Medicine"
+  },
+  {
+    "name": "writing-expert",
+    "description": "General prose craft, voice, style & editing hub. Sentence/paragraph craft; frameworks (BLUF, Minto Pyramid, SCQA, STAR, Inverted Pyramid, 5W1H); tone/voice by audience; anti-AI-ism; data storytelling; 18 sub-skills on demand. TRIGGER: write/draft/edit/improve/review general prose; revision; rhetorical/argument frameworks; storytelling/narrative; headlines; plain & inclusive language; localization-friendly; anti-jargon; brand voice; audience modeling; visual writing (captions, alt text); accessibility writing; AI-collaboration writing; writing under pressure; interview/profile writing; email craft; nominalization/cohesion/flow; 'make this better'. SKIP: software/eng docs \u2192 technical-writing-craft; exec/persuasion \u2192 executive-comms; marketing/PR/newsletters \u2192 content-and-marketing-writing; career/academic/legal/policy/survey \u2192 career-and-formal-writing; AI-voice cleanup \u2192 kill-the-ai-ism; multi-pass doc critique \u2192 document-critique.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/writing-expert",
+    "category": "AI, Agents & Prompt Engineering"
   },
   {
     "name": "mongodb-expert",

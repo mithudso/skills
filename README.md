@@ -2,7 +2,7 @@
 
 A unified, comprehensive collection of **skills**, **workflows**, **prompts**, and **domain intelligence** for modern AI agent environments: **Google Antigravity**, **Gemini**, **Claude Code**, and **Claude**.
 
-> **Repository Status**: 420 Production Skills Cataloged & Indexed (Auto-Synchronized)
+> **Repository Status**: 436 Production Skills Cataloged & Indexed (Auto-Synchronized)
 
 ## Repository Overview
 
@@ -25,7 +25,7 @@ skills/
 | :--- | :---: | :--- |
 | **Gemini / Plugins** | `174` | Domain plugins: Science/Bio, Data Agent Kit (BigQuery/dbt), Firebase, Chrome DevTools, Modern Web |
 | **Claude Code** | `156` | Deep engineering, infrastructure, AI orchestration, Firecrawl automation, psychology & analysis |
-| **Claude** | `75` | Standalone Claude workspace intelligence, security access trees, and prompt optimization |
+| **Claude** | `91` | Standalone Claude workspace intelligence, security access trees, and prompt optimization |
 | **Claude (Archived)** | `9` | Specialized RFID, NFC, physical security, and trading strategy reference trees |
 | **Antigravity** | `3` | Antigravity CLI, IDE customizations, SDK orchestration, and permissioning |
 | **Custom / MQL Optimizer** | `2` | Deep MQL query optimization, execution plan analysis, and indexing |
@@ -34,17 +34,17 @@ skills/
 ### By Domain Category
 | Category | Skills Count |
 | :--- | :---: |
-| **Science, Biology & Medicine** | `145` |
-| **Databases, Data Engineering & Analytics** | `84` |
-| **Frontend & Web Development** | `56` |
+| **Science, Biology & Medicine** | `150` |
+| **Databases, Data Engineering & Analytics** | `90` |
+| **Frontend & Web Development** | `57` |
 | **Cloud, DevOps & Infrastructure** | `51` |
-| **AI, Agents & Prompt Engineering** | `29` |
-| **Security, Auth & Diagnostics** | `24` |
+| **AI, Agents & Prompt Engineering** | `30` |
+| **Security, Auth & Diagnostics** | `26` |
 | **General & Specialized Utilities** | `17` |
 | **Programming & Languages** | `6` |
 | **Web Scraping & Firecrawl** | `4` |
 | **Writing, Communication & Marketing** | `2` |
-| **Finance, Banking & Business** | `1` |
+| **Finance, Banking & Business** | `2` |
 | **Psychology & Behavioral Science** | `1` |
 
 ---
