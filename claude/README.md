@@ -2,7 +2,7 @@
 
 Claude workspace capabilities, prompt deep-optimizers, telemetry pipelines, and archived physical security / RFID protocol knowledge trees.
 
-**Total Skills in Section**: `49`
+**Total Skills in Section**: `51`
 
 ## Skills Index
 
@@ -20,6 +20,7 @@ Claude workspace capabilities, prompt deep-optimizers, telemetry pipelines, and 
 | [contactless-smartcards-mifare-desfire](archived-treearch/contactless-smartcards-mifare-desfire/SKILL.md) | [`archived-treearch/contactless-smartcards-mifare-desfire`](archived-treearch/contactless-smartcards-mifare-desfire) | Contactless smart cards and on-card crypto: ISO/IEC 14443 Type A/B PICCs, the ISO/IEC 7816-4 APDU model, and the NXP MIFARE family (Classic, Ultral... |
 | [content-ingestion-extraction](standalone/content-ingestion-extraction/SKILL.md) | [`standalone/content-ingestion-extraction`](standalone/content-ingestion-extraction) | Acquire, extract, audit & restructure content from heterogeneous sources — aging docs, doc folders/KBs, live web DOM, meeting-audio devices, one-of... |
 | [data-analytics](standalone/data-analytics/SKILL.md) | [`standalone/data-analytics`](standalone/data-analytics) | Data analytics family ROUTER (da-* hubs). Split into 6 sub-domain hubs: da-1-foundations-theory (probability, measurement, epistemology, inference)... |
+| [deep-query-optimizer](standalone/deep-query-optimizer/SKILL.md) | [`standalone/deep-query-optimizer`](standalone/deep-query-optimizer) | SQL member of the deep-optimizer family: a multi-pass review-and-fix optimizer for a SQL query or file. Detects the dialect (Postgres/MySQL/SQLite/... |
 | [design-deep-optimizer](standalone/design-deep-optimizer/SKILL.md) | [`standalone/design-deep-optimizer`](standalone/design-deep-optimizer) | Multi-stage design & image critique-and-fix optimizer for graphic/brand & UI/UX screens; sibling of code-deep-optimizer/document-critique. Ingests ... |
 | [devops-infra](standalone/devops-infra/SKILL.md) | [`standalone/devops-infra`](standalone/devops-infra) | DevOps / infrastructure / observability family ROUTER. Split into focused sub-hubs — route to: devops-linux-internals (kernel, boot, memory/NUMA, s... |
 | [document-formats](standalone/document-formats/SKILL.md) | [`standalone/document-formats`](standalone/document-formats) | Generate/parse/edit/convert document & data-file formats in Python & Node — PDF, Word(.docx), Excel(.xlsx), PowerPoint(.pptx), CSV/TSV, advanced JS... |
@@ -52,6 +53,7 @@ Claude workspace capabilities, prompt deep-optimizers, telemetry pipelines, and 
 | [rfid-fundamentals-bands-standards](archived-treearch/rfid-fundamentals-bands-standards/SKILL.md) | [`archived-treearch/rfid-fundamentals-bands-standards`](archived-treearch/rfid-fundamentals-bands-standards) | RFID fundamentals — system anatomy, frequency bands, coupling physics, and core air-interface standards. TRIGGER: choosing/comparing an RFID band (... |
 | [rfid-nfc-access-attacks-defenses](archived-treearch/rfid-nfc-access-attacks-defenses/SKILL.md) | [`archived-treearch/rfid-nfc-access-attacks-defenses`](archived-treearch/rfid-nfc-access-attacks-defenses) | Threat model, attacks, and defenses for card-based physical access control (RFID/NFC badges, readers, controllers), for DEFENSE and authorized asse... |
 | [secrets-and-key-management](standalone/secrets-and-key-management/SKILL.md) | [`standalone/secrets-and-key-management`](standalone/secrets-and-key-management) | Foundational spine for the secure custody of secrets — the generate → store → transfer → use → rotate → destroy lifecycle and envelope encryption (... |
+| [skill-optimizer](standalone/skill-optimizer/SKILL.md) | [`standalone/skill-optimizer`](standalone/skill-optimizer) | Audit and improve a TAM or Claude Code skill to production quality: runs a convergence-loop quality gate, writes Medium+ fixes, seeds peer-deferral... |
 | [skill-tree-architect](standalone/skill-tree-architect/SKILL.md) | [`standalone/skill-tree-architect`](standalone/skill-tree-architect) | Whole-tree architect for the ~/.claude/skills hub-and-spoke taxonomy — audits the whole tree against the two-tier description cap (>1000 soft / >15... |
 | [technical-instruction](standalone/technical-instruction/SKILL.md) | [`standalone/technical-instruction`](standalone/technical-instruction) | Hub for teaching engineers — design, deliver, assess & measure technical training and engineering education; routes to 10 spokes. TRIGGER: course/c... |
 | [telemetry-pipeline](standalone/telemetry-pipeline/SKILL.md) | [`standalone/telemetry-pipeline`](standalone/telemetry-pipeline) | Telemetry / observability pipelines — the vendor-neutral processing layer (telemetry router) between telemetry SOURCES and DESTINATIONS (Splunk, El... |

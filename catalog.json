@@ -3872,6 +3872,17 @@
     "category": "Science, Biology & Medicine"
   },
   {
+    "name": "deep-query-optimizer",
+    "description": "SQL member of the deep-optimizer family: a multi-pass review-and-fix optimizer for a SQL query or file. Detects the dialect (Postgres/MySQL/SQLite/SQL Server), audits sargability, index design, joins and N+1, predicate logic, projection, pagination, subqueries/CTEs, and the EXPLAIN plan; severity-rates findings; applies every Medium+ rewrite in place; and when a DB connection exists, verifies via EXPLAIN/EXPLAIN ANALYZE that the plan improved and the result set is unchanged, backing out regressions and looping to convergence. Recommends index DDL. TRIGGER: \"optimize this SQL\", \"run dqo\", \"tune this query\", \"why is this query slow\", \"what index for this query\", full-scan/N+1/deep-paging SQL. SKIP: MongoDB/MQL \u2192 deep-mongodb-mql-query-optimizer (/dmqo); warehouse/dbt or SQL schema modeling \u2192 da-data-engineering-platform; ORM or app-layer N+1 in code \u2192 code-deep-optimizer; one-shot advice with no query \u2192 software-engineering-patterns; prose \u2192 ddo; prompts \u2192 prompt-deep-optimizer.",
+    "has_references": false,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/deep-query-optimizer",
+    "category": "Databases, Data Engineering & Analytics"
+  },
+  {
     "name": "design-deep-optimizer",
     "description": "Multi-stage design & image critique-and-fix optimizer for graphic/brand & UI/UX screens; sibling of code-deep-optimizer/document-critique. Ingests a screenshot, URL, code (HTML/CSS), or spec and runs an 11-pass critique (hierarchy, gestalt, typography, color, usability heuristics/Laws of UX, WCAG, affective/trust, metrics, brand-parity, hallucination guard) over the frontend-ui spokes; severity-rates Blocker\u2192Nit and, for code-backed designs, applies Medium+ fixes to convergence (re-render/contrast/axe verified). Image/URL/spec inputs get critique-only findings. TRIGGER: \"critique/optimize this design|mockup|UI|screen|landing page|brand asset\", \"/deso\", \"review this screenshot's design\", \"run a design critique\", \"improve this UI's visual design\". SKIP: producing a NEW design (web-design / ui-ux-pro-max); one narrow question (the matching frontend-ui spoke); prose (document-critique); code logic (code-deep-optimizer); photographic or AI-generated-image critique.",
     "has_references": false,
@@ -4145,6 +4156,17 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/secrets-and-key-management",
     "category": "Science, Biology & Medicine"
+  },
+  {
+    "name": "skill-optimizer",
+    "description": "Audit and improve a TAM or Claude Code skill to production quality: runs a convergence-loop quality gate, writes Medium+ fixes, seeds peer-deferral edges, verifies, and syncs to the mdb-context-hub. TRIGGER: \"optimize skill\", \"audit skill\", \"run sko\", \"skill trigger accuracy\", \"skill too long\", \"fix skill\", \"skill collision check\". Structural-only `--meta` mode does wiring/registry/validation without content passes: \"register skill to the hub\", \"validate placement/folder/manifest\", \"fix skill naming\", \"wire up peer deferral edges\", \"run sko --meta\". SKIP: non-skill prompt files \u2192 prompt-deep-optimizer / phe; new skill from scratch \u2192 skill-creator; prose-only edits \u2192 writing-expert; batch push w/o validation or whole-registry reconcile \u2192 /sync-skills; deep MCP tool audits \u2192 ai-mcp-sdk-prompting (references/mcp-tool-search-optimizer.md); whole-TREE rebalance / cross-hub placement / cap-balance / reshape for a new family \u2192 skill-tree-architect.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/skill-optimizer",
+    "category": "AI, Agents & Prompt Engineering"
   },
   {
     "name": "skill-tree-architect",
