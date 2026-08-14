@@ -1,18 +1,18 @@
 # Master Skills Index
 
-This index provides an exhaustive directory of all **378** agent skills cataloged across **Google Antigravity**, **Gemini / Plugins**, **Claude Code**, **Claude Workspace**, and **Custom Tooling**.
+This index provides an exhaustive directory of all **380** agent skills cataloged across **Google Antigravity**, **Gemini / Plugins**, **Claude Code**, **Claude Workspace**, and **Custom Tooling**.
 
 ## Table of Contents
 - [Skills by Category](#skills-by-category)
   - [AI, Agents & Prompt Engineering (28)](#ai-agents--prompt-engineering)
   - [Cloud, DevOps & Infrastructure (47)](#cloud-devops--infrastructure)
-  - [Databases, Data Engineering & Analytics (73)](#databases-data-engineering--analytics)
+  - [Databases, Data Engineering & Analytics (74)](#databases-data-engineering--analytics)
   - [Finance, Banking & Business (1)](#finance-banking--business)
   - [Frontend & Web Development (54)](#frontend--web-development)
   - [General & Specialized Utilities (17)](#general--specialized-utilities)
   - [Programming & Languages (6)](#programming--languages)
   - [Psychology & Behavioral Science (1)](#psychology--behavioral-science)
-  - [Science, Biology & Medicine (121)](#science-biology--medicine)
+  - [Science, Biology & Medicine (122)](#science-biology--medicine)
   - [Security, Auth & Diagnostics (24)](#security-auth--diagnostics)
   - [Web Scraping & Firecrawl (4)](#web-scraping--firecrawl)
   - [Writing, Communication & Marketing (2)](#writing-communication--marketing)
@@ -131,6 +131,7 @@ This index provides an exhaustive directory of all **378** agent skills cataloge
 | [code-deep-optimizer](claude-code/code-deep-optimizer/SKILL.md) | `Claude Code` | [`claude-code/code-deep-optimizer`](claude-code/code-deep-optimizer) | Multi-stage review-and-fix optimizer for a source file or whole repo. Auto-detects languages, frameworks, and domains, activates matching reviewer skills, runs an 18-pass audit ... |
 | [consumer-credit-and-debt](claude-code/consumer-credit-and-debt/SKILL.md) | `Claude Code` | [`claude-code/consumer-credit-and-debt`](claude-code/consumer-credit-and-debt) | Hub for US consumer credit & debt — credit health, lending, collections, and governing law (federal + NC); routes to 11 spokes. Educational, NOT financial or legal advice (as of... |
 | [consumer-finance](claude-code/consumer-finance/SKILL.md) | `Claude Code` | [`claude-code/consumer-finance`](claude-code/consumer-finance) | Hub for US personal/consumer finance — money management, coverage, and life planning; routes to 9 spokes. Educational only, NOT advice (as of 2026). TRIGGER: student loans (IDR/... |
+| [consumer-finance](claude/standalone/consumer-finance/SKILL.md) | `Claude` | [`claude/standalone/consumer-finance`](claude/standalone/consumer-finance) | Hub for US personal/consumer finance — money management, coverage, and life planning; routes to 9 spokes. Educational only, NOT advice (as of 2026). TRIGGER: student loans (IDR/... |
 | [conversion-copywriting-and-voice-of-customer](claude-code/conversion-copywriting-and-voice-of-customer/SKILL.md) | `Claude Code` | [`claude-code/conversion-copywriting-and-voice-of-customer`](claude-code/conversion-copywriting-and-voice-of-customer) | Mine customer language and build evidence-based conversion copy strategy: VOC research (reviews, support tickets, transcripts, Reddit, G2); Jobs-to-be-Done message extraction; m... |
 | [da-2-data-analysis-lifecycle](claude-code/da-2-data-analysis-lifecycle/SKILL.md) | `Claude Code` | [`claude-code/da-2-data-analysis-lifecycle`](claude-code/da-2-data-analysis-lifecycle) | Data-analysis lifecycle & process hub (da family) — the structured workflow from raw data to insight. TRIGGER: overall process/workflow/methodology of an analysis project; struc... |
 | [da-analytical-methods](claude-code/da-analytical-methods/SKILL.md) | `Claude Code` | [`claude-code/da-analytical-methods`](claude-code/da-analytical-methods) | DA methods hub — applies analytical techniques to turn prepared data into findings and models (16 sub-skills on demand). TRIGGER: data cleaning; EDA; regression / GLMs / mixed m... |
@@ -324,6 +325,7 @@ This index provides an exhaustive directory of all **378** agent skills cataloge
 | [debug-optimize-lcp](gemini/chrome-devtools-plugin/skills/debug-optimize-lcp/SKILL.md) | `Gemini / Plugins` | [`gemini/chrome-devtools-plugin/skills/debug-optimize-lcp`](gemini/chrome-devtools-plugin/skills/debug-optimize-lcp) | Guides debugging and optimizing Largest Contentful Paint (LCP) using Chrome DevTools MCP tools. Use this skill whenever the user asks about LCP performance, slow page loads, Cor... |
 | [devops-containers-cicd](claude-code/devops-containers-cicd/SKILL.md) | `Claude Code` | [`claude-code/devops-containers-cicd`](claude-code/devops-containers-cicd) | Containers, orchestration, CI/CD, IaC & delivery sub-hub (devops family). TRIGGER: Docker/Dockerfile, image optimization, container runtime; Kubernetes workloads/networking/ingr... |
 | [devops-infra](claude-code/devops-infra/SKILL.md) | `Claude Code` | [`claude-code/devops-infra`](claude-code/devops-infra) | DevOps / infrastructure / observability family ROUTER. Split into focused sub-hubs — route to: devops-linux-internals (kernel, boot, memory/NUMA, storage/filesystems, virtualiza... |
+| [devops-infra](claude/standalone/devops-infra/SKILL.md) | `Claude` | [`claude/standalone/devops-infra`](claude/standalone/devops-infra) | DevOps / infrastructure / observability family ROUTER. Split into focused sub-hubs — route to: devops-linux-internals (kernel, boot, memory/NUMA, storage/filesystems, virtualiza... |
 | [devops-linux-admin](claude-code/devops-linux-admin/SKILL.md) | `Claude Code` | [`claude-code/devops-linux-admin`](claude-code/devops-linux-admin) | Linux/macOS sysadmin & host-operations sub-hub (devops family). TRIGGER: sysadmin troubleshooting (high CPU, OOM, disk full, DNS, port conflicts), systemd units/journald, packag... |
 | [devops-linux-internals](claude-code/devops-linux-internals/SKILL.md) | `Claude Code` | [`claude-code/devops-linux-internals`](claude-code/devops-linux-internals) | Linux kernel & OS-internals sub-hub (devops family). TRIGGER: Linux kernel architecture, boot/init, memory & NUMA, storage & filesystems, virtualization/KVM, io_uring async I/O,... |
 | [devops-observability](claude-code/devops-observability/SKILL.md) | `Claude Code` | [`claude-code/devops-observability`](claude-code/devops-observability) | Observability, logging, tracing & performance sub-hub (devops family). TRIGGER: Node.js observability & OpenTelemetry instrumentation; Pino v9+ structured logging (child loggers... |
@@ -552,6 +554,7 @@ This index provides an exhaustive directory of all **378** agent skills cataloge
 | [configure](gemini/claude-plugins-official/external_plugins/imessage/skills/configure/SKILL.md) | General & Specialized Utilities | `Gemini / Plugins` | [`gemini/claude-plugins-official/external_plugins/imessage/skills/configure`](gemini/claude-plugins-official/external_plugins/imessage/skills/configure) |
 | [consumer-credit-and-debt](claude-code/consumer-credit-and-debt/SKILL.md) | Databases, Data Engineering & Analytics | `Claude Code` | [`claude-code/consumer-credit-and-debt`](claude-code/consumer-credit-and-debt) |
 | [consumer-finance](claude-code/consumer-finance/SKILL.md) | Databases, Data Engineering & Analytics | `Claude Code` | [`claude-code/consumer-finance`](claude-code/consumer-finance) |
+| [consumer-finance](claude/standalone/consumer-finance/SKILL.md) | Databases, Data Engineering & Analytics | `Claude` | [`claude/standalone/consumer-finance`](claude/standalone/consumer-finance) |
 | [contactless-smartcards-mifare-desfire](claude/archived-treearch/contactless-smartcards-mifare-desfire/SKILL.md) | Science, Biology & Medicine | `Claude (Archived)` | [`claude/archived-treearch/contactless-smartcards-mifare-desfire`](claude/archived-treearch/contactless-smartcards-mifare-desfire) |
 | [content-and-marketing-writing](claude-code/content-and-marketing-writing/SKILL.md) | Science, Biology & Medicine | `Claude Code` | [`claude-code/content-and-marketing-writing`](claude-code/content-and-marketing-writing) |
 | [content-ingestion-extraction](claude-code/content-ingestion-extraction/SKILL.md) | Cloud, DevOps & Infrastructure | `Claude Code` | [`claude-code/content-ingestion-extraction`](claude-code/content-ingestion-extraction) |
@@ -582,6 +585,7 @@ This index provides an exhaustive directory of all **378** agent skills cataloge
 | [design-deep-optimizer](claude-code/design-deep-optimizer/SKILL.md) | Cloud, DevOps & Infrastructure | `Claude Code` | [`claude-code/design-deep-optimizer`](claude-code/design-deep-optimizer) |
 | [devops-containers-cicd](claude-code/devops-containers-cicd/SKILL.md) | Science, Biology & Medicine | `Claude Code` | [`claude-code/devops-containers-cicd`](claude-code/devops-containers-cicd) |
 | [devops-infra](claude-code/devops-infra/SKILL.md) | Science, Biology & Medicine | `Claude Code` | [`claude-code/devops-infra`](claude-code/devops-infra) |
+| [devops-infra](claude/standalone/devops-infra/SKILL.md) | Science, Biology & Medicine | `Claude` | [`claude/standalone/devops-infra`](claude/standalone/devops-infra) |
 | [devops-linux-admin](claude-code/devops-linux-admin/SKILL.md) | Science, Biology & Medicine | `Claude Code` | [`claude-code/devops-linux-admin`](claude-code/devops-linux-admin) |
 | [devops-linux-internals](claude-code/devops-linux-internals/SKILL.md) | Science, Biology & Medicine | `Claude Code` | [`claude-code/devops-linux-internals`](claude-code/devops-linux-internals) |
 | [devops-observability](claude-code/devops-observability/SKILL.md) | Science, Biology & Medicine | `Claude Code` | [`claude-code/devops-observability`](claude-code/devops-observability) |

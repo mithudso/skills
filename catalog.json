@@ -3828,6 +3828,17 @@
     "category": "Cloud, DevOps & Infrastructure"
   },
   {
+    "name": "consumer-finance",
+    "description": "Hub for US personal/consumer finance \u2014 money management, coverage, and life planning; routes to 9 spokes. Educational only, NOT advice (as of 2026). TRIGGER: student loans (IDR/SAVE/PSLF, FAFSA, default); personal banking (FDIC/NCUA, HYSA, neobanks); individual income taxes (brackets, deductions, W-4, self-employment, NC); personal insurance (auto, home/renters, life, disability); health insurance (ACA, HSA, Medicare, Medicaid); medical bills & billing disputes; budgeting & saving; investing & retirement (401k, IRA, Roth, Social Security); estate planning & wills (POA, NC probate). SKIP: credit reports/scores, building credit, charge-offs, debt collectors, mortgages, auto loans, predatory lending, identity theft, bankruptcy, or US/NC credit-debt LAW \u2192 consumer-credit-and-debt; NC business/nonprofit/payroll \u2192 venture-nc-business-formation-tax, venture-nc-employer-payroll, venture-nc-nonprofit-formation; MongoDB/TAM \u2192 their own hubs.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/consumer-finance",
+    "category": "Databases, Data Engineering & Analytics"
+  },
+  {
     "name": "content-ingestion-extraction",
     "description": "Acquire, extract, audit & restructure content from heterogeneous sources \u2014 aging docs, doc folders/KBs, live web DOM, meeting-audio devices, one-off docs to templatize. TRIGGER: doc archaeology (staleness, dead links, process drift, deprecate/archive decisions); doc-store bootstrapping (numbered taxonomy, _meta indexes, archive policy); Chrome content-script DOM extractor (selector fallback, MutationObserver/waitForElement, shadow-DOM, SPA nav, partial extraction); Granola transcript/notes fetch (REST, native-host, ProseMirror, polling sync); Plaud recorder ecosystem (devices, Developer API/OAuth, MCP, AutoFlow); reverse-engineer a doc into a reconstruction prompt with {{placeholders}} + data-manifest. SKIP: producing/parsing a finished file FORMAT \u2192 document-formats; general Chrome-extension architecture \u2192 chrome-extension-expert; prose/voice \u2192 writing-expert.",
     "has_references": true,
@@ -3847,6 +3858,17 @@
     "platform": "Claude",
     "section": "claude/standalone",
     "rel_path": "claude/standalone/data-analytics",
+    "category": "Science, Biology & Medicine"
+  },
+  {
+    "name": "devops-infra",
+    "description": "DevOps / infrastructure / observability family ROUTER. Split into focused sub-hubs \u2014 route to: devops-linux-internals (kernel, boot, memory/NUMA, storage/filesystems, virtualization, io_uring, cgroups/namespaces, sandboxing, immutable Linux, privilege); devops-linux-admin (sysadmin, systemd, package management, shell scripting, host networking diagnostics); devops-containers-cicd (Docker, Kubernetes, CI/CD pipelines, Terraform/Kafka IaC, git workflows, library packaging); devops-observability (Node/OTel observability, Pino logging, Sentry, eBPF, Linux perf tracing). Pick the sub-hub matching the task.",
+    "has_references": false,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/devops-infra",
     "category": "Science, Biology & Medicine"
   },
   {

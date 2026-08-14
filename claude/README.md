@@ -2,7 +2,7 @@
 
 Claude workspace capabilities, prompt deep-optimizers, telemetry pipelines, and archived physical security / RFID protocol knowledge trees.
 
-**Total Skills in Section**: `42`
+**Total Skills in Section**: `44`
 
 ## Skills Index
 
@@ -15,9 +15,11 @@ Claude workspace capabilities, prompt deep-optimizers, telemetry pipelines, and 
 | [atlas-vector-search-pii-isolation](standalone/atlas-vector-search-pii-isolation/SKILL.md) | [`standalone/atlas-vector-search-pii-isolation`](standalone/atlas-vector-search-pii-isolation) | Isolating PII and enforcing entitlement boundaries in MongoDB Atlas Vector Search + RAG deployments for regulated (FSI/bank) customers. TRIGGER: ke... |
 | [chrome-extension-expert](standalone/chrome-extension-expert/SKILL.md) | [`standalone/chrome-extension-expert`](standalone/chrome-extension-expert) | Chrome extension / MV3 development hub — build, package, secure, test browser extensions. 17 references. TRIGGER: MV3 service-worker lifecycle/idle... |
 | [claude-code-skills](standalone/claude-code-skills/SKILL.md) | [`standalone/claude-code-skills`](standalone/claude-code-skills) | Expert reference for Claude Code skills — anatomy (SKILL.md, frontmatter, references/), authoring, discovery, distribution (plugins, marketplaces, ... |
+| [consumer-finance](standalone/consumer-finance/SKILL.md) | [`standalone/consumer-finance`](standalone/consumer-finance) | Hub for US personal/consumer finance — money management, coverage, and life planning; routes to 9 spokes. Educational only, NOT advice (as of 2026)... |
 | [contactless-smartcards-mifare-desfire](archived-treearch/contactless-smartcards-mifare-desfire/SKILL.md) | [`archived-treearch/contactless-smartcards-mifare-desfire`](archived-treearch/contactless-smartcards-mifare-desfire) | Contactless smart cards and on-card crypto: ISO/IEC 14443 Type A/B PICCs, the ISO/IEC 7816-4 APDU model, and the NXP MIFARE family (Classic, Ultral... |
 | [content-ingestion-extraction](standalone/content-ingestion-extraction/SKILL.md) | [`standalone/content-ingestion-extraction`](standalone/content-ingestion-extraction) | Acquire, extract, audit & restructure content from heterogeneous sources — aging docs, doc folders/KBs, live web DOM, meeting-audio devices, one-of... |
 | [data-analytics](standalone/data-analytics/SKILL.md) | [`standalone/data-analytics`](standalone/data-analytics) | Data analytics family ROUTER (da-* hubs). Split into 6 sub-domain hubs: da-1-foundations-theory (probability, measurement, epistemology, inference)... |
+| [devops-infra](standalone/devops-infra/SKILL.md) | [`standalone/devops-infra`](standalone/devops-infra) | DevOps / infrastructure / observability family ROUTER. Split into focused sub-hubs — route to: devops-linux-internals (kernel, boot, memory/NUMA, s... |
 | [document-formats](standalone/document-formats/SKILL.md) | [`standalone/document-formats`](standalone/document-formats) | Generate/parse/edit/convert document & data-file formats in Python & Node — PDF, Word(.docx), Excel(.xlsx), PowerPoint(.pptx), CSV/TSV, advanced JS... |
 | [embedding-inversion-threat-model](standalone/embedding-inversion-threat-model/SKILL.md) | [`standalone/embedding-inversion-threat-model`](standalone/embedding-inversion-threat-model) | Threat model for data leakage from vector embeddings and vector stores — why embeddings are NOT a safe anonymization layer for PII. TRIGGER: embedd... |
 | [ethereum-protocol-expert](standalone/ethereum-protocol-expert/SKILL.md) | [`standalone/ethereum-protocol-expert`](standalone/ethereum-protocol-expert) | Ethereum protocol expert, how the chain works beneath the app layer (execution, consensus, scaling). TRIGGER: the account model (EOA vs contract ac... |
