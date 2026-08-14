@@ -3784,6 +3784,17 @@
     "category": "Cloud, DevOps & Infrastructure"
   },
   {
+    "name": "ai-rag-retrieval",
+    "description": "RAG & retrieval sub-hub (ai-agent family). TRIGGER: Retrieval-Augmented Generation architecture (chunking, embeddings, hybrid search, reranking, query transformation, evaluation); advanced RAG patterns (self-RAG, corrective, GraphRAG, agentic, adaptive); iterative/multi-step retrieval; AI datastores (vector & graph databases). SKIP: agent orchestration \u2192 ai-agents-orchestration; model training/serving \u2192 ai-llm-model-layer; MCP/SDK/prompting \u2192 ai-mcp-sdk-prompting; RAG prompt-injection/lethal-trifecta defense \u2192 rag-prompt-injection-defense; embedding inversion / vector-store leakage \u2192 embedding-inversion-threat-model; Atlas Vector Search tenant/PII isolation \u2192 atlas-vector-search-pii-isolation.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/ai-rag-retrieval",
+    "category": "Databases, Data Engineering & Analytics"
+  },
+  {
     "name": "applied-psychology",
     "description": "Applied human psychology hub (operator/TAM) \u2014 how people decide, trust, are persuaded, learn, feel, perform, differ, and relate to AI. 10 evidence-based, replication-honest references. TRIGGER: behavior change & adoption (Self-Determination Theory, Fogg B=MAP, habits); decision-making (biases, prospect theory, nudge, System 1/2); persuasion (ELM, dissonance, reactance, inoculation); trust, rapport & psychological safety (Mayer ABI, Trust Equation, Edmondson); human-AI interaction (automation bias, algorithm aversion, calibrated reliance); learning & expertise (cognitive load, retrieval practice, spacing, deliberate practice); emotion & affect (emotion regulation, emotional intelligence/labor); performance & resilience (growth mindset, grit, flow, self-efficacy, burnout); personality (Big Five, HEXACO, MBTI critique, Dark Triad); moral psychology. SKIP: customer-facing comms drafting \u2192 content-and-marketing-writing / executive-comms. SKIP: clinical PD / ADHD / autism depth \u2192 psychology.",
     "has_references": true,
@@ -3949,6 +3960,17 @@
     "category": "Science, Biology & Medicine"
   },
   {
+    "name": "devops-observability",
+    "description": "Observability, logging, tracing & performance sub-hub (devops family). TRIGGER: Node.js observability & OpenTelemetry instrumentation; Pino v9+ structured logging (child loggers, serializers, redaction); Sentry error monitoring & performance tracing; eBPF observability/networking/security (bpftrace/bcc, CO-RE/BTF/libbpf); Linux perf tracing & profiling. SKIP: container/CI-CD/IaC \u2192 devops-containers-cicd; Linux kernel/admin \u2192 devops-linux-internals / devops-linux-admin; Python-side logging (stdlib logging/structlog/loguru) \u2192 lang-python (references/python-logging-observability.md).",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/devops-observability",
+    "category": "Science, Biology & Medicine"
+  },
+  {
     "name": "document-formats",
     "description": "Generate/parse/edit/convert document & data-file formats in Python & Node \u2014 PDF, Word(.docx), Excel(.xlsx), PowerPoint(.pptx), CSV/TSV, advanced JSON, draw.io(.drawio), Markdown. TRIGGER: PDF (pdf-lib, pypdf, ReportLab, HTML-to-PDF, extract text/tables); Word .docx (docx-js, TOC, tracked changes); Excel .xlsx (openpyxl/pandas, formulas, charts); PowerPoint .pptx (PptxGenJS/python-pptx, pptx\u2192PDF); CSV/TSV (encoding/BOM, formula-injection CWE-1236, csvkit/qsv/DuckDB); advanced JSON (streaming, JSON Schema/Ajv/Zod, JSON Patch, JSONPath, MessagePack); draw.io (mxGraph XML, drawpyo); Markdown/CommonMark/GFM authoring + processing (remark/unified, markdown-it); reports/invoices/memos/decks/diagrams as files. SKIP: analytical/ETL tabular processing \u2192 da-analytical-methods / da-data-engineering-platform; extracting FROM aging/live-DOM sources \u2192 content-ingestion-extraction; in-browser markdown render+sanitize \u2192 markdown-rendering-browser.",
     "has_references": true,
@@ -4092,6 +4114,39 @@
     "category": "Science, Biology & Medicine"
   },
   {
+    "name": "lang-rust",
+    "description": "Rust language sub-hub (lang family) \u2014 systems Rust + Rust for blockchain/smart contracts. TRIGGER: ownership/borrowing/lifetimes, the borrow checker; move semantics, Copy/Clone; smart pointers (Box/Rc/Arc/RefCell/Weak), interior mutability; traits, generics, dyn vs impl Trait; enums & pattern matching; Option/Result, `?`, thiserror/anyhow; closures & iterators; concurrency (Send/Sync, threads, Mutex/Arc, atomics, channels, rayon); async/await & tokio; macros (macro_rules!/proc-macro); cargo/crates/features/workspaces/editions; no_std/embedded; WASM; idioms/anti-patterns; clippy. Blockchain: Solana+Anchor (Rust surface), CosmWasm, ink!, Substrate/FRAME. SKIP: Python \u2192 lang-python; JS/TS \u2192 lang-js-ts; Go/Kotlin \u2192 lang-go-and-mobile; language-agnostic patterns \u2192 software-engineering-patterns; crate publishing \u2192 code-packaging; deep Solana runtime \u2192 solana; consensus theory \u2192 distributed-systems-consensus; contract auditing \u2192 contract-security; whole-chain depth \u2192 per-chain skills.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/lang-rust",
+    "category": "Cloud, DevOps & Infrastructure"
+  },
+  {
+    "name": "logql-grafana-loki",
+    "description": "LogQL \u2014 the query language for Grafana Loki, the label-indexed \"schema-at-query\" log system. PromQL-inspired; two query types: log queries (return lines) and metric queries (logs \u2192 time series). Sibling of splunk-platform-spl, kql-kusto-query-language, and elasticsearch-opensearch under \"Log & event query languages\". TRIGGER: writing/debugging a LogQL query; the required log stream selector {label=\"value\"} and matchers (=, !=, =~, !~); the log pipeline (line filters |= != |~ !~, pattern |> !>, parsers json/logfmt/pattern/regexp/unpack, label filters, line_format, label_format); metric queries (rate, count_over_time, *_over_time, sum/avg/quantile by/without); unwrap for numeric values; the __error__ parse-failure label; left-to-right filter ordering; Loki's low-cardinality-label discipline and why high-cardinality labels destroy performance; LogQL-vs-PromQL / -vs-SPL / -vs-KQL. SKIP: Loki cluster operation, ingesters/queriers, TSDB index, retention/deployment \u2192 Grafana Loki operational docs directly; PromQL on Prometheus/Mimir \u2192 Prometheus docs; shipping logs into Loki (Promtail/Alloy/Fluent Bit/OTel Collector) \u2192 telemetry-pipeline; OTel SDK, Pino, Sentry, eBPF \u2192 devops-observability; Splunk SPL \u2192 splunk-platform-spl; KQL \u2192 kql-kusto-query-language; Elasticsearch ES|QL / OpenSearch PPL / Query DSL \u2192 elasticsearch-opensearch.",
+    "has_references": false,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/logql-grafana-loki",
+    "category": "Databases, Data Engineering & Analytics"
+  },
+  {
+    "name": "mongodb-expert",
+    "description": "MongoDB data-plane & engine hub. TRIGGER: CRUD/MQL query/projection/update; aggregation pipelines & deep stages ($lookup,$graphLookup,$facet,$bucket,$merge/$out,$setWindowFields,$densify); index design (compound/multikey/partial/wildcard/TTL/hashed); query optimization, explain plans, slow queries; schema design (embed vs reference, patterns); transactions; change streams (resume tokens); time-series; geospatial 2dsphere/GeoJSON; views & materialized views; BSON types; error codes; connection strings; driver internals (CMAP, SDAM, retryable writes); WiredTiger internals (cache/eviction/checkpoint/MVCC); mongosh; mongodump/restore; multi-tenancy; sharding; replication; Compass. SKIP: Atlas platform/config \u2192 mongodb-atlas-expert; live perf/diagnostics \u2192 atlas-diagnostics-expert; backup/DR/migration/security/encryption \u2192 mongodb-operations-expert; KB lookup \u2192 mongodb-kb; MongoDB University courses/learning paths/certification program \u2192 mongodb-university-certification.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/mongodb-expert",
+    "category": "Science, Biology & Medicine"
+  },
+  {
     "name": "mongodb-operations-expert",
     "description": "MongoDB/Atlas operations hub \u2014 reliability & data movement. 18 references. TRIGGER: backup/restore & point-in-time recovery; disaster recovery & RTO/RPO; Ops Manager/Cloud Manager; major-version upgrade paths & FCV; migration patterns & safe schema/data migrations (expand-contract, backfill, rollback); mongosync live migration / cluster-to-cluster; Relational Migrator; CDC pipeline architecture; change streams/TTL/archival & lifecycle; security architecture, auth, network hardening; encryption at-rest/in-transit/CSFLE/Queryable Encryption; compliance & regulatory posture; Atlas cost optimization & right-sizing; Kafka connector; Spark connector; cloud-native compute\u2013storage disaggregation (Aurora/Hyperscale/PolarDB/Neon, object-storage OLTP, serverless/scale-to-zero, branching). SKIP: data-plane query/index/schema/engine \u2192 mongodb-expert; Atlas platform/features \u2192 mongodb-atlas-expert; live diagnostics/perf \u2192 atlas-diagnostics-expert; KB lookup \u2192 mongodb-kb.",
     "has_references": true,
@@ -4191,6 +4246,17 @@
     "category": "Science, Biology & Medicine"
   },
   {
+    "name": "psychology-positive",
+    "description": "Positive psychology & wellbeing science \u2014 replication-honest reference for happiness, flourishing, meaning, and the major theories of the good life. TRIGGER: subjective wellbeing (Diener, life satisfaction, PA/NA); PERMA & Seligman's flourishing; eudaimonia vs hedonia (Ryff, Aristotle); hedonic adaptation / set-point / hedonic treadmill; income & happiness ($75k plateau debate, Killingsworth-Kahneman-Mellers); self-determination theory (autonomy/competence/relatedness); flow & autotelic experience; meaning in life (Frankl, Steger, coherence/purpose/significance); positive psychology interventions (gratitude, three-good-things, best-possible-self); the positivity-ratio & happiness-pie debunks. SKIP: self-efficacy/impostor/confidence \u2192 psychology-confidence-identity; burnout/chronic-stress/allostatic-load \u2192 psychology-stress-trauma; social comparison/status \u2192 psychology-social; grit/growth-mindset & \"how to USE these to drive motivation/adoption\" \u2192 applied-psychology.",
+    "has_references": false,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/psychology-positive",
+    "category": "Science, Biology & Medicine"
+  },
+  {
     "name": "psychology-social",
     "description": "Social psychology depth spoke (psychology hub): replication-honest science of how groups, hierarchy, status, and social pressure shape behavior \u2014 robust mechanism vs broken classic. TRIGGER: social rank (dominance vs prestige; status biobehavior; social dominance orientation); status signaling (costly signaling, conspicuous consumption/Veblen, Zahavi handicap principle); social comparison (Festinger, up/downward, relative deprivation); conformity (Asch, normative vs informational, Sherif); obedience (Milgram, engaged-followership); in-group/out-group & social identity theory (Tajfel-Turner minimal-group, self-categorization, realistic conflict, system justification); Stanford Prison Experiment debunk. SKIP: persuasion/compliance, Cialdini, cults, inoculation \u2192 psychology-influence-depth; self-esteem/impostor/identity-as-trait \u2192 psychology-confidence-identity; USE-it-to-nudge or moral foundations \u2192 applied-psychology; narcissism/dark-triad-as-pathology \u2192 psychology-clinical-personality.",
     "has_references": true,
@@ -4255,6 +4321,28 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/skill-tree-architect",
     "category": "Science, Biology & Medicine"
+  },
+  {
+    "name": "solve-case",
+    "description": "End-to-end MongoDB/Atlas support-case solver. Orchestrates the mongodb-* and 10gen skills, the case and account MCPs, and the diagnostic and psychology agents into one workflow: identify the customer, run full troubleshooting and diagnosis (deep-diving any unknown), give a fact-based cited analysis, then craft a customer-psychology-informed reply bundled with blockers, tools used, who to talk to, an escalation call, and insights. TRIGGER: \"solve this case\", \"solve case <id|url>\", \"work this case end to end\", \"diagnose and respond to this MongoDB/Atlas case\", or taking a support case from intake to a drafted customer reply. SKIP: one narrow MongoDB symptom with no customer/response/escalation wrap-up (use atlas-diagnostics-expert or mongodb-kb); drafting a reply with no diagnosis (use content-and-marketing-writing); backtesting diagnosis methodologies (use diagnosis-methodology-backtest); building or auditing another skill (use skill-creator or skill-optimizer).",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/solve-case",
+    "category": "Science, Biology & Medicine"
+  },
+  {
+    "name": "tam-operations",
+    "description": "TAM operations hub \u2014 account deliverables, customer health, case & incident ops, reporting automation, Customer Dashboard support-data. TRIGGER: TAM deliverables \u2014 EBR/QBR, account review, support plan, engagement overview, JIMP, weekly update, case-analysis report; account health, churn risk, NRR, sentiment, health-scoring; MongoDB Premium Services operating model (TAM/NTSE/IR/DCE roles, S1\u2013S4 SLAs, JIMP/Break-Glass/PIR-RCA, Straight-to-8, risk register, Monday tracking); account-artifact collection; shift-handoff (SBAR), meeting-prep, operator reports (freshness, BLUF); customer file consolidation; active case tracker (Support API, severity, diagnostic catalog, LLM summarization); case/event timeline viz; incident response (SEV, IC/comms, postmortems, SLO/error budgets, on-call, MTTD/MTTR); Monday.com board audit; Slack subscription audit. SKIP: vendor API client dev \u2192 integration-clients; MongoDB technical \u2192 mongodb-* hubs.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/tam-operations",
+    "category": "Databases, Data Engineering & Analytics"
   },
   {
     "name": "technical-instruction",
