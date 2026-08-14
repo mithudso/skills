@@ -82,6 +82,33 @@ def extract_skill_metadata(skill_dir):
     except Exception as e:
         return {"name": os.path.basename(skill_dir), "description": f"Error: {e}"}
 
+def is_glean_compatible(skill_dir):
+    skill_md = os.path.join(skill_dir, "SKILL.md")
+    if not os.path.exists(skill_md):
+        return False
+    try:
+        with open(skill_md, "r", encoding="utf-8", errors="ignore") as f:
+            content = f.read().lower()
+        
+        exclude_keywords = [
+            "invoke_subagent",
+            "run_command",
+            "write_to_file",
+            "replace_file_content",
+            "mcp server",
+            "model context protocol",
+            "strreplaceeditor",
+            "globtool",
+            "bash tool"
+        ]
+        
+        for kw in exclude_keywords:
+            if kw in content:
+                return False
+        return True
+    except:
+        return False
+
 def copy_skill(src_dir, dst_dir):
     os.makedirs(os.path.dirname(dst_dir), exist_ok=True)
     if os.path.exists(dst_dir):
