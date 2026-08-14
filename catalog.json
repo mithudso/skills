@@ -3784,6 +3784,17 @@
     "category": "Cloud, DevOps & Infrastructure"
   },
   {
+    "name": "applied-psychology",
+    "description": "Applied human psychology hub (operator/TAM) \u2014 how people decide, trust, are persuaded, learn, feel, perform, differ, and relate to AI. 10 evidence-based, replication-honest references. TRIGGER: behavior change & adoption (Self-Determination Theory, Fogg B=MAP, habits); decision-making (biases, prospect theory, nudge, System 1/2); persuasion (ELM, dissonance, reactance, inoculation); trust, rapport & psychological safety (Mayer ABI, Trust Equation, Edmondson); human-AI interaction (automation bias, algorithm aversion, calibrated reliance); learning & expertise (cognitive load, retrieval practice, spacing, deliberate practice); emotion & affect (emotion regulation, emotional intelligence/labor); performance & resilience (growth mindset, grit, flow, self-efficacy, burnout); personality (Big Five, HEXACO, MBTI critique, Dark Triad); moral psychology. SKIP: customer-facing comms drafting \u2192 content-and-marketing-writing / executive-comms. SKIP: clinical PD / ADHD / autism depth \u2192 psychology.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/applied-psychology",
+    "category": "Science, Biology & Medicine"
+  },
+  {
     "name": "artifact-to-procedure",
     "description": "Distill any completed artifact, session, or solved problem into a reusable skill, playbook, or procedure \u2014 validated to work on a fresh case without the original. TRIGGER: user says \"turn this into a skill/playbook/procedure\", \"extract the method from this\", \"make this reusable\", \"capture this workflow\", \"document what we did so we can repeat it\"; or presents completed work implying future reuse, not just documentation or summary. SKIP: building a new skill from scratch with no completed artifact \u2192 skill-creator; saving personal session notes for continuity \u2192 remember; documenting an API, codebase, or project structure \u2192 technical-writing-craft.",
     "has_references": false,
@@ -3872,6 +3883,17 @@
     "category": "Science, Biology & Medicine"
   },
   {
+    "name": "database-proxies-query-middleware",
+    "description": "Database proxies & query-optimization middleware: the data-access control plane that pools, routes, caches, rewrites, and firewalls queries. SQL/engine sibling of llm-ai-gateways. TRIGGER: choosing/designing a DB proxy (ProxySQL, MariaDB MaxScale, Vitess/vtgate, Pgpool-II, PgBouncer, PgCat, AWS RDS Proxy, Heimdall); connection pooling/multiplexing; read/write splitting and the read-after-write staleness hazard (causal_reads, GTID); proxy result caching; SQL firewall; proxy-based sharding; failover acceleration and proxy-tier HA; credential brokering; the proxy-vs-driver-vs-app decision; RDS Proxy pinning; PgBouncer transaction-mode pooling; why MongoDB uses mongos natively. SKIP: LLM/AI request proxying -> llm-ai-gateways; driver CMAP/SDAM -> mongodb-driver-internals; compute-storage disaggregation -> mongodb-operations-expert; cross-engine federation -> adjacent only; generic API gateways -> software-engineering-patterns; learned/ML query optimization -> da-analytical-methods.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/database-proxies-query-middleware",
+    "category": "Science, Biology & Medicine"
+  },
+  {
     "name": "deep-query-optimizer",
     "description": "SQL member of the deep-optimizer family: a multi-pass review-and-fix optimizer for a SQL query or file. Detects the dialect (Postgres/MySQL/SQLite/SQL Server), audits sargability, index design, joins and N+1, predicate logic, projection, pagination, subqueries/CTEs, and the EXPLAIN plan; severity-rates findings; applies every Medium+ rewrite in place; and when a DB connection exists, verifies via EXPLAIN/EXPLAIN ANALYZE that the plan improved and the result set is unchanged, backing out regressions and looping to convergence. Recommends index DDL. TRIGGER: \"optimize this SQL\", \"run dqo\", \"tune this query\", \"why is this query slow\", \"what index for this query\", full-scan/N+1/deep-paging SQL. SKIP: MongoDB/MQL \u2192 deep-mongodb-mql-query-optimizer (/dmqo); warehouse/dbt or SQL schema modeling \u2192 da-data-engineering-platform; ORM or app-layer N+1 in code \u2192 code-deep-optimizer; one-shot advice with no query \u2192 software-engineering-patterns; prose \u2192 ddo; prompts \u2192 prompt-deep-optimizer.",
     "has_references": false,
@@ -3883,6 +3905,17 @@
     "category": "Databases, Data Engineering & Analytics"
   },
   {
+    "name": "deep-research",
+    "description": "Multi-source deep research using firecrawl and exa MCPs (fallback: WebSearch/WebFetch). Searches the web, synthesizes findings, and delivers cited reports with inline source attribution, confidence ratings, and explicit knowledge gaps. Includes methodology guidance via references/deep-research-methods.md. TRIGGER: user says \"research\", \"deep dive\", \"investigate\", \"look into\", \"what's the current state of\", \"competitive analysis\", \"due diligence\", \"market sizing\", or asks for evidence/citations on any topic; user wants to execute a research strategy using firecrawl/exa/WebSearch. SKIP: quick one-fact lookup with no synthesis (answer directly); asks HOW to research / methodology-only (\u2192 deep-research-methods); edit/rewrite an existing document (\u2192 writing-expert); research meant to end in an installed skill (\u2192 /dr); wants the Firecrawl-managed end-to-end workflow (\u2192 firecrawl-deep-research); mapping a conceptual family / finding which topics to build out (\u2192 concept-family-explorer).",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/deep-research",
+    "category": "Frontend & Web Development"
+  },
+  {
     "name": "design-deep-optimizer",
     "description": "Multi-stage design & image critique-and-fix optimizer for graphic/brand & UI/UX screens; sibling of code-deep-optimizer/document-critique. Ingests a screenshot, URL, code (HTML/CSS), or spec and runs an 11-pass critique (hierarchy, gestalt, typography, color, usability heuristics/Laws of UX, WCAG, affective/trust, metrics, brand-parity, hallucination guard) over the frontend-ui spokes; severity-rates Blocker\u2192Nit and, for code-backed designs, applies Medium+ fixes to convergence (re-render/contrast/axe verified). Image/URL/spec inputs get critique-only findings. TRIGGER: \"critique/optimize this design|mockup|UI|screen|landing page|brand asset\", \"/deso\", \"review this screenshot's design\", \"run a design critique\", \"improve this UI's visual design\". SKIP: producing a NEW design (web-design / ui-ux-pro-max); one narrow question (the matching frontend-ui spoke); prose (document-critique); code logic (code-deep-optimizer); photographic or AI-generated-image critique.",
     "has_references": false,
@@ -3892,6 +3925,17 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/design-deep-optimizer",
     "category": "Cloud, DevOps & Infrastructure"
+  },
+  {
+    "name": "devops-containers-cicd",
+    "description": "Containers, orchestration, CI/CD, IaC & delivery sub-hub (devops family). TRIGGER: Docker/Dockerfile, image optimization, container runtime; Kubernetes workloads/networking/ingress; CI/CD pipeline design (GitHub Actions, reusable workflows, caching, release automation); Terraform/OpenTofu & Apache Kafka infra; git branching/merge/rebase, conventional commits, branch protection, monorepo CI, semantic-release; library packaging & distribution (npm/PyPI/crates, ESM/CJS, monorepo, semver, provenance); self-healing systems & autonomic computing (MAPE-K, Kubernetes reconciliation, AIOps remediation, runbook automation, agentic-SRE); chaos engineering & resilience testing (fault injection, GameDays, blast-radius control, chaos-in-CI); git internals (object model, commit DAG, plumbing/refs/reflog, packfiles/gc, worktrees, history rewriting); build automation (make/Makefile, .PHONY, task runners \u2014 just/Task/Ninja). SKIP: Linux kernel/admin internals \u2192 devops-linux-internals / devops-linux-admin; logging/tracing/metrics \u2192 devops-observability.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/devops-containers-cicd",
+    "category": "Science, Biology & Medicine"
   },
   {
     "name": "devops-infra",
@@ -3914,6 +3958,17 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/document-formats",
     "category": "Databases, Data Engineering & Analytics"
+  },
+  {
+    "name": "elasticsearch-opensearch",
+    "description": "Elasticsearch / OpenSearch & the ELK/Elastic Stack \u2014 the open-source search + log-analytics engine. TRIGGER: Elasticsearch-vs-OpenSearch choice & the 2021 fork/licensing (SSPL, Elastic License, AGPL, Linux Foundation); the stack (Beats, Elastic Agent/Fleet, Logstash, Kibana / OpenSearch Dashboards, Data Prepper, ingest pipelines); engine internals (Lucene, inverted index, doc_values, refresh/flush/translog, shards & replicas, mappings, analyzers, text-vs-keyword); Query DSL (bool/term/match/range, query-vs-filter context, aggregations, BM25, ES|QL vs OpenSearch PPL/SQL); operations (ILM/ISM, hot-warm-cold-frozen tiers, shard sizing, anti-patterns); log-analytics/observability/SIEM positioning vs Splunk. SKIP: Atlas Search & Atlas vector search \u2192 mongodb-atlas-expert; RAG retrieval \u2192 ai-rag-retrieval; Splunk platform itself \u2192 splunk-platform-spl; telemetry routers (Cribl/Vector/Fluent Bit/OTel Collector) \u2192 telemetry-pipeline; OTel SDK instrumentation \u2192 devops-observability.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/elasticsearch-opensearch",
+    "category": "Science, Biology & Medicine"
   },
   {
     "name": "embedding-inversion-threat-model",
@@ -3958,6 +4013,17 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/frontend-ui",
     "category": "Cloud, DevOps & Infrastructure"
+  },
+  {
+    "name": "fundraising-and-donor-psychology",
+    "description": "Apply fundraising PRACTICE psychology: donor retention (leaky bucket, trust\u2192commitment chain, identity/wellbeing predictors); psychology of the ask (ask-string anchoring, legitimizing paltry contributions / LPC, social information); recurring giving; donor stewardship & recognition (Burk's three requirements, thank-you timing); overhead myth & impact trust; lapsed-donor reactivation (recency>frequency). TRIGGER: donor retention; first-year attrition; leaky bucket; ask-string anchoring; even-a-penny / LPC; social information fundraising; recurring giving; sustainer; stewardship program; donor recognition; thank-you letter; board thank-you call; overhead myth; lapsed donor win-back; relationship fundraising; donor LTV. SKIP: why donors give -> psychology-of-charitable-giving; reciprocity / ELM -> persuasion-and-influence-psychology; fundraising CRM -> venture-nonprofit-fundraising-ops; donor-journey -> venture-cause-nonprofit-marketing; anchoring -> behavioral-decision-making; CLV math -> da-analytical-methods.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/fundraising-and-donor-psychology",
+    "category": "Science, Biology & Medicine"
   },
   {
     "name": "generative-engine-optimization",
@@ -4090,6 +4156,17 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/prompt-deep-optimizer",
     "category": "Cloud, DevOps & Infrastructure"
+  },
+  {
+    "name": "psychology",
+    "description": "Psychology domain hub \u2014 clinical, developmental, social & positive psychology as a deep knowledge domain (vs applied-psychology = TAM/operator lens). SPOKES: psychology-positive; psychology-clinical-personality; psychology-neurodevelopmental; psychology-stress-trauma; psychology-social; psychology-confidence-identity; psychology-influence-depth. TRIGGER: personality disorders (narcissism, BPD, psychopathy, dark triad); neurodevelopmental (ADHD, autism, masking); positive psychology / PERMA / wellbeing; stress science / allostatic load / PTSD / polyvagal theory; social hierarchy / status / dominance; self-efficacy / impostor syndrome; influence theory (Cialdini, compliance, cult dynamics). SKIP: operator psychology (behavior change, nudges, decision-making, human-AI) \u2192 applied-psychology; persuasion in practice \u2192 content-and-marketing-writing; moral psychology \u2192 applied-psychology.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/psychology",
+    "category": "Science, Biology & Medicine"
   },
   {
     "name": "psychology-clinical-personality",
