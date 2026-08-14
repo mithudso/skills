@@ -3762,6 +3762,17 @@
     "category": "Security, Auth & Diagnostics"
   },
   {
+    "name": "ai-agents-orchestration",
+    "description": "AI agent building & orchestration sub-hub (ai-agent family). TRIGGER: agent ecosystems/frameworks (Claude SDK, LangGraph, CrewAI, OpenAI Agents); multi-agent orchestration & councils; A2A interop / Agent Cards; agent harness construction (action spaces, tool defs, observation format); agent memory architecture; planning patterns; reliability & guardrails; durable execution/state; agent workflow builders; autonomous loops; coding agents; vibe coding & AI-assisted dev (spec-driven development); computer-use/GUI agents; voice/realtime agents; eval-driven development; automated agent/compound-system optimization from a metric (ADAS, AFlow, DSPy/MIPROv2, GEPA, TextGrad, Trace/OptoPrime, Darwin-G\u00f6del Machine, self-improving agents); algorithmic discovery & superoptimization (AlphaTensor/AlphaDev/FunSearch/AlphaEvolve, program synthesis, evolving faster algorithms); self-improving skill libraries (Voyager, ACE, experience-to-skill distillation, playbook curation). SKIP: RAG/retrieval \u2192 ai-rag-retrieval; model training/serving \u2192 ai-llm-model-layer; MCP/SDK/prompting \u2192 ai-mcp-sdk-prompting.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/ai-agents-orchestration",
+    "category": "Cloud, DevOps & Infrastructure"
+  },
+  {
     "name": "ai-assisted-copywriting-workflow",
     "description": "Guide the end-to-end workflow for using LLMs to produce on-brand marketing copy: brand-voice prompting, brief\u2192draft\u2192human-QA loop, variation generation at scale, failure-mode guardrails, and FTC compliance. TRIGGER: use AI/LLMs for marketing copy while keeping brand voice; structure a copy brief for AI; QA or review AI-generated copy; human-in-the-loop copy workflow; generate headline/subject line variants for A/B testing; brand-voice drift / hallucinated stats / AI sameness; FTC rules for AI-generated ads (practical rules); publishing checklist for AI copy. SKIP: authoring a brand voice guide (no dedicated skill \u2014 use writing-expert); AI-persona/chatbot writing \u2192 content-and-marketing-writing; LLM prompt-engineering \u2192 ai-mcp-sdk-prompting; removing AI-voice tells \u2192 kill-the-ai-ism; prose craft frameworks (AIDA, PAS) \u2192 direct-response-and-sales-letter-copywriting; getting AI content cited by LLMs \u2192 generative-engine-optimization; FTC statute/fake-review rule detail \u2192 venture-marketing-strategy-local-seo.",
     "has_references": true,
@@ -3839,6 +3850,39 @@
     "category": "Science, Biology & Medicine"
   },
   {
+    "name": "bartending-career-track",
+    "description": "Bartending career progression, certifications, competitions, and portfolio building \u2014 the full professional track from barback to F&B director. TRIGGER: bartending career path or ladder; barback to bartender promotion; bar manager or beverage director role; event bartending or freelance bartending; bartending certifications (TIPS, ServSafe Alcohol, state RBS/TABC/MAST/OLCC); Cicerone levels and costs; WSET spirits; BarSmarts; competitive bartending (Diageo World Class, Speed Rack, Bacardi Legacy, Bombay Sapphire Most Imaginative); USBG membership; event bartending licensing and insurance; cocktail menu portfolio; bartender resume conventions and volume metrics. SKIP: general resume writing, wine sommelier career (non-bartending), or food safety \u2192 career-and-formal-writing; restaurant management without bar focus \u2192 content-and-marketing-writing; finding bartending jobs or shift-gig platforms (Instawork, Qwick, GigSalad) \u2192 service-industry-job-hunting; service-industry resume craft, ATS design, trail shift prep, situational interview questions \u2192 service-industry-resume-and-interview.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/bartending-career-track",
+    "category": "Frontend & Web Development"
+  },
+  {
+    "name": "blockchain",
+    "description": "Blockchain & crypto-protocol hub \u2014 how chains work beneath the app layer, their economics & on-chain security; routes to spokes. TRIGGER: Bitcoin protocol (UTXO, Script, Taproot, Lightning, halving/21M, mempool/fees, ordinals/Runes); Ethereum protocol (account model, EVM/gas, EIP-1559, Proof of Stake/Gasper, EIP-4844 blobs, L2 rollups); Solana (account model, Sealevel/SVM, programs); tokenomics & cryptoeconomics (emission/burns, staking economics, security budget, fee markets, MEV/PBS, governance); smart-contract security & auditing (reentrancy, oracle/flash-loan, EVM & Solana pitfalls, audit process, Slither/Mythril/Foundry/Echidna/Certora). SKIP: consensus THEORY (CAP/FLP/Paxos/Raft/BFT, PoW-vs-PoS as a class) \u2192 distributed-systems-consensus; Rust/Solidity LANGUAGE syntax \u2192 lang-rust; crypto-primitive math (ECDSA/Schnorr/BLS/KZG) \u2192 blockchain-crypto-primitives; crypto trading/investing \u2192 trading-and-investing.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/blockchain",
+    "category": "Science, Biology & Medicine"
+  },
+  {
+    "name": "blockchain-economics",
+    "description": "Blockchain economics & cryptoeconomics \u2014 the incentive/mechanism layer above protocol mechanics. TRIGGER: tokenomics (issuance/emission schedules, inflation/disinflation, burns/sinks, ultrasound-money debate, vesting & unlock cliffs, fair-launch vs VC, airdrops, utility/governance/security-token taxonomy + Howey, the token-velocity / MV=PQ problem); cryptoeconomics & mechanism design (incentive-compatibility, the security budget & 51%/cost-of-attack economics, staking economics \u2014 real yield/slashing/liquid staking/restaking, PoS-vs-PoW economic security, Schelling points, the verifier's dilemma); fee-market design (EIP-1559 base fee & why it's not a pure auction, priority fees, EIP-4844 blob fees, Solana local fee markets, first-vs-second-price TFM); MEV (arbitrage/sandwich/liquidation/JIT, the searcher\u2192builder\u2192relay\u2192proposer supply chain, PBS & enshrined-PBS, Flashbots/MEV-Boost, order-flow auctions, intents/solvers, encrypted mempools); governance economics (token-weighted/quadratic/conviction voting, vote-buying & bribe markets, DAO treasuries). SKIP: DeFi protocol mechanics/AMM math \u2192 defi; consensus theory/safety proofs \u2192 distributed-systems-consensus; per-chain protocol detail \u2192 bitcoin-protocol-expert / ethereum-protocol-expert; crypto-primitive math \u2192 blockchain-crypto-primitives; crypto investing/trading \u2192 investing-and-retirement / trading-and-investing (mechanism economics, NOT trading advice).",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/blockchain-economics",
+    "category": "Science, Biology & Medicine"
+  },
+  {
     "name": "chrome-extension-expert",
     "description": "Chrome extension / MV3 development hub \u2014 build, package, secure, test browser extensions. 17 references. TRIGGER: MV3 service-worker lifecycle/idle termination; manifest.json fields, permissions, CRX packaging, Web Store publishing; chrome.runtime/chrome.tabs cross-context messaging; native messaging hosts (Python/Node, 4-byte framing); chrome.identity getAuthToken/launchWebAuthFlow OAuth; chrome.storage local/session/sync; chrome.tabs query/update/create; chrome.notifications; offscreen documents & keepalive; chrome.action badge/icon; content scripts & shadow-DOM overlays; WebSocket/Socket.IO in a service worker; Playwright E2E for unpacked extensions; marked.js + DOMPurify markdown rendering; extension security/permission/CSP review. SKIP: general frontend/UI/CSS \u2192 frontend-ui; JS/TS language \u2192 lang-js-ts; language-agnostic patterns \u2192 software-engineering-patterns.",
     "has_references": true,
@@ -3861,6 +3905,17 @@
     "category": "Cloud, DevOps & Infrastructure"
   },
   {
+    "name": "concept-family-explorer",
+    "description": "Gap-discovery layer ABOVE /dr: map a subject's full conceptual family (parent domain, siblings, sub-concepts, adjacent/cross-over fields, frontier), surface useful/novel concepts you're MISSING, score each via the da-* skills, then loop /dr on every viable gap until the concept tree saturates; finishes with skill-optimizer + prompt-deep-optimizer. TRIGGER: 'what am I missing about X', 'map the concept space/family of X', 'find adjacent/sibling concepts to X', 'what skills should I build around X', 'saturate/complete my coverage of X', 'expand my concept tree for X', 'explore the conceptual neighborhood of X'. SKIP: researching a topic you ALREADY named \u2192 /dr; cited web report with no skill-building \u2192 deep-research; create ONE skill interactively \u2192 skill-creator; audit/improve one existing skill \u2192 skill-optimizer; optimize one prompt \u2192 phe / prompt-deep-optimizer.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/concept-family-explorer",
+    "category": "Databases, Data Engineering & Analytics"
+  },
+  {
     "name": "consumer-finance",
     "description": "Hub for US personal/consumer finance \u2014 money management, coverage, and life planning; routes to 9 spokes. Educational only, NOT advice (as of 2026). TRIGGER: student loans (IDR/SAVE/PSLF, FAFSA, default); personal banking (FDIC/NCUA, HYSA, neobanks); individual income taxes (brackets, deductions, W-4, self-employment, NC); personal insurance (auto, home/renters, life, disability); health insurance (ACA, HSA, Medicare, Medicaid); medical bills & billing disputes; budgeting & saving; investing & retirement (401k, IRA, Roth, Social Security); estate planning & wills (POA, NC probate). SKIP: credit reports/scores, building credit, charge-offs, debt collectors, mortgages, auto loans, predatory lending, identity theft, bankruptcy, or US/NC credit-debt LAW \u2192 consumer-credit-and-debt; NC business/nonprofit/payroll \u2192 venture-nc-business-formation-tax, venture-nc-employer-payroll, venture-nc-nonprofit-formation; MongoDB/TAM \u2192 their own hubs.",
     "has_references": true,
@@ -3872,6 +3927,17 @@
     "category": "Databases, Data Engineering & Analytics"
   },
   {
+    "name": "content-and-marketing-writing",
+    "description": "Content, marketing & external communications craft \u2014 writing that goes out to customers, press, prospects, and the public. 10 sub-skills on demand. TRIGGER: sales & marketing copy (landing pages, ads, positioning); press releases & wire announcements; crisis PR & reputation statements; email newsletters; op-eds & bylined essays; release blogs & product-launch narratives; chatbot / conversational & AI-persona writing; audio scripts (podcasts, voice-over, voice UI); NPS/CSAT/review-response writing at scale; customer-support & TAM ticket replies and escalation handoffs. SKIP: general prose, voice, or line-editing \u2192 writing-expert; software/API/product docs \u2192 technical-writing-craft; executive, board, persuasion, or deck writing \u2192 executive-comms; career/academic/legal/policy writing \u2192 career-and-formal-writing; underlying analysis (charts, data ethics, funnels, MMM, cohort retention, NLP) to build first \u2192 da-applied-and-communication.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/content-and-marketing-writing",
+    "category": "Science, Biology & Medicine"
+  },
+  {
     "name": "content-ingestion-extraction",
     "description": "Acquire, extract, audit & restructure content from heterogeneous sources \u2014 aging docs, doc folders/KBs, live web DOM, meeting-audio devices, one-off docs to templatize. TRIGGER: doc archaeology (staleness, dead links, process drift, deprecate/archive decisions); doc-store bootstrapping (numbered taxonomy, _meta indexes, archive policy); Chrome content-script DOM extractor (selector fallback, MutationObserver/waitForElement, shadow-DOM, SPA nav, partial extraction); Granola transcript/notes fetch (REST, native-host, ProseMirror, polling sync); Plaud recorder ecosystem (devices, Developer API/OAuth, MCP, AutoFlow); reverse-engineer a doc into a reconstruction prompt with {{placeholders}} + data-manifest. SKIP: producing/parsing a finished file FORMAT \u2192 document-formats; general Chrome-extension architecture \u2192 chrome-extension-expert; prose/voice \u2192 writing-expert.",
     "has_references": true,
@@ -3881,6 +3947,39 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/content-ingestion-extraction",
     "category": "Cloud, DevOps & Infrastructure"
+  },
+  {
+    "name": "da-2-data-analysis-lifecycle",
+    "description": "Data-analysis lifecycle & process hub (da family) \u2014 the structured workflow from raw data to insight. TRIGGER: overall process/workflow/methodology of an analysis project; structuring/planning start-to-finish; phases/stages; iterate vs advance; process frameworks (CRISP-DM, KDD, SEMMA, OSEMN, TDSP); problem framing (business/research question, hypotheses, success metrics/KPIs, scoping/feasibility); iteration & experimentation loops; documentation & reproducibility (notebooks, provenance, environment capture); stakeholder communication & handoff. SKIP: theory \u2192 da-1-foundations-theory; acquisition/sampling \u2192 da-3-data-acquisition-sampling; methods/ML \u2192 da-analytical-methods; pipelines/platform \u2192 da-data-engineering-platform; viz/comms \u2192 da-applied-and-communication.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/da-2-data-analysis-lifecycle",
+    "category": "Databases, Data Engineering & Analytics"
+  },
+  {
+    "name": "da-3-data-acquisition-sampling",
+    "description": "Data acquisition, collection & sampling hub (da family, stage 3). TRIGGER: data-source taxonomy (primary/secondary, internal/external, structured/semi/unstructured); collection methods (web scraping/crawling, robots.txt/legality, APIs & data feeds, REST/GraphQL/gRPC, pagination/rate-limit/auth, web/app analytics instrumentation, event tracking); data-collection overview; survey & sampling-frame design, response bias; sampling methods (simple random, stratified, cluster, systematic, convenience, quota, snowball); sample size/power; acquisition plumbing \u2014 API ingestion, DB extraction/CDC, streaming ingest (Kafka/Kinesis/Pub-Sub), ETL/ELT & modern data stack. SKIP: theory \u2192 da-1-foundations-theory; lifecycle \u2192 da-2-data-analysis-lifecycle; methods/ML \u2192 da-analytical-methods; pipelines/platform \u2192 da-data-engineering-platform; viz/comms \u2192 da-applied-and-communication.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/da-3-data-acquisition-sampling",
+    "category": "Science, Biology & Medicine"
+  },
+  {
+    "name": "da-data-engineering-platform",
+    "description": "Data-engineering & analytics-platform hub (da family) \u2014 tooling, pipelines, storage, modeling, governance beneath any analysis. TRIGGER: data tools/languages (Python, Polars, pandas, DuckDB, SQL, Spark, dbt); pipelines (ELT/ETL, orchestration, Airflow/Dagster, modern data stack, lakehouse); streaming analytics (Kafka, Flink, Spark Streaming, windowing, exactly-once); semantic layer / headless BI (metric stores, dbt, Cube); data observability (freshness/volume/schema/lineage); reverse ETL / operational analytics; real-time OLAP (ClickHouse, Druid, Pinot, StarRocks); dimensional modeling (Kimball, star schema, SCD, data vault); governance & catalogs (DAMA-DMBOK, DCAM, lineage); data FinOps / cost optimization; knowledge graphs & semantic analytics (RDF, ontologies). SKIP: cleaning/EDA/modeling/ML \u2192 da-analytical-methods; theory \u2192 da-1-foundations-theory; lifecycle \u2192 da-2-data-analysis-lifecycle; viz/comms \u2192 da-applied-and-communication.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/da-data-engineering-platform",
+    "category": "Science, Biology & Medicine"
   },
   {
     "name": "data-analytics",
@@ -3903,6 +4002,17 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/database-proxies-query-middleware",
     "category": "Science, Biology & Medicine"
+  },
+  {
+    "name": "deep-optimizer",
+    "description": "Convergence-loop optimizer family ROUTER. Multi-pass audit-and-fix loops for code, prose, prompts, skills, SQL queries, and UI/UX designs \u2014 each loops to zero Medium+ findings with build/verify gates. Routes to: code-deep-optimizer (source files & repos, 16-pass audit, CDO alias /cdo); document-critique (prose docs, passes 0\u201314, DDO alias /ddo); prompt-deep-optimizer (production prompts in code, PDO alias /pdo); skill-optimizer (SKILL.md files, 15 passes, SKO alias /sko); deep-query-optimizer (SQL queries, EXPLAIN-verified, DQO alias /dqo); design-deep-optimizer (graphic/UI/UX screens, 11-pass critique, DDeSO alias /deso). Route to the matching sub-hub. SKIP: MongoDB MQL/aggregation \u2192 mongodb-expert (references/deep-mongodb-mql-query-optimizer.md).",
+    "has_references": false,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/deep-optimizer",
+    "category": "Databases, Data Engineering & Analytics"
   },
   {
     "name": "deep-query-optimizer",
@@ -3960,6 +4070,17 @@
     "category": "Science, Biology & Medicine"
   },
   {
+    "name": "devops-linux-admin",
+    "description": "Linux/macOS sysadmin & host-operations sub-hub (devops family). TRIGGER: sysadmin troubleshooting (high CPU, OOM, disk full, DNS, port conflicts), systemd units/journald, package management, Bash/Zsh production shell scripting, host network diagnostics (ip, ss, dig, tcpdump, nmap, iptables/nftables); macOS networking stack & diagnostics \u2014 scutil/SystemConfiguration, networksetup/locations, mDNSResponder & DNS resolution order, /etc/resolver, pfctl/socketfilterfw, Network Extension/VPN utun & split DNS, wdutil/sysdiagnose Wi-Fi tooling, macOS\u2194Linux CLI mapping, captive portal/Private Relay/AWDL failure modes; regex & text processing (POSIX BRE/ERE vs PCRE, grep/sed/awk idioms, capture groups, ReDoS). SKIP: kernel/memory/storage/namespaces internals \u2192 devops-linux-internals; Docker/Kubernetes/CI-CD/IaC \u2192 devops-containers-cicd; logging/tracing/metrics/eBPF/perf \u2192 devops-observability; DNS protocol internals (DNSSEC, DoH/DoT mechanics, delegation) \u2192 networking.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/devops-linux-admin",
+    "category": "Science, Biology & Medicine"
+  },
+  {
     "name": "devops-observability",
     "description": "Observability, logging, tracing & performance sub-hub (devops family). TRIGGER: Node.js observability & OpenTelemetry instrumentation; Pino v9+ structured logging (child loggers, serializers, redaction); Sentry error monitoring & performance tracing; eBPF observability/networking/security (bpftrace/bcc, CO-RE/BTF/libbpf); Linux perf tracing & profiling. SKIP: container/CI-CD/IaC \u2192 devops-containers-cicd; Linux kernel/admin \u2192 devops-linux-internals / devops-linux-admin; Python-side logging (stdlib logging/structlog/loguru) \u2192 lang-python (references/python-logging-observability.md).",
     "has_references": true,
@@ -3969,6 +4090,17 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/devops-observability",
     "category": "Science, Biology & Medicine"
+  },
+  {
+    "name": "diagnosis-methodology-backtest",
+    "description": "Run a blind, parallel, multi-agent backtest comparing competing diagnosis methodologies against ground-truth case resolutions to score which predicts root causes most accurately. TRIGGER: \"which approach diagnoses these cases best\", \"backtest my diagnosis strategies\", \"blind eval over our cases\", \"run the 3-phase eval\", any work inside a strategy-backtest scoreboard repo, MongoDB/Atlas TAM support-case diagnosis methodology comparison. SKIP: diagnosing a single live case (use atlas-diagnostics-expert or mongodb-kb); general prompt optimization (use prompt-deep-optimizer); plain writing tasks.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/diagnosis-methodology-backtest",
+    "category": "Databases, Data Engineering & Analytics"
   },
   {
     "name": "document-formats",
@@ -4026,6 +4158,17 @@
     "category": "Databases, Data Engineering & Analytics"
   },
   {
+    "name": "firecrawl-onboarding",
+    "description": "Firecrawl ONBOARDING + install router. Use this to set Firecrawl up: run the one-command install (CLI + build + workflow skills + browser auth), get or authorize an API key (dashboard/CLI, or WorkOS ID-JAG on supported platforms), verify the install, and route to the right usage path \u2014 A: live web tools \u00b7 B: integrate into app code \u00b7 C: repeatable deliverables \u00b7 D: account/API-key auth \u00b7 E: REST API with no install. TRIGGER: \"install firecrawl\", \"set up firecrawl\", \"get/authorize a firecrawl API key\", \"firecrawl onboarding\", \"which firecrawl path or skill do I use\", \"firecrawl 401 / credentials\". SKIP: actually searching / scraping / interacting with the web right now \u2192 firecrawl (CLI), firecrawl-search, firecrawl-scrape, firecrawl-interact, firecrawl-crawl, firecrawl-map; integrating Firecrawl into product code \u2192 firecrawl-build-onboarding / -scrape / -search / -interact / -parse; producing a finished deliverable \u2192 firecrawl-workflows.",
+    "has_references": false,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/firecrawl-onboarding",
+    "category": "Science, Biology & Medicine"
+  },
+  {
     "name": "frontend-ui",
     "description": "Frontend & UI/UX design + build hub; refs on demand. TRIGGER: frontend/UI-UX design & engineering; design systems/tokens, components; HTML/CSS semantics, layout, styling; web/visual systems; mobile/iOS/SwiftUI/HIG; ui-ux-pro-max styles/palettes/fonts; vanilla-JS UI review (DOM/events/focus/state); accessibility/UX vs WCAG 2.2/WAI-ARIA/MDN; usability heuristics (Nielsen 10, 0\u20134 severity) + Laws of UX (Hick/Fitts/Jakob/Gestalt); visual-design critique (hierarchy, gestalt, C.R.A.P., balance, white space, scale, scanning) + design-critique methodology (I-like/I-wish/what-if, QA); editorial micro-typography & type-craft (widows/orphans, rag/rivers, kerning, leading/baseline-grid, measure, H&J, hanging punctuation, glyph crimes, faux bold/italic); computational UI-aesthetics & a11y metrics (complexity, colorfulness, AIM); affective/visual-trust critique (first-impression, halo, brand personality, Norman\u2019s 3 levels); design-ETHICS / deceptive design / dark patterns (Brignull/Gray/Mathur; sign-up/consent/cancellation/checkout/defaults; DSA Art. 25, GDPR/CNIL, FTC, CCPA/CPRA); detect\u2192rate\u2192fix. SKIP: Chrome-extension UI \u2192 chrome-extension-expert; JS/TS syntax \u2192 programming-languages; language-agnostic patterns/architecture \u2192 software-engineering-patterns.",
     "has_references": true,
@@ -4035,6 +4178,17 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/frontend-ui",
     "category": "Cloud, DevOps & Infrastructure"
+  },
+  {
+    "name": "fsi-banking-regulatory-context",
+    "description": "Financial-services-industry (FSI) fluency for a B2B technology SELLER (e.g. a MongoDB TAM): how banking segments differ as tech buyers, the regulation shaping their buying, and WHY banks buy that way. Educational, NOT legal advice. TRIGGER: selling/positioning tech into banks, capital markets, payments, wealth/asset mgmt, or insurance; a segment's tech needs (core banking, low-latency trading, ISO 20022); pointer-level \"what is Basel III, Dodd-Frank, SOX, GLBA, FFIEC, BCBS 239, PCI-DSS, SR 11-7, SEC 17a-4, FINRA, CAT for a bank\"; why FSI buyers are risk-averse and want auditability, data residency, segregation-of-duties; FSI cloud adoption, proof burden (SOC 2/SIG/CAIQ), build-vs-buy. SKIP: CONSUMER finance/banking -> consumer-finance, personal-banking; MongoDB compliance config -> mongodb-compliance; third-party-risk/DORA -> enterprise-vendor-management-and-tprm; GenAI/AI model-risk governance (SR 11-7/SR 26-2, NIST AI RMF, EU AI Act for an LLM deployment) -> bank-genai-model-risk-governance; buying-committee psychology -> applied-psychology; trading/markets -> trading-and-investing.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/fsi-banking-regulatory-context",
+    "category": "Science, Biology & Medicine"
   },
   {
     "name": "fundraising-and-donor-psychology",
@@ -4202,6 +4356,17 @@
     "category": "Databases, Data Engineering & Analytics"
   },
   {
+    "name": "programming-languages",
+    "description": "Programming-languages family ROUTER. Split into: lang-python (Python idioms, testing, typing, uv toolchain, packaging, CPython internals, pydantic); lang-js-ts (JavaScript/Node, TypeScript, Deno/Bun/edge runtimes, V8 internals, zod, JS debugging); lang-go-and-mobile (Go patterns, Kotlin/Compose Multiplatform). Route to the sub-hub for the language in question.",
+    "has_references": false,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/programming-languages",
+    "category": "Science, Biology & Medicine"
+  },
+  {
     "name": "prompt-deep-optimizer",
     "description": "Iteratively optimize prompts that live in code and run repeatedly \u2014 system prompts, agent instruction blocks, tool-call templates, workflow scaffolds. Runs a 16-pass audit in 5 parallel bundles, applies every Medium+ fix, loops to convergence. Outputs the rewritten prompt plus an algorithm pick (APE/OPRO/MIPROv2/GEPA/PromptBreeder/ProTeGi/TextGrad/EvoPrompt) for training-data-driven optimization, or \"structural-only\" without training data. TRIGGER: \"optimize this system prompt\"; \"run pdo\"; production prompt produces inconsistent output; improve a prompt that runs in code repeatedly; audit a prompt for injection vulnerabilities; which optimization algorithm to use; a production prompt with variable inputs shipped in a codebase. SKIP: one-off/exploratory/single-line prompts under ~600 tokens \u2192 ph or phe (longer one-off prompts stay here); machine-generated or DSPy-compiled prompts; skill files \u2192 skill-optimizer; prose documents \u2192 ddo / document-critique.",
     "has_references": true,
@@ -4243,6 +4408,17 @@
     "platform": "Claude",
     "section": "claude/standalone",
     "rel_path": "claude/standalone/psychology-influence-depth",
+    "category": "Science, Biology & Medicine"
+  },
+  {
+    "name": "psychology-neurodevelopmental",
+    "description": "Deep neurodevelopmental psychology spoke (psychology hub) \u2014 ADHD and autism as research domains, replication-honest. TRIGGER: ADHD mechanisms (Barkley behavioral-inhibition/EF, Sonuga-Barke dual-pathway delay aversion, Volkow dopamine/reward imaging, Faraone heritability/genetics, ENIGMA neuroimaging, stimulant mechanism); emotional dysregulation & rejection-sensitive dysphoria (RSD); autism/ASD (Kanner/Asperger history, Wing spectrum/triad, theory-of-mind/mindblindness vs Milton's double-empathy problem, weak central coherence, monotropism, enhanced perceptual functioning); masking/camouflaging (CAT-Q; Hull/Lai/Mandy); sensory processing & stimming; social cognition; neurodiversity (Singer/Sinclair); AuDHD overlap. SKIP: comorbid personality disorders \u2192 psychology-clinical-personality; trauma/PTSD \u2192 psychology-stress-trauma; \"how to deal with this person\" operator framing \u2192 applied-psychology; behavior-change/nudges \u2192 applied-psychology.",
+    "has_references": false,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/psychology-neurodevelopmental",
     "category": "Science, Biology & Medicine"
   },
   {
@@ -4290,6 +4466,17 @@
     "category": "Science, Biology & Medicine"
   },
   {
+    "name": "research-methodology",
+    "description": "Academic & scientific research methodology hub (deep-research family). Covers formal evidence-synthesis (systematic reviews, PRISMA, GRADE, meta-analysis, research integrity); data annotation & labeling (ML annotation, inter-rater reliability, qualitative coding, NLP labeling pipelines); research data management & FAIR principles (DMP, metadata standards, data repositories, reproducibility); personal knowledge management for researchers (PKM, Zotero, Obsidian, note-taking systems for large literature streams); AI-assisted literature review tools (Elicit, Consensus, scite, SciSpace, provenance/trust layer). SKIP: conducting live web research now \u2192 deep-research; HOW to research / methodology-only \u2192 deep-research (references/deep-research-methods.md).",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/research-methodology",
+    "category": "Science, Biology & Medicine"
+  },
+  {
     "name": "secrets-and-key-management",
     "description": "Foundational spine for the secure custody of secrets \u2014 the generate \u2192 store \u2192 transfer \u2192 use \u2192 rotate \u2192 destroy lifecycle and envelope encryption (a KEK wraps DEKs), stated independently of any one implementation. The organizing question: where do the keys live relative to the data they protect? TRIGGER: envelope encryption / key hierarchy (KEK vs DEK, why a key stored next to its ciphertext is theater); KDF selection & parameters (Argon2id vs scrypt vs PBKDF2 vs bcrypt; password-hashing vs key-derivation vs encryption); AES-GCM nonce/IV uniqueness (NIST SP 800-38D) and key-commitment; KMS vs HSM vs software keystore, key ceremonies, Shamir/quorum unseal; secure key transfer & wrapping (AES-KW RFC 3394/5649, HPKE RFC 9180, TLS-in-transit); crypto-periods, rotation & crypto-shredding; PCI split-knowledge & dual control (PCI DSS 4.0.1 Req 3.6/3.7); FIPS 140-3; at-rest vs in-transit vs in-use. SKIP: MongoDB CSFLE/QE field-encryption setup -> mongodb-encryption; MongoDB ops-level encryption & KMS config -> mongodb-operations-expert; browser/WebCrypto vault code review (SubtleCrypto, wrapKey, PBKDF2 iters, WebAuthn PRF) -> webcrypto-vault-reviewer; Atlas tenant/PII isolation for vector search -> atlas-vector-search-pii-isolation; embedding/vector-store leakage -> embedding-inversion-threat-model; bank AI/model-risk governance -> bank-genai-model-risk-governance; FSI regulation map -> fsi-banking-regulatory-context; app/web security review -> security-review.",
     "has_references": false,
@@ -4332,6 +4519,17 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/solve-case",
     "category": "Science, Biology & Medicine"
+  },
+  {
+    "name": "splunk-platform-spl",
+    "description": "Splunk platform & SPL (Search Processing Language) expert for the log/event ingest-index-search engine and its query language. TRIGGER: Splunk architecture & data lifecycle (forwarders, indexers, search heads, clustering, buckets, SmartStore); writing or optimizing SPL (streaming vs transforming commands, subsearches, CIM, SPL2); search performance (slow searches, time-bounding, tstats, acceleration, summary indexing, Search Job Inspector); knowledge objects (field extraction, tags, event types, macros, lookups); Simple XML / Dashboard Studio dashboards and alerts; Splunk Enterprise Security / SIEM (correlation searches, notable events/findings, risk-based alerting); Splunk Observability Cloud & the OpenTelemetry Collector. SKIP: MongoDB/Atlas logs INTO Splunk \u2192 mongodb-operations-expert / mongodb-atlas-expert; telemetry routing (Cribl/Vector/Fluent Bit) \u2192 telemetry-pipeline skill; OTel SDK instrumentation, Pino/Sentry/eBPF \u2192 devops-observability; Elasticsearch \u2192 elasticsearch skill.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/splunk-platform-spl",
+    "category": "Databases, Data Engineering & Analytics"
   },
   {
     "name": "tam-operations",
