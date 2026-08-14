@@ -1,0 +1,78 @@
+# ── editor / OS noise ────────────────────────────────────────────────────────
+.DS_Store
+*.orig
+*.zip
+*~
+
+# ── SECRETS — never commit. setup.sh prompts for these and writes ~/.claude/.env
+.env
+.env.*
+!**/.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.token
+*credential*
+*secret*
+.git-credentials
+
+# ── machine-local config that carries secrets or per-host state ──────────────
+# Real config lives in ~/.claude (a sibling of this repo); these patterns are a
+# belt-and-suspenders guard in case a raw copy is ever dropped into the tree.
+.claude.json
+settings.json
+settings.local.json
+remote-settings.json
+concept-tree.json
+stats-cache.json
+*-cache.json
+mcp-needs-auth-cache.json
+
+# ── sensitive / bulky personal dirs — never ship ────────────────────────────
+confidential/
+security/
+daemon/
+projects/
+downloads/
+file-history/
+shell-snapshots/
+telemetry/
+sessions/
+paste-cache/
+
+# ── private skills — personal-only, never committed here, never mirrored
+# into any curated/coworker-facing repo (e.g. 10gen/mdb-tam-skills) ─────────
+private-skills/
+
+# ── backups & logs ───────────────────────────────────────────────────────────
+*.bak
+*.bak.*
+*.bak-*
+*.log
+*.jsonl
+
+# ── vendored index system: ignore large/derived/rendered artifacts ──────────
+skill-consolidation/SKILLS-EMBEDDINGS.json
+skill-consolidation/.env
+skill-consolidation/run-state/
+skill-consolidation/scratch/
+skill-consolidation/audits/
+skill-consolidation/backups/
+skill-consolidation/com.skills-embed.plist
+skill-consolidation/skills-embed.service
+skill-consolidation/skills-embed.timer
+skill-consolidation/__pycache__/
+skill-consolidation/tiering/tier-state.json
+
+# regenerable rewrite ledger (audit artifact)
+skill-consolidation/referents-ledger.json
+.git-commit-msg.tmp
+
+# ── local git worktrees (scratch checkouts for parallel skill work) ─────────
+.claude/worktrees/
+
+# ── nc-real-estate: personal NC skill, kept private (see private-skills/)
+nc-real-estate/

@@ -1,0 +1,393 @@
+{
+  "metadata": {
+    "skill_name": "note-organizer",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-07-05T03:02:29Z",
+    "evals_run": [
+      0,
+      1,
+      2
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8571,
+        "passed": 6,
+        "failed": 1,
+        "total": 7,
+        "time_seconds": 481.4,
+        "tokens": 135163,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Leads with a short diagnosis stating what the notes are and which organizing shape was chosen",
+          "passed": true,
+          "evidence": "Opens with '**Diagnosis:** Operational dump \u2014 a week of standup + pricing-meeting capture... so I sorted by **actionability** (Actions \u2192 Decisions \u2192 Ideas \u2192 Questions \u2192 Reference \u2192 Archive)'."
+        },
+        {
+          "text": "All 5 TODO/action items appear in an actions section, with the duplicate incident-writeup TODO merged to one entry",
+          "passed": true,
+          "evidence": "Actions section has 4 entries = the 5 input action items (4 TODO lines + 'carlos filing ticket') with the incident write-up merged: '(owner not stated; appeared twice in the notes)'."
+        },
+        {
+          "text": "Decisions section contains: usage-based tier chosen (flat killed), hold pricing page until marketing signs off, EU notice = 60 days",
+          "passed": false,
+          "evidence": "Decisions section has only usage-based tier and hold-pricing-page; EU 60-day notice was classified under Questions (resolved) and Reference instead of Decisions."
+        },
+        {
+          "text": "The unresolved EU latency regression (analyzer change never rolled back on EU cluster, p99 still degraded) appears prominently, not buried or dropped",
+          "passed": true,
+          "evidence": "Called out in the opening diagnosis ('the Friday latency rollback was only **partial**... EU p99 is still degraded'), in Actions (Carlos ticket), and in the Reference incident record."
+        },
+        {
+          "text": "No invented owners, dates, or facts (every owner/date in output traces to the input)",
+          "passed": true,
+          "evidence": "Spot-checked: Sam (input 'sam owns'/'sam has it'), Carlos ticket (line 18), JT metering, Kavya, Dana, Mon/Wed/Thu tags all trace; incident write-up correctly marked '(owner not stated)'."
+        },
+        {
+          "text": "The trust-page idea (incl. uptime addition) is preserved in an ideas section, and the release-slip question is preserved (answered inline only with the metering estimate the input contains)",
+          "passed": true,
+          "evidence": "Ideas: 'trust page exposing the latency dashboard \u2014 and possibly uptime / status too. (cf. status.io)'; Questions: release-slip answered 'No. Metering is estimated at ~3 weeks (JT); the release is ~5 weeks out' \u2014 the input's own estimate, nothing more."
+        },
+        {
+          "text": "Ends with a counts line (items in vs out, dups merged, flags, parked) whose numbers reconcile",
+          "passed": true,
+          "evidence": "Counts paragraph reconciles on recheck: 21 note lines + 5 splits from 4 compound lines = 26 items; 15 entries (4+2+1+2+4+2) + 11 merged/folded = 26; flags 0, parked 0 all stated."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 8,
+        "failed": 0,
+        "total": 8,
+        "time_seconds": 429.6,
+        "tokens": 131838,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Notes are factored by CONCEPT, not by source (no 'Make It Stick notes' / 'Ahrens notes' section headers)",
+          "passed": true,
+          "evidence": "11 separate concept notes (retrieval-practice, spacing, interleaving, etc.); MOC groups by theme ('Effective learning techniques', 'Underlying theory') \u2014 no per-book/per-author headers anywhere."
+        },
+        {
+          "text": "Retrieval practice note merges Make It Stick + Karpicke 2011 + Dunlosky under one concept with both/all sources cited",
+          "passed": true,
+          "evidence": "retrieval-practice-beats-rereading.md cites 'Sources: Make It Stick (Brown et al.); Karpicke & Blunt 2011 (Science)' with the Karpicke evidence inline; Dunlosky is connected via explicit link to [[study-technique-utility-rankings]] (kept separate because Dunlosky spans multiple techniques) rather than folded in."
+        },
+        {
+          "text": "Note titles are claim-like statements (e.g. 'retrieval practice beats rereading'), not category labels",
+          "passed": true,
+          "evidence": "Titles are claims: 'Retrieval practice beats re-reading', 'Spacing beats massed practice', 'Interleaving beats blocking', 'Elaboration makes learning stick', 'Writing is thinking', 'Evergreen notes compound'; the remainder are established term names (e.g. 'Desirable difficulties'), none are category labels."
+        },
+        {
+          "text": "Related notes are explicitly linked (wikilinks or equivalent cross-references), incl. generation-effect connection the input flags with 'connects to the karpicke finding?'",
+          "passed": true,
+          "evidence": "Every note has a 'See also:' wikilink line; generation-effect.md carries 'Open question (from the original notes): does the generation effect connect to the Karpicke retrieval-practice finding? \u2014 see [[retrieval-practice-beats-rereading]]'."
+        },
+        {
+          "text": "Spacing note preserves the Cepeda 'gap scales with retention interval' claim with attribution",
+          "passed": true,
+          "evidence": "spacing-beats-massed-practice.md: 'Evidence: Cepeda et al. (meta-analysis) \u2014 the optimal spacing gap scales with the retention interval. \"Cram for tomorrow, space for forever.\"'"
+        },
+        {
+          "text": "Storage strength vs retrieval strength (Bjork) is its own concept note",
+          "passed": true,
+          "evidence": "storage-strength-vs-retrieval-strength.md is a standalone note attributed to Bjork, with the '(diff paper?)' uncertainty preserved as a \u2691 flag."
+        },
+        {
+          "text": "An index/MOC or linked list exists and is consistent with the skill's ~10-note threshold",
+          "passed": true,
+          "evidence": "organized.md is an explicit 'Map of Content (MOC)' indexing all 11 concept notes \u2014 11 notes is at/above the ~10-note MOC threshold, so producing one is consistent."
+        },
+        {
+          "text": "Ends with a counts line whose numbers reconcile (incl. folded/merged source mentions)",
+          "passed": true,
+          "evidence": "Counts section: '14 items in \u2192 11 concept notes + this MOC out' with 3 named folds (own-words\u2192elaboration, Karpicke\u2192retrieval, Cepeda\u2192spacing); recount of input confirms 14 items (MIS 4 + Ahrens 3 + 7 singles) and 11 + 3 = 14."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8571,
+        "passed": 6,
+        "failed": 1,
+        "total": 7,
+        "time_seconds": 80.6,
+        "tokens": 108105,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Single coherent document with a summary paragraph at the top",
+          "passed": true,
+          "evidence": "One document; after the one-line diagnosis, a genuine summary paragraph covers problem, core idea, freshness differentiator, MVP scope, and revenue candidates."
+        },
+        {
+          "text": "Ideas are clustered into named themes (concept/reports, freshness-expiry differentiator, cold start, revenue, MVP scope)",
+          "passed": true,
+          "evidence": "Named sections: 'The problem and the core idea', 'The differentiator: freshness done right', 'Product design', 'MVP', 'Business model', 'Risks' (cold start + liability), 'Naming', 'Open questions'."
+        },
+        {
+          "text": "The report-expiry-by-type differentiator is given prominence matching the input's 'this is the differentiator' emphasis",
+          "passed": true,
+          "evidence": "Dedicated second section 'The differentiator: freshness done right' plus summary-paragraph billing ('a freshness model as the differentiator'); 'This expire-by-type mechanic is the differentiator: nobody does freshness right.'"
+        },
+        {
+          "text": "Open questions section exists and contains liability concern and seed-data legality (gray area)",
+          "passed": false,
+          "evidence": "Open questions section exists and contains seed-data legality ('Is scraping AllTrails/Reddit for seed data legally viable?'), but the liability concern is placed only in Risks, not in the open-questions section."
+        },
+        {
+          "text": "Rejected/parked items preserved (gamification doubt, offline maps rejected as scope creep, freshtracks name concern)",
+          "passed": true,
+          "evidence": "'Gamify with points...? Feels wrong for the outdoors crowd \u2014 undecided'; 'Decision: no offline maps \u2014 that's scope creep. Link out to Gaia/CalTopo'; 'FreshTracks is probably taken by a ski thing'."
+        },
+        {
+          "text": "MVP decisions preserved faithfully: iOS only, 3 report types, Seattle (with reason), device-id no accounts",
+          "passed": true,
+          "evidence": "MVP section: 'iOS only', '3 report types: mud, snow, blockage', 'no accounts \u2014 device ID only', 'Denver vs. Seattle \u2192 Seattle, for its year-round conditions variance'."
+        },
+        {
+          "text": "Nothing invented (no features, competitors, or numbers absent from input); ends with a reconciling counts line",
+          "passed": true,
+          "evidence": "Spot-check found no invented features/competitors/numbers (Gaia/CalTopo, status quo, all figures trace to input); ends '19 items in \u2192 18 in output... 1 duplicate merged' \u2014 19\u22121=18 holds and every input line is present in the output (the '19' counts one compound input line as two items)."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5714,
+        "passed": 4,
+        "failed": 3,
+        "total": 7,
+        "time_seconds": 217.9,
+        "tokens": 106193,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Leads with a short diagnosis stating what the notes are and which organizing shape was chosen",
+          "passed": false,
+          "evidence": "Opens with 'Cleaned up from the week's raw dump. Two things you asked for are up top' \u2014 no diagnosis of what kind of notes these are and no named organizing shape."
+        },
+        {
+          "text": "All 5 TODO/action items appear in an actions section, with the duplicate incident-writeup TODO merged to one entry",
+          "passed": true,
+          "evidence": "Action-items table contains incident writeup (merged: 'noted Mon and again Wed'), pricing-page draft, ping marketing, Carlos EU ticket, plus the check-with-Dana item."
+        },
+        {
+          "text": "Decisions section contains: usage-based tier chosen (flat killed), hold pricing page until marketing signs off, EU notice = 60 days",
+          "passed": true,
+          "evidence": "'What got decided' lists 'Usage-based tier for the API is a go. Flat tier is killed', '60 days for EU customers... in the DPA addendum', and 'Hold the pricing page until marketing signs off'."
+        },
+        {
+          "text": "The unresolved EU latency regression (analyzer change never rolled back on EU cluster, p99 still degraded) appears prominently, not buried or dropped",
+          "passed": true,
+          "evidence": "Top-of-doc blockquote: 'Heads-up: The Friday latency incident is not actually closed... never rolled back there, so EU p99 is still degraded'; also a dedicated 'Open incident' section."
+        },
+        {
+          "text": "No invented owners, dates, or facts (every owner/date in output traces to the input)",
+          "passed": false,
+          "evidence": "Table assigns owner '**You**' to the incident writeup, but the input's 'TODO file incident writeup' states no owner \u2014 an invented owner (Dana is likewise inverted as owner of the 'check with dana' item)."
+        },
+        {
+          "text": "The trust-page idea (incl. uptime addition) is preserved in an ideas section, and the release-slip question is preserved (answered inline only with the metering estimate the input contains)",
+          "passed": true,
+          "evidence": "'Ideas / parking lot' keeps the trust page and 'could also show uptime \u2014 the way status.io does it'; 'Resolved question' answers the Sept-slip question with only the 3-week (jt) vs 5-week facts from the input."
+        },
+        {
+          "text": "Ends with a counts line (items in vs out, dups merged, flags, parked) whose numbers reconcile",
+          "passed": false,
+          "evidence": "Document ends with a Timeline section; there is no counts/reconciliation line anywhere."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 6,
+        "failed": 2,
+        "total": 8,
+        "time_seconds": 386.3,
+        "tokens": 118647,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Notes are factored by CONCEPT, not by source (no 'Make It Stick notes' / 'Ahrens notes' section headers)",
+          "passed": true,
+          "evidence": "Single doc organized 'by concept, not by source' with concept sections (Desirable difficulties, Retrieval practice, Spacing...); sources appear only as attributions and a trailing Sources appendix."
+        },
+        {
+          "text": "Retrieval practice note merges Make It Stick + Karpicke 2011 + Dunlosky under one concept with both/all sources cited",
+          "passed": true,
+          "evidence": "'Retrieval practice (the testing effect)' section cites Make It Stick as source, Karpicke & Blunt 2011 as evidence, and 'rated high utility by Dunlosky 2013' as related \u2014 all three under one concept."
+        },
+        {
+          "text": "Note titles are claim-like statements (e.g. 'retrieval practice beats rereading'), not category labels",
+          "passed": false,
+          "evidence": "Titles are topic/term labels, not claims: 'Interleaving', 'Elaboration', 'Retrieval practice (the testing effect)', 'Spacing / distributed practice', 'The generation effect' \u2014 none states the finding in the title."
+        },
+        {
+          "text": "Related notes are explicitly linked (wikilinks or equivalent cross-references), incl. generation-effect connection the input flags with 'connects to the karpicke finding?'",
+          "passed": true,
+          "evidence": "Sections cross-reference via markdown anchors ('Instances:', 'Related:'), and the generation-effect section keeps 'Open question: connects to the Karpicke finding on [retrieval practice]?'."
+        },
+        {
+          "text": "Spacing note preserves the Cepeda 'gap scales with retention interval' claim with attribution",
+          "passed": true,
+          "evidence": "'Evidence: Cepeda et al. meta-analysis \u2014 the optimal spacing gap scales with the retention interval: \"cram for tomorrow, space for forever.\"'"
+        },
+        {
+          "text": "Storage strength vs retrieval strength (Bjork) is its own concept note",
+          "passed": true,
+          "evidence": "Dedicated section 'Storage strength vs. retrieval strength' attributed to Bjork, with the 'different paper? \u2014 unverified' caveat preserved."
+        },
+        {
+          "text": "An index/MOC or linked list exists and is consistent with the skill's ~10-note threshold",
+          "passed": true,
+          "evidence": "A 'Map' section at the top links all 11 concept sections by anchor \u2014 an index consistent with having 10+ notes."
+        },
+        {
+          "text": "Ends with a counts line whose numbers reconcile (incl. folded/merged source mentions)",
+          "passed": false,
+          "evidence": "Document ends with a Sources appendix; no counts/reconciliation line exists anywhere."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.7143,
+        "passed": 5,
+        "failed": 2,
+        "total": 7,
+        "time_seconds": 158.0,
+        "tokens": 103087,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Single coherent document with a summary paragraph at the top",
+          "passed": true,
+          "evidence": "One coherent doc opening with 'The one-liner: **Waze for trails.** Recent, crowdsourced condition reports...' \u2014 a (brief) top summary, though it omits differentiator/MVP."
+        },
+        {
+          "text": "Ideas are clustered into named themes (concept/reports, freshness-expiry differentiator, cold start, revenue, MVP scope)",
+          "passed": true,
+          "evidence": "Named sections: The problem, The core idea (+ Report types), 'What makes it different: freshness done right', Key features, Open questions (cold start), Business/revenue ideas, Liability, Naming, MVP scope."
+        },
+        {
+          "text": "The report-expiry-by-type differentiator is given prominence matching the input's 'this is the differentiator' emphasis",
+          "passed": true,
+          "evidence": "Dedicated early section 'What makes it different: freshness done right' \u2014 'This expire-by-type mechanic is probably the real differentiator.'"
+        },
+        {
+          "text": "Open questions section exists and contains liability concern and seed-data legality (gray area)",
+          "passed": false,
+          "evidence": "'Open questions and things to decide' contains the cold-start/seed-scraping 'legal gray area' but not liability, which sits in a separate 'Liability and safety' section."
+        },
+        {
+          "text": "Rejected/parked items preserved (gamification doubt, offline maps rejected as scope creep, freshtracks name concern)",
+          "passed": true,
+          "evidence": "'Gamification?... feels a bit wrong for the outdoors crowd'; 'Scope creep to avoid: offline maps... link out to Gaia or CalTopo'; '(FreshTracks is probably already taken by a ski-related product.)'"
+        },
+        {
+          "text": "MVP decisions preserved faithfully: iOS only, 3 report types, Seattle (with reason), device-id no accounts",
+          "passed": true,
+          "evidence": "MVP scope: 'iOS only', '3 report types: mud, snow, blockage', 'No accounts \u2014 device ID only', 'Launch city: Seattle. Chosen over Denver because it has more year-round variance in conditions'."
+        },
+        {
+          "text": "Nothing invented (no features, competitors, or numbers absent from input); ends with a reconciling counts line",
+          "passed": false,
+          "evidence": "No counts/reconciliation line \u2014 the doc ends at MVP scope; also adds minor unsourced embellishment ('(Snow, water crossings, etc. each get their own sensible lifespan.)', the creek illustration)."
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.9047,
+        "stddev": 0.0825,
+        "min": 0.8571,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 330.5333,
+        "stddev": 217.9927,
+        "min": 80.6,
+        "max": 481.4
+      },
+      "tokens": {
+        "mean": 125035.3333,
+        "stddev": 14756.0512,
+        "min": 108105,
+        "max": 135163
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.6786,
+        "stddev": 0.0945,
+        "min": 0.5714,
+        "max": 0.75
+      },
+      "time_seconds": {
+        "mean": 254.0667,
+        "stddev": 118.3691,
+        "min": 158.0,
+        "max": 386.3
+      },
+      "tokens": {
+        "mean": 109309.0,
+        "stddev": 8234.7126,
+        "min": 103087,
+        "max": 118647
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.23",
+      "time_seconds": "+76.5",
+      "tokens": "+15726"
+    }
+  },
+  "notes": []
+}

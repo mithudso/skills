@@ -1,0 +1,54 @@
+{
+  "family": "deep-research",
+  "builtAt": "2026-06-01T19:55:34.790Z",
+  "hubs": {
+    "research-methodology": {
+      "keepExisting": true,
+      "title": "Research Methodology (academic research, annotation, FAIR, PKM, AI lit-review)",
+      "spokes": [
+        {
+          "spoke": "systematic-review-research-integrity",
+          "referenceFile": "references/systematic-review-research-integrity.md",
+          "routingLine": "Formal evidence-synthesis methodology and open-science/research-integrity practice — the rigor layer for synthesizing a body of evidence and…",
+          "srcBytes": 21616
+        },
+        {
+          "spoke": "research-data-annotation-coding",
+          "referenceFile": "references/research-data-annotation-coding.md",
+          "routingLine": "Turning raw data into reliable coded/labeled data — unifying ML/data annotation and qualitative research coding.",
+          "srcBytes": 22854
+        },
+        {
+          "spoke": "research-data-management-fair",
+          "referenceFile": "references/research-data-management-fair.md",
+          "routingLine": "Practitioner guide to documenting, licensing, and depositing research datasets so they are Findable, Accessible, Interoperable, Reusable (FAIR).…",
+          "srcBytes": 25917
+        },
+        {
+          "spoke": "research-note-taking-pkm",
+          "referenceFile": "references/research-note-taking-pkm.md",
+          "routingLine": "Design and operate a personal note/knowledge-management (PKM) system for a large, ongoing body of technical research — methods, tool choice, and…",
+          "srcBytes": 21003
+        },
+        {
+          "spoke": "ai-assisted-literature-review",
+          "referenceFile": "references/ai-assisted-literature-review.md",
+          "routingLine": "AI research-tool landscape and the provenance/trust layer above hands-on deep research.",
+          "srcBytes": 21918
+        }
+      ]
+    },
+    "deep-research": {
+      "keepExisting": true,
+      "title": "deep-research",
+      "spokes": [
+        {
+          "spoke": "deep-research-methods",
+          "referenceFile": "references/deep-research-methods.md",
+          "routingLine": "Research methodology expert: question decomposition, query formulation, source evaluation",
+          "srcBytes": 15570
+        }
+      ]
+    }
+  }
+}

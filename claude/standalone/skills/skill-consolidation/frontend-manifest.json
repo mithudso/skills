@@ -1,0 +1,66 @@
+{
+  "family": "frontend",
+  "builtAt": "2026-05-31T05:29:14.795Z",
+  "hubs": {
+    "frontend-ui": {
+      "keepExisting": false,
+      "title": "Frontend & UI/UX (design, HTML/CSS, web/mobile, accessibility reviews)",
+      "spokes": [
+        {
+          "spoke": "accessibility-ux-reviewer",
+          "referenceFile": "references/accessibility-ux-reviewer.md",
+          "routingLine": "Accessibility and UX review against WCAG 2.2, WAI-ARIA Authoring Practices Guide, and MDN",
+          "srcBytes": 9797
+        },
+        {
+          "spoke": "frontend-design",
+          "referenceFile": "references/frontend-design.md",
+          "routingLine": "Production-grade frontend engineering: design systems and tokens, component architecture",
+          "srcBytes": 18142
+        },
+        {
+          "spoke": "frontend-design-ui-ux-expert",
+          "referenceFile": "references/frontend-design-ui-ux-expert.md",
+          "routingLine": "DEPRECATED: Use `frontend-design` instead. This skill's content has been merged into the enriched frontend-design skill (489 lines, 32 sources).",
+          "srcBytes": 1543
+        },
+        {
+          "spoke": "html-css",
+          "referenceFile": "references/html-css.md",
+          "routingLine": "HTML (Living Standard) and CSS expert reference for markup structure, semantics, layout,",
+          "srcBytes": 12255
+        },
+        {
+          "spoke": "mobile-ios-design",
+          "referenceFile": "references/mobile-ios-design.md",
+          "routingLine": "iOS Human Interface Guidelines and SwiftUI patterns for building native iOS and iPadOS apps.",
+          "srcBytes": 10256
+        },
+        {
+          "spoke": "ui-ux-pro-max",
+          "referenceFile": "references/ui-ux-pro-max.md",
+          "routingLine": "UI/UX design intelligence for web and mobile: 50+ styles, 161 color palettes, 57 font",
+          "srcBytes": 16096
+        },
+        {
+          "spoke": "vanilla-js-ui-reviewer",
+          "referenceFile": "references/vanilla-js-ui-reviewer.md",
+          "routingLine": "Practical review reference for large plain-JavaScript UIs that manage DOM, events, focus, state, and accessibility without a framework.",
+          "srcBytes": 7785
+        },
+        {
+          "spoke": "web-design",
+          "referenceFile": "references/web-design.md",
+          "routingLine": "Senior web graphic designer for interfaces, layouts, and visual systems.",
+          "srcBytes": 4560
+        },
+        {
+          "spoke": "react-nextjs",
+          "referenceFile": "references/react-nextjs.md",
+          "routingLine": "React 19 and Next.js 15+ expert reference.",
+          "srcBytes": 23072
+        }
+      ]
+    }
+  }
+}

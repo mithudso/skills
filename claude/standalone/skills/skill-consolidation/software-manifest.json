@@ -1,0 +1,182 @@
+{
+  "family": "software",
+  "builtAt": "2026-05-31T05:29:14.275Z",
+  "hubs": {
+    "software-engineering-patterns": {
+      "keepExisting": false,
+      "title": "Software Engineering Patterns & Practices (architecture, APIs, debugging, reviews)",
+      "spokes": [
+        {
+          "spoke": "api-design-patterns",
+          "referenceFile": "references/api-design-patterns.md",
+          "routingLine": "API design expert for REST, GraphQL, and gRPC. Covers resource modeling, Richardson",
+          "srcBytes": 30708
+        },
+        {
+          "spoke": "backend-patterns",
+          "referenceFile": "references/backend-patterns.md",
+          "routingLine": "Backend architecture patterns for Node.js, Express, and Next.js API routes. Covers",
+          "srcBytes": 15402
+        },
+        {
+          "spoke": "microservices-patterns",
+          "referenceFile": "references/microservices-patterns.md",
+          "routingLine": "Microservices architecture expert: service decomposition (bounded contexts, DDD, strangler fig),",
+          "srcBytes": 7492
+        },
+        {
+          "spoke": "express-patterns",
+          "referenceFile": "references/express-patterns.md",
+          "routingLine": "Express.js production patterns expert — middleware, routing, error handling, rate limiting, CORS, security hardening, and testing for Express 4.x and 5.x.",
+          "srcBytes": 10117
+        },
+        {
+          "spoke": "coding-patterns",
+          "referenceFile": "references/coding-patterns.md",
+          "routingLine": "Software design patterns for JavaScript/TypeScript: creational (factory, builder, singleton, prototype), structural (facade, adapter, proxy, decorator…",
+          "srcBytes": 19777
+        },
+        {
+          "spoke": "coding-standards",
+          "referenceFile": "references/coding-standards.md",
+          "routingLine": "Baseline cross-project coding conventions for naming, readability, immutability, error handling, and code-quality review. Covers JavaScript, TypeScript, and…",
+          "srcBytes": 8187
+        },
+        {
+          "spoke": "debugging",
+          "referenceFile": "references/debugging.md",
+          "routingLine": "Systematic 7-phase debugging workflow for diagnosing and fixing bugs: symptom collection, environment analysis, unit test execution, integration testing…",
+          "srcBytes": 8928
+        },
+        {
+          "spoke": "debugging-strategies",
+          "referenceFile": "references/debugging-strategies.md",
+          "routingLine": "Master-level debugging reference covering systematic methodology, root cause analysis (5 Whys, Fishbone, Fault Tree), profiling tools by language/runtime…",
+          "srcBytes": 16138
+        },
+        {
+          "spoke": "software-architect",
+          "referenceFile": "references/software-architect.md",
+          "routingLine": "Software architecture methodology and documentation expert — ISO/IEC/IEEE 42010 concepts,",
+          "srcBytes": 17503
+        },
+        {
+          "spoke": "code-reviewer",
+          "referenceFile": "references/code-reviewer.md",
+          "routingLine": "Practical code-review reference covering reviewer mindset, workflow, comment quality, GitHub PR mechanics, and OWASP security checklists. Use when reviewing…",
+          "srcBytes": 9785
+        },
+        {
+          "spoke": "performance-profiling-expert",
+          "referenceFile": "references/performance-profiling-expert.md",
+          "routingLine": "Performance and profiling expert — Chrome DevTools Performance panel, Lighthouse audits,",
+          "srcBytes": 8386
+        },
+        {
+          "spoke": "sse-streaming-patterns",
+          "referenceFile": "references/sse-streaming-patterns.md",
+          "routingLine": "Server-Sent Events (SSE) patterns — EventSource API, fetch+ReadableStream",
+          "srcBytes": 19090
+        },
+        {
+          "spoke": "job-scheduling-patterns",
+          "referenceFile": "references/job-scheduling-patterns.md",
+          "routingLine": "Node.js job scheduling expert: cron expression syntax, in-process scheduling (node-cron,",
+          "srcBytes": 10081
+        },
+        {
+          "spoke": "alarm-scheduler-patterns",
+          "referenceFile": "references/alarm-scheduler-patterns.md",
+          "routingLine": "Chrome MV3 extension alarm scheduling expert: tiered severity-based polling, cooldowns,",
+          "srcBytes": 7108
+        },
+        {
+          "spoke": "auth-checker-patterns",
+          "referenceFile": "references/auth-checker-patterns.md",
+          "routingLine": "Multi-service auth state monitoring for Chrome MV3 extensions. Covers endpoint",
+          "srcBytes": 15947
+        },
+        {
+          "spoke": "diagnostic-registry-patterns",
+          "referenceFile": "references/diagnostic-registry-patterns.md",
+          "routingLine": "Diagnostic tool registry design -- static registries with keyword-based symptom matching,",
+          "srcBytes": 19892
+        },
+        {
+          "spoke": "ops-registry-patterns",
+          "referenceFile": "references/ops-registry-patterns.md",
+          "routingLine": "Operations registry patterns — dispatch tables, retry with backoff/jitter, circuit breakers, auto-remediation, idempotency, saga compensation, and audit…",
+          "srcBytes": 32188
+        },
+        {
+          "spoke": "playbook-matcher-patterns",
+          "referenceFile": "references/playbook-matcher-patterns.md",
+          "routingLine": "Rule-based matching of support cases to diagnostic playbooks and KB articles — keyword scoring,",
+          "srcBytes": 21757
+        },
+        {
+          "spoke": "template-config-patterns",
+          "referenceFile": "references/template-config-patterns.md",
+          "routingLine": "Configurable report and prompt template patterns for JavaScript operator tools, Chrome",
+          "srcBytes": 18595
+        },
+        {
+          "spoke": "web-auth-patterns",
+          "referenceFile": "references/web-auth-patterns.md",
+          "routingLine": "Browser authentication patterns — cookie attributes, OAuth 2.1 + PKCE,",
+          "srcBytes": 23524
+        },
+        {
+          "spoke": "indexeddb-patterns",
+          "referenceFile": "references/indexeddb-patterns.md",
+          "routingLine": "IndexedDB usage patterns for Chrome MV3 extensions and web apps — object stores, indexes,",
+          "srcBytes": 20752
+        },
+        {
+          "spoke": "glean-llm-client-patterns",
+          "referenceFile": "references/glean-llm-client-patterns.md",
+          "routingLine": "Glean AI platform API integration patterns for JavaScript clients, Chrome MV3",
+          "srcBytes": 24727
+        },
+        {
+          "spoke": "salesforce-scraping-patterns",
+          "referenceFile": "references/salesforce-scraping-patterns.md",
+          "routingLine": "Salesforce data extraction patterns for Chrome extensions — Lightning DOM traversal (LWC synthetic vs",
+          "srcBytes": 16038
+        },
+        {
+          "spoke": "nodejs-backend-frameworks",
+          "referenceFile": "references/nodejs-backend-frameworks.md",
+          "routingLine": "Node.js/TypeScript backend frameworks beyond Express: Fastify (plugins, encapsulation context, fastify-plugin, lifecycle hooks, JSON-Schema validation/serialization, TypeBox type-provider, decorators), NestJS (modules, hierarchical DI, providers/scopes, Middleware->Guards->Interceptors->Pipes->Handler->Filters pipeline, dynamic modules, forwardRef, Fastify adapter), Hono (web-standard Context, RegExpRouter, typed Variables/Bindings, @hono/zod-validator, RPC mode + hc client, edge runtimes), and Fastify-vs-NestJS-vs-Hono selection.",
+          "srcBytes": 0,
+          "drAuthored": true
+        },
+        {
+          "spoke": "python-web-frameworks",
+          "referenceFile": "references/python-web-frameworks.md",
+          "routingLine": "Python web frameworks: FastAPI (async, Pydantic models, dependency injection, automatic OpenAPI), Django (ORM, MVT, admin, DRF), Flask (blueprints, extensions, app factory), and the ASGI/WSGI server layer (uvicorn, gunicorn, hypercorn) — including framework selection and async-vs-sync tradeoffs.",
+          "srcBytes": 0,
+          "drAuthored": true
+        },
+        {
+          "spoke": "testing-and-vitest-expert",
+          "referenceFile": "references/testing-and-vitest-expert.md",
+          "routingLine": "Vitest testing expert: writing tests, reviewing suites, diagnosing flaky behavior, choosing moc",
+          "srcBytes": 9574
+        },
+        {
+          "spoke": "webapp-testing",
+          "referenceFile": "references/webapp-testing.md",
+          "routingLine": "Playwright-based local web application testing and UI automation. Write Python Playwright",
+          "srcBytes": 4844
+        },
+        {
+          "spoke": "repo-pattern-scanner",
+          "referenceFile": "references/repo-pattern-scanner.md",
+          "routingLine": "\"Scan a repository for reusable coding patterns and upload each to the mdb-context-hub shared l",
+          "srcBytes": 7454
+        }
+      ]
+    }
+  }
+}

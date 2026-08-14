@@ -1,0 +1,82 @@
+[
+ {
+  "query": "Can you do a security review of our Express backend before we launch?",
+  "should_trigger": true
+ },
+ {
+  "query": "Audit this repo for leaked credentials and PII ending up in logs",
+  "should_trigger": true
+ },
+ {
+  "query": "What CSP and HSTS headers should we set on the new web app?",
+  "should_trigger": true
+ },
+ {
+  "query": "Set up an Okta authorization server and scope our management API access",
+  "should_trigger": true
+ },
+ {
+  "query": "We need to harden our Okta admin console after a pentest finding",
+  "should_trigger": true
+ },
+ {
+  "query": "Plan a passkey and FastPass rollout so phishing-resistant MFA covers everyone",
+  "should_trigger": true
+ },
+ {
+  "query": "Add device assurance checks so only managed laptops can reach prod apps through Okta",
+  "should_trigger": true
+ },
+ {
+  "query": "Write SIEM detections for MFA fatigue and stolen session cookies in Okta",
+  "should_trigger": true
+ },
+ {
+  "query": "Design quarterly access certification campaigns in Okta for SOX evidence",
+  "should_trigger": true
+ },
+ {
+  "query": "Someone replayed a stolen Okta session cookie - how do we respond and kill their sessions?",
+  "should_trigger": true
+ },
+ {
+  "query": "Review my PBKDF2 key derivation and AES-GCM vault code",
+  "should_trigger": false
+ },
+ {
+  "query": "Design a new OAuth login flow for our web app",
+  "should_trigger": false
+ },
+ {
+  "query": "How should my AI agent get its own scoped tokens to call MCP servers?",
+  "should_trigger": false
+ },
+ {
+  "query": "Set up conditional access policies in Entra ID",
+  "should_trigger": false
+ },
+ {
+  "query": "Configure CSFLE and encryption at rest on our Atlas cluster",
+  "should_trigger": false
+ },
+ {
+  "query": "Write a least-privilege AWS IAM policy for S3 access",
+  "should_trigger": false
+ },
+ {
+  "query": "Harden my system prompt against prompt injection",
+  "should_trigger": false
+ },
+ {
+  "query": "Tune our Splunk ingestion pipeline, events are lagging",
+  "should_trigger": false
+ },
+ {
+  "query": "mongod is rejecting connections with SSL handshake errors",
+  "should_trigger": false
+ },
+ {
+  "query": "Which manifest permissions does my Chrome extension need for chrome.tabs?",
+  "should_trigger": false
+ }
+]

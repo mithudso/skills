@@ -1,0 +1,186 @@
+{
+  "family": "devops",
+  "builtAt": "2026-06-01T19:55:34.733Z",
+  "hubs": {
+    "devops-linux-internals": {
+      "keepExisting": false,
+      "title": "devops-linux-internals",
+      "spokes": [
+        {
+          "spoke": "linux-kernel-architecture",
+          "referenceFile": "references/linux-kernel-architecture.md",
+          "routingLine": "How the Linux kernel is structured and how it decides what runs. Covers the monolithic kernel",
+          "srcBytes": 18434
+        },
+        {
+          "spoke": "linux-boot-init",
+          "referenceFile": "references/linux-boot-init.md",
+          "routingLine": "The firmware-to-userspace boot chain on a modern x86-64/AArch64 Linux system: UEFI firmware and",
+          "srcBytes": 19838
+        },
+        {
+          "spoke": "linux-memory-numa",
+          "referenceFile": "references/linux-memory-numa.md",
+          "routingLine": "How the Linux kernel manages physical and virtual memory and how to tune it on NUMA hardware. C",
+          "srcBytes": 23312
+        },
+        {
+          "spoke": "linux-storage-filesystems",
+          "referenceFile": "references/linux-storage-filesystems.md",
+          "routingLine": "The Linux storage stack from the syscall down to the platter. Covers the VFS + page cache / wri",
+          "srcBytes": 23579
+        },
+        {
+          "spoke": "linux-virtualization",
+          "referenceFile": "references/linux-virtualization.md",
+          "routingLine": "The full Linux virtualization stack from hardware-assisted CPU extensions up to management tool",
+          "srcBytes": 26813
+        },
+        {
+          "spoke": "io-uring-async-io",
+          "referenceFile": "references/io-uring-async-io.md",
+          "routingLine": "The Linux io_uring asynchronous I/O interface: the shared-memory SQ/CQ ring model (SQE/CQE stru",
+          "srcBytes": 24794
+        },
+        {
+          "spoke": "linux-cgroups-namespaces",
+          "referenceFile": "references/linux-cgroups-namespaces.md",
+          "routingLine": "The two kernel primitives that make Linux containers possible: namespaces (what a process can S",
+          "srcBytes": 17686
+        },
+        {
+          "spoke": "linux-sandboxing-confinement",
+          "referenceFile": "references/linux-sandboxing-confinement.md",
+          "routingLine": "The confinement spectrum for running untrusted code on Linux, from in-kernel syscall/access fil",
+          "srcBytes": 23308
+        },
+        {
+          "spoke": "immutable-atomic-linux",
+          "referenceFile": "references/immutable-atomic-linux.md",
+          "routingLine": "Image-based and atomic Linux operating systems: the shared model (transactional all-or-nothing ",
+          "srcBytes": 20596
+        },
+        {
+          "spoke": "linux-mac-privilege",
+          "referenceFile": "references/linux-mac-privilege.md",
+          "routingLine": "The Linux access-control layer above discretionary file permissions: the LSM framework that hos",
+          "srcBytes": 22555
+        }
+      ]
+    },
+    "devops-linux-admin": {
+      "keepExisting": false,
+      "title": "devops-linux-admin",
+      "spokes": [
+        {
+          "spoke": "linux-sysadmin",
+          "referenceFile": "references/linux-sysadmin.md",
+          "routingLine": "Diagnose and resolve Linux and macOS systems issues using authoritative command-line tools. Cov",
+          "srcBytes": 49757
+        },
+        {
+          "spoke": "systemd",
+          "referenceFile": "references/systemd.md",
+          "routingLine": "systemd internals beyond day-to-day systemctl. The unit/object model and dependency+ordering se",
+          "srcBytes": 20488
+        },
+        {
+          "spoke": "linux-package-management",
+          "referenceFile": "references/linux-package-management.md",
+          "routingLine": "Install, query, repair, and pin software on Linux across the three major native package",
+          "srcBytes": 20411
+        },
+        {
+          "spoke": "shell-scripting",
+          "referenceFile": "references/shell-scripting.md",
+          "routingLine": "Write, debug, and optimize Bash and Zsh scripts with production-grade error handling, parameter",
+          "srcBytes": 26258
+        },
+        {
+          "spoke": "linux-networking-stack",
+          "referenceFile": "references/linux-networking-stack.md",
+          "routingLine": "The Linux kernel networking dataplane and how to engineer it. Covers nftables (the modern netfi",
+          "srcBytes": 14315
+        }
+      ]
+    },
+    "devops-containers-cicd": {
+      "keepExisting": false,
+      "title": "devops-containers-cicd",
+      "spokes": [
+        {
+          "spoke": "docker-containers",
+          "referenceFile": "references/docker-containers.md",
+          "routingLine": "Docker and container engineering expert covering Dockerfile authoring, image optimization,",
+          "srcBytes": 43161
+        },
+        {
+          "spoke": "kubernetes-networking",
+          "referenceFile": "references/kubernetes-networking.md",
+          "routingLine": "-",
+          "srcBytes": 26351
+        },
+        {
+          "spoke": "cicd-pipelines",
+          "referenceFile": "references/cicd-pipelines.md",
+          "routingLine": "-",
+          "srcBytes": 24716
+        },
+        {
+          "spoke": "terraform-kafka-infra",
+          "referenceFile": "references/terraform-kafka-infra.md",
+          "routingLine": "-",
+          "srcBytes": 26263
+        },
+        {
+          "spoke": "git-workflows",
+          "referenceFile": "references/git-workflows.md",
+          "routingLine": "Git branching strategies, commit conventions, merge strategies, CI integration,",
+          "srcBytes": 36982
+        },
+        {
+          "spoke": "code-packaging",
+          "referenceFile": "references/code-packaging.md",
+          "routingLine": "Library packaging and distribution expert for JavaScript/TypeScript, Python, and Rust.",
+          "srcBytes": 6716
+        }
+      ]
+    },
+    "devops-observability": {
+      "keepExisting": false,
+      "title": "devops-observability",
+      "spokes": [
+        {
+          "spoke": "nodejs-observability",
+          "referenceFile": "references/nodejs-observability.md",
+          "routingLine": "Node.js observability expert: OpenTelemetry setup (zero-code auto-instrumentation, programmatic",
+          "srcBytes": 10283
+        },
+        {
+          "spoke": "pino-structured-logging",
+          "referenceFile": "references/pino-structured-logging.md",
+          "routingLine": "Pino v9+ structured logging for Node.js: core API, child loggers, serializers, redaction,",
+          "srcBytes": 10238
+        },
+        {
+          "spoke": "sentry-monitoring",
+          "referenceFile": "references/sentry-monitoring.md",
+          "routingLine": "Sentry error monitoring and performance tracing for Node.js — @sentry/node v8+",
+          "srcBytes": 18757
+        },
+        {
+          "spoke": "ebpf-observability",
+          "referenceFile": "references/ebpf-observability.md",
+          "routingLine": "eBPF — programmable in-kernel execution for Linux observability, networking, and security. Cove",
+          "srcBytes": 17232
+        },
+        {
+          "spoke": "linux-perf-tracing",
+          "referenceFile": "references/linux-perf-tracing.md",
+          "routingLine": "Kernel-level Linux performance methodology and the tracing tools that implement it. Covers the ",
+          "srcBytes": 15072
+        }
+      ]
+    }
+  }
+}

@@ -12,7 +12,7 @@ LOG_FILE = os.path.join(REPO_DIR, ".sync.log")
 
 IGNORE_DIRS = {
     ".git", "node_modules", "checkpoint-documents", "backups",
-    ".system_generated", "cache", "downloads", "ide"
+    ".system_generated", "cache", "downloads", "ide", ".claude"
 }
 
 def log(msg):
@@ -360,7 +360,7 @@ def generate_glean_skills(skills):
         shutil.rmtree(glean_dir)
     os.makedirs(glean_dir, exist_ok=True)
     
-    CHUNK_SIZE = 50
+    CHUNK_SIZE = 10
     
     for i, s in enumerate(skills):
         src_dir = os.path.join(REPO_DIR, s["rel_path"])
@@ -476,7 +476,23 @@ def run_sync():
             if os.path.islink(src) or item in IGNORE_DIRS or item in ["plugins", "cache", "backups", "security", "cost-estimator", "tasks", "ide", "downloads"]:
                 continue
             if os.path.isdir(src):
-                if os.path.exists(os.path.join(src, "SKILL.md")):
+                # If the item itself is "skills", it's a directory OF skills, not a single skill.
+                if item == "skills":
+                    for sub in sorted(os.listdir(src)):
+                        sub_src = os.path.join(src, sub)
+                        if os.path.isdir(sub_src) and os.path.exists(os.path.join(sub_src, "SKILL.md")):
+                            dst = os.path.join(REPO_DIR, "claude", "standalone", sub)
+                            copy_skill(sub_src, dst)
+                            meta = extract_skill_metadata(dst)
+                            if meta:
+                                meta.update({
+                                    "platform": "Claude",
+                                    "section": "claude/standalone",
+                                    "rel_path": f"claude/standalone/{sub}",
+                                    "category": categorize_skill(meta["name"], meta["description"])
+                                })
+                                collected_skills.append(meta)
+                elif os.path.exists(os.path.join(src, "SKILL.md")):
                     dst = os.path.join(REPO_DIR, "claude", "standalone", item)
                     copy_skill(src, dst)
                     meta = extract_skill_metadata(dst)

@@ -1,0 +1,306 @@
+{
+  "family": "ai-agent",
+  "builtAt": "2026-06-01T19:55:34.767Z",
+  "hubs": {
+    "ai-agents-orchestration": {
+      "keepExisting": false,
+      "title": "ai-agents-orchestration",
+      "spokes": [
+        {
+          "spoke": "a2a-interop",
+          "referenceFile": "references/a2a-interop.md",
+          "routingLine": "A2A protocol and agent interoperability expert — A2A architecture (Agent Cards,",
+          "srcBytes": 8706
+        },
+        {
+          "spoke": "agent-council",
+          "referenceFile": "references/agent-council.md",
+          "routingLine": "Multi-agent council orchestration — consensus algorithms, debate patterns,",
+          "srcBytes": 11376
+        },
+        {
+          "spoke": "agent-ecosystem",
+          "referenceFile": "references/agent-ecosystem.md",
+          "routingLine": "AI agent ecosystem expert — frameworks (Claude SDK, OpenAI, LangGraph, CrewAI,",
+          "srcBytes": 14861
+        },
+        {
+          "spoke": "agent-harness-construction",
+          "referenceFile": "references/agent-harness-construction.md",
+          "routingLine": "Design and optimize AI agent action spaces, tool definitions, and observation formats to improv",
+          "srcBytes": 5441
+        },
+        {
+          "spoke": "agent-memory-architecture",
+          "referenceFile": "references/agent-memory-architecture.md",
+          "routingLine": "<!-- FOLDED REFERENCE under the ai-agent-engineering hub — the COGNITIVE memory architecture of",
+          "srcBytes": 13449
+        },
+        {
+          "spoke": "agent-planning-patterns",
+          "referenceFile": "references/agent-planning-patterns.md",
+          "routingLine": "<!-- FOLDED REFERENCE under the ai-agent-engineering hub — agent planning & control-flow patter",
+          "srcBytes": 6605
+        },
+        {
+          "spoke": "agent-reliability-and-guardrails",
+          "referenceFile": "references/agent-reliability-and-guardrails.md",
+          "routingLine": "# Agent Reliability & Guardrails",
+          "srcBytes": 15171
+        },
+        {
+          "spoke": "agent-state-and-durable-execution",
+          "referenceFile": "references/agent-state-and-durable-execution.md",
+          "routingLine": "<!-- FOLDED REFERENCE under the ai-agent-engineering hub — agent state management & durable exe",
+          "srcBytes": 4341
+        },
+        {
+          "spoke": "agent-workflow-builder_ai_toolkit",
+          "referenceFile": "references/agent-workflow-builder_ai_toolkit.md",
+          "routingLine": "Generates, enhances, develops, and deploys AI agent applications and workflows",
+          "srcBytes": 9289
+        },
+        {
+          "spoke": "autonomous-loops",
+          "referenceFile": "references/autonomous-loops.md",
+          "routingLine": "Patterns and architecture for autonomous Claude Code loops — from simple",
+          "srcBytes": 23647
+        },
+        {
+          "spoke": "coding-agents",
+          "referenceFile": "references/coding-agents.md",
+          "routingLine": "The design discipline of code agents — how autonomous/semi-autonomous LLM",
+          "srcBytes": 14048
+        },
+        {
+          "spoke": "computer-use-and-gui-agents",
+          "referenceFile": "references/computer-use-and-gui-agents.md",
+          "routingLine": "# Computer-Use & GUI Agents",
+          "srcBytes": 16366
+        },
+        {
+          "spoke": "multi-agent-orchestration",
+          "referenceFile": "references/multi-agent-orchestration.md",
+          "routingLine": "<!-- hub-reference-banner -->",
+          "srcBytes": 21963
+        },
+        {
+          "spoke": "voice-realtime-agents",
+          "referenceFile": "references/voice-realtime-agents.md",
+          "routingLine": "The application / design layer of voice agents — how to build and operate a",
+          "srcBytes": 12159
+        },
+        {
+          "spoke": "eval-driven-development",
+          "referenceFile": "references/eval-driven-development.md",
+          "routingLine": "The BUILD-TIME discipline of evaluating LLM/agent applications — the",
+          "srcBytes": 12401
+        }
+      ]
+    },
+    "ai-rag-retrieval": {
+      "keepExisting": false,
+      "title": "ai-rag-retrieval",
+      "spokes": [
+        {
+          "spoke": "advanced-rag-patterns",
+          "referenceFile": "references/advanced-rag-patterns.md",
+          "routingLine": "The advanced and agentic patterns layered on top of naive top-k RAG — the deep",
+          "srcBytes": 16104
+        },
+        {
+          "spoke": "rag-architecture",
+          "referenceFile": "references/rag-architecture.md",
+          "routingLine": "Retrieval-Augmented Generation architecture: chunking strategies, embedding pipelines,",
+          "srcBytes": 14890
+        },
+        {
+          "spoke": "iterative-retrieval",
+          "referenceFile": "references/iterative-retrieval.md",
+          "routingLine": "Iterative context refinement pattern for multi-agent workflows. Solves the cold-start",
+          "srcBytes": 7616
+        },
+        {
+          "spoke": "ai-datastores",
+          "referenceFile": "references/ai-datastores.md",
+          "routingLine": "AI datastore expert — vector databases (Pinecone, Qdrant, Weaviate, Chroma,",
+          "srcBytes": 18827
+        }
+      ]
+    },
+    "ai-llm-model-layer": {
+      "keepExisting": false,
+      "title": "ai-llm-model-layer",
+      "spokes": [
+        {
+          "spoke": "agentic-rl",
+          "referenceFile": "references/agentic-rl.md",
+          "routingLine": "<!-- Provenance: reference under the `ai-agent-engineering` hub. Created 2026-05-31 via /dr dee",
+          "srcBytes": 29764
+        },
+        {
+          "spoke": "distributed-training",
+          "referenceFile": "references/distributed-training.md",
+          "routingLine": "<!--",
+          "srcBytes": 39429
+        },
+        {
+          "spoke": "llm-alignment-post-training",
+          "referenceFile": "references/llm-alignment-post-training.md",
+          "routingLine": "<!-- Provenance: reference under the `ai-agent-engineering` hub. Created 2026-05-31 via /dr dee",
+          "srcBytes": 27036
+        },
+        {
+          "spoke": "llm-compression",
+          "referenceFile": "references/llm-compression.md",
+          "routingLine": "<!-- Provenance: reference under the `ai-agent-engineering` hub. Created 2026-05-31 via /dr dee",
+          "srcBytes": 28216
+        },
+        {
+          "spoke": "llm-fine-tuning-peft",
+          "referenceFile": "references/llm-fine-tuning-peft.md",
+          "routingLine": "<!-- Provenance: reference under the `ai-agent-engineering` hub. Created 2026-05-31 via /dr dee",
+          "srcBytes": 32269
+        },
+        {
+          "spoke": "llm-gpu-kernels",
+          "referenceFile": "references/llm-gpu-kernels.md",
+          "routingLine": "<!--",
+          "srcBytes": 31760
+        },
+        {
+          "spoke": "llm-inference-serving",
+          "referenceFile": "references/llm-inference-serving.md",
+          "routingLine": "<!--",
+          "srcBytes": 36412
+        },
+        {
+          "spoke": "llm-pretraining-scaling-laws",
+          "referenceFile": "references/llm-pretraining-scaling-laws.md",
+          "routingLine": "<!--",
+          "srcBytes": 37419
+        },
+        {
+          "spoke": "llm-routing-cascades",
+          "referenceFile": "references/llm-routing-cascades.md",
+          "routingLine": "<!--",
+          "srcBytes": 14925
+        },
+        {
+          "spoke": "rlhf-infrastructure",
+          "referenceFile": "references/rlhf-infrastructure.md",
+          "routingLine": "<!-- Provenance: reference under the `ai-agent-engineering` hub. Created 2026-05-31 by authorin",
+          "srcBytes": 34260
+        },
+        {
+          "spoke": "transformer-architecture",
+          "referenceFile": "references/transformer-architecture.md",
+          "routingLine": "<!--",
+          "srcBytes": 27938
+        },
+        {
+          "spoke": "multimodal-llm-architecture",
+          "referenceFile": "references/multimodal-llm-architecture.md",
+          "routingLine": "<!--",
+          "srcBytes": 42128
+        },
+        {
+          "spoke": "reasoning-models",
+          "referenceFile": "references/reasoning-models.md",
+          "routingLine": "<!-- Provenance: reference under the `ai-agent-engineering` hub. Created 2026-05-31 via /dr dee",
+          "srcBytes": 35829
+        },
+        {
+          "spoke": "llm-models",
+          "referenceFile": "references/llm-models.md",
+          "routingLine": "LLM landscape reference — Claude (Opus 4.7/Sonnet 4.6/Haiku 4.5), GPT (4.1/4o/o3/o4-mini),",
+          "srcBytes": 14916
+        },
+        {
+          "spoke": "llm-observability",
+          "referenceFile": "references/llm-observability.md",
+          "routingLine": "<!-- Provenance: reference under the `ai-agent-engineering` hub. Created 2026-05-31 via /dr dee",
+          "srcBytes": 18564
+        },
+        {
+          "spoke": "continuous-learning-v2",
+          "referenceFile": "references/continuous-learning-v2.md",
+          "routingLine": "Hook-based learning system for Claude Code that observes sessions via PreToolUse/PostToolUse ho",
+          "srcBytes": 8799
+        }
+      ]
+    },
+    "ai-mcp-sdk-prompting": {
+      "keepExisting": false,
+      "title": "ai-mcp-sdk-prompting",
+      "spokes": [
+        {
+          "spoke": "mcp-builder",
+          "referenceFile": "references/mcp-builder.md",
+          "routingLine": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs",
+          "srcBytes": 15246
+        },
+        {
+          "spoke": "mcp-servers",
+          "referenceFile": "references/mcp-servers.md",
+          "routingLine": "MCP server development expert — JSON-RPC 2.0 architecture, Tools/Resources/Prompts primitives,",
+          "srcBytes": 16268
+        },
+        {
+          "spoke": "anthropic-sdk",
+          "referenceFile": "references/anthropic-sdk.md",
+          "routingLine": "Official TypeScript/Node.js client for the Anthropic Messages API. Covers messages.create,",
+          "srcBytes": 16810
+        },
+        {
+          "spoke": "prompt-engineering",
+          "referenceFile": "references/prompt-engineering.md",
+          "routingLine": "Expert reference for prompt engineering — foundational techniques (zero-shot, few-shot,",
+          "srcBytes": 16123
+        },
+        {
+          "spoke": "ai-languages",
+          "referenceFile": "references/ai-languages.md",
+          "routingLine": "AI/LLM programming languages and frameworks reference — Python (LangChain,",
+          "srcBytes": 18104
+        },
+        {
+          "spoke": "declarative-llm-frameworks",
+          "referenceFile": "references/declarative-llm-frameworks.md",
+          "routingLine": "The \"prompt-as-program\" framework layer — declare the interface (inputs,",
+          "srcBytes": 11656
+        },
+        {
+          "spoke": "llm-integration-reviewer",
+          "referenceFile": "references/llm-integration-reviewer.md",
+          "routingLine": "|",
+          "srcBytes": 8847
+        },
+        {
+          "spoke": "ai-redteaming-tooling",
+          "referenceFile": "references/ai-redteaming-tooling.md",
+          "routingLine": "The OFFENSIVE security-testing discipline for LLM/agent apps — systematically",
+          "srcBytes": 11529
+        },
+        {
+          "spoke": "llm-context-engineering",
+          "referenceFile": "references/llm-context-engineering.md",
+          "routingLine": "Master LLM context design, optimization, and security for AI applications",
+          "srcBytes": 10667
+        },
+        {
+          "spoke": "mcp-tool-search-optimizer",
+          "referenceFile": "references/mcp-tool-search-optimizer.md",
+          "routingLine": "Use when an MCP server or large tool catalog exposes 10+ tools that must be discovered by Anthr",
+          "srcBytes": 5553
+        },
+        {
+          "spoke": "prompt-lookup",
+          "referenceFile": "references/prompt-lookup.md",
+          "routingLine": "Prompt discovery, retrieval, management, versioning, and optimization. Uses the",
+          "srcBytes": 9018
+        }
+      ]
+    }
+  }
+}

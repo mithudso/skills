@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eval Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js" integrity="sha384-EnyY0/GSHQGSxSgMwaIPzSESbqoOLSexfnSMN2AP+39Ckmn92stwABZynq1JyzdT" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --bg: #faf9f5;
+      --surface: #ffffff;
+      --border: #e8e6dc;
+      --text: #141413;
+      --text-muted: #b0aea5;
+      --accent: #d97757;
+      --accent-hover: #c4613f;
+      --green: #788c5d;
+      --green-bg: #eef2e8;
+      --red: #c44;
+      --red-bg: #fceaea;
+      --header-bg: #141413;
+      --header-text: #faf9f5;
+      --radius: 6px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---- Header ---- */
+    .header {
+      background: var(--header-bg);
+      color: var(--header-text);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    .header .instructions {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-top: 0.25rem;
+    }
+    .header .progress {
+      font-size: 0.875rem;
+      opacity: 0.8;
+      text-align: right;
+    }
+
+    /* ---- Main content ---- */
+    .main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* ---- Sections ---- */
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      flex-shrink: 0;
+    }
+    .section-header {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.75rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .section-body {
+      padding: 1rem;
+    }
+
+    /* ---- Config badge ---- */
+    .config-badge {
+      display: inline-block;
+      padding: 0.2rem 0.625rem;
+      border-radius: 9999px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-left: 0.75rem;
+      vertical-align: middle;
+    }
+    .config-badge.config-primary {
+      background: rgba(33, 150, 243, 0.12);
+      color: #1976d2;
+    }
+    .config-badge.config-baseline {
+      background: rgba(255, 193, 7, 0.15);
+      color: #f57f17;
+    }
+
+    /* ---- Prompt ---- */
+    .prompt-text {
+      white-space: pre-wrap;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+
+    /* ---- Outputs ---- */
+    .output-file {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .output-file + .output-file {
+      margin-top: 1rem;
+    }
+    .output-file-header {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .output-file-header .dl-btn {
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-decoration: none;
+      cursor: pointer;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 500;
+      opacity: 0.8;
+    }
+    .output-file-header .dl-btn:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+    .output-file-content {
+      padding: 0.75rem;
+      overflow-x: auto;
+    }
+    .output-file-content pre {
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+    }
+    .output-file-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+    .output-file-content iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+    .output-file-content table {
+      border-collapse: collapse;
+      font-size: 0.8125rem;
+      width: 100%;
+    }
+    .output-file-content table td,
+    .output-file-content table th {
+      border: 1px solid var(--border);
+      padding: 0.375rem 0.5rem;
+      text-align: left;
+    }
+    .output-file-content table th {
+      background: var(--bg);
+      font-weight: 600;
+    }
+    .output-file-content .download-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+    .output-file-content .download-link:hover {
+      background: var(--border);
+    }
+    .empty-state {
+      color: var(--text-muted);
+      font-style: italic;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    /* ---- Feedback ---- */
+    .prev-feedback {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.625rem 0.75rem;
+      margin-top: 0.75rem;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .prev-feedback-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.25rem;
+      color: var(--text-muted);
+    }
+    .feedback-textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      resize: vertical;
+      color: var(--text);
+    }
+    .feedback-textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+    .feedback-status {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      min-height: 1.1em;
+    }
+
+    /* ---- Grades (collapsible) ---- */
+    .grades-toggle {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .grades-toggle:hover {
+      color: var(--accent);
+    }
+    .grades-toggle .arrow {
+      margin-right: 0.5rem;
+      transition: transform 0.15s;
+      font-size: 0.75rem;
+    }
+    .grades-toggle .arrow.open {
+      transform: rotate(90deg);
+    }
+    .grades-content {
+      display: none;
+      margin-top: 0.75rem;
+    }
+    .grades-content.open {
+      display: block;
+    }
+    .grades-summary {
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .grade-badge {
+      display: inline-block;
+      padding: 0.125rem 0.5rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .grade-pass { background: var(--green-bg); color: var(--green); }
+    .grade-fail { background: var(--red-bg); color: var(--red); }
+    .assertion-list {
+      list-style: none;
+    }
+    .assertion-item {
+      padding: 0.625rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8125rem;
+    }
+    .assertion-item:last-child { border-bottom: none; }
+    .assertion-status {
+      font-weight: 600;
+      margin-right: 0.5rem;
+    }
+    .assertion-status.pass { color: var(--green); }
+    .assertion-status.fail { color: var(--red); }
+    .assertion-evidence {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+      padding-left: 1.5rem;
+    }
+
+    /* ---- View tabs ---- */
+    .view-tabs {
+      display: flex;
+      gap: 0;
+      padding: 0 2rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .view-tab {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.625rem 1.25rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
+    }
+    .view-tab:hover { color: var(--text); }
+    .view-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .view-panel { display: none; }
+    .view-panel.active { display: flex; flex-direction: column; flex: 1; overflow: hidden; }
+
+    /* ---- Benchmark view ---- */
+    .benchmark-view {
+      padding: 1.5rem 2rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .benchmark-table {
+      border-collapse: collapse;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.8125rem;
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+    .benchmark-table th, .benchmark-table td {
+      padding: 0.625rem 0.75rem;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    .benchmark-table th {
+      font-family: 'Poppins', sans-serif;
+      background: var(--header-bg);
+      color: var(--header-text);
+      font-weight: 500;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .benchmark-table tr:hover { background: var(--bg); }
+    .benchmark-table tr.benchmark-row-with { background: rgba(33, 150, 243, 0.06); }
+    .benchmark-table tr.benchmark-row-without { background: rgba(255, 193, 7, 0.06); }
+    .benchmark-table tr.benchmark-row-with:hover { background: rgba(33, 150, 243, 0.12); }
+    .benchmark-table tr.benchmark-row-without:hover { background: rgba(255, 193, 7, 0.12); }
+    .benchmark-table tr.benchmark-row-avg { font-weight: 600; border-top: 2px solid var(--border); }
+    .benchmark-table tr.benchmark-row-avg.benchmark-row-with { background: rgba(33, 150, 243, 0.12); }
+    .benchmark-table tr.benchmark-row-avg.benchmark-row-without { background: rgba(255, 193, 7, 0.12); }
+    .benchmark-delta-positive { color: var(--green); font-weight: 600; }
+    .benchmark-delta-negative { color: var(--red); font-weight: 600; }
+    .benchmark-notes {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+    }
+    .benchmark-notes h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+    }
+    .benchmark-notes ul {
+      list-style: disc;
+      padding-left: 1.25rem;
+    }
+    .benchmark-notes li {
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      margin-bottom: 0.375rem;
+    }
+    .benchmark-empty {
+      color: var(--text-muted);
+      font-style: italic;
+      text-align: center;
+      padding: 3rem;
+    }
+
+    /* ---- Navigation ---- */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      flex-shrink: 0;
+    }
+    .nav-btn {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+      transition: all 0.15s;
+    }
+    .nav-btn:hover:not(:disabled) {
+      background: var(--bg);
+      border-color: var(--text-muted);
+    }
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .done-btn {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.5rem 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+    .done-btn:hover {
+      background: var(--bg);
+      border-color: var(--text-muted);
+    }
+    .done-btn.ready {
+      border: none;
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+    }
+    .done-btn.ready:hover {
+      background: var(--accent-hover);
+    }
+    /* ---- Done overlay ---- */
+    .done-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+    }
+    .done-overlay.visible {
+      display: flex;
+    }
+    .done-card {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 2rem 3rem;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-width: 500px;
+    }
+    .done-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .done-card p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    .done-card .btn-row {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    .done-card button {
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+    .done-card button:hover {
+      background: var(--bg);
+    }
+    /* ---- Toast ---- */
+    .toast {
+      position: fixed;
+      bottom: 5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--header-bg);
+      color: var(--header-text);
+      padding: 0.625rem 1.25rem;
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 200;
+    }
+    .toast.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" style="height:100vh; display:flex; flex-direction:column;">
+    <div class="header">
+      <div>
+        <h1>Eval Review: <span id="skill-name"></span></h1>
+        <div class="instructions">Review each output and leave feedback below. Navigate with arrow keys or buttons. When done, copy feedback and paste into Claude Code.</div>
+      </div>
+      <div class="progress" id="progress"></div>
+    </div>
+
+    <!-- View tabs (only shown when benchmark data exists) -->
+    <div class="view-tabs" id="view-tabs" style="display:none;">
+      <button class="view-tab active" onclick="switchView('outputs')">Outputs</button>
+      <button class="view-tab" onclick="switchView('benchmark')">Benchmark</button>
+    </div>
+
+    <!-- Outputs panel (qualitative review) -->
+    <div class="view-panel active" id="panel-outputs">
+    <div class="main">
+      <!-- Prompt -->
+      <div class="section">
+        <div class="section-header">Prompt <span class="config-badge" id="config-badge" style="display:none;"></span></div>
+        <div class="section-body">
+          <div class="prompt-text" id="prompt-text"></div>
+        </div>
+      </div>
+
+      <!-- Outputs -->
+      <div class="section">
+        <div class="section-header">Output</div>
+        <div class="section-body" id="outputs-body">
+          <div class="empty-state">No output files found</div>
+        </div>
+      </div>
+
+      <!-- Previous Output (collapsible) -->
+      <div class="section" id="prev-outputs-section" style="display:none;">
+        <div class="section-header">
+          <div class="grades-toggle" onclick="togglePrevOutputs()">
+            <span class="arrow" id="prev-outputs-arrow">&#9654;</span>
+            Previous Output
+          </div>
+        </div>
+        <div class="grades-content" id="prev-outputs-content"></div>
+      </div>
+
+      <!-- Grades (collapsible) -->
+      <div class="section" id="grades-section" style="display:none;">
+        <div class="section-header">
+          <div class="grades-toggle" onclick="toggleGrades()">
+            <span class="arrow" id="grades-arrow">&#9654;</span>
+            Formal Grades
+          </div>
+        </div>
+        <div class="grades-content" id="grades-content"></div>
+      </div>
+
+      <!-- Feedback -->
+      <div class="section">
+        <div class="section-header">Your Feedback</div>
+        <div class="section-body">
+          <textarea
+            class="feedback-textarea"
+            id="feedback"
+            placeholder="What do you think of this output? Any issues, suggestions, or things that look great?"
+          ></textarea>
+          <div class="feedback-status" id="feedback-status"></div>
+          <div class="prev-feedback" id="prev-feedback" style="display:none;">
+            <div class="prev-feedback-label">Previous feedback</div>
+            <div id="prev-feedback-text"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav" id="outputs-nav">
+      <button class="nav-btn" id="prev-btn" onclick="navigate(-1)">&#8592; Previous</button>
+      <button class="done-btn" id="done-btn" onclick="showDoneDialog()">Submit All Reviews</button>
+      <button class="nav-btn" id="next-btn" onclick="navigate(1)">Next &#8594;</button>
+    </div>
+    </div><!-- end panel-outputs -->
+
+    <!-- Benchmark panel (quantitative stats) -->
+    <div class="view-panel" id="panel-benchmark">
+      <div class="benchmark-view" id="benchmark-content">
+        <div class="benchmark-empty">No benchmark data available. Run a benchmark to see quantitative results here.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Done overlay -->
+  <div class="done-overlay" id="done-overlay">
+    <div class="done-card">
+      <h2>Review Complete</h2>
+      <p>Your feedback has been saved. Go back to your Claude Code session and tell Claude you're done reviewing.</p>
+      <div class="btn-row">
+        <button onclick="closeDoneDialog()">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ---- Embedded data (injected by generate_review.py) ----
+    const EMBEDDED_DATA = {"skill_name": "note-organizer", "runs": [{"id": "eval-0-standup-dump-actionability-with_skill-run-1", "prompt": "(No prompt found)", "eval_id": null, "outputs": [{"name": "organized.md", "type": "text", "content": "# Week of 6/29 \u2014 organized\n\n**Diagnosis:** Operational dump \u2014 standup and meeting captures full of actions,\ndecisions, blockers, and one running incident. Your stated goal (\"what I owe\npeople and what got decided\") confirms the shape: actionability sort. Assumed\nthe un-owned incident-writeup TODO is yours, since the notes assign it to no\none \u2014 flagged rather than assigned.\n\n## Actions\n\n**Latency incident**\n- File the incident writeup for Friday night's search-latency spike \u2014 no owner\n  stated in the notes *(dedup: captured Mon and again Weds)*\n- EU cluster ticket for the still-degraded p99 \u2014 Carlos said Thursday he's\n  filing it (worth confirming it landed)\n\n**Pricing**\n- Ping marketing re: tier-name sign-off \u2014 owner: Sam *(Thurs)*\n- Update the pricing page draft \u2014 Sam has it; currently on hold per the\n  Decisions section until marketing signs off tier names *(blocked \u2014 see\n  Problems)*\n\n## Problems\n\n- **EU p99 is still degraded.** The analyzer change shipped to the EU cluster\n  too and was never rolled back there *(Carlos, Thurs)*; Carlos is filing a\n  ticket \u2014 addressed by the EU-ticket action above.\n  \u26a1 conflict: Monday's notes say the analyzer change was \"rolled back\" and\n  that the rollback fixed p99 \u2014 Thursday's info shows that was true of the\n  main cluster only.\n- **Pricing page draft is blocked on final tier names** *(Sam, Weds)* \u2014\n  marketing hasn't signed off; addressed by the ping-marketing action and the\n  hold decision below.\n\n## Decisions\n\n- **Usage-based tier for the API; flat tier killed** *(Mon)*. Confirmed Weds:\n  it goes in the September release.\n- **Hold the pricing page until marketing signs off the tier names** *(Thurs)*.\n\n## Wins\n\n- Rollback fixed p99 on the main cluster: 800ms \u2192 back to 120ms *(Kavya, Mon)*\n  \u2014 main cluster only; EU still degraded, see Problems.\n- EU price-change notice question resolved: Dana confirmed 60 days, per the\n  DPA addendum *(Thurs)* \u2014 closes Wednesday's \"check with Dana\".\n- September-release timing risk resolved: metering estimate is 3 weeks (JT)\n  and the release is 5 weeks out, so the date holds \u2014 closes the open question\n  below.\n\n## Ideas\n\n- Customer-facing trust page: expose the latency dashboard to customers; could\n  also show uptime \u2014 status.io does this *(merged from two notes, Mon + Weds)*.\n\n## Questions\n\n- Does the Sept release date slip if usage metering isn't done? \u2014 **answered\n  in the notes:** metering is estimated at 3 weeks (JT) vs. 5 weeks to\n  release, so no slip expected.\n\n## Reference\n\n- Price-change notice periods: 30 days standard (legal), 60 days for EU\n  customers (Dana confirmed; source: DPA addendum).\n- Candidate tier names: Builder / Scale / Enterprise \u2014 pending marketing\n  sign-off.\n- Usage-metering estimate: 3 weeks (JT); release is 5 weeks out.\n\n## Archive\n\n- Carlos out until Thursday \u2014 superseded; he was back Thursday.\n- Pricing meeting moved to Wednesday \u2014 happened; notes captured above.\n\n---\n\n**Counts:** 22 items in \u2192 16 appear above, 3 merged as duplicates (second\nincident-writeup TODO; trust-page/uptime idea into one; \"EU p99 still\ndegraded + filing ticket\" into the EU rollback problem), 3 folded into other\nitems (Sept-release confirmation into the usage-tier decision; Dana's 60-day\nconfirmation into the notice question; the metering estimate into the\nrelease-slip question), 1 flag (\u26a1 rollback conflict), 0 parked. 22 = 16 + 3\n+ 3, all accounted for; Parking-lot section omitted because it's empty.\n"}], "grading": {"expectations": [{"text": "Leads with a short diagnosis stating what the notes are and which organizing shape was chosen", "passed": true, "evidence": "Output opens with '**Diagnosis:** Operational dump \u2014 standup and meeting captures full of actions, decisions, blockers, and one running incident... actionability sort.' Names both the note type and the chosen shape."}, {"text": "All TODO/action items appear in an actions section, with the duplicate incident-writeup TODO merged to one entry", "passed": true, "evidence": "Actions section contains all four action items: incident writeup (single entry with '(dedup: captured Mon and again Weds)' merging the two TODOs from input lines 4 and 13), EU cluster ticket (Carlos), ping marketing (Sam), update pricing page draft (Sam). No input TODO is missing from Actions."}, {"text": "A Problems section exists and contains the EU latency regression (analyzer change never rolled back on EU cluster, p99 still degraded), cross-referenced to its action", "passed": true, "evidence": "Problems section, first bullet: 'EU p99 is still degraded. The analyzer change shipped to the EU cluster too and was never rolled back there (Carlos, Thurs)... addressed by the EU-ticket action above.' Explicit cross-reference to the Actions entry, plus a flagged Mon-vs-Thurs rollback conflict."}, {"text": "A Wins section exists and contains the primary-cluster rollback fix (p99 back to 120ms) and/or Dana's confirmed 60-day answer", "passed": true, "evidence": "Wins section contains both: 'Rollback fixed p99 on the main cluster: 800ms \u2192 back to 120ms (Kavya, Mon)' and 'Dana confirmed 60 days, per the DPA addendum (Thurs)'. Both match input lines 10 and 19."}, {"text": "Decisions section contains: usage-based tier chosen (flat killed), hold pricing page until marketing signs off", "passed": true, "evidence": "Decisions section: 'Usage-based tier for the API; flat tier killed (Mon). Confirmed Weds: it goes in the September release.' and 'Hold the pricing page until marketing signs off the tier names (Thurs).' Both decisions present and correctly dated."}, {"text": "No invented owners, dates, or facts (every owner/date in output traces to the input)", "passed": true, "evidence": "Spot-checked every owner and date: Kavya/rollback (input 'kavya says rollback fixed p99'), Sam/pricing-page ('sam has it') and ping-marketing ('sam owns'), Carlos/EU ticket (Thurs), Dana/60-day DPA addendum, JT/3-week metering estimate, tier names Builder/Scale/Enterprise, 800ms/120ms, 30-day/60-day, 3-vs-5-week timing \u2014 all trace to the input. The un-owned incident-writeup TODO is explicitly flagged as 'no owner stated' rather than assigned an invented owner."}, {"text": "The trust-page idea (incl. uptime addition) is preserved in an ideas section, and the release-slip question is preserved", "passed": true, "evidence": "Ideas section: 'Customer-facing trust page: expose the latency dashboard to customers; could also show uptime \u2014 status.io does this (merged from two notes, Mon + Weds).' Questions section preserves 'Does the Sept release date slip if usage metering isn't done?' with its in-notes answer (3 wks vs 5 wks)."}, {"text": "Ends with a counts line whose numbers reconcile", "passed": true, "evidence": "Counts line: '22 items in \u2192 16 appear above, 3 merged as duplicates, 3 folded into other items... 22 = 16 + 3 + 3'. Arithmetic verified: 16+3+3=22. Independent recount of the input yields 22 items when the Monday standup line is split into its two facts (spike + rollback); the 3 named merges (dup incident TODO, uptime idea, EU degraded+ticket line) and 3 named folds (Sept confirmation, Dana confirmation, metering estimate) each trace to real input items, leaving exactly 16 displayed."}], "summary": {"passed": 8, "failed": 0, "total": 8, "pass_rate": 1.0}, "claims": [{"claim": "22 items in the input", "type": "factual", "verified": true, "evidence": "Input has 21 content lines; the Monday standup line contains two distinct facts (latency spike report + rollback action), giving 22 under the output's stated splitting. Defensible, though item granularity is inherently judgment-dependent."}, {"claim": "Monday's 'rolled back' note conflicts with Thursday's EU finding", "type": "factual", "verified": true, "evidence": "Input line 3 says 'rolled back the analyzer change'; input line 17 says 'analyzer change actually shipped to EU cluster too, never rolled back there'. The flagged conflict is real and correctly scoped to main-cluster-only."}, {"claim": "The release-slip question is answered in the notes", "type": "factual", "verified": true, "evidence": "Input: 'metering work estimate: 3 wks (jt), release is 5 wks out so ok' \u2014 supports the output's 'no slip expected'."}], "eval_feedback": {"suggestions": [{"assertion": "Ends with a counts line whose numbers reconcile", "reason": "Input item granularity is ambiguous (21 lines vs 22 facts), so almost any internally consistent arithmetic passes. Consider asserting instead that every input line is traceable to an output entry (a losslessness check), which is harder to satisfy with a fabricated-but-consistent counts line."}], "overall": "Assertions are well-targeted and discriminating overall; the output also correctly caught the rollback conflict, which assertion 3 only implicitly rewards \u2014 a dedicated conflict-detection assertion would make that outcome explicit."}}}], "previous_feedback": {}, "previous_outputs": {"eval-0-standup-dump-actionability-with_skill-run-1": [{"name": "organized.md", "type": "text", "content": "# Standup / notes \u2014 week of 6/29 \u2014 organized\n\n**Diagnosis:** Operational dump \u2014 a week of standup + pricing-meeting capture (Mon\u2013Thu). It's actions, decisions, a couple of ideas and questions, plus incident and reference facts. You asked for \"what I owe people\" and \"what got decided,\" so I sorted by **actionability** (Actions \u2192 Decisions \u2192 Ideas \u2192 Questions \u2192 Reference \u2192 Archive), not by topic. Nothing added, nothing dropped. Two things to know up front: (1) the Friday latency rollback was only **partial** \u2014 the same analyzer change also shipped to the EU cluster and was never rolled back there, so EU p99 is still degraded; (2) both questions raised this week already got answered (see Questions). No conflicts, nothing parked.\n\n## Actions \u2014 what's outstanding\n\n**Reliability / incident**\n- **File the incident write-up** for Friday night's search-latency spike (p99 \u2192 800ms). *(owner not stated; appeared twice in the notes)*\n- **Carlos \u2014 file a ticket** for the EU cluster, whose p99 is still degraded. *(Thu)*\n\n**Pricing page / launch**\n- **Sam \u2014 ping marketing to sign off on the tier names** (builder / scale / enterprise). This is the current unblocker for the pricing page. *(Sam owns)*\n- **Sam \u2014 update the pricing-page draft.** \u26d4 Blocked on final tier names \u2192 marketing sign-off \u2014 and the team decided to hold the page until then (see Decisions). *(Sam has the draft)*\n\n## Decisions \u2014 what got decided\n- **API pricing \u2192 usage-based tier**, confirmed for the **September release**. The flat tier is killed. *(decided Mon, reconfirmed Wed)*\n- **Hold the pricing page** until marketing signs off on the tier names. *(Thu)*\n\n## Ideas\n- **Customer-facing \"trust page\"** exposing the latency dashboard \u2014 and possibly uptime / status too. *(cf. status.io)*\n\n## Questions \u2014 both resolved this week\n- **Does the Sept release slip if usage metering isn't done?** \u2192 **No.** Metering is estimated at ~3 weeks (JT); the release is ~5 weeks out. *(resolved)*\n- **Is the EU price-change notice period 60 days?** \u2192 **Yes \u2014 60 days**, confirmed by Dana; it's in the DPA addendum. This also closes the \"check with Dana\" to-do. *(resolved)*\n\n## Reference \u2014 facts worth keeping\n- **Friday-night search-latency incident:** p99 spiked to 800ms Friday night, traced to an analyzer change (Kavya, Mon). Rolled back \u2192 p99 back to 120ms on the main cluster. **But** the same change had also shipped to the **EU cluster and was never rolled back there** (Carlos, Thu), so **EU p99 is still degraded** \u2014 the fix was partial. (Drives the two reliability actions above.)\n- **Price-change notice periods:** 30 days standard (per legal); **60 days for EU customers**, confirmed by Dana, per the DPA addendum.\n- **Proposed tier names:** builder / scale / enterprise \u2014 marketing has **not** signed off yet.\n- **Metering estimate:** ~3 weeks (JT); September release is ~5 weeks out.\n\n## Archive \u2014 stale / superseded\n- Carlos was out until Thursday; he's now back. *(Mon \u2192 Thu)*\n- Pricing meeting was moved to Wednesday \u2014 it happened (notes captured above). *(Mon)*\n\n---\n**Counts.** 21 note lines in (line 1 is the date header). The four compound lines \u2014 the Mon standup line, the Wed \"30-day / 60-day / check-Dana\" line, the Thu \"Carlos back + EU spread\" line, and the \"EU degraded + ticket\" line \u2014 split into multiples, giving **26 substantive items**. These map to **15 distinct entries** \u2014 4 actions, 2 decisions, 1 idea, 2 (resolved) questions, 4 reference facts, 2 archived \u2014 with the other **11 items merged or folded in**: **3 duplicate/near-duplicate merges** (incident write-up \u00d72, usage-based-tier decision \u00d72, trust-page idea \u00d72); the Carlos out\u2192back status merged into one archive line; the pricing-page blocker folded into its action; four incident fragments (spike, rollback, EU spread, EU still-degraded) folded into one incident record; and Dana's 60-day confirmation folded into the notice-period reference \u2014 which also answers the EU-60 question and closes the \"check with Dana\" to-do. The Sept-slip question is answered by the metering estimate in Reference. **0 flags (\u2691 unclear / \u26a1 conflict), 0 parked.** All 26 items accounted for.\n"}], "eval-0-standup-dump-actionability-without_skill-run-1": [{"name": "organized.md", "type": "text", "content": "# Standup Notes \u2014 Week of June 29\n\nCleaned up from the week's raw dump. Two things you asked for are up top: **what you owe / who owes what** and **what got decided**. Everything from the notes is preserved below; nothing added.\n\n> **Heads-up:** The Friday latency incident is **not actually closed.** The rollback only fixed the primary cluster \u2014 the analyzer change also shipped to the EU cluster and was never rolled back there, so EU p99 is still degraded (found Thursday). This affects your incident writeup.\n\n---\n\n## Action items \u2014 who owes what\n\n| Owner | Item | Status |\n| --- | --- | --- |\n| **You** | File the incident report/writeup for Friday's latency spike | **Open** \u2014 noted Mon and again Wed. Must now cover the EU cluster gap (see incident below), not just the primary rollback |\n| **Sam** | Update the pricing-page draft (Sam has the doc) | **Blocked / on hold** \u2014 waiting on final tier names; decision is to hold until marketing signs off |\n| **Sam** | Ping marketing about the tier names | **Open** |\n| **Carlos** | File a ticket for the degraded EU p99 | **In progress** \u2014 was filing it Thursday |\n| **Dana** | Confirm the EU price-change notice period | **Done** \u2014 confirmed 60 days (see decisions) |\n\n**Waiting on someone else:** Marketing sign-off on the tier names \u2014 this is the single blocker holding up the pricing page.\n\n---\n\n## What got decided\n\n- **Usage-based tier for the API is a go.** Flat tier is killed. **Confirmed** for the September release.\n- **Price-change notice periods:** 30 days standard; **60 days for EU customers.** Dana confirmed the EU 60-day figure \u2014 it's in the DPA addendum. (This resolves the earlier \"EU 60??\" open question.)\n- **Hold the pricing page** until marketing signs off on the tier names.\n- **September release date holds.** Usage-metering work is estimated at 3 weeks (jt) and the release is 5 weeks out, so no slip.\n\n**Decided but not final \u2014 needs sign-off:**\n- Proposed tier names are **builder / scale / enterprise**. Marketing has **not** signed off yet.\n\n---\n\n## Open incident \u2014 Friday latency spike\n\n- **Fri night:** Search latency spiked, p99 hit 800ms (flagged by Kavya).\n- **Response:** Rolled back the analyzer change. Kavya confirmed the rollback brought p99 back to 120ms.\n- **Thursday update (Carlos, back from being out):** The analyzer change had also shipped to the **EU cluster** and was **never rolled back there.** EU p99 is **still degraded.** Carlos is filing a ticket.\n- **Net:** Primary cluster recovered; EU cluster still broken. Incident stays open until EU is rolled back and the writeup reflects both clusters.\n\n---\n\n## Resolved question\n\n- **Does the Sept release slip if usage metering isn't done in time?** \u2192 **No.** Metering is a 3-week job (jt) and the release is 5 weeks out.\n\n---\n\n## Ideas / parking lot (not decided)\n\n- Expose the latency dashboard to customers as a **\"trust page.\"**\n- The trust page could also show **uptime** \u2014 the way status.io does it.\n\n---\n\n## Timeline (context)\n\n- **Mon:** Standup. Carlos out until Thursday. Pricing meeting moved to Wednesday.\n- **Wed:** Pricing meeting.\n- **Thu:** Carlos back; EU cluster issue surfaced.\n"}], "eval-1-reading-notes-atomic-with_skill-run-1": [{"name": "desirable-difficulties.md", "type": "text", "content": "# Desirable difficulties\n\n**Desirable difficulties** (Bjork): harder encoding produces stronger retention. Difficulty introduced during learning \u2014 the kind that feels counterproductive in the moment \u2014 can strengthen later recall.\n\nSource: Bjork (via Make It Stick, Brown et al.).\n\nSee also (candidate instances / related techniques, grouped for navigation): [[retrieval-practice-beats-rereading]], [[spacing-beats-massed-practice]], [[interleaving-beats-blocking]], [[generation-effect]]. Related theory: [[storage-strength-vs-retrieval-strength]]\n"}, {"name": "elaboration-makes-learning-stick.md", "type": "text", "content": "# Elaboration makes learning stick\n\n**Elaboration** = connecting new information to what you already know. That connecting is what makes it stick.\n\nIn practice: take notes in your own words. Copying quotes verbatim bypasses understanding \u2014 restating in your own words forces the elaboration.\n\nSource: Ahrens, *How to Take Smart Notes*.\n\nSee also: [[writing-is-thinking]], [[evergreen-notes-compound]]\n"}, {"name": "evergreen-notes-compound.md", "type": "text", "content": "# Evergreen notes compound\n\n**Evergreen notes** (Matuschak): notes should be concept-oriented, not source-oriented. A second source on the same concept lands on the *existing* note, and the two compound over time. Give notes claim-like titles \u2014 \"like APIs\" (stable, reusable).\n\nSource: Matuschak.\n\nNote: this is the method this collection now applies \u2014 each concept above is one accreting note that the next reading can extend.\n\nSee also: [[elaboration-makes-learning-stick]], [[writing-is-thinking]]\n"}, {"name": "generation-effect.md", "type": "text", "content": "# Generation effect\n\nAttempting to generate an answer *before* being shown it helps learning \u2014 even when the attempt fails.\n\nSource: Make It Stick (Brown et al.).\n\nOpen question (from the original notes): does the generation effect connect to the Karpicke retrieval-practice finding? \u2014 see [[retrieval-practice-beats-rereading]].\n\nSee also: [[retrieval-practice-beats-rereading]], [[desirable-difficulties]]\n"}, {"name": "interleaving-beats-blocking.md", "type": "text", "content": "# Interleaving beats blocking\n\nInterleaving different problem types beats blocking (practicing one type at a time in a run), even though blocked practice feels easier.\n\nSource: Make It Stick (Brown et al.).\n\nSee also: [[desirable-difficulties]]\n"}, {"name": "organized.md", "type": "text", "content": "# Learning Science \u2014 Map of Content (MOC)\n\n**Diagnosis.** These are reading/research notes on learning science \u2014 claims and findings drawn from named books and papers (Make It Stick, Ahrens, Karpicke & Blunt, Cepeda et al., Dunlosky, Bjork, Matuschak). Shape chosen: **atomic concept notes + this Map of Content**, because you want to \"build on\" them as you read more. Concept-oriented notes accrete \u2014 your next reading lands on the concept note that already exists rather than starting a new pile. (That is exactly the evergreen-notes method your own notes describe: [[evergreen-notes-compound]].) Nothing was dropped or invented; two items are flagged below. No assumptions were needed.\n\nThis file is the index. Each linked note is one concept you can extend as you read more \u2014 add a new source under the concept it belongs to, not a new note per book.\n\n## Effective learning techniques (evidence-backed)\n- [[retrieval-practice-beats-rereading]] \u2014 recalling beats re-exposure (Make It Stick; Karpicke & Blunt 2011)\n- [[spacing-beats-massed-practice]] \u2014 distributed practice beats cramming (Make It Stick; Cepeda et al.)\n- [[interleaving-beats-blocking]] \u2014 mixing problem types beats blocking (Make It Stick)\n- [[generation-effect]] \u2014 trying before being told helps, even on failure (Make It Stick)\n\n## Underlying theory\n- [[desirable-difficulties]] \u2014 harder encoding \u2192 stronger retention (Bjork); umbrella over the techniques above\n- [[storage-strength-vs-retrieval-strength]] \u2014 forgetting is retrieval-strength decay; storage persists (Bjork)\n\n## Encoding & note-taking practice\n- [[elaboration-makes-learning-stick]] \u2014 connect new info to prior knowledge; own words, not copied quotes (Ahrens)\n- [[writing-is-thinking]] \u2014 writing is thinking, not its record (Ahrens)\n- [[evergreen-notes-compound]] \u2014 concept-oriented notes compound across sources (Matuschak)\n\n## Tools & implementation\n- [[spaced-repetition-systems]] \u2014 Anki (SM-2), Leitner boxes; implements spacing\n\n## Cross-cutting evidence\n- [[study-technique-utility-rankings]] \u2014 Dunlosky 2013: testing + distributed practice high; highlighting/re-reading low\n\n## Open questions\n- Does the **generation effect** connect to the **Karpicke retrieval-practice** finding? (your own question, in the Make It Stick notes) \u2014 tracked in [[generation-effect]].\n\n## Flags\n- \u2691 **unclear:** the \"storage vs. retrieval strength\" note cites a Bjork paper of uncertain identity (\"diff paper?\" in the original) \u2014 see [[storage-strength-vs-retrieval-strength]].\n\n## Counts\n- **14 items in \u2192 11 concept notes + this MOC out.**\n- **Folded / merged (3):** Ahrens \"own words\" merged into [[elaboration-makes-learning-stick]]; Karpicke & Blunt 2011 folded as evidence into [[retrieval-practice-beats-rereading]]; Cepeda et al. folded as evidence into [[spacing-beats-massed-practice]].\n- **Duplicates merged:** 0 exact duplicates (the 3 above are folds/merges of related material).\n- **Flags:** 2 (1 \u2691 unclear source; 1 open question).\n- **Parked:** 0.\n- **Reconciliation:** 11 items each own a note + 3 folded/merged = 14 accounted for.\n"}, {"name": "retrieval-practice-beats-rereading.md", "type": "text", "content": "# Retrieval practice beats re-reading\n\nTesting yourself beats re-reading. The act of recalling \u2014 **retrieval practice** \u2014 strengthens memory more than re-exposure to the material does.\n\nEvidence: Karpicke & Blunt (2011, *Science*) found retrieval practice beat elaborative studying (concept mapping) for learning science texts \u2014 even though students predicted the opposite.\n\nSources: Make It Stick (Brown et al.); Karpicke & Blunt 2011 (*Science*).\n\nSee also: [[desirable-difficulties]], [[generation-effect]], [[study-technique-utility-rankings]]\n"}, {"name": "spaced-repetition-systems.md", "type": "text", "content": "# Spaced-repetition systems\n\nSpaced-repetition systems implement the spacing principle in software. Anki uses the **SM-2** algorithm; review intervals expand on each successful recall. **Leitner boxes** are the analog (physical flashcard) version.\n\nSource: general note (marked \"random\" in the original \u2014 no specific citation given).\n\nSee also: [[spacing-beats-massed-practice]]\n"}, {"name": "spacing-beats-massed-practice.md", "type": "text", "content": "# Spacing beats massed practice\n\nSpacing practice out over time works better than massing it, even though spacing *feels* worse. Massed practice (\"cramming\") produces fast gains that evaporate.\n\nEvidence: Cepeda et al. (meta-analysis) \u2014 the optimal spacing gap scales with the retention interval. \"Cram for tomorrow, space for forever.\"\n\nSources: Make It Stick (Brown et al.); Cepeda et al. (meta-analysis).\n\nSee also: [[desirable-difficulties]], [[storage-strength-vs-retrieval-strength]], [[spaced-repetition-systems]], [[study-technique-utility-rankings]]\n"}, {"name": "storage-strength-vs-retrieval-strength.md", "type": "text", "content": "# Storage strength vs. retrieval strength\n\nBjork distinguishes **storage strength** from **retrieval strength**. Forgetting is the decay of *retrieval* strength; *storage* strength persists. That is why relearning something is faster than learning it the first time.\n\nSource: Bjork.\n\n\u2691 unclear: the original note asks \"(diff paper?)\" \u2014 the exact Bjork paper is uncertain and may differ from the source of [[desirable-difficulties]].\n\nSee also: [[spacing-beats-massed-practice]], [[desirable-difficulties]]\n"}, {"name": "study-technique-utility-rankings.md", "type": "text", "content": "# Study-technique utility rankings (Dunlosky 2013)\n\nThe Dunlosky et al. (2013) review rated common study techniques by utility:\n\n- **High utility:** practice testing, distributed practice.\n- **Low utility:** highlighting, re-reading.\n- **Middling:** summarization.\n\nSource: Dunlosky 2013 review.\n\nSee also: [[retrieval-practice-beats-rereading]] (practice testing), [[spacing-beats-massed-practice]] (distributed practice)\n"}, {"name": "writing-is-thinking.md", "type": "text", "content": "# Writing is thinking\n\nWriting *is* thinking \u2014 not the record of thinking that has already happened.\n\nSource: Ahrens, *How to Take Smart Notes*.\n\nSee also: [[elaboration-makes-learning-stick]], [[evergreen-notes-compound]]\n"}], "eval-1-reading-notes-atomic-without_skill-run-1": [{"name": "organized.md", "type": "text", "content": "# Learning Science \u2014 Reading Notes\n\nOrganized by **concept, not by source**, so that as you read more, a new source on\nthe same idea lands on the note that already exists and they compound (Matuschak's\nevergreen-notes idea, [below](#evergreen-notes--concept-oriented-not-source-oriented)).\nStudies are folded in as **evidence under the concept they support** rather than kept\nas separate per-book notes.\n\n**How to add to this as you read more:**\n- Find the concept the new material speaks to and add it *there* (in your own words \u2014\n  see [Smart notes](#smart-notes--writing-is-thinking)). Sources then stack on one note.\n- If it's a genuinely new concept, start a new note under the right section and link it.\n- Open questions are kept as questions, not resolved.\n\n---\n\n## Map\n\n**The principle behind it all**\n- [Desirable difficulties](#desirable-difficulties)\n\n**Techniques that exploit desirable difficulty**\n- [Retrieval practice (the testing effect)](#retrieval-practice-the-testing-effect)\n- [Spacing / distributed practice](#spacing--distributed-practice)\n- [Interleaving](#interleaving)\n- [The generation effect](#the-generation-effect)\n\n**A different lever: encoding**\n- [Elaboration](#elaboration)\n\n**The model that explains why the gains last**\n- [Storage strength vs. retrieval strength](#storage-strength-vs-retrieval-strength)\n\n**The evidence at a glance**\n- [Dunlosky 2013 \u2014 what works, what doesn't](#dunlosky-2013--what-works-what-doesnt)\n\n**Putting it into practice**\n- [Spaced-repetition systems (SM-2, Anki, Leitner)](#spaced-repetition-systems-sm-2-anki-leitner)\n- [Smart notes / writing is thinking](#smart-notes--writing-is-thinking)\n- [Evergreen notes / concept-oriented, not source-oriented](#evergreen-notes--concept-oriented-not-source-oriented)\n\n---\n\n## The principle behind it all\n\n### Desirable difficulties\nBjork's umbrella idea: **harder encoding = stronger retention.** Making learning feel\nharder in the moment tends to make it stick better later. This is the parent principle\nunder which several of the techniques below sit \u2014 retrieval practice, spacing, and\ninterleaving all *feel* worse while you do them but produce more durable learning.\n\n- **Source:** Bjork, via *Make It Stick* (Brown et al.)\n- **Instances:** [Retrieval practice](#retrieval-practice-the-testing-effect),\n  [Spacing](#spacing--distributed-practice), [Interleaving](#interleaving),\n  [The generation effect](#the-generation-effect)\n- **Why it lasts:** [Storage strength vs. retrieval strength](#storage-strength-vs-retrieval-strength)\n\n---\n\n## Techniques that exploit desirable difficulty\n\n### Retrieval practice (the testing effect)\nTesting yourself beats rereading. The act of *recalling* strengthens memory more than\nre-exposure does. (A [desirable difficulty](#desirable-difficulties).)\n\n- **Source:** *Make It Stick* (Brown et al.)\n- **Evidence:** Karpicke & Blunt 2011 (*Science*) \u2014 retrieval practice beat elaborative\n  studying (concept mapping) for learning science texts, **even when students predicted\n  the opposite.**\n- **Related:** rated *high utility* by [Dunlosky 2013](#dunlosky-2013--what-works-what-doesnt);\n  connected to [the generation effect](#the-generation-effect); operationalized by\n  [spaced-repetition systems](#spaced-repetition-systems-sm-2-anki-leitner).\n\n### Spacing / distributed practice\nSpacing out practice **feels worse but works better.** Massed practice (cramming) gives\nfast gains that evaporate. (A [desirable difficulty](#desirable-difficulties).)\n\n- **Source:** *Make It Stick* (Brown et al.)\n- **Evidence:** Cepeda et al. meta-analysis \u2014 the optimal spacing gap scales with the\n  retention interval: **\"cram for tomorrow, space for forever.\"**\n- **Related:** rated *high utility* by [Dunlosky 2013](#dunlosky-2013--what-works-what-doesnt);\n  operationalized by [spaced-repetition systems](#spaced-repetition-systems-sm-2-anki-leitner).\n\n### Interleaving\nMixing different problem types beats blocking (practicing one type at a time) \u2014 **even\nthough blocked practice feels easier.** (A [desirable difficulty](#desirable-difficulties).)\n\n- **Source:** *Make It Stick* (Brown et al.)\n\n### The generation effect\nAttempting an answer *before* being shown it helps \u2014 **even when you fail** at the\nattempt. (A [desirable difficulty](#desirable-difficulties).)\n\n- **Source:** *Make It Stick* (Brown et al.)\n- **Open question:** connects to the Karpicke finding on\n  [retrieval practice](#retrieval-practice-the-testing-effect)?\n\n---\n\n## A different lever: encoding\n\n### Elaboration\nElaboration = **connecting new information to what you already know.** That connecting\nis what makes it stick. (This is an *encoding* mechanism \u2014 building links to prior\nknowledge \u2014 rather than an instance of [desirable difficulty](#desirable-difficulties).)\n\n- **Source:** Ahrens, *How to Take Smart Notes* (*Make It Stick* also touches on it)\n- **Related:** Karpicke & Blunt's study compared retrieval practice *against*\n  elaborative studying (concept mapping) \u2014 see\n  [Retrieval practice](#retrieval-practice-the-testing-effect).\n\n---\n\n## The model that explains why the gains last\n\n### Storage strength vs. retrieval strength\nBjork (a different paper?) distinguishes **\"storage strength\"** from **\"retrieval\nstrength.\"** Forgetting is decay of *retrieval* strength; *storage* persists. That's why\nrelearning something is faster than learning it the first time. This is the model that\nexplains why the [desirable-difficulty](#desirable-difficulties) techniques above produce\ndurable learning.\n\n- **Source:** Bjork (different paper from the desirable-difficulties one? \u2014 unverified)\n\n---\n\n## The evidence at a glance\n\n### Dunlosky 2013 \u2014 what works, what doesn't\nA review that rated study techniques by utility:\n- **High utility:** practice testing ([retrieval practice](#retrieval-practice-the-testing-effect))\n  + distributed practice ([spacing](#spacing--distributed-practice)).\n- **Low utility:** highlighting and rereading.\n- **Middling:** summarization.\n\n- **Source:** Dunlosky 2013 review\n\n---\n\n## Putting it into practice\n\n### Spaced-repetition systems (SM-2, Anki, Leitner)\nTools that operationalize [retrieval practice](#retrieval-practice-the-testing-effect)\nand [spacing](#spacing--distributed-practice):\n- Anki uses the **SM-2** algorithm \u2014 **intervals expand on success.**\n- **Leitner boxes** = the analog version of the same idea.\n\n- **Source:** (personal note / \"random\")\n\n### Smart notes / writing is thinking\n- **Writing IS thinking**, not the record of it.\n- Notes should be **in your own words** \u2014 copying quotes bypasses understanding.\n- (See also [Elaboration](#elaboration), which is the mechanism this relies on.)\n\n- **Source:** Ahrens, *How to Take Smart Notes*\n\n### Evergreen notes / concept-oriented, not source-oriented\nNotes should be **concept-oriented, not source-oriented.** A second source on the same\nconcept lands on the existing note and they **compound.** Give notes titles like APIs\n(stable, reusable handles). This is the organizing principle this whole document follows.\n\n- **Source:** Matuschak\n\n---\n\n## Sources\n- *Make It Stick* \u2014 Brown et al. \u2192 retrieval practice, spacing, interleaving, desirable\n  difficulties (Bjork), the generation effect\n- Ahrens, *How to Take Smart Notes* \u2192 writing is thinking, elaboration, own-words notes\n- Karpicke & Blunt 2011 (*Science*) \u2192 retrieval practice > elaborative study for science texts\n- Cepeda et al. \u2192 spacing meta-analysis; gap scales with retention interval\n- Bjork \u2192 desirable difficulties; storage vs. retrieval strength (possibly a separate paper)\n- Dunlosky 2013 \u2192 utility ratings of study techniques\n- Matuschak \u2192 evergreen notes\n- Tools: Anki (SM-2), Leitner boxes\n"}], "eval-2-brainstorm-single-doc-with_skill-run-1": [{"name": "organized.md", "type": "text", "content": "**Diagnosis:** Brainstorm \u2014 ~19 ideas circling one theme (a trail-conditions app), with a couple of embedded decisions and open questions. Shape: single restructured doc, since the goal is one coherent write-up to show a friend. Assumed audience is a non-technical friend, so ideas are clustered by theme with the strongest (the freshness differentiator) near the top. Nothing added beyond the source notes.\n\n---\n\n# Trail Conditions App \u2014 \"Waze for Trails\"\n\nHikers never know current trail conditions \u2014 AllTrails reviews are weeks old. The idea is a crowdsourced app for recent-condition reports from people actually on the trail, with a freshness model as the differentiator: reports auto-expire at different rates by type, so stale information decays instead of lingering as noise. The MVP is deliberately small \u2014 iOS only, three report types, one metro area (Seattle), no accounts \u2014 with possible revenue from a premium tier and from selling condition data to parks departments.\n\n## The problem and the core idea\n\n- Hikers never know current trail conditions; AllTrails reviews are weeks old.\n- Core idea: **Waze for trails** \u2014 recent-condition reports from people actually on the trail.\n- Side benefit: crowding reports could smooth out trailhead parking chaos.\n\n## The differentiator: freshness done right\n\n- Reports **expire automatically, with decay rates by report type** \u2014 a snow report from 3 weeks ago is noise. Mud expires fast; a downed tree stays until someone clears it. This expire-by-type mechanic is the differentiator: nobody does freshness right. *(dedup: raised twice in the notes)*\n- Verification: multiple reports agreeing \u2192 a confidence score; a single report shows as \"unconfirmed\".\n\n## Product design\n\n- Report types: mud, snow/ice, downed trees, water crossings, crowding, trail closure.\n- **Offline first** \u2014 there's no signal on trails. Queue reports locally, sync when back in range.\n- Photo with every report; auto-timestamp + GPS pulled from EXIF.\n- Decision: **no offline maps** \u2014 that's scope creep. Link out to Gaia/CalTopo instead.\n\n## MVP\n\n- iOS only.\n- 3 report types: mud, snow, blockage.\n- One metro area, no accounts \u2014 device ID only.\n- Metro choice: Denver vs. Seattle \u2192 **Seattle**, for its year-round conditions variance.\n\n## Business model\n\n- Premium tier with a weather overlay?\n- Partnerships with parks departments \u2014 they might *want* this data for trail-maintenance prioritization; sell them a dashboard.\n\n## Risks\n\n- **Cold start / seed problem:** the app is useless empty. One idea: scrape recent AllTrails/Reddit mentions as seed data \u2014 but that's a legal gray area.\n- **Liability:** someone trusts a \"water crossing passable\" report and drowns. Mitigation per the notes: TOS + \"conditions change\" disclaimers everywhere; never say \"safe\".\n\n## Naming\n\n- Candidates: TrailPulse, FreshTracks, TrailCheck. FreshTracks is probably taken by a ski thing.\n\n## Open questions\n\n- Gamify with points for reports? Feels wrong for the outdoors crowd \u2014 undecided.\n- Revenue model overall is still an open question (premium tier and parks partnerships are candidates, not decisions).\n- Is scraping AllTrails/Reddit for seed data legally viable?\n- Final name?\n\n---\n\n**Counts:** 19 items in \u2192 18 in output across 8 sections (1 duplicate merged: expire-by-type raised twice; 1 item folded: \"Seattle better\" resolved into the MVP metro choice). Flags: 0 unclear, 0 conflicts. Parked: 0 \u2014 every input item is accounted for.\n"}], "eval-2-brainstorm-single-doc-without_skill-run-1": [{"name": "organized.md", "type": "text", "content": "# Trail Conditions App \u2014 Concept Doc\n\n## The one-liner\n**Waze for trails.** Recent, crowdsourced condition reports from people who are actually out on the trail right now.\n\n## The problem\nHikers never really know the *current* state of a trail before they head out. The best existing option \u2014 AllTrails reviews \u2014 runs weeks behind. A comment from three weeks ago tells you nothing about whether the creek is running high today or whether that section is still buried in snow.\n\n## The core idea\nA lightweight app where hikers file quick, real-time condition reports as they go, and other hikers see fresh, trustworthy info before they set out. The value is *freshness* \u2014 knowing what a trail is like today, not last month.\n\n### Report types\n- Mud\n- Snow / ice\n- Downed trees\n- Water crossings\n- Crowding\n- Trail closure\n\n## What makes it different: freshness done right\nThe standout idea is **reports that expire by type.** A snow report from three weeks ago is just noise, but a downed tree stays relevant until someone clears it. So reports auto-decay on a schedule that fits the condition:\n- **Mud** expires fast.\n- **Downed trees** persist until cleared.\n- (Snow, water crossings, etc. each get their own sensible lifespan.)\n\nNobody handles freshness well today. This expire-by-type mechanic is probably the real differentiator.\n\n## Key features\n\n**Offline-first (non-negotiable).**\nThere's usually no signal on the trail. The app has to queue reports locally and sync them automatically once the phone is back in range.\n\n**Photo with every report.**\nEach report includes a photo, with the timestamp and GPS pulled automatically from the EXIF data \u2014 so reports are anchored to a real time and place without extra effort.\n\n**Confidence scoring / verification.**\nMultiple reports that agree raise a confidence score. A single report is flagged as \"unconfirmed.\" This keeps one-off or mistaken reports from misleading people.\n\n## Open questions and things to decide\n\n**Gamification?**\nPoints for filing reports could drive participation \u2014 but it feels a bit wrong for the outdoors crowd. Flagged as an open question, not a commitment.\n\n**The cold-start problem.**\nAn empty app is useless; there's no reason to open it until there's data in it. One idea: seed it by scraping recent AllTrails / Reddit trail mentions. That's a legal gray area, so it needs more thought before relying on it.\n\n**Scope creep to avoid: offline maps.**\nTempting, but out of scope. Better to link out to Gaia or CalTopo rather than build mapping ourselves.\n\n## Business / revenue ideas\n- **Premium tier** with a weather overlay.\n- **Parks department partnerships.** They may actively *want* this data for trail-maintenance prioritization \u2014 sell them a dashboard.\n- **Crowding data** as a side benefit: crowding reports could help smooth out trailhead parking chaos.\n\n## Liability and safety\nReal risk: someone trusts a \"water crossing passable\" report, attempts it, and drowns. Mitigation:\n- Strong terms of service.\n- \"Conditions change\" disclaimers throughout.\n- **Never** use the word \"safe\" \u2014 report conditions, don't certify safety.\n\n## Naming\nCandidates: **TrailPulse**, **FreshTracks**, **TrailCheck**.\n(FreshTracks is probably already taken by a ski-related product.)\n\n## MVP scope\nKeep the first version deliberately small:\n- **iOS only**\n- **3 report types:** mud, snow, blockage\n- **One metro area** to start\n- **No accounts** \u2014 device ID only\n\n**Launch city: Seattle.** Chosen over Denver because it has more year-round variance in conditions, which gives the freshness angle more to work with.\n"}]}, "benchmark": {"metadata": {"skill_name": "note-organizer", "skill_path": "<path/to/skill>", "executor_model": "<model-name>", "analyzer_model": "<model-name>", "timestamp": "2026-07-05T03:25:51Z", "evals_run": [0], "runs_per_configuration": 3}, "runs": [{"eval_id": 0, "configuration": "with_skill", "run_number": 1, "result": {"pass_rate": 1.0, "passed": 8, "failed": 0, "total": 8, "time_seconds": 0.0, "tokens": 0, "tool_calls": 0, "errors": 0}, "expectations": [{"text": "Leads with a short diagnosis stating what the notes are and which organizing shape was chosen", "passed": true, "evidence": "Output opens with '**Diagnosis:** Operational dump \u2014 standup and meeting captures full of actions, decisions, blockers, and one running incident... actionability sort.' Names both the note type and the chosen shape."}, {"text": "All TODO/action items appear in an actions section, with the duplicate incident-writeup TODO merged to one entry", "passed": true, "evidence": "Actions section contains all four action items: incident writeup (single entry with '(dedup: captured Mon and again Weds)' merging the two TODOs from input lines 4 and 13), EU cluster ticket (Carlos), ping marketing (Sam), update pricing page draft (Sam). No input TODO is missing from Actions."}, {"text": "A Problems section exists and contains the EU latency regression (analyzer change never rolled back on EU cluster, p99 still degraded), cross-referenced to its action", "passed": true, "evidence": "Problems section, first bullet: 'EU p99 is still degraded. The analyzer change shipped to the EU cluster too and was never rolled back there (Carlos, Thurs)... addressed by the EU-ticket action above.' Explicit cross-reference to the Actions entry, plus a flagged Mon-vs-Thurs rollback conflict."}, {"text": "A Wins section exists and contains the primary-cluster rollback fix (p99 back to 120ms) and/or Dana's confirmed 60-day answer", "passed": true, "evidence": "Wins section contains both: 'Rollback fixed p99 on the main cluster: 800ms \u2192 back to 120ms (Kavya, Mon)' and 'Dana confirmed 60 days, per the DPA addendum (Thurs)'. Both match input lines 10 and 19."}, {"text": "Decisions section contains: usage-based tier chosen (flat killed), hold pricing page until marketing signs off", "passed": true, "evidence": "Decisions section: 'Usage-based tier for the API; flat tier killed (Mon). Confirmed Weds: it goes in the September release.' and 'Hold the pricing page until marketing signs off the tier names (Thurs).' Both decisions present and correctly dated."}, {"text": "No invented owners, dates, or facts (every owner/date in output traces to the input)", "passed": true, "evidence": "Spot-checked every owner and date: Kavya/rollback (input 'kavya says rollback fixed p99'), Sam/pricing-page ('sam has it') and ping-marketing ('sam owns'), Carlos/EU ticket (Thurs), Dana/60-day DPA addendum, JT/3-week metering estimate, tier names Builder/Scale/Enterprise, 800ms/120ms, 30-day/60-day, 3-vs-5-week timing \u2014 all trace to the input. The un-owned incident-writeup TODO is explicitly flagged as 'no owner stated' rather than assigned an invented owner."}, {"text": "The trust-page idea (incl. uptime addition) is preserved in an ideas section, and the release-slip question is preserved", "passed": true, "evidence": "Ideas section: 'Customer-facing trust page: expose the latency dashboard to customers; could also show uptime \u2014 status.io does this (merged from two notes, Mon + Weds).' Questions section preserves 'Does the Sept release date slip if usage metering isn't done?' with its in-notes answer (3 wks vs 5 wks)."}, {"text": "Ends with a counts line whose numbers reconcile", "passed": true, "evidence": "Counts line: '22 items in \u2192 16 appear above, 3 merged as duplicates, 3 folded into other items... 22 = 16 + 3 + 3'. Arithmetic verified: 16+3+3=22. Independent recount of the input yields 22 items when the Monday standup line is split into its two facts (spike + rollback); the 3 named merges (dup incident TODO, uptime idea, EU degraded+ticket line) and 3 named folds (Sept confirmation, Dana confirmation, metering estimate) each trace to real input items, leaving exactly 16 displayed."}], "notes": []}], "run_summary": {"with_skill": {"pass_rate": {"mean": 1.0, "stddev": 0.0, "min": 1.0, "max": 1.0}, "time_seconds": {"mean": 0.0, "stddev": 0.0, "min": 0.0, "max": 0.0}, "tokens": {"mean": 0.0, "stddev": 0.0, "min": 0, "max": 0}}, "delta": {"pass_rate": "+1.00", "time_seconds": "+0.0", "tokens": "+0"}}, "notes": []}};
+
+    // ---- State ----
+    let feedbackMap = {};  // run_id -> feedback text
+    let currentIndex = 0;
+    let visitedRuns = new Set();
+
+    // ---- Init ----
+    async function init() {
+      // Load saved feedback from server — but only if this isn't a fresh
+      // iteration (indicated by previous_feedback being present). When
+      // previous feedback exists, the feedback.json on disk is stale from
+      // the prior iteration and should not pre-fill the textareas.
+      const hasPrevious = Object.keys(EMBEDDED_DATA.previous_feedback || {}).length > 0
+        || Object.keys(EMBEDDED_DATA.previous_outputs || {}).length > 0;
+      if (!hasPrevious) {
+        try {
+          const resp = await fetch("/api/feedback");
+          const data = await resp.json();
+          if (data.reviews) {
+            for (const r of data.reviews) feedbackMap[r.run_id] = r.feedback;
+          }
+        } catch { /* first run, no feedback yet */ }
+      }
+
+      document.getElementById("skill-name").textContent = EMBEDDED_DATA.skill_name;
+      showRun(0);
+
+      // Wire up feedback auto-save
+      const textarea = document.getElementById("feedback");
+      let saveTimeout = null;
+      textarea.addEventListener("input", () => {
+        clearTimeout(saveTimeout);
+        document.getElementById("feedback-status").textContent = "";
+        saveTimeout = setTimeout(() => saveCurrentFeedback(), 800);
+      });
+    }
+
+    // ---- Navigation ----
+    function navigate(delta) {
+      const newIndex = currentIndex + delta;
+      if (newIndex >= 0 && newIndex < EMBEDDED_DATA.runs.length) {
+        saveCurrentFeedback();
+        showRun(newIndex);
+      }
+    }
+
+    function updateNavButtons() {
+      document.getElementById("prev-btn").disabled = currentIndex === 0;
+      document.getElementById("next-btn").disabled =
+        currentIndex === EMBEDDED_DATA.runs.length - 1;
+    }
+
+    // ---- Show a run ----
+    function showRun(index) {
+      currentIndex = index;
+      const run = EMBEDDED_DATA.runs[index];
+
+      // Progress
+      document.getElementById("progress").textContent =
+        `${index + 1} of ${EMBEDDED_DATA.runs.length}`;
+
+      // Prompt
+      document.getElementById("prompt-text").textContent = run.prompt;
+
+      // Config badge
+      const badge = document.getElementById("config-badge");
+      const configMatch = run.id.match(/(with_skill|without_skill|new_skill|old_skill)/);
+      if (configMatch) {
+        const config = configMatch[1];
+        const isBaseline = config === "without_skill" || config === "old_skill";
+        badge.textContent = config.replace(/_/g, " ");
+        badge.className = "config-badge " + (isBaseline ? "config-baseline" : "config-primary");
+        badge.style.display = "inline-block";
+      } else {
+        badge.style.display = "none";
+      }
+
+      // Outputs
+      renderOutputs(run);
+
+      // Previous outputs
+      renderPrevOutputs(run);
+
+      // Grades
+      renderGrades(run);
+
+      // Previous feedback
+      const prevFb = (EMBEDDED_DATA.previous_feedback || {})[run.id];
+      const prevEl = document.getElementById("prev-feedback");
+      if (prevFb) {
+        document.getElementById("prev-feedback-text").textContent = prevFb;
+        prevEl.style.display = "block";
+      } else {
+        prevEl.style.display = "none";
+      }
+
+      // Feedback
+      document.getElementById("feedback").value = feedbackMap[run.id] || "";
+      document.getElementById("feedback-status").textContent = "";
+
+      updateNavButtons();
+
+      // Track visited runs and promote done button when all visited
+      visitedRuns.add(index);
+      const doneBtn = document.getElementById("done-btn");
+      if (visitedRuns.size >= EMBEDDED_DATA.runs.length) {
+        doneBtn.classList.add("ready");
+      }
+
+      // Scroll main content to top
+      document.querySelector(".main").scrollTop = 0;
+    }
+
+    // ---- Render outputs ----
+    function renderOutputs(run) {
+      const container = document.getElementById("outputs-body");
+      container.innerHTML = "";
+
+      const outputs = run.outputs || [];
+      if (outputs.length === 0) {
+        container.innerHTML = '<div class="empty-state">No output files</div>';
+        return;
+      }
+
+      for (const file of outputs) {
+        const fileDiv = document.createElement("div");
+        fileDiv.className = "output-file";
+
+        // Always show file header with download link
+        const header = document.createElement("div");
+        header.className = "output-file-header";
+        const nameSpan = document.createElement("span");
+        nameSpan.textContent = file.name;
+        header.appendChild(nameSpan);
+        const dlBtn = document.createElement("a");
+        dlBtn.className = "dl-btn";
+        dlBtn.textContent = "Download";
+        dlBtn.download = file.name;
+        dlBtn.href = getDownloadUri(file);
+        header.appendChild(dlBtn);
+        fileDiv.appendChild(header);
+
+        const content = document.createElement("div");
+        content.className = "output-file-content";
+
+        if (file.type === "text") {
+          const pre = document.createElement("pre");
+          pre.textContent = file.content;
+          content.appendChild(pre);
+        } else if (file.type === "image") {
+          const img = document.createElement("img");
+          img.src = file.data_uri;
+          img.alt = file.name;
+          content.appendChild(img);
+        } else if (file.type === "pdf") {
+          const iframe = document.createElement("iframe");
+          iframe.src = file.data_uri;
+          content.appendChild(iframe);
+        } else if (file.type === "xlsx") {
+          renderXlsx(content, file.data_b64);
+        } else if (file.type === "binary") {
+          const a = document.createElement("a");
+          a.className = "download-link";
+          a.href = file.data_uri;
+          a.download = file.name;
+          a.textContent = "Download " + file.name;
+          content.appendChild(a);
+        } else if (file.type === "error") {
+          const pre = document.createElement("pre");
+          pre.textContent = file.content;
+          pre.style.color = "var(--red)";
+          content.appendChild(pre);
+        }
+
+        fileDiv.appendChild(content);
+        container.appendChild(fileDiv);
+      }
+    }
+
+    // ---- XLSX rendering via SheetJS ----
+    function renderXlsx(container, b64Data) {
+      try {
+        const raw = Uint8Array.from(atob(b64Data), c => c.charCodeAt(0));
+        const wb = XLSX.read(raw, { type: "array" });
+
+        for (let i = 0; i < wb.SheetNames.length; i++) {
+          const sheetName = wb.SheetNames[i];
+          const ws = wb.Sheets[sheetName];
+
+          if (wb.SheetNames.length > 1) {
+            const sheetLabel = document.createElement("div");
+            sheetLabel.style.cssText =
+              "font-weight:600; font-size:0.8rem; color:#b0aea5; margin-top:0.5rem; margin-bottom:0.25rem;";
+            sheetLabel.textContent = "Sheet: " + sheetName;
+            container.appendChild(sheetLabel);
+          }
+
+          const htmlStr = XLSX.utils.sheet_to_html(ws, { editable: false });
+          const wrapper = document.createElement("div");
+          wrapper.innerHTML = htmlStr;
+          container.appendChild(wrapper);
+        }
+      } catch (err) {
+        container.textContent = "Error rendering spreadsheet: " + err.message;
+      }
+    }
+
+    // ---- Grades ----
+    function renderGrades(run) {
+      const section = document.getElementById("grades-section");
+      const content = document.getElementById("grades-content");
+
+      if (!run.grading) {
+        section.style.display = "none";
+        return;
+      }
+
+      const grading = run.grading;
+      section.style.display = "block";
+      // Reset to collapsed
+      content.classList.remove("open");
+      document.getElementById("grades-arrow").classList.remove("open");
+
+      const summary = grading.summary || {};
+      const expectations = grading.expectations || [];
+
+      let html = '<div style="padding: 1rem;">';
+
+      // Summary line
+      const passRate = summary.pass_rate != null
+        ? Math.round(summary.pass_rate * 100) + "%"
+        : "?";
+      const badgeClass = summary.pass_rate >= 0.8 ? "grade-pass" : summary.pass_rate >= 0.5 ? "" : "grade-fail";
+      html += '<div class="grades-summary">';
+      html += '<span class="grade-badge ' + badgeClass + '">' + passRate + '</span>';
+      html += '<span>' + (summary.passed || 0) + ' passed, ' + (summary.failed || 0) + ' failed of ' + (summary.total || 0) + '</span>';
+      html += '</div>';
+
+      // Assertions list
+      html += '<ul class="assertion-list">';
+      for (const exp of expectations) {
+        const statusClass = exp.passed ? "pass" : "fail";
+        const statusIcon = exp.passed ? "\u2713" : "\u2717";
+        html += '<li class="assertion-item">';
+        html += '<span class="assertion-status ' + statusClass + '">' + statusIcon + '</span>';
+        html += '<span>' + escapeHtml(exp.text) + '</span>';
+        if (exp.evidence) {
+          html += '<div class="assertion-evidence">' + escapeHtml(exp.evidence) + '</div>';
+        }
+        html += '</li>';
+      }
+      html += '</ul>';
+
+      html += '</div>';
+      content.innerHTML = html;
+    }
+
+    function toggleGrades() {
+      const content = document.getElementById("grades-content");
+      const arrow = document.getElementById("grades-arrow");
+      content.classList.toggle("open");
+      arrow.classList.toggle("open");
+    }
+
+    // ---- Previous outputs (collapsible) ----
+    function renderPrevOutputs(run) {
+      const section = document.getElementById("prev-outputs-section");
+      const content = document.getElementById("prev-outputs-content");
+      const prevOutputs = (EMBEDDED_DATA.previous_outputs || {})[run.id];
+
+      if (!prevOutputs || prevOutputs.length === 0) {
+        section.style.display = "none";
+        return;
+      }
+
+      section.style.display = "block";
+      // Reset to collapsed
+      content.classList.remove("open");
+      document.getElementById("prev-outputs-arrow").classList.remove("open");
+
+      // Render the files into the content area
+      content.innerHTML = "";
+      const wrapper = document.createElement("div");
+      wrapper.style.padding = "1rem";
+
+      for (const file of prevOutputs) {
+        const fileDiv = document.createElement("div");
+        fileDiv.className = "output-file";
+
+        const header = document.createElement("div");
+        header.className = "output-file-header";
+        const nameSpan = document.createElement("span");
+        nameSpan.textContent = file.name;
+        header.appendChild(nameSpan);
+        const dlBtn = document.createElement("a");
+        dlBtn.className = "dl-btn";
+        dlBtn.textContent = "Download";
+        dlBtn.download = file.name;
+        dlBtn.href = getDownloadUri(file);
+        header.appendChild(dlBtn);
+        fileDiv.appendChild(header);
+
+        const fc = document.createElement("div");
+        fc.className = "output-file-content";
+
+        if (file.type === "text") {
+          const pre = document.createElement("pre");
+          pre.textContent = file.content;
+          fc.appendChild(pre);
+        } else if (file.type === "image") {
+          const img = document.createElement("img");
+          img.src = file.data_uri;
+          img.alt = file.name;
+          fc.appendChild(img);
+        } else if (file.type === "pdf") {
+          const iframe = document.createElement("iframe");
+          iframe.src = file.data_uri;
+          fc.appendChild(iframe);
+        } else if (file.type === "xlsx") {
+          renderXlsx(fc, file.data_b64);
+        } else if (file.type === "binary") {
+          const a = document.createElement("a");
+          a.className = "download-link";
+          a.href = file.data_uri;
+          a.download = file.name;
+          a.textContent = "Download " + file.name;
+          fc.appendChild(a);
+        }
+
+        fileDiv.appendChild(fc);
+        wrapper.appendChild(fileDiv);
+      }
+
+      content.appendChild(wrapper);
+    }
+
+    function togglePrevOutputs() {
+      const content = document.getElementById("prev-outputs-content");
+      const arrow = document.getElementById("prev-outputs-arrow");
+      content.classList.toggle("open");
+      arrow.classList.toggle("open");
+    }
+
+    // ---- Feedback (saved to server -> feedback.json) ----
+    function saveCurrentFeedback() {
+      const run = EMBEDDED_DATA.runs[currentIndex];
+      const text = document.getElementById("feedback").value;
+
+      if (text.trim() === "") {
+        delete feedbackMap[run.id];
+      } else {
+        feedbackMap[run.id] = text;
+      }
+
+      // Build reviews array from map
+      const reviews = [];
+      for (const [run_id, feedback] of Object.entries(feedbackMap)) {
+        if (feedback.trim()) {
+          reviews.push({ run_id, feedback, timestamp: new Date().toISOString() });
+        }
+      }
+
+      fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ reviews, status: "in_progress" }),
+      }).then(() => {
+        document.getElementById("feedback-status").textContent = "Saved";
+      }).catch(() => {
+        // Static mode or server unavailable — no-op on auto-save,
+        // feedback will be downloaded on final submit
+        document.getElementById("feedback-status").textContent = "Will download on submit";
+      });
+    }
+
+    // ---- Done ----
+    function showDoneDialog() {
+      // Save current textarea to feedbackMap (but don't POST yet)
+      const run = EMBEDDED_DATA.runs[currentIndex];
+      const text = document.getElementById("feedback").value;
+      if (text.trim() === "") {
+        delete feedbackMap[run.id];
+      } else {
+        feedbackMap[run.id] = text;
+      }
+
+      // POST once with status: complete — include ALL runs so the model
+      // can distinguish "no feedback" (looks good) from "not reviewed"
+      const reviews = [];
+      const ts = new Date().toISOString();
+      for (const r of EMBEDDED_DATA.runs) {
+        reviews.push({ run_id: r.id, feedback: feedbackMap[r.id] || "", timestamp: ts });
+      }
+      const payload = JSON.stringify({ reviews, status: "complete" }, null, 2);
+      fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+      }).then(() => {
+        document.getElementById("done-overlay").classList.add("visible");
+      }).catch(() => {
+        // Server not available (static mode) — download as file
+        const blob = new Blob([payload], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "feedback.json";
+        a.click();
+        URL.revokeObjectURL(url);
+        document.getElementById("done-overlay").classList.add("visible");
+      });
+    }
+
+    function closeDoneDialog() {
+      // Reset status back to in_progress
+      saveCurrentFeedback();
+      document.getElementById("done-overlay").classList.remove("visible");
+    }
+
+    // ---- Toast ----
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("visible");
+      setTimeout(() => toast.classList.remove("visible"), 2000);
+    }
+
+    // ---- Keyboard nav ----
+    document.addEventListener("keydown", (e) => {
+      // Don't capture when typing in textarea
+      if (e.target.tagName === "TEXTAREA") return;
+
+      if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        e.preventDefault();
+        navigate(-1);
+      } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        e.preventDefault();
+        navigate(1);
+      }
+    });
+
+    // ---- Util ----
+    function getDownloadUri(file) {
+      if (file.data_uri) return file.data_uri;
+      if (file.data_b64) return "data:application/octet-stream;base64," + file.data_b64;
+      if (file.type === "text") return "data:text/plain;charset=utf-8," + encodeURIComponent(file.content);
+      return "#";
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // ---- View switching ----
+    function switchView(view) {
+      document.querySelectorAll(".view-tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".view-panel").forEach(p => p.classList.remove("active"));
+      document.querySelector(`[onclick="switchView('${view}')"]`).classList.add("active");
+      document.getElementById("panel-" + view).classList.add("active");
+    }
+
+    // ---- Benchmark rendering ----
+    function renderBenchmark() {
+      const data = EMBEDDED_DATA.benchmark;
+      if (!data) return;
+
+      // Show the tabs
+      document.getElementById("view-tabs").style.display = "flex";
+
+      const container = document.getElementById("benchmark-content");
+      const summary = data.run_summary || {};
+      const metadata = data.metadata || {};
+      const notes = data.notes || [];
+
+      let html = "";
+
+      // Header
+      html += "<h2 style='font-family: Poppins, sans-serif; margin-bottom: 0.5rem;'>Benchmark Results</h2>";
+      html += "<p style='color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1.25rem;'>";
+      if (metadata.skill_name) html += "<strong>" + escapeHtml(metadata.skill_name) + "</strong> &mdash; ";
+      if (metadata.timestamp) html += metadata.timestamp + " &mdash; ";
+      if (metadata.evals_run) html += "Evals: " + metadata.evals_run.join(", ") + " &mdash; ";
+      html += (metadata.runs_per_configuration || "?") + " runs per configuration";
+      html += "</p>";
+
+      // Summary table
+      html += '<table class="benchmark-table">';
+
+      function fmtStat(stat, pct) {
+        if (!stat) return "—";
+        const suffix = pct ? "%" : "";
+        const m = pct ? (stat.mean * 100).toFixed(0) : stat.mean.toFixed(1);
+        const s = pct ? (stat.stddev * 100).toFixed(0) : stat.stddev.toFixed(1);
+        return m + suffix + " ± " + s + suffix;
+      }
+
+      function deltaClass(val) {
+        if (!val) return "";
+        const n = parseFloat(val);
+        if (n > 0) return "benchmark-delta-positive";
+        if (n < 0) return "benchmark-delta-negative";
+        return "";
+      }
+
+      // Discover config names dynamically (everything except "delta")
+      const configs = Object.keys(summary).filter(k => k !== "delta");
+      const configA = configs[0] || "config_a";
+      const configB = configs[1] || "config_b";
+      const labelA = configA.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+      const labelB = configB.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+      const a = summary[configA] || {};
+      const b = summary[configB] || {};
+      const delta = summary.delta || {};
+
+      html += "<thead><tr><th>Metric</th><th>" + escapeHtml(labelA) + "</th><th>" + escapeHtml(labelB) + "</th><th>Delta</th></tr></thead>";
+      html += "<tbody>";
+
+      html += "<tr><td><strong>Pass Rate</strong></td>";
+      html += "<td>" + fmtStat(a.pass_rate, true) + "</td>";
+      html += "<td>" + fmtStat(b.pass_rate, true) + "</td>";
+      html += '<td class="' + deltaClass(delta.pass_rate) + '">' + (delta.pass_rate || "—") + "</td></tr>";
+
+      // Time (only show row if data exists)
+      if (a.time_seconds || b.time_seconds) {
+        html += "<tr><td><strong>Time (s)</strong></td>";
+        html += "<td>" + fmtStat(a.time_seconds, false) + "</td>";
+        html += "<td>" + fmtStat(b.time_seconds, false) + "</td>";
+        html += '<td class="' + deltaClass(delta.time_seconds) + '">' + (delta.time_seconds ? delta.time_seconds + "s" : "—") + "</td></tr>";
+      }
+
+      // Tokens (only show row if data exists)
+      if (a.tokens || b.tokens) {
+        html += "<tr><td><strong>Tokens</strong></td>";
+        html += "<td>" + fmtStat(a.tokens, false) + "</td>";
+        html += "<td>" + fmtStat(b.tokens, false) + "</td>";
+        html += '<td class="' + deltaClass(delta.tokens) + '">' + (delta.tokens || "—") + "</td></tr>";
+      }
+
+      html += "</tbody></table>";
+
+      // Per-eval breakdown (if runs data available)
+      const runs = data.runs || [];
+      if (runs.length > 0) {
+        const evalIds = [...new Set(runs.map(r => r.eval_id))].sort((a, b) => a - b);
+
+        html += "<h3 style='font-family: Poppins, sans-serif; margin-bottom: 0.75rem;'>Per-Eval Breakdown</h3>";
+
+        const hasTime = runs.some(r => r.result && r.result.time_seconds != null);
+        const hasErrors = runs.some(r => r.result && r.result.errors > 0);
+
+        for (const evalId of evalIds) {
+          const evalRuns = runs.filter(r => r.eval_id === evalId);
+          const evalName = evalRuns[0] && evalRuns[0].eval_name ? evalRuns[0].eval_name : "Eval " + evalId;
+
+          html += "<h4 style='font-family: Poppins, sans-serif; margin: 1rem 0 0.5rem; color: var(--text);'>" + escapeHtml(evalName) + "</h4>";
+          html += '<table class="benchmark-table">';
+          html += "<thead><tr><th>Config</th><th>Run</th><th>Pass Rate</th>";
+          if (hasTime) html += "<th>Time (s)</th>";
+          if (hasErrors) html += "<th>Crashes During Execution</th>";
+          html += "</tr></thead>";
+          html += "<tbody>";
+
+          // Group by config and render with average rows
+          const configGroups = [...new Set(evalRuns.map(r => r.configuration))];
+          for (let ci = 0; ci < configGroups.length; ci++) {
+            const config = configGroups[ci];
+            const configRuns = evalRuns.filter(r => r.configuration === config);
+            if (configRuns.length === 0) continue;
+
+            const rowClass = ci === 0 ? "benchmark-row-with" : "benchmark-row-without";
+            const configLabel = config.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+
+            for (const run of configRuns) {
+              const r = run.result || {};
+              const prClass = r.pass_rate >= 0.8 ? "benchmark-delta-positive" : r.pass_rate < 0.5 ? "benchmark-delta-negative" : "";
+              html += '<tr class="' + rowClass + '">';
+              html += "<td>" + configLabel + "</td>";
+              html += "<td>" + run.run_number + "</td>";
+              html += '<td class="' + prClass + '">' + ((r.pass_rate || 0) * 100).toFixed(0) + "% (" + (r.passed || 0) + "/" + (r.total || 0) + ")</td>";
+              if (hasTime) html += "<td>" + (r.time_seconds != null ? r.time_seconds.toFixed(1) : "—") + "</td>";
+              if (hasErrors) html += "<td>" + (r.errors || 0) + "</td>";
+              html += "</tr>";
+            }
+
+            // Average row
+            const rates = configRuns.map(r => (r.result || {}).pass_rate || 0);
+            const avgRate = rates.reduce((a, b) => a + b, 0) / rates.length;
+            const avgPrClass = avgRate >= 0.8 ? "benchmark-delta-positive" : avgRate < 0.5 ? "benchmark-delta-negative" : "";
+            html += '<tr class="benchmark-row-avg ' + rowClass + '">';
+            html += "<td>" + configLabel + "</td>";
+            html += "<td>Avg</td>";
+            html += '<td class="' + avgPrClass + '">' + (avgRate * 100).toFixed(0) + "%</td>";
+            if (hasTime) {
+              const times = configRuns.map(r => (r.result || {}).time_seconds).filter(t => t != null);
+              html += "<td>" + (times.length ? (times.reduce((a, b) => a + b, 0) / times.length).toFixed(1) : "—") + "</td>";
+            }
+            if (hasErrors) html += "<td></td>";
+            html += "</tr>";
+          }
+          html += "</tbody></table>";
+
+          // Per-assertion detail for this eval
+          const runsWithExpectations = {};
+          for (const config of configGroups) {
+            runsWithExpectations[config] = evalRuns.filter(r => r.configuration === config && r.expectations && r.expectations.length > 0);
+          }
+          const hasAnyExpectations = Object.values(runsWithExpectations).some(runs => runs.length > 0);
+          if (hasAnyExpectations) {
+            // Collect all unique assertion texts across all configs
+            const allAssertions = [];
+            const seen = new Set();
+            for (const config of configGroups) {
+              for (const run of runsWithExpectations[config]) {
+                for (const exp of (run.expectations || [])) {
+                  if (!seen.has(exp.text)) {
+                    seen.add(exp.text);
+                    allAssertions.push(exp.text);
+                  }
+                }
+              }
+            }
+
+            html += '<table class="benchmark-table" style="margin-top: 0.5rem;">';
+            html += "<thead><tr><th>Assertion</th>";
+            for (const config of configGroups) {
+              const label = config.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+              html += "<th>" + escapeHtml(label) + "</th>";
+            }
+            html += "</tr></thead><tbody>";
+
+            for (const assertionText of allAssertions) {
+              html += "<tr><td>" + escapeHtml(assertionText) + "</td>";
+
+              for (const config of configGroups) {
+                html += "<td>";
+                for (const run of runsWithExpectations[config]) {
+                  const exp = (run.expectations || []).find(e => e.text === assertionText);
+                  if (exp) {
+                    const cls = exp.passed ? "benchmark-delta-positive" : "benchmark-delta-negative";
+                    const icon = exp.passed ? "\u2713" : "\u2717";
+                    html += '<span class="' + cls + '" title="Run ' + run.run_number + ': ' + escapeHtml(exp.evidence || "") + '">' + icon + "</span> ";
+                  } else {
+                    html += "— ";
+                  }
+                }
+                html += "</td>";
+              }
+              html += "</tr>";
+            }
+            html += "</tbody></table>";
+          }
+        }
+      }
+
+      // Notes
+      if (notes.length > 0) {
+        html += '<div class="benchmark-notes">';
+        html += "<h3>Analysis Notes</h3>";
+        html += "<ul>";
+        for (const note of notes) {
+          html += "<li>" + escapeHtml(note) + "</li>";
+        }
+        html += "</ul></div>";
+      }
+
+      container.innerHTML = html;
+    }
+
+    // ---- Start ----
+    init();
+    renderBenchmark();
+  </script>
+</body>
+</html>

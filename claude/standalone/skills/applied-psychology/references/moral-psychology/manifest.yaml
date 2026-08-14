@@ -1,0 +1,44 @@
+name: moral-psychology
+title: Moral Psychology
+version: 1.0.0
+category: applied-human-psychology
+parentConcept: Applied Human Psychology
+description: >-
+  The evidence-based psychology of moral judgment — how people decide what is
+  right, wrong, and fair, why values conflicts happen, and why purely rational
+  arguments bounce off moral intuitions. Moral Foundations Theory (and the
+  Morality-as-Cooperation rival), the Social Intuitionist Model, dual-process
+  moral judgment (trolley/footbridge), the Theory of Dyadic Morality, moral
+  licensing and Bandura's moral disengagement, organizational justice and the
+  fair-process effect, and the is–ought / naturalistic-fallacy limit on ethical
+  nudging — applied to values-based stakeholder conflict, fairness perception in
+  pricing/escalations/negotiations, why rational arguments aren't landing, and
+  detecting when a team is rationalizing bad conduct. Each construct carries its
+  replication and effect-size nuance honestly.
+tags:
+  - moral-psychology
+  - applied-human-psychology
+  - moral-foundations-theory
+  - morality-as-cooperation
+  - social-intuitionist-model
+  - moral-intuition
+  - moral-dumbfounding
+  - dual-process-morality
+  - trolley-problem
+  - theory-of-dyadic-morality
+  - moral-typecasting
+  - moral-licensing
+  - moral-disengagement
+  - organizational-justice
+  - procedural-justice
+  - distributive-justice
+  - fair-process-effect
+  - fairness-perception
+  - equity-theory
+  - is-ought-problem
+  - naturalistic-fallacy
+  - ethics-of-nudging
+  - values-conflict
+  - applied-psychology
+references:
+  - references/moral-psychology-detail.md

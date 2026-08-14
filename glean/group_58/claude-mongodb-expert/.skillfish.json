@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "mongodb-expert",
+  "owner": "local",
+  "repo": "10gen/mdb-tam",
+  "path": "docs/mongodb-expert-context.md",
+  "branch": "docs/slack-dev-context",
+  "sha": "c97088f4b6f36ae84bbe20f434e8c518da5a0f14",
+  "source": "manual"
+}

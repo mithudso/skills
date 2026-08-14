@@ -1,0 +1,30 @@
+{
+  "family": "ai-agent",
+  "hubs": {
+    "ai-agent-engineering": {
+      "keepExisting": false,
+      "title": "AI & Agent Engineering (agents, MCP, LLMs, RAG, prompting)",
+      "spokes": [
+        "a2a-interop",
+        "agent-council",
+        "agent-ecosystem",
+        "agent-harness-construction",
+        "agent-workflow-builder_ai_toolkit",
+        "ai-datastores",
+        "ai-languages",
+        "anthropic-sdk",
+        "autonomous-loops",
+        "continuous-learning-v2",
+        "llm-context-engineering",
+        "llm-integration-reviewer",
+        "llm-models",
+        "mcp-builder",
+        "mcp-servers",
+        "prompt-engineering",
+        "rag-architecture"
+      ]
+    }
+  },
+  "skillsRoot": "__HOME__/.claude/skills",
+  "standalone": []
+}
