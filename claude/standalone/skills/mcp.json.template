@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "skills-relay": {
-      "command": "node",
-      "args": ["__HOME__/.claude/scripts/skills-relay.js"]
-    }
-  }
-}
