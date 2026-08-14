@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  TEMPLATE LaunchAgent for the scheduled BF-triage job (Mon-Fri).
+  Do NOT load this file directly — it contains __PLACEHOLDERS__ that are not
+  valid plist values. Run ./install-launchd.sh, which substitutes machine-
+  specific values, writes ~/Library/LaunchAgents/<label>.plist, and loads it.
+
+  launchd requires ABSOLUTE paths and does NOT expand ~ / $HOME / env vars in
+  ProgramArguments / Standard*Path / PATH — which is exactly why this is a
+  template filled in per-machine at install time rather than a committed plist.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>__LABEL__</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>__SCRIPT__</string>
+    </array>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>__PATH__</string>
+        <key>HOME</key>
+        <string>__HOME__</string>
+        <key>NOTIFY_OSASCRIPT</key>
+        <string>1</string>
+        <key>NOTIFY_SLACK_WEBHOOK</key>
+        <string>__SLACK_WEBHOOK__</string>
+        <key>BF_TRIAGE_GENERATE_PDF</key>
+        <string>1</string>
+        <key>BF_TRIAGE_ATTACH_PDF</key>
+        <string>1</string>
+    </dict>
+
+    <key>WorkingDirectory</key>
+    <string>__WORKDIR__</string>
+
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>__HOUR__</integer><key>Minute</key><integer>__MINUTE__</integer></dict>
+        <dict><key>Weekday</key><integer>2</integer><key>Hour</key><integer>__HOUR__</integer><key>Minute</key><integer>__MINUTE__</integer></dict>
+        <dict><key>Weekday</key><integer>3</integer><key>Hour</key><integer>__HOUR__</integer><key>Minute</key><integer>__MINUTE__</integer></dict>
+        <dict><key>Weekday</key><integer>4</integer><key>Hour</key><integer>__HOUR__</integer><key>Minute</key><integer>__MINUTE__</integer></dict>
+        <dict><key>Weekday</key><integer>5</integer><key>Hour</key><integer>__HOUR__</integer><key>Minute</key><integer>__MINUTE__</integer></dict>
+    </array>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>__LOGDIR__/launchd.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>__LOGDIR__/launchd.err.log</string>
+</dict>
+</plist>

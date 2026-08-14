@@ -1,0 +1,10 @@
+.DS_Store
+*.tmp
+*.log
+*.lock
+*.part_*
+*.zip
+.system_generated/
+__pycache__/
+*.pyc
+node_modules/
