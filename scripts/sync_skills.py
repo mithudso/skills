@@ -373,7 +373,7 @@ def generate_glean_skills(skills):
             folder_name = f"{platform_prefix}-{safe_name}"
             
             group_idx = (i // CHUNK_SIZE) + 1
-            group_dir = os.path.join(glean_dir, f"group_{group_idx}")
+            group_dir = os.path.join(glean_dir, f"group_{group_idx}", "skills")
             os.makedirs(group_dir, exist_ok=True)
             
             target_dir = os.path.join(group_dir, folder_name)
