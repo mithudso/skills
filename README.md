@@ -2,7 +2,7 @@
 
 A unified, comprehensive collection of **skills**, **workflows**, **prompts**, and **domain intelligence** for modern AI agent environments: **Google Antigravity**, **Gemini**, **Claude Code**, and **Claude**.
 
-> **Repository Status**: 357 Production Skills Cataloged & Indexed (Auto-Synchronized)
+> **Repository Status**: 378 Production Skills Cataloged & Indexed (Auto-Synchronized)
 
 ## Repository Overview
 
@@ -23,11 +23,10 @@ skills/
 ### By Platform
 | Platform | Total Skills | Primary Focus |
 | :--- | :---: | :--- |
+| **Gemini / Plugins** | `174` | Domain plugins: Science/Bio, Data Agent Kit (BigQuery/dbt), Firebase, Chrome DevTools, Modern Web |
 | **Claude Code** | `156` | Deep engineering, infrastructure, AI orchestration, Firecrawl automation, psychology & analysis |
-| **Gemini / Plugins** | `146` | Domain plugins: Science/Bio, Data Agent Kit (BigQuery/dbt), Firebase, Chrome DevTools, Modern Web |
 | **Claude** | `33` | Standalone Claude workspace intelligence, security access trees, and prompt optimization |
 | **Claude (Archived)** | `9` | Specialized RFID, NFC, physical security, and trading strategy reference trees |
-| **Custom / MongoDB** | `7` | MongoDB Atlas connection, query optimization, stream processing, search & AI |
 | **Antigravity** | `3` | Antigravity CLI, IDE customizations, SDK orchestration, and permissioning |
 | **Custom / MQL Optimizer** | `2` | Deep MQL query optimization, execution plan analysis, and indexing |
 | **Custom / Customer Intelligence** | `1` | Enterprise account intelligence and incident response playbooks |
@@ -35,14 +34,14 @@ skills/
 ### By Domain Category
 | Category | Skills Count |
 | :--- | :---: |
-| **Science, Biology & Medicine** | `120` |
-| **Databases, Data Engineering & Analytics** | `78` |
-| **Cloud, DevOps & Infrastructure** | `46` |
-| **Frontend & Web Development** | `45` |
+| **Science, Biology & Medicine** | `121` |
+| **Databases, Data Engineering & Analytics** | `73` |
+| **Frontend & Web Development** | `54` |
+| **Cloud, DevOps & Infrastructure** | `47` |
+| **AI, Agents & Prompt Engineering** | `28` |
 | **Security, Auth & Diagnostics** | `24` |
-| **AI, Agents & Prompt Engineering** | `23` |
-| **General & Specialized Utilities** | `8` |
-| **Programming & Languages** | `5` |
+| **General & Specialized Utilities** | `17` |
+| **Programming & Languages** | `6` |
 | **Web Scraping & Firecrawl** | `4` |
 | **Writing, Communication & Marketing** | `2` |
 | **Finance, Banking & Business** | `1` |
