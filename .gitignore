@@ -4,6 +4,8 @@
 *.lock
 *.part_*
 *.zip
+.sync.lock
+.sync.log
 .system_generated/
 __pycache__/
 *.pyc

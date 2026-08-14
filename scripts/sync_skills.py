@@ -613,11 +613,11 @@ def daemon_loop():
             for root, dirs, files in os.walk(d):
                 if any(x in root for x in IGNORE_DIRS):
                     continue
-                if "SKILL.md" in files:
-                    for f in files:
+                for f in files:
+                    if f.endswith(('.md', '.json', '.yaml', '.yml', '.py', '.js', '.sh', '.ts', '.txt', '.prompt')):
                         p = os.path.join(root, f)
                         try:
-                            snapshot[p] = os.path.getmtime(p)
+                            snapshot[p] = (os.path.getmtime(p), os.path.getsize(p))
                         except:
                             pass
         return snapshot

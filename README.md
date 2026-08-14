@@ -2,7 +2,7 @@
 
 A unified, comprehensive collection of **skills**, **workflows**, **prompts**, and **domain intelligence** for modern AI agent environments: **Google Antigravity**, **Gemini**, **Claude Code**, and **Claude**.
 
-> **Repository Status**: 357 Production Skills Cataloged & Indexed
+> **Repository Status**: 357 Production Skills Cataloged & Indexed (Auto-Synchronized)
 
 ## Repository Overview
 
@@ -70,20 +70,9 @@ An **Agent Skill** is a self-contained capability package that equips an AI agen
 - `scripts/` *(optional)*: Automated scripts and CLI helpers executed by the agent.
 - `examples/` *(optional)*: Input/output examples and golden reference templates.
 
-## How to Use These Skills
+## Automated Synchronization Hook
 
-### 1. In Antigravity / Gemini
-Place skill directories in:
-- System-wide: `~/.gemini/antigravity/builtin/skills/<skill-name>/` or `~/.gemini/config/plugins/<plugin-name>/skills/<skill-name>/`
-- Project-specific: `.gemini/skills/<skill-name>/` or `.antigravity/skills/<skill-name>/`
-
-### 2. In Claude Code / Anthropic Agent System
-Place skill directories in:
-- System-wide: `~/.agents/skills/<skill-name>/` or `~/.claude/skills/<skill-name>/`
-- Project-specific: `.claude/skills/<skill-name>/` or `.agents/skills/<skill-name>/`
-
-### 3. Programmatic Access
-Use `catalog.json` to programmatically search, filter, and load skills into any custom LLM workflow or MCP server.
+This repository features real-time hooks and background daemons. Any skill created or edited in **Google Antigravity**, **Gemini**, **Claude Code**, or local workspaces is automatically consolidated, cataloged, and pushed to GitHub.
 
 ---
 

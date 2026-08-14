@@ -3192,7 +3192,7 @@
   {
     "name": "skill-tree-architect",
     "description": "Whole-tree architect for the ~/.Codex/skills hub-and-spoke taxonomy \u2014 audits the whole tree against the two-tier description cap (>1000 soft / >1536 hard), hub balance, and cross-hub concept placement, then orchestrates the existing skill-consolidation toolchain to rebalance and reshape it when a large new concept family lands (reuses the tools, never reimplements them). TRIGGER: rebalance / restructure / optimize the skill tree; is my taxonomy optimal; reshape for a new family; concept in the wrong hub or family; hubs over the cap / too big / should split; audit hub-and-spoke placement; find misplaced spokes; hub the homeless skills. SKIP: ONE skill's content or peer-seeds \u2192 skill-optimizer; a single NEW \u22658 homeless family \u2192 detect-candidates.mjs; what to build \u2192 concept-family-explorer; lint one skill \u2192 meta-validate.mjs; a prompt \u2192 prompt-deep-optimizer / phe.",
-    "has_references": false,
+    "has_references": true,
     "has_scripts": false,
     "has_examples": false,
     "platform": "Claude Code",
