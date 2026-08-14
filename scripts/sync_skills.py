@@ -360,7 +360,9 @@ def generate_glean_skills(skills):
         shutil.rmtree(glean_dir)
     os.makedirs(glean_dir, exist_ok=True)
     
-    for s in skills:
+    CHUNK_SIZE = 50
+    
+    for i, s in enumerate(skills):
         skill_file = os.path.join(REPO_DIR, s["rel_path"], "SKILL.md")
         if not os.path.exists(skill_file):
             continue
@@ -379,7 +381,11 @@ def generate_glean_skills(skills):
             platform_prefix = s["platform"].replace(" / ", "-").replace("/", "-").replace(" ", "_").lower()
             file_name = f"{platform_prefix}-{safe_name}.md"
             
-            target_path = os.path.join(glean_dir, file_name)
+            group_idx = (i // CHUNK_SIZE) + 1
+            group_dir = os.path.join(glean_dir, f"group_{group_idx}")
+            os.makedirs(group_dir, exist_ok=True)
+            
+            target_path = os.path.join(group_dir, file_name)
             
             lines = [
                 f"# {s['name']}",
