@@ -418,6 +418,8 @@ def run_sync():
         for item in sorted(os.listdir(ag_builtin)):
             src = os.path.join(ag_builtin, item)
             if os.path.isdir(src) and os.path.exists(os.path.join(src, "SKILL.md")):
+                if not is_glean_compatible(src):
+                    continue
                 dst = os.path.join(REPO_DIR, "antigravity", item)
                 copy_skill(src, dst)
                 meta = extract_skill_metadata(dst)
@@ -442,6 +444,8 @@ def run_sync():
                     if any(x in root for x in IGNORE_DIRS):
                         continue
                     if "SKILL.md" in files:
+                        if not is_glean_compatible(root):
+                            continue
                         rel_sub = os.path.relpath(root, gemini_plugins)
                         dst = os.path.join(REPO_DIR, "gemini", rel_sub)
                         copy_skill(root, dst)
@@ -465,6 +469,8 @@ def run_sync():
             if not os.path.isdir(src) or item in IGNORE_DIRS or item.startswith(".sync-backup"):
                 continue
             if os.path.exists(os.path.join(src, "SKILL.md")):
+                if not is_glean_compatible(src):
+                    continue
                 dst = os.path.join(REPO_DIR, "claude-code", item)
                 copy_skill(src, dst)
                 meta = extract_skill_metadata(dst)
@@ -480,6 +486,8 @@ def run_sync():
                 try:
                     for root, dirs, files in os.walk(src, onerror=lambda e: None):
                         if "SKILL.md" in files and not any(x in root for x in IGNORE_DIRS):
+                            if not is_glean_compatible(root):
+                                continue
                             rel_sub = os.path.relpath(root, agents_path)
                             dst = os.path.join(REPO_DIR, "claude-code", rel_sub)
                             copy_skill(root, dst)
@@ -508,6 +516,8 @@ def run_sync():
                     for sub in sorted(os.listdir(src)):
                         sub_src = os.path.join(src, sub)
                         if os.path.isdir(sub_src) and os.path.exists(os.path.join(sub_src, "SKILL.md")):
+                            if not is_glean_compatible(sub_src):
+                                continue
                             dst = os.path.join(REPO_DIR, "claude", "standalone", sub)
                             copy_skill(sub_src, dst)
                             meta = extract_skill_metadata(dst)
@@ -520,6 +530,8 @@ def run_sync():
                                 })
                                 collected_skills.append(meta)
                 elif os.path.exists(os.path.join(src, "SKILL.md")):
+                    if not is_glean_compatible(src):
+                        continue
                     dst = os.path.join(REPO_DIR, "claude", "standalone", item)
                     copy_skill(src, dst)
                     meta = extract_skill_metadata(dst)
@@ -535,6 +547,8 @@ def run_sync():
                     for sub in sorted(os.listdir(src)):
                         sub_src = os.path.join(src, sub)
                         if os.path.isdir(sub_src) and os.path.exists(os.path.join(sub_src, "SKILL.md")):
+                            if not is_glean_compatible(sub_src):
+                                continue
                             dst = os.path.join(REPO_DIR, "claude", "archived-treearch", sub)
                             copy_skill(sub_src, dst)
                             meta = extract_skill_metadata(dst)
@@ -554,6 +568,8 @@ def run_sync():
             for item in sorted(os.listdir(dt_mongo)):
                 src = os.path.join(dt_mongo, item)
                 if os.path.isdir(src) and os.path.exists(os.path.join(src, "SKILL.md")):
+                    if not is_glean_compatible(src):
+                        continue
                     dst = os.path.join(REPO_DIR, "custom", "mongodb-desktop", item)
                     copy_skill(src, dst)
                     meta = extract_skill_metadata(dst)
@@ -573,6 +589,8 @@ def run_sync():
         try:
             for root, dirs, files in os.walk(mql_path, onerror=lambda e: None):
                 if "SKILL.md" in files:
+                    if not is_glean_compatible(root):
+                        continue
                     skill_name = os.path.basename(root)
                     dst = os.path.join(REPO_DIR, "custom", "mqloptimizer", skill_name)
                     copy_skill(root, dst)
@@ -593,6 +611,8 @@ def run_sync():
         try:
             for root, dirs, files in os.walk(cust_path, onerror=lambda e: None):
                 if "SKILL.md" in files and not any(x in root for x in IGNORE_DIRS):
+                    if not is_glean_compatible(root):
+                        continue
                     skill_name = os.path.basename(root)
                     dst = os.path.join(REPO_DIR, "custom", "customer-intelligence", skill_name)
                     copy_skill(root, dst)

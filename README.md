@@ -2,7 +2,7 @@
 
 A unified, comprehensive collection of **skills**, **workflows**, **prompts**, and **domain intelligence** for modern AI agent environments: **Google Antigravity**, **Gemini**, **Claude Code**, and **Claude**.
 
-> **Repository Status**: 653 Production Skills Cataloged & Indexed (Auto-Synchronized)
+> **Repository Status**: 599 Production Skills Cataloged & Indexed (Auto-Synchronized)
 
 ## Repository Overview
 
@@ -23,27 +23,27 @@ skills/
 ### By Platform
 | Platform | Total Skills | Primary Focus |
 | :--- | :---: | :--- |
-| **Claude** | `302` | Standalone Claude workspace intelligence, security access trees, and prompt optimization |
-| **Gemini / Plugins** | `174` | Domain plugins: Science/Bio, Data Agent Kit (BigQuery/dbt), Firebase, Chrome DevTools, Modern Web |
-| **Claude Code** | `156` | Deep engineering, infrastructure, AI orchestration, Firecrawl automation, psychology & analysis |
+| **Claude** | `286` | Standalone Claude workspace intelligence, security access trees, and prompt optimization |
+| **Gemini / Plugins** | `152` | Domain plugins: Science/Bio, Data Agent Kit (BigQuery/dbt), Firebase, Chrome DevTools, Modern Web |
+| **Claude Code** | `148` | Deep engineering, infrastructure, AI orchestration, Firecrawl automation, psychology & analysis |
 | **Claude (Archived)** | `9` | Specialized RFID, NFC, physical security, and trading strategy reference trees |
-| **Custom / MongoDB** | `7` | MongoDB Atlas connection, query optimization, stream processing, search & AI |
-| **Antigravity** | `3` | Antigravity CLI, IDE customizations, SDK orchestration, and permissioning |
 | **Custom / MQL Optimizer** | `2` | Deep MQL query optimization, execution plan analysis, and indexing |
+| **Antigravity** | `1` | Antigravity CLI, IDE customizations, SDK orchestration, and permissioning |
+| **Custom / MongoDB** | `1` | MongoDB Atlas connection, query optimization, stream processing, search & AI |
 
 ### By Domain Category
 | Category | Skills Count |
 | :--- | :---: |
-| **Science, Biology & Medicine** | `229` |
-| **Databases, Data Engineering & Analytics** | `138` |
-| **Frontend & Web Development** | `89` |
-| **Cloud, DevOps & Infrastructure** | `71` |
-| **AI, Agents & Prompt Engineering** | `41` |
-| **Security, Auth & Diagnostics** | `40` |
+| **Science, Biology & Medicine** | `215` |
+| **Databases, Data Engineering & Analytics** | `122` |
+| **Frontend & Web Development** | `81` |
+| **Cloud, DevOps & Infrastructure** | `63` |
+| **Security, Auth & Diagnostics** | `39` |
+| **AI, Agents & Prompt Engineering** | `36` |
 | **General & Specialized Utilities** | `18` |
 | **Web Scraping & Firecrawl** | `8` |
 | **Programming & Languages** | `7` |
-| **Writing, Communication & Marketing** | `6` |
+| **Writing, Communication & Marketing** | `4` |
 | **Finance, Banking & Business** | `3` |
 | **Psychology & Behavioral Science** | `3` |
 

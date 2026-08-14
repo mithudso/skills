@@ -1,27 +1,5 @@
 [
   {
-    "name": "agy-customizations",
-    "description": "Comprehensive guide and reference for the Antigravity Customization System. Use to explain how customizations work, their loading priority, discovery mechanisms, and to guide the creation of skills, rules, plugins, hooks, and MCP servers.",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Antigravity",
-    "section": "antigravity",
-    "rel_path": "antigravity/agy-customizations",
-    "category": "Cloud, DevOps & Infrastructure"
-  },
-  {
-    "name": "antigravity-guide",
-    "description": "Provides a comprehensive guide, quick reference, and sitemap for Google Antigravity (AGY), including the Antigravity CLI (agy), Antigravity 2.0, Antigravity IDE, Python SDK, slash commands, keybindings, and customizations (skills, rules, MCP, sidecars). Activate this skill when the user asks questions about how to use, configure, or customize Antigravity, AGY, the agy CLI, the Antigravity IDE, or Antigravity 2.0.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Antigravity",
-    "section": "antigravity",
-    "rel_path": "antigravity/antigravity_guide",
-    "category": "Frontend & Web Development"
-  },
-  {
     "name": "permissioned-github",
     "description": "Guidelines for interacting with GitHub and request permissions from the user when commands fail due to restrictions in the agent environment.",
     "has_references": false,
@@ -165,28 +143,6 @@
     "category": "Science, Biology & Medicine"
   },
   {
-    "name": "troubleshooting",
-    "description": "Uses Chrome DevTools MCP and documentation to troubleshoot connection and target issues. Trigger this skill when list_pages, new_page, or navigate_page fail, or when the server initialization fails.",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/chrome-devtools-plugin",
-    "rel_path": "gemini/chrome-devtools-plugin/skills/troubleshooting",
-    "category": "Science, Biology & Medicine"
-  },
-  {
-    "name": "chrome-devtools",
-    "description": "Uses Chrome DevTools via MCP for efficient debugging, troubleshooting and browser automation. Use when debugging web pages, automating browser interactions, analyzing performance, or inspecting network requests. This skill does not apply to `--slim` mode (MCP configuration).",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/chrome-devtools-plugin",
-    "rel_path": "gemini/chrome-devtools-plugin/skills/chrome-devtools",
-    "category": "Science, Biology & Medicine"
-  },
-  {
     "name": "memory-leak-debugging",
     "description": "Diagnoses and resolves memory leaks in JavaScript/Node.js applications. Use when a user reports high memory usage, OOM errors, or wants to analyze heapsnapshots or run memory leak detection tools like memlab.",
     "has_references": true,
@@ -207,50 +163,6 @@
     "section": "gemini/chrome-devtools-plugin",
     "rel_path": "gemini/chrome-devtools-plugin/skills/a11y-debugging",
     "category": "Science, Biology & Medicine"
-  },
-  {
-    "name": "claude-automation-recommender",
-    "description": "Analyze a codebase and recommend Claude Code automations (hooks, subagents, skills, plugins, MCP servers). Use when user asks for automation recommendations, wants to optimize their Claude Code setup, mentions improving Claude Code workflows, asks how to first set up Claude Code for a project, or wants to know what Claude Code features they should use.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/claude-plugins-official",
-    "rel_path": "gemini/claude-plugins-official/plugins/claude-code-setup/skills/claude-automation-recommender",
-    "category": "AI, Agents & Prompt Engineering"
-  },
-  {
-    "name": "build-mcp-server",
-    "description": "This skill should be used when the user asks to \"build an MCP server\", \"create an MCP\", \"make an MCP integration\", \"wrap an API for Claude\", \"expose tools to Claude\", \"make an MCP app\", or discusses building something with the Model Context Protocol. It is the entry point for MCP server development \u2014 it interrogates the user about their use case, determines the right deployment model (remote HTTP, MCPB, local stdio), picks a tool-design pattern, and hands off to specialized skills.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/claude-plugins-official",
-    "rel_path": "gemini/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server",
-    "category": "Science, Biology & Medicine"
-  },
-  {
-    "name": "build-mcp-app",
-    "description": "This skill should be used when the user wants to build an \"MCP app\", add \"interactive UI\" or \"widgets\" to an MCP server, \"render components in chat\", build \"MCP UI resources\", make a tool that shows a \"form\", \"picker\", \"dashboard\" or \"confirmation dialog\" inline in the conversation, or mentions \"apps SDK\" in the context of MCP. Use AFTER the build-mcp-server skill has settled the deployment model, or when the user already knows they want UI widgets.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/claude-plugins-official",
-    "rel_path": "gemini/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app",
-    "category": "Frontend & Web Development"
-  },
-  {
-    "name": "build-mcpb",
-    "description": "This skill should be used when the user wants to \"package an MCP server\", \"bundle an MCP\", \"make an MCPB\", \"ship a local MCP server\", \"distribute a local MCP\", discusses \".mcpb files\", mentions bundling a Node or Python runtime with their MCP server, or needs an MCP server that interacts with the local filesystem, desktop apps, or OS and must be installable without the user having Node/Python set up.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/claude-plugins-official",
-    "rel_path": "gemini/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcpb",
-    "category": "Cloud, DevOps & Infrastructure"
   },
   {
     "name": "claude-md-improver",
@@ -297,17 +209,6 @@
     "category": "General & Specialized Utilities"
   },
   {
-    "name": "m5-onboard",
-    "description": "End-to-end onboarding for a freshly-plugged-in M5Stack ESP32 device (Cardputer, Cardputer-Adv, Core, CoreS3, Stick) \u2014 detect on USB, flash UIFlow 2.0 firmware, and install the Claude Buddy MicroPython app bundle. Use whenever the user plugs in or wants to flash/provision/reset an M5Stack or ESP32 board, or says \"m5-onboard go\".",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/claude-plugins-official",
-    "rel_path": "gemini/claude-plugins-official/plugins/cwc-makers/skills/m5-onboard",
-    "category": "Frontend & Web Development"
-  },
-  {
     "name": "cardputer-buddy",
     "description": "Iterate on the Cardputer-Adv MicroPython app bundle (Claude Buddy, Snake, Hello) after the device is already provisioned via m5-onboard. Use when the user wants to add a new app, push a single changed .py without re-flashing, watch device serial logs, or run a one-shot REPL command. Trigger on \"add an app\", \"push to the cardputer\", \"tail the device\", \"run on the device\", or follow-up work after /maker-setup.",
     "has_references": false,
@@ -330,17 +231,6 @@
     "category": "Frontend & Web Development"
   },
   {
-    "name": "skill-development",
-    "description": "This skill should be used when the user wants to \"create a skill\", \"add a skill to plugin\", \"write a new skill\", \"improve skill description\", \"organize skill content\", or needs guidance on skill structure, progressive disclosure, or skill development best practices for Claude Code plugins.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/claude-plugins-official",
-    "rel_path": "gemini/claude-plugins-official/plugins/plugin-dev/skills/skill-development",
-    "category": "Frontend & Web Development"
-  },
-  {
     "name": "plugin-settings",
     "description": "This skill should be used when the user asks about \"plugin settings\", \"store plugin configuration\", \"user-configurable plugin\", \".local.md files\", \"plugin state files\", \"read YAML frontmatter\", \"per-project plugin settings\", or wants to make plugin behavior configurable. Documents the .claude/plugin-name.local.md pattern for storing plugin-specific configuration with YAML frontmatter and markdown content.",
     "has_references": true,
@@ -352,17 +242,6 @@
     "category": "AI, Agents & Prompt Engineering"
   },
   {
-    "name": "plugin-structure",
-    "description": "This skill should be used when the user asks to \"create a plugin\", \"scaffold a plugin\", \"understand plugin structure\", \"organize plugin components\", \"set up plugin.json\", \"use ${CLAUDE_PLUGIN_ROOT}\", \"add commands/agents/skills/hooks\", \"configure auto-discovery\", or needs guidance on plugin directory layout, manifest configuration, component organization, file naming conventions, or Claude Code plugin architecture best practices.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": true,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/claude-plugins-official",
-    "rel_path": "gemini/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure",
-    "category": "Frontend & Web Development"
-  },
-  {
     "name": "hook-development",
     "description": "This skill should be used when the user asks to \"create a hook\", \"add a PreToolUse/PostToolUse/Stop hook\", \"validate tool use\", \"implement prompt-based hooks\", \"use ${CLAUDE_PLUGIN_ROOT}\", \"set up event-driven automation\", \"block dangerous commands\", or mentions hook events (PreToolUse, PostToolUse, Stop, SubagentStop, SessionStart, SessionEnd, UserPromptSubmit, PreCompact, Notification). Provides comprehensive guidance for creating and implementing Claude Code plugin hooks with focus on advanced prompt-based hooks API.",
     "has_references": true,
@@ -372,17 +251,6 @@
     "section": "gemini/claude-plugins-official",
     "rel_path": "gemini/claude-plugins-official/plugins/plugin-dev/skills/hook-development",
     "category": "Frontend & Web Development"
-  },
-  {
-    "name": "mcp-integration",
-    "description": "This skill should be used when the user asks to \"add MCP server\", \"integrate MCP\", \"configure MCP in plugin\", \"use .mcp.json\", \"set up Model Context Protocol\", \"connect external service\", mentions \"${CLAUDE_PLUGIN_ROOT} with MCP\", or discusses MCP server types (SSE, stdio, HTTP, WebSocket). Provides comprehensive guidance for integrating Model Context Protocol servers into Claude Code plugins for external tool and service integration.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": true,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/claude-plugins-official",
-    "rel_path": "gemini/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration",
-    "category": "Science, Biology & Medicine"
   },
   {
     "name": "agent-development",
@@ -437,17 +305,6 @@
     "platform": "Gemini / Plugins",
     "section": "gemini/claude-plugins-official",
     "rel_path": "gemini/claude-plugins-official/plugins/frontend-design/skills/frontend-design",
-    "category": "Frontend & Web Development"
-  },
-  {
-    "name": "writing-hookify-rules",
-    "description": "This skill should be used when the user asks to \"create a hookify rule\", \"write a hook rule\", \"configure hookify\", \"add a hookify rule\", or needs guidance on hookify rule syntax and patterns.",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/claude-plugins-official",
-    "rel_path": "gemini/claude-plugins-official/plugins/hookify/skills/writing-rules",
     "category": "Frontend & Web Development"
   },
   {
@@ -649,17 +506,6 @@
     "category": "Databases, Data Engineering & Analytics"
   },
   {
-    "name": "gcs-security-assessment",
-    "description": "Assesses security posture, evaluates risks, and checks SAIF compliance for Google Cloud Storage buckets or projects. Use when the user requests security scans, vulnerability checks, or SAIF assessments. Don't use when: The user is asking about non-GCS resources (Compute Engine, GKE, etc.), investigating a live production outage, or asking general security questions not tied to a specific project or bucket.",
-    "has_references": true,
-    "has_scripts": true,
-    "has_examples": true,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/data-agent-kit-plugin",
-    "rel_path": "gemini/data-agent-kit-plugin/skills/gcs_security_assessment",
-    "category": "Cloud, DevOps & Infrastructure"
-  },
-  {
     "name": "ml-best-practices",
     "description": "CRITICAL RULE: You MUST use this skill whenever the task involves any machine learning tasks or data analysis. Use this skill if the user's prompt or requirements mention any of the following: * Clustering * Classification * Regression * Time series forecasting * Statistical testing * Model comparison * ML * Data analysis SQL/BigQuery ML HANDOFF: If the user requires a SQL solution, use this skill to dictate the ANALYSIS STEPS (e.g., markdown analysis cells, visualization logic), but defer to `bigquery` for all SQL syntax.",
     "has_references": false,
@@ -726,17 +572,6 @@
     "category": "Databases, Data Engineering & Analytics"
   },
   {
-    "name": "enforcing-resource-attribution",
-    "description": "Enforces resource attribution for CLI commands. Use this skill whenever you are running `bq` or `gcloud` commands via `run_command`.",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/data-agent-kit-plugin",
-    "rel_path": "gemini/data-agent-kit-plugin/skills/enforcing_resource_attribution",
-    "category": "Cloud, DevOps & Infrastructure"
-  },
-  {
     "name": "dbt-bigquery",
     "description": "Expert guidance for creating, modifying, and optimizing dbt pipelines for BigQuery. Use this skill whenever user asks for generating or modifying a dbt model or project. Activate this skill when the user - Creates, modifies, or troubleshoots **dbt models or pipelines** - Needs to **optimize SQL** within a dbt project - Is **setting up a new dbt project** or configuring existing one",
     "has_references": false,
@@ -790,28 +625,6 @@
     "section": "gemini/data-agent-kit-plugin",
     "rel_path": "gemini/data-agent-kit-plugin/skills/federate_lakehouse_catalog",
     "category": "Databases, Data Engineering & Analytics"
-  },
-  {
-    "name": "firebase-basics",
-    "description": "Provides foundational setup, authentication, and project management workflows for Firebase using the Firebase CLI. Use when checking Firebase CLI version (must use 'npx -y firebase-tools@latest --version'), initializing a Firebase environment, authenticating, setting active projects, or setting up `google-services.json` or `GoogleService-Info.plist` files.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/firebase",
-    "rel_path": "gemini/firebase/skills/firebase_basics",
-    "category": "Science, Biology & Medicine"
-  },
-  {
-    "name": "firebase-crashlytics",
-    "description": "Comprehensive guide for Firebase Crashlytics, including provisioning and SDK usage. Use this skill when the user needs help setting up Crashlytics, adding crash reporting, or using the Crashlytics SDK in their application.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/firebase",
-    "rel_path": "gemini/firebase/skills/firebase_crashlytics",
-    "category": "Frontend & Web Development"
   },
   {
     "name": "xcode-project-setup",
@@ -924,17 +737,6 @@
     "category": "AI, Agents & Prompt Engineering"
   },
   {
-    "name": "gemini-live-api-dev",
-    "description": "Use this skill when building real-time, bidirectional streaming applications with the Gemini Live API. Covers WebSocket-based audio/video/text streaming, voice activity detection (VAD), native audio features, function calling, session management, ephemeral tokens for client-side auth, live translation, and all Live API configuration options. SDKs covered - google-genai (Python), @google/genai (JavaScript/TypeScript).",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/gemini-api",
-    "rel_path": "gemini/gemini-api/skills/gemini-live-api-dev",
-    "category": "Security, Auth & Diagnostics"
-  },
-  {
     "name": "google-antigravity-sdk",
     "description": "Design, implement, and debug autonomous AI agents and multi-agent systems using the Google Antigravity (AGY) SDK. ACTIVATE this skill when the user wants to create, configure, or orchestrate Google Antigravity agents.",
     "has_references": true,
@@ -1023,17 +825,6 @@
     "category": "Cloud, DevOps & Infrastructure"
   },
   {
-    "name": "read-confluence",
-    "description": "Use when reading MongoDB Confluence pages via MCP tools. Covers fetch by URL, fetch by ID, CQL search, and Glean fallback search patterns.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/mongodb-internal",
-    "rel_path": "gemini/mongodb-internal/.agents/skills/tooling/read-confluence/skills/read-confluence",
-    "category": "Science, Biology & Medicine"
-  },
-  {
     "name": "sps-comparison",
     "description": "Use when fetching SPS Performance Analyzer comparison results, checking multipatch comparison status, listing user comparisons, or creating new multipatches. Triggers on Performance Analyzer URLs or comparison IDs.",
     "has_references": true,
@@ -1043,28 +834,6 @@
     "section": "gemini/mongodb-internal",
     "rel_path": "gemini/mongodb-internal/.agents/skills/tooling/sps-comparison/skills/sps-comparison",
     "category": "Frontend & Web Development"
-  },
-  {
-    "name": "survey-builder",
-    "description": "Use when building, brainstorming, or refining Qualtrics surveys for developer experience and UX research.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/mongodb-internal",
-    "rel_path": "gemini/mongodb-internal/.agents/skills/tooling/survey-builder/skills/survey-builder",
-    "category": "Frontend & Web Development"
-  },
-  {
-    "name": "review-skill",
-    "description": "Review a proposed Agent Skill for structural validity and content quality before publishing. Runs the skill-validator CLI to check for structural issues, scores the skill with an LLM judge, and interprets results to advise SMEs on what to address. Use when a user wants to review, validate, or quality-check an Agent Skill.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/mongodb-internal",
-    "rel_path": "gemini/mongodb-internal/.agents/skills/tooling/review-skill/skills/review-skill",
-    "category": "AI, Agents & Prompt Engineering"
   },
   {
     "name": "pr-review-loop",
@@ -1109,17 +878,6 @@
     "section": "gemini/mongodb-internal",
     "rel_path": "gemini/mongodb-internal/.agents/skills/tooling/upgrading-superpowers/skills/upgrading-superpowers",
     "category": "AI, Agents & Prompt Engineering"
-  },
-  {
-    "name": "edit-confluence",
-    "description": "Use when editing Confluence wiki pages via MCP tools. Covers safe editing workflow: fetch first, edit in storage format, handle CDATA blocks.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/mongodb-internal",
-    "rel_path": "gemini/mongodb-internal/.agents/skills/tooling/edit-confluence/skills/edit-confluence",
-    "category": "Science, Biology & Medicine"
   },
   {
     "name": "evergreen-cicd",
@@ -1175,17 +933,6 @@
     "section": "gemini/mongodb-internal",
     "rel_path": "gemini/mongodb-internal/.agents/skills/tooling/cost-reducer/skills/cost-reducer",
     "category": "AI, Agents & Prompt Engineering"
-  },
-  {
-    "name": "evergreen-stack-ci",
-    "description": "Run Evergreen CI across every branch in a Graphite PR stack (or a single branch) by generating local patches per branch, polling for completion, and triaging failures back to the earliest-introducing branch. Evergreen only auto-builds master-based PRs \u2014 non-master-based PRs in a stack fail with permission errors, so this skill works around that by creating CLI patches per branch and tracking them in a state file outside the repo. Use whenever the user says \"run evergreen on the stack\", \"patch every branch\", \"stack CI\", \"run CI on each branch in the stack\", \"find which branch broke evergreen\", \"evergreen the whole stack\", \"babysit stack patches\", \"fix stack CI failures\", or any time CI has to run across multiple non-master-based branches because Evergreen won't build them automatically. Also coordinates worktree cleanup, gt restack after fixes, and gt submit --no-stack --update-only for branches with existing PRs (NEVER creates new PRs without explicit user request).",
-    "has_references": true,
-    "has_scripts": true,
-    "has_examples": false,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/mongodb-internal",
-    "rel_path": "gemini/mongodb-internal/.agents/skills/tooling/evergreen-stack-ci/skills/evergreen-stack-ci",
-    "category": "Cloud, DevOps & Infrastructure"
   },
   {
     "name": "jira-cli",
@@ -1472,17 +1219,6 @@
     "section": "gemini/mongodb-internal",
     "rel_path": "gemini/mongodb-internal/.agents/skills/before-you-code/writing-plans/skills/writing-plans",
     "category": "Frontend & Web Development"
-  },
-  {
-    "name": "mongodb-code-review",
-    "description": "Use when reviewing MongoDB C++ PRs, being asked to review code in the mongo repo, or when the user wants a checklist for their own reviews. Orchestrates parallel sub-agent reviewers with different focus areas such as design, style, tests, etc.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Gemini / Plugins",
-    "section": "gemini/mongodb-internal",
-    "rel_path": "gemini/mongodb-internal/.agents/skills/query-integration/mongodb-code-review/skills/mongodb-code-review",
-    "category": "Databases, Data Engineering & Analytics"
   },
   {
     "name": "mozjs-upgrade-validate",
@@ -1947,17 +1683,6 @@
     "category": "Science, Biology & Medicine"
   },
   {
-    "name": "ai-agent-engineering",
-    "description": "AI & agent-engineering family ROUTER. Split into: ai-agents-orchestration (agent frameworks, multi-agent, memory, planning, guardrails, coding/GUI agents, autonomous loops, eval); ai-rag-retrieval (RAG, iterative retrieval, vector/graph datastores); ai-llm-model-layer (training, fine-tuning, alignment/RLHF, compression, inference serving, transformer/multimodal architecture, model selection, observability); ai-mcp-sdk-prompting (MCP servers/builder, Anthropic SDK, prompt engineering, context engineering, LLM frameworks, tool-search, prompt lookup). Route to the matching sub-hub.",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude Code",
-    "section": "claude-code",
-    "rel_path": "claude-code/ai-agent-engineering",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
     "name": "ai-agents-orchestration",
     "description": "AI agent building & orchestration sub-hub (ai-agent family). TRIGGER: agent ecosystems/frameworks (Codex SDK, LangGraph, CrewAI, OpenAI Agents); multi-agent orchestration & councils; A2A interop / Agent Cards; agent harness construction (action spaces, tool defs, observation format); agent memory architecture; planning patterns; reliability & guardrails; durable execution/state; agent workflow builders; autonomous loops; coding agents; vibe coding & AI-assisted dev (spec-driven development); computer-use/GUI agents; voice/realtime agents; eval-driven development; automated agent/compound-system optimization from a metric (ADAS, AFlow, DSPy/MIPROv2, GEPA, TextGrad, Trace/OptoPrime, Darwin-G\u00f6del Machine, self-improving agents); algorithmic discovery & superoptimization (AlphaTensor/AlphaDev/FunSearch/AlphaEvolve, program synthesis, evolving faster algorithms); self-improving skill libraries (Voyager, ACE, experience-to-skill distillation, playbook curation). SKIP: RAG/retrieval \u2192 ai-rag-retrieval; model training/serving \u2192 ai-llm-model-layer; MCP/SDK/prompting \u2192 ai-mcp-sdk-prompting.",
     "has_references": true,
@@ -1989,17 +1714,6 @@
     "section": "claude-code",
     "rel_path": "claude-code/ai-llm-model-layer",
     "category": "Cloud, DevOps & Infrastructure"
-  },
-  {
-    "name": "ai-mcp-sdk-prompting",
-    "description": "MCP, SDK, prompting & context-engineering sub-hub (ai-agent family). TRIGGER: MCP servers & the MCP builder; Anthropic SDK; prompt engineering; LLM context engineering (AGENTS.md, caching, agent memory, prompt-injection hardening); declarative LLM frameworks; multi-provider LLM integration review; AI programming languages; AI red-teaming tooling; MCP tool-search/discovery optimization; prompt discovery/lookup & registries; iterative self-refinement & convergence loops (Self-Refine, Reflexion, CRITIC, stop-condition/oscillation/budget); prompt & context compression (LLMLingua, gist tokens, soft-prompt distillation); applied vision-model UI-critique technique (VLM critiques a screenshot \u2014 structured findings, Set-of-Mark grounding, before/after, VLM-as-judge calibration & failure modes). SKIP: agent orchestration \u2192 ai-agents-orchestration; RAG \u2192 ai-rag-retrieval; model training/serving (incl. VLM encoder/architecture internals) \u2192 ai-llm-model-layer.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude Code",
-    "section": "claude-code",
-    "rel_path": "claude-code/ai-mcp-sdk-prompting",
-    "category": "Science, Biology & Medicine"
   },
   {
     "name": "ai-rag-retrieval",
@@ -2308,17 +2022,6 @@
     "section": "claude-code",
     "rel_path": "claude-code/content-and-marketing-writing",
     "category": "Science, Biology & Medicine"
-  },
-  {
-    "name": "content-ingestion-extraction",
-    "description": "Acquire, extract, audit & restructure content from heterogeneous sources \u2014 aging docs, doc folders/KBs, live web DOM, meeting-audio devices, one-off docs to templatize. TRIGGER: doc archaeology (staleness, dead links, process drift, deprecate/archive decisions); doc-store bootstrapping (numbered taxonomy, _meta indexes, archive policy); Chrome content-script DOM extractor (selector fallback, MutationObserver/waitForElement, shadow-DOM, SPA nav, partial extraction); Granola transcript/notes fetch (REST, native-host, ProseMirror, polling sync); Plaud recorder ecosystem (devices, Developer API/OAuth, MCP, AutoFlow); reverse-engineer a doc into a reconstruction prompt with {{placeholders}} + data-manifest. SKIP: producing/parsing a finished file FORMAT \u2192 document-formats; general Chrome-extension architecture \u2192 chrome-extension-expert; prose/voice \u2192 writing-expert.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude Code",
-    "section": "claude-code",
-    "rel_path": "claude-code/content-ingestion-extraction",
-    "category": "Cloud, DevOps & Infrastructure"
   },
   {
     "name": "conversion-copywriting-and-voice-of-customer",
@@ -3047,17 +2750,6 @@
     "category": "Security, Auth & Diagnostics"
   },
   {
-    "name": "harness-streamliner",
-    "description": "Streamline and optimize the Codex harness config \u2014 settings.json, hooks, MCP servers, permissions, env, model, statusline \u2014 to cut redundancy, startup latency, and per-turn token overhead. Runs a read-only scan, then AUTO-APPLIES every Medium-or-higher config fix in place (timestamped backup first, jq-validated after, auto-restore on breakage) and reports what changed. Use this whenever the user wants to \"streamline / optimize / clean up / trim / tune / speed up my Codex setup or config\", mentions a bloated or slow settings.json, duplicate or redundant permission rules, dead or broken hooks, too many MCP servers eating context, high startup cost, or asks to audit ~/.Codex (and project .Codex/) for cruft. Covers user-level ~/.Codex AND project-level .Codex/settings*.json when a repo is in scope. Triggers on: \"/hso\", \"streamline my Codex setup\", \"optimize my settings\", \"my config is bloated\", \"clean up my permissions\", \"audit my hooks\", \"reduce startup overhead\", \"too many mcp servers\". SKIP: skill body/triggering quality -> skill-optimizer; skill tree, count, placement, or tiering -> skill-tree-architect, /skill-tier, /sync-skills; prompt or agent-instruction quality -> prompt-deep-optimizer; a single precise setting change the user already named -> update-config.",
-    "has_references": true,
-    "has_scripts": true,
-    "has_examples": false,
-    "platform": "Claude Code",
-    "section": "claude-code",
-    "rel_path": "claude-code/harness-streamliner",
-    "category": "AI, Agents & Prompt Engineering"
-  },
-  {
     "name": "health-behavior-change-and-donor-registration",
     "description": "Apply health-behavior models and organ-donor registration intervention evidence. HBM (susceptibility, severity, benefits, barriers, cues, self-efficacy); TPB/TRA (attitude, norm, PBC, intention\u2192behavior); EPPM (threat x efficacy, danger- vs fear-control); COM-B (capability, opportunity, motivation); the willingness-registration GAP; mandated/prompted/active choice, opt-in vs opt-out/presumed consent (behavioral-defaults evidence), reciprocity priming, loss-framing, social norms, UK BIT RCT 1M+. TRIGGER: HBM/TPB/EPPM for a health campaign; fear-appeal design; intention-action gap; donor registration campaign design; opt-in/opt-out/mandated/prompted-choice evidence (not policy advocacy); reciprocity or loss-framing for donation messaging; COM-B barrier mapping; social-norm messaging for registration; why supporters don't register. SKIP: SDT/Fogg/habit loops/stages-of-change \u2192 applied-psychology (references/behavior-change-psychology.md); OPO/OPTN/system/consent law \u2192 venture-organ-donation-system; presumed-consent policy advocacy \u2192 venture-organ-donation-frontier; Cialdini/norm theory/ELM/reactance \u2192 applied-psychology (references/persuasion-and-influence-psychology.md); nudge/defaults/choice-architecture \u2192 applied-psychology (references/behavioral-decision-making.md); EPPM for charitable giving/prosocial framing \u2192 psychology-of-charitable-giving.",
     "has_references": true,
@@ -3155,17 +2847,6 @@
     "section": "claude-code",
     "rel_path": "claude-code/legal",
     "category": "Cloud, DevOps & Infrastructure"
-  },
-  {
-    "name": "Misc / Catch-All (hub)",
-    "description": "The task asks me to return the fixed file content directly:",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude Code",
-    "section": "claude-code",
-    "rel_path": "claude-code/misc-catch-all",
-    "category": "Writing, Communication & Marketing"
   },
   {
     "name": "mongodb-atlas-expert",
@@ -3311,17 +2992,6 @@
     "category": "Cloud, DevOps & Infrastructure"
   },
   {
-    "name": "prompt-helper-optimizer",
-    "description": "One-off and exploratory prompt improvement \u2014 interprets a raw prompt, finds weaknesses, and rewrites it into an agent-ready instruction. Two aliases: /ph (review mode: critique + recommendations) and /phe (auto-execute mode: optimize, save, and immediately run the improved prompt). Algorithm-aware: recommends APE, OPRO, ProTeGi, TextGrad, EvoPrompt, DSPy/MIPROv2, GEPA, and BetterTogether when relevant. TRIGGER: \"improve/rewrite/optimize/critique this prompt\", \"/ph\", \"/phe\", \"which prompt algorithm should I use\", \"make this agent-ready\", \"strengthen this prompt\", \"rubber-duck this prompt\". SKIP: production or codebase system prompts needing multi-pass audit (use prompt-deep-optimizer /pdo); prompt engineering reference or learning questions (use the ai-mcp-sdk-prompting hub); retrieving saved prompts -> ai-mcp-sdk-prompting (references/prompt-lookup.md); optimizing MongoDB queries, Atlas indexes, SQL queries, code, or any non-prompt artifact; prompts longer than ~600 tokens (use /pdo).",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude Code",
-    "section": "claude-code",
-    "rel_path": "claude-code/prompt-helper-optimizer",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
     "name": "psychology",
     "description": "Psychology domain hub \u2014 clinical, developmental, social & positive psychology as a deep knowledge domain (vs applied-psychology = TAM/operator lens). SPOKES: psychology-positive; psychology-clinical-personality; psychology-neurodevelopmental; psychology-stress-trauma; psychology-social; psychology-confidence-identity; psychology-influence-depth. TRIGGER: personality disorders (narcissism, BPD, psychopathy, dark triad); neurodevelopmental (ADHD, autism, masking); positive psychology / PERMA / wellbeing; stress science / allostatic load / PTSD / polyvagal theory; social hierarchy / status / dominance; self-efficacy / impostor syndrome; influence theory (Cialdini, compliance, cult dynamics). SKIP: operator psychology (behavior change, nudges, decision-making, human-AI) \u2192 applied-psychology; persuasion in practice \u2192 content-and-marketing-writing; moral psychology \u2192 applied-psychology.",
     "has_references": true,
@@ -3418,17 +3088,6 @@
     "platform": "Claude Code",
     "section": "claude-code",
     "rel_path": "claude-code/psychology-stress-trauma",
-    "category": "Science, Biology & Medicine"
-  },
-  {
-    "name": "repo-bootstrapper",
-    "description": "TRIGGER: bootstrap, audit, or bring a repo to mdb-tam standard; create or update AGENTS.md/AGENTS.md/docs suite; initialize operations infrastructure; generate high_signal_file_index.json or codebase-overview.md. Creates or upgrades any repository to the full mdb-tam standard. Refreshes every meta document the repo carries \u2014 AGENTS.md, AGENTS.md, README.md indices, .github/, .vscode/, .editorconfig, .gitignore, dependabot, CODEOWNERS, issue/PR templates, CI workflows \u2014 plus the docs/ suite and operations infrastructure (operations-registry.js, tool-inventory.json, CI drift check, 5-standard external-call audit). SKIP: pure code review or bug fix (use the /code-review command); pure security audit (use security-reviewer); code-pattern extraction without meta-doc work (use repo-pattern-scanner); repos not following mdb-tam conventions.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude Code",
-    "section": "claude-code",
-    "rel_path": "claude-code/repo-bootstrapper",
     "category": "Science, Biology & Medicine"
   },
   {
@@ -3561,17 +3220,6 @@
     "platform": "Claude Code",
     "section": "claude-code",
     "rel_path": "claude-code/splunk-platform-spl",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
-    "name": "tam-operations",
-    "description": "TAM operations hub \u2014 account deliverables, customer health, case & incident ops, reporting automation, Customer Dashboard support-data. TRIGGER: TAM deliverables \u2014 EBR/QBR, account review, support plan, engagement overview, JIMP, weekly update, case-analysis report; account health, churn risk, NRR, sentiment, health-scoring; MongoDB Premium Services operating model (TAM/NTSE/IR/DCE roles, S1\u2013S4 SLAs, JIMP/Break-Glass/PIR-RCA, Straight-to-8, risk register, Monday tracking); account-artifact collection; shift-handoff (SBAR), meeting-prep, operator reports (freshness, BLUF); customer file consolidation; active case tracker (Support API, severity, diagnostic catalog, LLM summarization); case/event timeline viz; incident response (SEV, IC/comms, postmortems, SLO/error budgets, on-call, MTTD/MTTR); Monday.com board audit; Slack subscription audit. SKIP: vendor API client dev \u2192 integration-clients; MongoDB technical \u2192 mongodb-* hubs.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude Code",
-    "section": "claude-code",
-    "rel_path": "claude-code/tam-operations",
     "category": "Databases, Data Engineering & Analytics"
   },
   {
@@ -3762,17 +3410,6 @@
     "category": "Security, Auth & Diagnostics"
   },
   {
-    "name": "ai-agent-engineering",
-    "description": "AI & agent-engineering family ROUTER. Split into: ai-agents-orchestration (agent frameworks, multi-agent, memory, planning, guardrails, coding/GUI agents, autonomous loops, eval); ai-rag-retrieval (RAG, iterative retrieval, vector/graph datastores); ai-llm-model-layer (training, fine-tuning, alignment/RLHF, compression, inference serving, transformer/multimodal architecture, model selection, observability); ai-mcp-sdk-prompting (MCP servers/builder, Anthropic SDK, prompt engineering, context engineering, LLM frameworks, tool-search, prompt lookup). Route to the matching sub-hub.",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/ai-agent-engineering",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
     "name": "ai-agents-orchestration",
     "description": "AI agent building & orchestration sub-hub (ai-agent family). TRIGGER: agent ecosystems/frameworks (Claude SDK, LangGraph, CrewAI, OpenAI Agents); multi-agent orchestration & councils; A2A interop / Agent Cards; agent harness construction (action spaces, tool defs, observation format); agent memory architecture; planning patterns; reliability & guardrails; durable execution/state; agent workflow builders; autonomous loops; coding agents; vibe coding & AI-assisted dev (spec-driven development); computer-use/GUI agents; voice/realtime agents; eval-driven development; automated agent/compound-system optimization from a metric (ADAS, AFlow, DSPy/MIPROv2, GEPA, TextGrad, Trace/OptoPrime, Darwin-G\u00f6del Machine, self-improving agents); algorithmic discovery & superoptimization (AlphaTensor/AlphaDev/FunSearch/AlphaEvolve, program synthesis, evolving faster algorithms); self-improving skill libraries (Voyager, ACE, experience-to-skill distillation, playbook curation). SKIP: RAG/retrieval \u2192 ai-rag-retrieval; model training/serving \u2192 ai-llm-model-layer; MCP/SDK/prompting \u2192 ai-mcp-sdk-prompting.",
     "has_references": true,
@@ -3804,17 +3441,6 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/ai-llm-model-layer",
     "category": "Cloud, DevOps & Infrastructure"
-  },
-  {
-    "name": "ai-mcp-sdk-prompting",
-    "description": "MCP, SDK, prompting & context-engineering sub-hub (ai-agent family). TRIGGER: MCP servers & the MCP builder; Anthropic SDK; prompt engineering; LLM context engineering (CLAUDE.md, caching, agent memory, prompt-injection hardening); declarative LLM frameworks; multi-provider LLM integration review; AI programming languages; AI red-teaming tooling; MCP tool-search/discovery optimization; prompt discovery/lookup & registries; iterative self-refinement & convergence loops (Self-Refine, Reflexion, CRITIC, stop-condition/oscillation/budget); prompt & context compression (LLMLingua, gist tokens, soft-prompt distillation); applied vision-model UI-critique technique (VLM critiques a screenshot \u2014 structured findings, Set-of-Mark grounding, before/after, VLM-as-judge calibration & failure modes). SKIP: agent orchestration \u2192 ai-agents-orchestration; RAG \u2192 ai-rag-retrieval; model training/serving (incl. VLM encoder/architecture internals) \u2192 ai-llm-model-layer; defending a deployed RAG/agent against prompt injection (lethal trifecta, CaMeL, OWASP LLM Top 10) \u2192 rag-prompt-injection-defense.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/ai-mcp-sdk-prompting",
-    "category": "Science, Biology & Medicine"
   },
   {
     "name": "ai-rag-retrieval",
@@ -4057,17 +3683,6 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/content-and-marketing-writing",
     "category": "Science, Biology & Medicine"
-  },
-  {
-    "name": "content-ingestion-extraction",
-    "description": "Acquire, extract, audit & restructure content from heterogeneous sources \u2014 aging docs, doc folders/KBs, live web DOM, meeting-audio devices, one-off docs to templatize. TRIGGER: doc archaeology (staleness, dead links, process drift, deprecate/archive decisions); doc-store bootstrapping (numbered taxonomy, _meta indexes, archive policy); Chrome content-script DOM extractor (selector fallback, MutationObserver/waitForElement, shadow-DOM, SPA nav, partial extraction); Granola transcript/notes fetch (REST, native-host, ProseMirror, polling sync); Plaud recorder ecosystem (devices, Developer API/OAuth, MCP, AutoFlow); reverse-engineer a doc into a reconstruction prompt with {{placeholders}} + data-manifest. SKIP: producing/parsing a finished file FORMAT \u2192 document-formats; general Chrome-extension architecture \u2192 chrome-extension-expert; prose/voice \u2192 writing-expert.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/content-ingestion-extraction",
-    "category": "Cloud, DevOps & Infrastructure"
   },
   {
     "name": "conversion-copywriting-and-voice-of-customer",
@@ -4444,17 +4059,6 @@
     "category": "Science, Biology & Medicine"
   },
   {
-    "name": "harness-streamliner",
-    "description": "Streamline and optimize the Claude Code harness config \u2014 settings.json, hooks, MCP servers, permissions, env, model, statusline \u2014 to cut redundancy, startup latency, and per-turn token overhead. Runs a read-only scan, then AUTO-APPLIES every Medium-or-higher config fix in place (timestamped backup first, jq-validated after, auto-restore on breakage) and reports what changed. Use this whenever the user wants to \"streamline / optimize / clean up / trim / tune / speed up my Claude setup or config\", mentions a bloated or slow settings.json, duplicate or redundant permission rules, dead or broken hooks, too many MCP servers eating context, high startup cost, or asks to audit ~/.claude (and project .claude/) for cruft. Covers user-level ~/.claude AND project-level .claude/settings*.json when a repo is in scope. Triggers on: \"/hso\", \"streamline my claude setup\", \"optimize my settings\", \"my config is bloated\", \"clean up my permissions\", \"audit my hooks\", \"reduce startup overhead\", \"too many mcp servers\". SKIP: skill body/triggering quality -> skill-optimizer; skill tree, count, placement, or tiering -> skill-tree-architect, /skill-tier, /sync-skills; prompt or agent-instruction quality -> prompt-deep-optimizer; a single precise setting change the user already named -> update-config.",
-    "has_references": true,
-    "has_scripts": true,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/harness-streamliner",
-    "category": "AI, Agents & Prompt Engineering"
-  },
-  {
     "name": "health-behavior-change-and-donor-registration",
     "description": "Apply health-behavior models and organ-donor registration intervention evidence. HBM (susceptibility, severity, benefits, barriers, cues, self-efficacy); TPB/TRA (attitude, norm, PBC, intention\u2192behavior); EPPM (threat x efficacy, danger- vs fear-control); COM-B (capability, opportunity, motivation); the willingness-registration GAP; mandated/prompted/active choice, opt-in vs opt-out/presumed consent (behavioral-defaults evidence), reciprocity priming, loss-framing, social norms, UK BIT RCT 1M+. TRIGGER: HBM/TPB/EPPM for a health campaign; fear-appeal design; intention-action gap; donor registration campaign design; opt-in/opt-out/mandated/prompted-choice evidence (not policy advocacy); reciprocity or loss-framing for donation messaging; COM-B barrier mapping; social-norm messaging for registration; why supporters don't register. SKIP: SDT/Fogg/habit loops/stages-of-change \u2192 applied-psychology (references/behavior-change-psychology.md); OPO/OPTN/system/consent law \u2192 venture-organ-donation-system; presumed-consent policy advocacy \u2192 venture-organ-donation-frontier; Cialdini/norm theory/ELM/reactance \u2192 applied-psychology (references/persuasion-and-influence-psychology.md); nudge/defaults/choice-architecture \u2192 applied-psychology (references/behavioral-decision-making.md); EPPM for charitable giving/prosocial framing \u2192 psychology-of-charitable-giving.",
     "has_references": true,
@@ -4563,17 +4167,6 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/logql-grafana-loki",
     "category": "Databases, Data Engineering & Analytics"
-  },
-  {
-    "name": "Misc / Catch-All (hub)",
-    "description": "The task asks me to return the fixed file content directly:",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/misc-catch-all",
-    "category": "Writing, Communication & Marketing"
   },
   {
     "name": "mongodb-atlas-expert",
@@ -4730,17 +4323,6 @@
     "category": "Cloud, DevOps & Infrastructure"
   },
   {
-    "name": "prompt-helper-optimizer",
-    "description": "One-off and exploratory prompt improvement \u2014 interprets a raw prompt, finds weaknesses, and rewrites it into an agent-ready instruction. Two aliases: /ph (review mode: critique + recommendations) and /phe (auto-execute mode: optimize, save, and immediately run the improved prompt). Algorithm-aware: recommends APE, OPRO, ProTeGi, TextGrad, EvoPrompt, DSPy/MIPROv2, GEPA, and BetterTogether when relevant. TRIGGER: \"improve/rewrite/optimize/critique this prompt\", \"/ph\", \"/phe\", \"which prompt algorithm should I use\", \"make this agent-ready\", \"strengthen this prompt\", \"rubber-duck this prompt\". SKIP: production or codebase system prompts needing multi-pass audit (use prompt-deep-optimizer /pdo); prompt engineering reference or learning questions (use the ai-mcp-sdk-prompting hub); retrieving saved prompts -> ai-mcp-sdk-prompting (references/prompt-lookup.md); optimizing MongoDB queries, Atlas indexes, SQL queries, code, or any non-prompt artifact; prompts longer than ~600 tokens (use /pdo).",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/prompt-helper-optimizer",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
     "name": "psychology",
     "description": "Psychology domain hub \u2014 clinical, developmental, social & positive psychology as a deep knowledge domain (vs applied-psychology = TAM/operator lens). SPOKES: psychology-positive; psychology-clinical-personality; psychology-neurodevelopmental; psychology-stress-trauma; psychology-social; psychology-confidence-identity; psychology-influence-depth. TRIGGER: personality disorders (narcissism, BPD, psychopathy, dark triad); neurodevelopmental (ADHD, autism, masking); positive psychology / PERMA / wellbeing; stress science / allostatic load / PTSD / polyvagal theory; social hierarchy / status / dominance; self-efficacy / impostor syndrome; influence theory (Cialdini, compliance, cult dynamics). SKIP: operator psychology (behavior change, nudges, decision-making, human-AI) \u2192 applied-psychology; persuasion in practice \u2192 content-and-marketing-writing; moral psychology \u2192 applied-psychology.",
     "has_references": true,
@@ -4851,17 +4433,6 @@
     "category": "Science, Biology & Medicine"
   },
   {
-    "name": "repo-bootstrapper",
-    "description": "TRIGGER: bootstrap, audit, or bring a repo to mdb-tam standard; create or update CLAUDE.md/AGENTS.md/docs suite; initialize operations infrastructure; generate high_signal_file_index.json or codebase-overview.md. Creates or upgrades any repository to the full mdb-tam standard. Refreshes every meta document the repo carries \u2014 CLAUDE.md, AGENTS.md, README.md indices, .github/, .vscode/, .editorconfig, .gitignore, dependabot, CODEOWNERS, issue/PR templates, CI workflows \u2014 plus the docs/ suite and operations infrastructure (operations-registry.js, tool-inventory.json, CI drift check, 5-standard external-call audit). SKIP: pure code review or bug fix (use the /code-review command); pure security audit (use security-reviewer); code-pattern extraction without meta-doc work (use repo-pattern-scanner); repos not following mdb-tam conventions.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/repo-bootstrapper",
-    "category": "Science, Biology & Medicine"
-  },
-  {
     "name": "research-methodology",
     "description": "Academic & scientific research methodology hub (deep-research family). Covers formal evidence-synthesis (systematic reviews, PRISMA, GRADE, meta-analysis, research integrity); data annotation & labeling (ML annotation, inter-rater reliability, qualitative coding, NLP labeling pipelines); research data management & FAIR principles (DMP, metadata standards, data repositories, reproducibility); personal knowledge management for researchers (PKM, Zotero, Obsidian, note-taking systems for large literature streams); AI-assisted literature review tools (Elicit, Consensus, scite, SciSpace, provenance/trust layer). SKIP: conducting live web research now \u2192 deep-research; HOW to research / methodology-only \u2192 deep-research (references/deep-research-methods.md).",
     "has_references": true,
@@ -4939,17 +4510,6 @@
     "category": "Science, Biology & Medicine"
   },
   {
-    "name": "ai-agent-engineering",
-    "description": "AI & agent-engineering family ROUTER. Split into: ai-agents-orchestration (agent frameworks, multi-agent, memory, planning, guardrails, coding/GUI agents, autonomous loops, eval); ai-rag-retrieval (RAG, iterative retrieval, vector/graph datastores); ai-llm-model-layer (training, fine-tuning, alignment/RLHF, compression, inference serving, transformer/multimodal architecture, model selection, observability); ai-mcp-sdk-prompting (MCP servers/builder, Anthropic SDK, prompt engineering, context engineering, LLM frameworks, tool-search, prompt lookup). Route to the matching sub-hub.",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/ai-agent-engineering",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
     "name": "ai-agents-orchestration",
     "description": "AI agent building & orchestration sub-hub (ai-agent family). TRIGGER: agent ecosystems/frameworks (Claude SDK, LangGraph, CrewAI, OpenAI Agents); multi-agent orchestration & councils; A2A interop / Agent Cards; agent harness construction (action spaces, tool defs, observation format); agent memory architecture; planning patterns; reliability & guardrails; durable execution/state; agent workflow builders; autonomous loops; coding agents; vibe coding & AI-assisted dev (spec-driven development); computer-use/GUI agents; voice/realtime agents; eval-driven development; automated agent/compound-system optimization from a metric (ADAS, AFlow, DSPy/MIPROv2, GEPA, TextGrad, Trace/OptoPrime, Darwin-G\u00f6del Machine, self-improving agents); algorithmic discovery & superoptimization (AlphaTensor/AlphaDev/FunSearch/AlphaEvolve, program synthesis, evolving faster algorithms); self-improving skill libraries (Voyager, ACE, experience-to-skill distillation, playbook curation). SKIP: RAG/retrieval \u2192 ai-rag-retrieval; model training/serving \u2192 ai-llm-model-layer; MCP/SDK/prompting \u2192 ai-mcp-sdk-prompting.",
     "has_references": true,
@@ -4981,17 +4541,6 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/ai-llm-model-layer",
     "category": "Cloud, DevOps & Infrastructure"
-  },
-  {
-    "name": "ai-mcp-sdk-prompting",
-    "description": "MCP, SDK, prompting & context-engineering sub-hub (ai-agent family). TRIGGER: MCP servers & the MCP builder; Anthropic SDK; prompt engineering; LLM context engineering (CLAUDE.md, caching, agent memory, prompt-injection hardening); declarative LLM frameworks; multi-provider LLM integration review; AI programming languages; AI red-teaming tooling; MCP tool-search/discovery optimization; prompt discovery/lookup & registries; iterative self-refinement & convergence loops (Self-Refine, Reflexion, CRITIC, stop-condition/oscillation/budget); prompt & context compression (LLMLingua, gist tokens, soft-prompt distillation); applied vision-model UI-critique technique (VLM critiques a screenshot \u2014 structured findings, Set-of-Mark grounding, before/after, VLM-as-judge calibration & failure modes). SKIP: agent orchestration \u2192 ai-agents-orchestration; RAG \u2192 ai-rag-retrieval; model training/serving (incl. VLM encoder/architecture internals) \u2192 ai-llm-model-layer; defending a deployed RAG/agent against prompt injection (lethal trifecta, CaMeL, OWASP LLM Top 10) \u2192 rag-prompt-injection-defense.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/ai-mcp-sdk-prompting",
-    "category": "Science, Biology & Medicine"
   },
   {
     "name": "ai-rag-retrieval",
@@ -5267,17 +4816,6 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/content-and-marketing-writing",
     "category": "Science, Biology & Medicine"
-  },
-  {
-    "name": "content-ingestion-extraction",
-    "description": "Acquire, extract, audit & restructure content from heterogeneous sources \u2014 aging docs, doc folders/KBs, live web DOM, meeting-audio devices, one-off docs to templatize. TRIGGER: doc archaeology (staleness, dead links, process drift, deprecate/archive decisions); doc-store bootstrapping (numbered taxonomy, _meta indexes, archive policy); Chrome content-script DOM extractor (selector fallback, MutationObserver/waitForElement, shadow-DOM, SPA nav, partial extraction); Granola transcript/notes fetch (REST, native-host, ProseMirror, polling sync); Plaud recorder ecosystem (devices, Developer API/OAuth, MCP, AutoFlow); reverse-engineer a doc into a reconstruction prompt with {{placeholders}} + data-manifest. SKIP: producing/parsing a finished file FORMAT \u2192 document-formats; general Chrome-extension architecture \u2192 chrome-extension-expert; prose/voice \u2192 writing-expert; a skill file's factual currency \u2192 skill-refresher.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/content-ingestion-extraction",
-    "category": "Cloud, DevOps & Infrastructure"
   },
   {
     "name": "conversion-copywriting-and-voice-of-customer",
@@ -6105,17 +5643,6 @@
     "category": "Science, Biology & Medicine"
   },
   {
-    "name": "harness-streamliner",
-    "description": "Streamline and optimize the Claude Code harness config \u2014 settings.json, hooks, MCP servers, permissions, env, model, statusline \u2014 to cut redundancy, startup latency, and per-turn token overhead. Runs a read-only scan, then AUTO-APPLIES every Medium-or-higher config fix in place (timestamped backup first, jq-validated after, auto-restore on breakage) and reports what changed. Use this whenever the user wants to \"streamline / optimize / clean up / trim / tune / speed up my Claude setup or config\", mentions a bloated or slow settings.json, duplicate or redundant permission rules, dead or broken hooks, too many MCP servers eating context, high startup cost, or asks to audit ~/.claude (and project .claude/) for cruft. Covers user-level ~/.claude AND project-level .claude/settings*.json when a repo is in scope. Triggers on: \"/hso\", \"streamline my claude setup\", \"optimize my settings\", \"my config is bloated\", \"clean up my permissions\", \"audit my hooks\", \"reduce startup overhead\", \"too many mcp servers\". SKIP: skill body/triggering quality -> skill-optimizer; skill tree, count, placement, or tiering -> skill-tree-architect, /skill-tier, /sync-skills; prompt or agent-instruction quality -> prompt-deep-optimizer; a single precise setting change the user already named -> update-config.",
-    "has_references": true,
-    "has_scripts": true,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/harness-streamliner",
-    "category": "AI, Agents & Prompt Engineering"
-  },
-  {
     "name": "health-behavior-change-and-donor-registration",
     "description": "Apply health-behavior models and organ-donor registration intervention evidence. HBM (susceptibility, severity, benefits, barriers, cues, self-efficacy); TPB/TRA (attitude, norm, PBC, intention\u2192behavior); EPPM (threat x efficacy, danger- vs fear-control); COM-B (capability, opportunity, motivation); the willingness-registration GAP; mandated/prompted/active choice, opt-in vs opt-out/presumed consent (behavioral-defaults evidence), reciprocity priming, loss-framing, social norms, UK BIT RCT 1M+. TRIGGER: HBM/TPB/EPPM for a health campaign; fear-appeal design; intention-action gap; donor registration campaign design; opt-in/opt-out/mandated/prompted-choice evidence (not policy advocacy); reciprocity or loss-framing for donation messaging; COM-B barrier mapping; social-norm messaging for registration; why supporters don't register. SKIP: SDT/Fogg/habit loops/stages-of-change \u2192 applied-psychology (references/behavior-change-psychology.md); OPO/OPTN/system/consent law \u2192 venture-organ-donation-system; presumed-consent policy advocacy \u2192 venture-organ-donation-frontier; Cialdini/norm theory/ELM/reactance \u2192 applied-psychology (references/persuasion-and-influence-psychology.md); nudge/defaults/choice-architecture \u2192 applied-psychology (references/behavioral-decision-making.md); EPPM for charitable giving/prosocial framing \u2192 psychology-of-charitable-giving.",
     "has_references": true,
@@ -6278,17 +5805,6 @@
     "platform": "Claude",
     "section": "claude/standalone",
     "rel_path": "claude/standalone/logql-grafana-loki",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
-    "name": "misc-catch-all",
-    "description": "Catch-all hub for standalone skills that do not belong to any coherent >=8 family \u2014 reached by elimination, not topic match. TRIGGER: only when no other hub or skill fits and you have scanned the routing table below for the specific standalone skill. SKIP: anything matching a real domain hub (mongodb, frontend, security-review, data-analytics, deep-optimizer, writing, devops, etc.) -> that hub. NOTE: this is a deliberate junk drawer; prefer the per-skill routing table in the body over the hub description.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/misc-catch-all",
     "category": "Databases, Data Engineering & Analytics"
   },
   {
@@ -6512,17 +6028,6 @@
     "category": "Cloud, DevOps & Infrastructure"
   },
   {
-    "name": "prompt-helper-optimizer",
-    "description": "One-off and exploratory prompt improvement \u2014 interprets a raw prompt, finds weaknesses, and rewrites it into an agent-ready instruction. Two aliases: /ph (review mode: critique + recommendations) and /phe (auto-execute mode: optimize, save, and immediately run the improved prompt). Algorithm-aware: recommends APE, OPRO, ProTeGi, TextGrad, EvoPrompt, DSPy/MIPROv2, GEPA, and BetterTogether when relevant. TRIGGER: \"improve/rewrite/optimize/critique this prompt\", \"/ph\", \"/phe\", \"which prompt algorithm should I use\", \"make this agent-ready\", \"strengthen this prompt\", \"rubber-duck this prompt\". SKIP: production or codebase system prompts needing multi-pass audit (use prompt-deep-optimizer /pdo); prompt engineering reference or learning questions (use the ai-mcp-sdk-prompting hub); retrieving saved prompts -> ai-mcp-sdk-prompting (references/prompt-lookup.md); optimizing MongoDB queries, Atlas indexes, SQL queries, code, or any non-prompt artifact; prompts longer than ~600 tokens (use /pdo).",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/prompt-helper-optimizer",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
     "name": "psychology",
     "description": "Psychology domain hub \u2014 clinical, developmental, social & positive psychology as a deep knowledge domain (vs applied-psychology = TAM/operator lens). SPOKES: psychology-positive; psychology-clinical-personality; psychology-neurodevelopmental; psychology-stress-trauma; psychology-social; psychology-confidence-identity; psychology-influence-depth; psychology-institutional-betrayal. TRIGGER: personality disorders (narcissism, BPD, psychopathy, dark triad); neurodevelopmental (ADHD, autism, masking); positive psychology / PERMA / wellbeing; stress science / allostatic load / PTSD / polyvagal theory; social hierarchy / status / dominance; self-efficacy / impostor syndrome; influence theory (Cialdini, compliance, cult dynamics); institutional betrayal / DARVO / survivor disbelief. SKIP: operator psychology (behavior change, nudges, decision-making, human-AI) \u2192 applied-psychology; persuasion in practice \u2192 content-and-marketing-writing; moral psychology \u2192 applied-psychology.",
     "has_references": true,
@@ -6641,17 +6146,6 @@
     "platform": "Claude",
     "section": "claude/standalone",
     "rel_path": "claude/standalone/rag-prompt-injection-defense",
-    "category": "Science, Biology & Medicine"
-  },
-  {
-    "name": "repo-bootstrapper",
-    "description": "TRIGGER: bootstrap, audit, or bring a repo to mdb-tam standard; create or update CLAUDE.md/AGENTS.md/docs suite; initialize operations infrastructure; generate high_signal_file_index.json or codebase-overview.md. Creates or upgrades any repository to the full mdb-tam standard. Refreshes every meta document the repo carries \u2014 CLAUDE.md, AGENTS.md, README.md indices, .github/, .vscode/, .editorconfig, .gitignore, dependabot, CODEOWNERS, issue/PR templates, CI workflows \u2014 plus the docs/ suite and operations infrastructure (operations-registry.js, tool-inventory.json, CI drift check, 5-standard external-call audit). SKIP: pure code review or bug fix (use the /code-review command); pure security audit (use security-reviewer); code-pattern extraction without meta-doc work (use repo-pattern-scanner); repos not following mdb-tam conventions.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/repo-bootstrapper",
     "category": "Science, Biology & Medicine"
   },
   {
@@ -6796,17 +6290,6 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/subscription-commerce",
     "category": "Science, Biology & Medicine"
-  },
-  {
-    "name": "tam-operations",
-    "description": "TAM operations hub \u2014 account deliverables, customer health, case & incident ops, reporting automation, Customer Dashboard support-data. TRIGGER: TAM deliverables \u2014 EBR/QBR, account review, support plan, engagement overview, JIMP, weekly update, case-analysis report; account health, churn risk, NRR, sentiment, health-scoring; MongoDB Premium Services operating model (TAM/NTSE/IR/DCE roles, S1\u2013S4 SLAs, JIMP/Break-Glass/PIR-RCA, Straight-to-8, risk register, Monday tracking); account-artifact collection; shift-handoff (SBAR), meeting-prep, operator reports (freshness, BLUF); customer file consolidation; active case tracker (Support API, severity, diagnostic catalog, LLM summarization); case/event timeline viz; incident response (SEV, IC/comms, postmortems, SLO/error budgets, on-call, MTTD/MTTR); Monday.com board audit; Slack subscription audit. SKIP: vendor API client dev \u2192 integration-clients; MongoDB technical \u2192 mongodb-* hubs.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/tam-operations",
-    "category": "Databases, Data Engineering & Analytics"
   },
   {
     "name": "technical-instruction",
@@ -6974,17 +6457,6 @@
     "category": "Databases, Data Engineering & Analytics"
   },
   {
-    "name": "tam-operations",
-    "description": "TAM operations hub \u2014 account deliverables, customer health, case & incident ops, reporting automation, Customer Dashboard support-data. TRIGGER: TAM deliverables \u2014 EBR/QBR, account review, support plan, engagement overview, JIMP, weekly update, case-analysis report; account health, churn risk, NRR, sentiment, health-scoring; MongoDB Premium Services operating model (TAM/NTSE/IR/DCE roles, S1\u2013S4 SLAs, JIMP/Break-Glass/PIR-RCA, Straight-to-8, risk register, Monday tracking); account-artifact collection; shift-handoff (SBAR), meeting-prep, operator reports (freshness, BLUF); customer file consolidation; active case tracker (Support API, severity, diagnostic catalog, LLM summarization); case/event timeline viz; incident response (SEV, IC/comms, postmortems, SLO/error budgets, on-call, MTTD/MTTR); Monday.com board audit; Slack subscription audit. SKIP: vendor API client dev \u2192 integration-clients; MongoDB technical \u2192 mongodb-* hubs.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/tam-operations",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
     "name": "technical-instruction",
     "description": "Hub for teaching engineers \u2014 design, deliver, assess & measure technical training and engineering education; routes to 10 spokes. TRIGGER: course/curriculum/learning-path design (ADDIE/SAM/Dick&Carey/Gagn\u00e9/UbD, learning objectives, scope-and-sequence); certification & credential design (job-task analysis, item writing, CTT/IRT psychometrics, cut scores, ISO 17024/NCCA, Open Badges); hands-on labs, participatory live coding, DevRel/customer academy; teaching troubleshooting & diagnostic reasoning (cognitive apprenticeship, productive failure, illness scripts); MongoDB University & certification program; training measurement & ROI (Kirkpatrick, Phillips ROI, xAPI/SCORM/cmi5, transfer); GenAI in education (AI-assisted ID, LLM tutors/ITS, AI-resistant assessment); expert-knowledge elicitation (CDM/ACTA/PARI/GDTA); skills taxonomies & competency frameworks (O*NET/ESCO/SFIA, CBE/CBT); is-training-the-right-fix / HPT (Gilbert BEM, EPSS, job aids). SKIP: learning SCIENCE (cognitive load, retrieval, spacing) \u2192 applied-psychology; single tutorial/Di\u00e1taxis \u2192 technical-writing-craft; how to debug \u2192 software-engineering-patterns; live MongoDB/Atlas diagnosis \u2192 atlas-diagnostics-expert; survey/Likert & measurement theory \u2192 career-and-formal-writing/da-1-foundations-theory.",
     "has_references": true,
@@ -7084,17 +6556,6 @@
     "category": "AI, Agents & Prompt Engineering"
   },
   {
-    "name": "atlas-stream-processing",
-    "description": "Manages MongoDB Atlas Stream Processing (ASP) workflows. Handles workspace provisioning, data source/sink connections, processor lifecycle operations, debugging diagnostics, and tier sizing. Supports Kafka, Atlas clusters, S3, HTTPS, and Lambda integrations for streaming data workloads and event processing. NOT for general MongoDB queries or Atlas cluster management. Requires MongoDB MCP Server with Atlas API credentials.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Custom / MongoDB",
-    "section": "custom/mongodb-desktop",
-    "rel_path": "custom/mongodb-desktop/atlas-stream-processing",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
     "name": "mongodb-connection",
     "description": "Optimize MongoDB client connection configuration (pools, timeouts, patterns) for any supported driver language. Use this skill when working/updating/reviewing on functions that instantiate or configure a MongoDB client (eg, when calling `connect()`), configuring connection pools, troubleshooting connection errors (ECONNREFUSED, timeouts, pool exhaustion), optimizing performance issues related to connections. This includes scenarios like building serverless functions with MongoDB, creating API endpoints that use MongoDB, optimizing high-traffic MongoDB applications, creating long-running tasks and concurrency, or debugging connection-related failures.",
     "has_references": true,
@@ -7103,61 +6564,6 @@
     "platform": "Custom / MongoDB",
     "section": "custom/mongodb-desktop",
     "rel_path": "custom/mongodb-desktop/mongodb-connection",
-    "category": "Science, Biology & Medicine"
-  },
-  {
-    "name": "mongodb-mcp-setup",
-    "description": "Guide users through configuring key MongoDB MCP server options. Use this skill when a user has the MongoDB MCP server installed but hasn't configured the required environment variables, or when they ask about connecting to MongoDB/Atlas and don't have the credentials set up.",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Custom / MongoDB",
-    "section": "custom/mongodb-desktop",
-    "rel_path": "custom/mongodb-desktop/mongodb-mcp-setup",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
-    "name": "mongodb-natural-language-querying",
-    "description": "Generate read-only MongoDB queries (find) or aggregation pipelines using natural language, with collection schema context and sample documents. Use this skill whenever the user asks to write, create, or generate MongoDB queries, wants to filter/query/aggregate data in MongoDB, asks \"how do I query...\", needs help with query syntax, or discusses finding/filtering/grouping MongoDB documents. Also use for translating SQL-like requests to MongoDB syntax. Does NOT handle Atlas Search ($search operator), vector/semantic search ($vectorSearch operator), fuzzy matching, autocomplete indexes, or relevance scoring - use search-and-ai for those. Does NOT analyze or optimize existing queries - use mongodb-query-optimizer for that. Does NOT handle aggregation pipelines that involve write operations. Requires MongoDB MCP server.",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Custom / MongoDB",
-    "section": "custom/mongodb-desktop",
-    "rel_path": "custom/mongodb-desktop/mongodb-natural-language-querying",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
-    "name": "mongodb-query-optimizer",
-    "description": "Help with MongoDB query optimization and indexing. Use only when the user asks for optimization or performance: \"How do I optimize this query?\", \"How do I index this?\", \"Why is this query slow?\", \"Can you fix my slow queries?\", \"What are the slow queries on my cluster?\", etc. Do not invoke for general MongoDB query writing unless user asks for performance or index help. Prefer indexing as optimization strategy. Use MongoDB MCP when available.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Custom / MongoDB",
-    "section": "custom/mongodb-desktop",
-    "rel_path": "custom/mongodb-desktop/mongodb-query-optimizer",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
-    "name": "mongodb-schema-design",
-    "description": "MongoDB schema design patterns and anti-patterns. Use when designing data models, reviewing schemas, migrating from SQL, or troubleshooting performance issues caused by schema problems. Triggers on \"design schema\", \"embed vs reference\", \"MongoDB data model\", \"schema review\", \"unbounded arrays\", \"one-to-many\", \"tree structure\", \"16MB limit\", \"schema validation\", \"JSON Schema\", \"time series\", \"schema migration\", \"polymorphic\", \"TTL\", \"data lifecycle\", \"archive\", \"index explosion\", \"unnecessary indexes\", \"approximation pattern\", \"document versioning\".",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Custom / MongoDB",
-    "section": "custom/mongodb-desktop",
-    "rel_path": "custom/mongodb-desktop/mongodb-schema-design",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
-    "name": "mongodb-search-and-ai",
-    "description": "Guides MongoDB users through implementing and optimizing Atlas Search (full-text), Vector Search (semantic), and Hybrid Search solutions. Use this skill when users need to build search functionality for text-based queries (autocomplete, fuzzy matching, faceted search), semantic similarity (embeddings, RAG applications), or combined approaches. Also use when users need text containment, substring matching ('contains', 'includes', 'appears in'), case-insensitive or multi-field text search, or filtering across many fields with variable combinations. Provides workflows for selecting the right search type, creating indexes, constructing queries, and optimizing performance using the MongoDB MCP server.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Custom / MongoDB",
-    "section": "custom/mongodb-desktop",
-    "rel_path": "custom/mongodb-desktop/mongodb-search-and-ai",
     "category": "Science, Biology & Medicine"
   },
   {
