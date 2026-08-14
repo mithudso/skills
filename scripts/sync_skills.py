@@ -354,6 +354,53 @@ def generate_section_readmes(skills):
         with open(target_path, "w", encoding="utf-8") as f:
             f.write("\n".join(lines))
 
+def generate_glean_skills(skills):
+    glean_dir = os.path.join(REPO_DIR, "glean")
+    if os.path.exists(glean_dir):
+        shutil.rmtree(glean_dir)
+    os.makedirs(glean_dir, exist_ok=True)
+    
+    for s in skills:
+        skill_file = os.path.join(REPO_DIR, s["rel_path"], "SKILL.md")
+        if not os.path.exists(skill_file):
+            continue
+            
+        try:
+            with open(skill_file, "r", encoding="utf-8", errors="ignore") as f:
+                content = f.read()
+                
+            content_no_fm = content
+            if content.startswith("---"):
+                parts = content.split("---", 2)
+                if len(parts) >= 3:
+                    content_no_fm = parts[2].strip()
+                    
+            safe_name = s["name"].replace("/", "-").replace("\\", "-").replace(" ", "_").lower()
+            platform_prefix = s["platform"].replace(" / ", "-").replace("/", "-").replace(" ", "_").lower()
+            file_name = f"{platform_prefix}-{safe_name}.md"
+            
+            target_path = os.path.join(glean_dir, file_name)
+            
+            lines = [
+                f"# {s['name']}",
+                "",
+                f"**Category:** {s.get('category', '')}",
+                f"**Platform:** {s.get('platform', '')}",
+                f"**Original Path:** {s.get('rel_path', '')}",
+                "",
+                "## Description",
+                s.get('description', ''),
+                "",
+                "---",
+                "",
+                content_no_fm
+            ]
+            
+            with open(target_path, "w", encoding="utf-8") as f:
+                f.write("\n".join(lines))
+        except Exception as e:
+            log(f"Error generating Glean skill for {s['name']}: {e}")
+
 def run_sync():
     log("Starting synchronization scan...")
     collected_skills = []
@@ -544,6 +591,7 @@ def run_sync():
     generate_index_md(collected_skills)
     generate_readme_md(collected_skills)
     generate_section_readmes(collected_skills)
+    generate_glean_skills(collected_skills)
     generate_gitignore()
 
     # Check git status

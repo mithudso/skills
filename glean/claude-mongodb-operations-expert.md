@@ -1,0 +1,100 @@
+# mongodb-operations-expert
+
+**Category:** Databases, Data Engineering & Analytics
+**Platform:** Claude
+**Original Path:** claude/standalone/mongodb-operations-expert
+
+## Description
+MongoDB/Atlas operations hub — reliability & data movement. 18 references. TRIGGER: backup/restore & point-in-time recovery; disaster recovery & RTO/RPO; Ops Manager/Cloud Manager; major-version upgrade paths & FCV; migration patterns & safe schema/data migrations (expand-contract, backfill, rollback); mongosync live migration / cluster-to-cluster; Relational Migrator; CDC pipeline architecture; change streams/TTL/archival & lifecycle; security architecture, auth, network hardening; encryption at-rest/in-transit/CSFLE/Queryable Encryption; compliance & regulatory posture; Atlas cost optimization & right-sizing; Kafka connector; Spark connector; cloud-native compute–storage disaggregation (Aurora/Hyperscale/PolarDB/Neon, object-storage OLTP, serverless/scale-to-zero, branching). SKIP: data-plane query/index/schema/engine → mongodb-expert; Atlas platform/features → mongodb-atlas-expert; live diagnostics/perf → atlas-diagnostics-expert; KB lookup → mongodb-kb.
+
+---
+
+# MongoDB Operations Expert
+
+The operations, reliability, and data-movement hub for MongoDB and Atlas. This
+skill covers the parts of running MongoDB that sit *around* the data plane:
+keeping data safe (backup, restore, point-in-time recovery, disaster recovery),
+moving data (migration patterns, mongosync live migration, Relational Migrator,
+CDC, Kafka and Spark connectors), governing data (lifecycle, archival, security
+architecture, encryption, compliance), and controlling spend (cost
+optimization). It spans both Atlas-managed and self-managed deployments, plus
+the Ops Manager / Cloud Manager control planes that automate them.
+
+Use it when the task is about reliability or data movement rather than writing
+queries, designing Atlas platform features, or diagnosing a live cluster. For a
+single deep sub-area, match the routing table below and read the corresponding
+reference file before answering.
+
+## How to use this skill
+
+This skill consolidates 16 MongoDB operations sub-skills as on-demand reference
+files. Match the task to the routing table below and **Read the listed
+`references/…md` file before answering deep questions** — the table alone is not
+enough for depth. For exact command, option, version, and endpoint details,
+defer to the official MongoDB Manual, Atlas docs, and connector docs as the
+source of truth.
+
+## Sub-skill routing table
+
+This hub absorbs 16 former standalone skills plus 2 researched architecture references (18 total) as on-demand reference files. When a
+task matches a row, **Read the listed `references/` file** before answering — do
+not rely on this table alone for depth.
+
+| Sub-topic | When to load | Reference file |
+| --- | --- | --- |
+| `mongodb-backup-restore` | MongoDB backup and restore — Atlas Cloud Backup snapshot policies, Continuous Cloud Backup PIT windows and oplog sizing, Queryable Backups, Ops Manager / self-managed backup, `mongodump`/`mongorestore`. | `references/mongodb-backup-restore.md` |
+| `mongodb-disaster-recovery` | MongoDB Atlas and self-managed disaster recovery — RTO/RPO modeling and calculation, failover and multi-region/multi-cloud topology, recovery runbooks. | `references/mongodb-disaster-recovery.md` |
+| `mongodb-ops-manager` | MongoDB Ops Manager (self-hosted) and Cloud Manager (hosted SaaS) control plane — automation, monitoring, and backup of self-managed deployments. | `references/mongodb-ops-manager.md` |
+| `mongodb-upgrade-paths` | MongoDB self-managed upgrade paths — sequential 4.4→5.0→6.0→7.0→8.0 paths, FCV management, binary upgrade ordering, and rollback. | `references/mongodb-upgrade-paths.md` |
+| `mongodb-migration-patterns` | Strategy and tooling reference for migrating data into, out of, and between MongoDB clusters. | `references/mongodb-migration-patterns.md` |
+| `mongosync` | Live migration / cluster-to-cluster sync with mongosync — when to choose it, setup, and cutover. | `references/mongosync.md` |
+| `mongodb-mongosync` | mongosync deep reference — configuration, filtering, reverse sync, monitoring, and operational details. | `references/mongodb-mongosync.md` |
+| `mongodb-relational-migrator` | MongoDB Relational Migrator (free GUI tool) — migrating RDBMS schemas and data to MongoDB, mapping rules, and sync jobs. | `references/mongodb-relational-migrator.md` |
+| `mongodb-cdc-architecture` | Change-data-capture pipeline architecture for MongoDB — patterns, delivery semantics, and downstream integration. | `references/mongodb-cdc-architecture.md` |
+| `mongodb-data-lifecycle` | MongoDB data lifecycle — Change Streams (resume tokens, pre/post images, split events, CDC), TTL Indexes (expireAfterSeconds, partial TTL, monitor thread), and archival/tiering. | `references/mongodb-data-lifecycle.md` |
+| `mongodb-security-architecture` | MongoDB security architecture — authentication, authorization/RBAC, network hardening, auditing, and defense-in-depth posture. | `references/mongodb-security-architecture.md` |
+| `mongodb-encryption` | MongoDB in-use encryption — CSFLE and Queryable Encryption (QE), plus encryption at-rest and in-transit. | `references/mongodb-encryption.md` |
+| `mongodb-compliance` | MongoDB Atlas compliance certifications, regulatory frameworks, and audit/posture mapping. | `references/mongodb-compliance.md` |
+| `mongodb-cost-optimization` | MongoDB Atlas cost optimization — cluster right-sizing, storage tier selection, archival, and spend reduction. | `references/mongodb-cost-optimization.md` |
+| `mongodb-kafka-connector` | MongoDB Connector for Apache Kafka — both the source connector (CDC into Kafka) and the sink connector (Kafka into MongoDB). | `references/mongodb-kafka-connector.md` |
+| `mongodb-spark-connector` | MongoDB Spark Connector V10 and Databricks integration — batch/streaming reads from change streams, batch/streaming writes with upsert/insert/replace. | `references/mongodb-spark-connector.md` |
+| `cloud-native-database-disaggregation` | Vendor-neutral **compute–storage disaggregation** in cloud databases — Aurora / Hyperscale-Socrates / PolarDB / Taurus / Neon, "log is the database", object-storage-backed OLTP, serverless / scale-to-zero, copy-on-write branching, disaggregation performance & cost trade-offs, OLAP-vs-OLTP contrast. | `references/cloud-native-database-disaggregation.md` |
+| `htap-disaggregated-storage` | **HTAP** (Hybrid Transactional/Analytical Processing) and how shared/disaggregated storage serves OLTP + OLAP from one copy — single-engine dual-format (HANA, Oracle In-Memory, SQL Server, SingleStore, HeatWave), separate row/column replicas (TiDB TiKV+TiFlash), zero-ETL (Aurora→Redshift), Snowflake Unistore, PolarDB-IMCI, AlloyDB columnar; isolation/freshness trade-offs. | `references/htap-disaggregated-storage.md` |
+
+## Cross-hub boundaries
+
+This hub owns operations, reliability, and data movement. Hand off when the task
+falls into a sibling hub:
+
+- **Data-plane query/index/schema/aggregation/engine work** → `mongodb-expert`.
+- **Atlas platform features and configuration** (Search, Vector Search, Charts,
+  App Services, Triggers/Functions, Stream Processing, IaC / Terraform / AKO) →
+  `mongodb-atlas-expert`.
+- **Live cluster diagnostics, performance, monitoring, capacity** →
+  `atlas-diagnostics-expert`.
+- **Knowledge-base article lookup** → `misc-catch-all` (references/mongodb-kb.md).
+- **Cloning, installing, or running this repo** → `misc-catch-all` (references/10gen.md).
+
+Some topics legitimately touch two hubs (e.g., Atlas Cloud Backup is both an
+operations concern here and an Atlas platform feature). Lead with the hub that
+matches the user's intent — reliability/data-movement intent stays here.
+
+<!-- cross-hub-map -->
+## Cross-hub map — where every MongoDB topic lives
+
+All MongoDB knowledge is split across **four hubs** (plus `mongodb-kb` for KB-article lookups and
+`10gen` for repo install/run). If a task's deep material is **not** in this hub's Sub-skill routing
+table, it is a reference file under a sibling hub — **activate that hub or Read its `references/<name>.md` directly**.
+
+| Hub | Owns | Example reference files |
+| --- | --- | --- |
+| `mongodb-expert` | Core data plane + **engine internals**: CRUD/MQL, aggregation, indexes, query performance, schema design, transactions, change streams, time-series, geospatial, views, BSON, error codes, connection strings, driver internals, **WiredTiger cache/eviction/checkpoint internals**, mongosh, database tools, multi-tenancy, sharding, replication, Compass | `references/mongodb-wiredtiger-internals.md`, `mongodb-indexes-deep.md`, `mongodb-sharding.md`, `mongodb-replication.md` |
+| `mongodb-atlas-expert` | Atlas **cloud platform**: control plane, Atlas Search, Vector Search, Stream Processing, Charts, Data Federation, App Services, Triggers, Online Archive, Flex, networking, IAM/RBAC, Terraform, AKO | `references/mongodb-atlas-search.md`, `mongodb-atlas-vector-search.md` |
+| `atlas-diagnostics-expert` | Live **diagnostics & performance**: ts-diag, FTDC, performance-troubleshooting symptom triage, benchmarking, monitoring/observability, capacity planning | `references/mongodb-performance-troubleshooting.md` |
+| `database-migrations` | Safe production schema/data migrations — expand-contract, backfill, online schema change (gh-ost/pt-osc/pgroll), rollback, tool selection | `references/database-migrations.md` |
+| `mongodb-operations-expert` | **Ops & data movement**: backup/restore, DR, Ops Manager, upgrades, migration, mongosync, relational migrator, CDC, data lifecycle, security architecture, encryption, compliance, cost, Kafka/Spark connectors | `references/mongosync.md`, `mongodb-backup-restore.md` |
+
+**High-overlap routing notes:**
+- Performance **symptom triage** (high CPU, cache pressure, slow queries, latency spikes) starts at `atlas-diagnostics-expert`, but **storage-engine root-cause internals** (WiredTiger cache fill / dirty trigger / eviction threads / reconciliation / checkpoints) are owned by `mongodb-expert` — cross-load `mongodb-expert/references/mongodb-wiredtiger-internals.md` (and `mongodb-wiredtiger.md`) for depth.
+- Migration symptoms vs migration **execution**: live-cluster diagnosis → `atlas-diagnostics-expert`; the migration/mongosync runbook → `mongodb-operations-expert`.
+- Atlas Search/Vector **query syntax & index design** → `mongodb-atlas-expert`; the slowness *triage* of a running search → `atlas-diagnostics-expert`.
