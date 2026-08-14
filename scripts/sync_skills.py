@@ -383,22 +383,25 @@ def run_sync():
             plugin_path = os.path.join(gemini_plugins, plugin)
             if not os.path.isdir(plugin_path) or plugin in IGNORE_DIRS:
                 continue
-            for root, dirs, files in os.walk(plugin_path):
-                if any(x in root for x in IGNORE_DIRS):
-                    continue
-                if "SKILL.md" in files:
-                    rel_sub = os.path.relpath(root, gemini_plugins)
-                    dst = os.path.join(REPO_DIR, "gemini", rel_sub)
-                    copy_skill(root, dst)
-                    meta = extract_skill_metadata(dst)
-                    if meta:
-                        meta.update({
-                            "platform": "Gemini / Plugins",
-                            "section": f"gemini/{plugin}",
-                            "rel_path": f"gemini/{rel_sub}",
-                            "category": categorize_skill(meta["name"], meta["description"])
-                        })
-                        collected_skills.append(meta)
+            try:
+                for root, dirs, files in os.walk(plugin_path, onerror=lambda e: None):
+                    if any(x in root for x in IGNORE_DIRS):
+                        continue
+                    if "SKILL.md" in files:
+                        rel_sub = os.path.relpath(root, gemini_plugins)
+                        dst = os.path.join(REPO_DIR, "gemini", rel_sub)
+                        copy_skill(root, dst)
+                        meta = extract_skill_metadata(dst)
+                        if meta:
+                            meta.update({
+                                "platform": "Gemini / Plugins",
+                                "section": f"gemini/{plugin}",
+                                "rel_path": f"gemini/{rel_sub}",
+                                "category": categorize_skill(meta["name"], meta["description"])
+                            })
+                            collected_skills.append(meta)
+            except Exception:
+                pass
 
     # 3. Claude Code (~/.agents/skills)
     agents_path = os.path.expanduser("~/.agents/skills")
@@ -420,20 +423,23 @@ def run_sync():
                     })
                     collected_skills.append(meta)
             else:
-                for root, dirs, files in os.walk(src):
-                    if "SKILL.md" in files and not any(x in root for x in IGNORE_DIRS):
-                        rel_sub = os.path.relpath(root, agents_path)
-                        dst = os.path.join(REPO_DIR, "claude-code", rel_sub)
-                        copy_skill(root, dst)
-                        meta = extract_skill_metadata(dst)
-                        if meta:
-                            meta.update({
-                                "platform": "Claude Code",
-                                "section": "claude-code",
-                                "rel_path": f"claude-code/{rel_sub}",
-                                "category": categorize_skill(meta["name"], meta["description"])
-                            })
-                            collected_skills.append(meta)
+                try:
+                    for root, dirs, files in os.walk(src, onerror=lambda e: None):
+                        if "SKILL.md" in files and not any(x in root for x in IGNORE_DIRS):
+                            rel_sub = os.path.relpath(root, agents_path)
+                            dst = os.path.join(REPO_DIR, "claude-code", rel_sub)
+                            copy_skill(root, dst)
+                            meta = extract_skill_metadata(dst)
+                            if meta:
+                                meta.update({
+                                    "platform": "Claude Code",
+                                    "section": "claude-code",
+                                    "rel_path": f"claude-code/{rel_sub}",
+                                    "category": categorize_skill(meta["name"], meta["description"])
+                                })
+                                collected_skills.append(meta)
+                except Exception:
+                    pass
 
     # 4. Claude Standalone & Workspace (~/.claude)
     claude_path = os.path.expanduser("~/.claude")
@@ -474,54 +480,62 @@ def run_sync():
     # 5. Custom
     dt_mongo = os.path.expanduser("~/Desktop/mongodb-skills")
     if os.path.exists(dt_mongo):
-        for item in sorted(os.listdir(dt_mongo)):
-            src = os.path.join(dt_mongo, item)
-            if os.path.isdir(src) and os.path.exists(os.path.join(src, "SKILL.md")):
-                dst = os.path.join(REPO_DIR, "custom", "mongodb-desktop", item)
-                copy_skill(src, dst)
-                meta = extract_skill_metadata(dst)
-                if meta:
-                    meta.update({
-                        "platform": "Custom / MongoDB",
-                        "section": "custom/mongodb-desktop",
-                        "rel_path": f"custom/mongodb-desktop/{item}",
-                        "category": categorize_skill(meta["name"], meta["description"])
-                    })
-                    collected_skills.append(meta)
+        try:
+            for item in sorted(os.listdir(dt_mongo)):
+                src = os.path.join(dt_mongo, item)
+                if os.path.isdir(src) and os.path.exists(os.path.join(src, "SKILL.md")):
+                    dst = os.path.join(REPO_DIR, "custom", "mongodb-desktop", item)
+                    copy_skill(src, dst)
+                    meta = extract_skill_metadata(dst)
+                    if meta:
+                        meta.update({
+                            "platform": "Custom / MongoDB",
+                            "section": "custom/mongodb-desktop",
+                            "rel_path": f"custom/mongodb-desktop/{item}",
+                            "category": categorize_skill(meta["name"], meta["description"])
+                        })
+                        collected_skills.append(meta)
+        except Exception:
+            pass
 
     mql_path = os.path.expanduser("~/dev/mqloptimizer")
     if os.path.exists(mql_path):
-        for root, dirs, files in os.walk(mql_path):
-            if "SKILL.md" in files:
-                skill_name = os.path.basename(root)
-                dst = os.path.join(REPO_DIR, "custom", "mqloptimizer", skill_name)
-                copy_skill(root, dst)
-                meta = extract_skill_metadata(dst)
-                if meta:
-                    meta.update({
-                        "platform": "Custom / MQL Optimizer",
-                        "section": "custom/mqloptimizer",
-                        "rel_path": f"custom/mqloptimizer/{skill_name}",
-                        "category": categorize_skill(meta["name"], meta["description"])
-                    })
-                    collected_skills.append(meta)
+        try:
+            for root, dirs, files in os.walk(mql_path, onerror=lambda e: None):
+                if "SKILL.md" in files:
+                    skill_name = os.path.basename(root)
+                    dst = os.path.join(REPO_DIR, "custom", "mqloptimizer", skill_name)
+                    copy_skill(root, dst)
+                    meta = extract_skill_metadata(dst)
+                    if meta:
+                        meta.update({
+                            "platform": "Custom / MQL Optimizer",
+                            "section": "custom/mqloptimizer",
+                            "rel_path": f"custom/mqloptimizer/{skill_name}",
+                            "category": categorize_skill(meta["name"], meta["description"])
+                        })
+                        collected_skills.append(meta)
+        except Exception:
+            pass
 
     cust_path = os.path.expanduser("~/customers")
     if os.path.exists(cust_path):
-        for root, dirs, files in os.walk(cust_path):
-            if "SKILL.md" in files and not any(x in root for x in IGNORE_DIRS):
-                skill_name = os.path.basename(root)
-                dst = os.path.join(REPO_DIR, "custom", "customer-intelligence", skill_name)
-                copy_skill(root, dst)
-                meta = extract_skill_metadata(dst)
-                if meta:
-                    meta.update({
-                        "platform": "Custom / Customer Intelligence",
-                        "section": "custom/customer-intelligence",
+        try:
+            for root, dirs, files in os.walk(cust_path, onerror=lambda e: None):
+                if "SKILL.md" in files and not any(x in root for x in IGNORE_DIRS):
+                    skill_name = os.path.basename(root)
+                    dst = os.path.join(REPO_DIR, "custom", "customer-intelligence", skill_name)
+                    copy_skill(root, dst)
+                    meta = extract_skill_metadata(dst)
+                    if meta:
+                        meta.update({
+                            "platform": "Custom / Customer Intelligence",
                         "rel_path": f"custom/customer-intelligence/{skill_name}",
                         "category": categorize_skill(meta["name"], meta["description"])
                     })
                     collected_skills.append(meta)
+        except Exception:
+            pass
 
     # Save catalog.json
     with open(os.path.join(REPO_DIR, "catalog.json"), "w", encoding="utf-8") as f:
@@ -610,16 +624,19 @@ def daemon_loop():
         for d in watch_dirs:
             if not os.path.exists(d):
                 continue
-            for root, dirs, files in os.walk(d):
-                if any(x in root for x in IGNORE_DIRS):
-                    continue
-                for f in files:
-                    if f.endswith(('.md', '.json', '.yaml', '.yml', '.py', '.js', '.sh', '.ts', '.txt', '.prompt')):
-                        p = os.path.join(root, f)
-                        try:
-                            snapshot[p] = (os.path.getmtime(p), os.path.getsize(p))
-                        except:
-                            pass
+            try:
+                for root, dirs, files in os.walk(d, onerror=lambda e: None):
+                    if any(x in root for x in IGNORE_DIRS):
+                        continue
+                    for f in files:
+                        if f.endswith(('.md', '.json', '.yaml', '.yml', '.py', '.js', '.sh', '.ts', '.txt', '.prompt')):
+                            p = os.path.join(root, f)
+                            try:
+                                snapshot[p] = (os.path.getmtime(p), os.path.getsize(p))
+                            except Exception:
+                                pass
+            except Exception:
+                pass
         return snapshot
 
     last_snapshot = get_snapshot()
