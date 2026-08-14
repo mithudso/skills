@@ -3773,6 +3773,17 @@
     "category": "Security, Auth & Diagnostics"
   },
   {
+    "name": "ai-llm-model-layer",
+    "description": "LLM model-layer sub-hub (ai-agent family) \u2014 training, alignment, serving, architecture. TRIGGER: pretraining & scaling laws; distributed training; fine-tuning/PEFT; alignment & post-training (SFT, RLHF/PPO, DPO family); RLHF infrastructure; agentic RL; LLM compression (quantization/distillation/pruning); GPU kernels; inference serving/runtime (PagedAttention, batching, speculative decoding, TTFT/TPOT); transformer & multimodal architecture; reasoning models; model landscape/selection; LLM observability; continuous learning; neural architecture search (NAS \u2014 DARTS/ENAS/weight-sharing supernets, zero-cost proxies, hardware-aware NAS). SKIP: agent orchestration \u2192 ai-agents-orchestration; RAG \u2192 ai-rag-retrieval; MCP/SDK/prompting \u2192 ai-mcp-sdk-prompting.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/ai-llm-model-layer",
+    "category": "Cloud, DevOps & Infrastructure"
+  },
+  {
     "name": "artifact-to-procedure",
     "description": "Distill any completed artifact, session, or solved problem into a reusable skill, playbook, or procedure \u2014 validated to work on a fresh case without the original. TRIGGER: user says \"turn this into a skill/playbook/procedure\", \"extract the method from this\", \"make this reusable\", \"capture this workflow\", \"document what we did so we can repeat it\"; or presents completed work implying future reuse, not just documentation or summary. SKIP: building a new skill from scratch with no completed artifact \u2192 skill-creator; saving personal session notes for continuity \u2192 remember; documenting an API, codebase, or project structure \u2192 technical-writing-craft.",
     "has_references": false,
@@ -3859,6 +3870,17 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/data-analytics",
     "category": "Science, Biology & Medicine"
+  },
+  {
+    "name": "design-deep-optimizer",
+    "description": "Multi-stage design & image critique-and-fix optimizer for graphic/brand & UI/UX screens; sibling of code-deep-optimizer/document-critique. Ingests a screenshot, URL, code (HTML/CSS), or spec and runs an 11-pass critique (hierarchy, gestalt, typography, color, usability heuristics/Laws of UX, WCAG, affective/trust, metrics, brand-parity, hallucination guard) over the frontend-ui spokes; severity-rates Blocker\u2192Nit and, for code-backed designs, applies Medium+ fixes to convergence (re-render/contrast/axe verified). Image/URL/spec inputs get critique-only findings. TRIGGER: \"critique/optimize this design|mockup|UI|screen|landing page|brand asset\", \"/deso\", \"review this screenshot's design\", \"run a design critique\", \"improve this UI's visual design\". SKIP: producing a NEW design (web-design / ui-ux-pro-max); one narrow question (the matching frontend-ui spoke); prose (document-critique); code logic (code-deep-optimizer); photographic or AI-generated-image critique.",
+    "has_references": false,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/design-deep-optimizer",
+    "category": "Cloud, DevOps & Infrastructure"
   },
   {
     "name": "devops-infra",
@@ -4015,6 +4037,28 @@
     "category": "Cloud, DevOps & Infrastructure"
   },
   {
+    "name": "networking",
+    "description": "Networking hub \u2014 protocol internals & network diagnostics (cloud-connectivity spokes queued). TRIGGER: protocol-level DNS \u2014 resolution path (stub/recursive/authoritative, delegation, glue, QNAME minimization), record types (A/AAAA/CNAME/SRV/TXT/NS/SOA/CAA/SVCB-HTTPS), NXDOMAIN/SERVFAIL/REFUSED triage, TTLs & negative caching, DNSSEC validation failures, encrypted DNS (DoT/DoH/DoQ, ECH, Oblivious DoH), split-horizon/private DNS (.internal, home.arpa, BIND views), EDNS(0)/Flag Days/ECS, resolver stack differences (systemd-resolved, mDNSResponder, glibc/musl, ndots), dig/delv/drill/kdig debugging (dns-deep-dive). SKIP: host-level net admin & macOS network config/tooling (ip/ss/tcpdump, scutil/networksetup) \u2192 devops-linux-admin; Cloudflare product behavior \u2192 cloudflare-platform; AWS VPC/PrivateLink \u2192 aws-cloud / mongodb-atlas-expert; MongoDB SRV seedlist \u2192 mongodb-expert (references/mongodb-connection-string.md); Node dns/getaddrinfo API usage \u2192 lang-js-ts.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/networking",
+    "category": "Science, Biology & Medicine"
+  },
+  {
+    "name": "okta-incident-response",
+    "description": "Guides MongoDB responders through Okta Tier-0 incident response, fire drills, and high-severity case handling. Use when triaging or coordinating Okta S1/S2 incidents, choosing Atlas/MongoDB diagnostic paths, following the Okta outage scenario catalog, applying drill safety rules, or deciding when to escalate to Cloud Ops/HELP. TRIGGER: /ir, run ir, activate okta incident response, okta is down, okta S1/S2, run an okta fire drill, okta incident postmortem or case analysis. SKIP: configuring or securing the Okta identity product itself (SSO/OIDC, MFA, tenant hardening) -> okta-expert (security-review); generic MongoDB design or query tuning with no incident context -> mongodb-expert; general Atlas architecture planning with no active case -> mongodb-atlas-expert; a normal low-severity support case with no incident posture -> solve-case.",
+    "has_references": true,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/okta-incident-response",
+    "category": "Databases, Data Engineering & Analytics"
+  },
+  {
     "name": "postgresql-expert",
     "description": "PostgreSQL data-plane & engine hub \u2014 the open-source RDBMS beneath RDS/Aurora PostgreSQL, Supabase, Neon, and Citus. TRIGGER: MVCC & tuple visibility (xmin/xmax, snapshots, HOT updates, dead tuples), VACUUM/autovacuum, table & index bloat, transaction-ID wraparound & freezing; the query planner & EXPLAIN (ANALYZE, BUFFERS) \u2014 seq/index/index-only/bitmap scans, nested-loop/hash/merge joins, cost model, ANALYZE & extended statistics, planner GUCs; index design & access methods (B-tree, GIN, GiST, SP-GiST, BRIN, Hash, partial/expression/covering, skip scan); WAL, checkpoints, PITR/base backup, streaming & logical replication, replication slots, sync commit, failover (Patroni); declarative partitioning (range/list/hash, pruning, partitionwise join/agg); rich types (JSONB, arrays, ranges), the extension model (PostGIS, pg_stat_statements, postgres_fdw, TimescaleDB, Citus) and pgvector for vector search; isolation levels (RC/RR/serializable SSI), locking, deadlocks; CTEs, window functions, MERGE; roles/privileges/RLS. SKIP: connection poolers (PgBouncer/PgCat/Pgpool) & read-write splitting middleware \u2192 database-proxies-query-middleware; AWS Aurora PostgreSQL platform/storage/Serverless v2/DSQL \u2192 aws-cloud (references/aws-aurora.md); MongoDB engine/MQL \u2192 mongodb-expert; generic cross-dialect SQL tuning \u2192 deep-query-optimizer; dbt/warehouse modeling \u2192 da-data-engineering-platform; RAG retrieval architecture \u2192 ai-rag-retrieval.",
     "has_references": true,
@@ -4100,6 +4144,17 @@
     "platform": "Claude",
     "section": "claude/standalone",
     "rel_path": "claude/standalone/secrets-and-key-management",
+    "category": "Science, Biology & Medicine"
+  },
+  {
+    "name": "skill-tree-architect",
+    "description": "Whole-tree architect for the ~/.claude/skills hub-and-spoke taxonomy \u2014 audits the whole tree against the two-tier description cap (>1000 soft / >1536 hard), hub balance, and cross-hub concept placement, then orchestrates the existing skill-consolidation toolchain to rebalance and reshape it when a large new concept family lands (reuses the tools, never reimplements them). TRIGGER: rebalance / restructure / optimize the skill tree; is my taxonomy optimal; reshape for a new family; concept in the wrong hub or family; hubs over the cap / too big / should split; audit hub-and-spoke placement; find misplaced spokes; hub the homeless skills. SKIP: ONE skill's content or peer-seeds \u2192 skill-optimizer; a single NEW \u22658 homeless family \u2192 detect-candidates.mjs; what to build \u2192 concept-family-explorer; lint one skill \u2192 meta-validate.mjs; a prompt \u2192 prompt-deep-optimizer / phe.",
+    "has_references": false,
+    "has_scripts": false,
+    "has_examples": false,
+    "platform": "Claude",
+    "section": "claude/standalone",
+    "rel_path": "claude/standalone/skill-tree-architect",
     "category": "Science, Biology & Medicine"
   },
   {
