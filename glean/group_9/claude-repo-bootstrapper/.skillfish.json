@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "repo-bootstrapper",
+  "owner": "10gen",
+  "repo": "mdb-tam",
+  "path": "docs/repo-bootstrap-prompt.md",
+  "branch": "fix/case-tracker-glean-default-and-slack-api-client",
+  "sha": "7855397cb24b8cd7b03de10598c257967fd386bd",
+  "source": "manual"
+}

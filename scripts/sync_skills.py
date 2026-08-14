@@ -363,47 +363,21 @@ def generate_glean_skills(skills):
     CHUNK_SIZE = 50
     
     for i, s in enumerate(skills):
-        skill_file = os.path.join(REPO_DIR, s["rel_path"], "SKILL.md")
-        if not os.path.exists(skill_file):
+        src_dir = os.path.join(REPO_DIR, s["rel_path"])
+        if not os.path.exists(os.path.join(src_dir, "SKILL.md")):
             continue
             
         try:
-            with open(skill_file, "r", encoding="utf-8", errors="ignore") as f:
-                content = f.read()
-                
-            content_no_fm = content
-            if content.startswith("---"):
-                parts = content.split("---", 2)
-                if len(parts) >= 3:
-                    content_no_fm = parts[2].strip()
-                    
             safe_name = s["name"].replace("/", "-").replace("\\", "-").replace(" ", "_").lower()
             platform_prefix = s["platform"].replace(" / ", "-").replace("/", "-").replace(" ", "_").lower()
-            file_name = f"{platform_prefix}-{safe_name}.md"
+            folder_name = f"{platform_prefix}-{safe_name}"
             
             group_idx = (i // CHUNK_SIZE) + 1
             group_dir = os.path.join(glean_dir, f"group_{group_idx}")
             os.makedirs(group_dir, exist_ok=True)
             
-            target_path = os.path.join(group_dir, file_name)
-            
-            lines = [
-                f"# {s['name']}",
-                "",
-                f"**Category:** {s.get('category', '')}",
-                f"**Platform:** {s.get('platform', '')}",
-                f"**Original Path:** {s.get('rel_path', '')}",
-                "",
-                "## Description",
-                s.get('description', ''),
-                "",
-                "---",
-                "",
-                content_no_fm
-            ]
-            
-            with open(target_path, "w", encoding="utf-8") as f:
-                f.write("\n".join(lines))
+            target_dir = os.path.join(group_dir, folder_name)
+            copy_skill(src_dir, target_dir)
         except Exception as e:
             log(f"Error generating Glean skill for {s['name']}: {e}")
 

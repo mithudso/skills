@@ -1,0 +1,75 @@
+id: incident-response
+name: Incident Response
+description: >
+  Incident response lifecycle -- severity classification (SEV0-SEV3, P0-P4),
+  incident roles (IC, comms lead, scribe, SME, deputy), communication templates,
+  blameless postmortem writing, SLO/SLI/SLA management and error budgets,
+  on-call best practices, runbook design, incident metrics (MTTD/MTTR/MTTA/MTBF),
+  tool comparison (PagerDuty/Grafana Cloud IRM/incident.io/Squadcast),
+  chaos engineering for preparedness, and anti-patterns.
+version: 1.1.1
+last_updated: 2026-05-31
+category: developer
+tags:
+  - incident-response
+  - sre
+  - on-call
+  - postmortem
+  - runbook
+  - severity
+  - SLO
+  - SLI
+  - SLA
+  - MTTR
+  - MTTD
+  - chaos-engineering
+  - pagerduty
+  - blameless
+  - incident-commander
+triggers:
+  - incident response
+  - incident management
+  - on-call rotation
+  - postmortem writing
+  - blameless postmortem
+  - severity levels SEV P0 P1
+  - SLO SLI SLA error budget
+  - MTTR MTTD MTTA metrics
+  - runbook design
+  - incident commander
+  - on-call best practices
+  - chaos engineering resilience
+  - incident communication template
+  - status page update
+  - PagerDuty Opsgenie Grafana Cloud IRM
+  - incident escalation
+  - war room
+globs:
+  - "**/runbook*"
+  - "**/postmortem*"
+  - "**/incident*"
+  - "**/on-call*"
+  - "**/oncall*"
+cross_references:
+  - devops-infra
+  - tam-reference
+  - autoremediation
+  - integration-clients
+sources:
+  - https://response.pagerduty.com/
+  - https://goingoncall.pagerduty.com/
+  - https://rootly.com/sre/
+  - https://rootly.com/incident-response/metrics
+  - https://rootly.com/incident-response/runbooks
+  - https://rootly.com/incident-response/incident-commander
+  - https://incident.io/blog/slo-sla-sli
+  - https://betterstack.com/community/guides/incident-management/severity-levels/
+  - https://opsbrief.io/blog/incident-severity-levels-how-to-define-sev0-sev1-sev2-and-sev3
+  - https://www.atlassian.com/incident-management
+  - https://sre.google/sre-book/table-of-contents/
+  - https://incident.io/blog/best-open-source-pagerduty-alternatives-2026
+  - https://sreschool.com/blog/blameless-postmortem/
+  - https://runframe.io/blog/incident-stakeholder-communication-templates
+  - https://www.metricfire.com/blog/measure-mttr-mtta-mttd/
+  - https://www.justaftermidnight247.com/insights/site-reliability-engineering-sre-best-practices-2026-tips-tools-and-kpis/
+  - https://calmops.com/software-engineering/chaos-engineering-resilient-systems/
