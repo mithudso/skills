@@ -1782,28 +1782,6 @@
     "category": "Databases, Data Engineering & Analytics"
   },
   {
-    "name": "bartending-career-track",
-    "description": "Bartending career progression, certifications, competitions, and portfolio building \u2014 the full professional track from barback to F&B director. TRIGGER: bartending career path or ladder; barback to bartender promotion; bar manager or beverage director role; event bartending or freelance bartending; bartending certifications (TIPS, ServSafe Alcohol, state RBS/TABC/MAST/OLCC); Cicerone levels and costs; WSET spirits; BarSmarts; competitive bartending (Diageo World Class, Speed Rack, Bacardi Legacy, Bombay Sapphire Most Imaginative); USBG membership; event bartending licensing and insurance; cocktail menu portfolio; bartender resume conventions and volume metrics. SKIP: general resume writing, wine sommelier career (non-bartending), or food safety \u2192 career-and-formal-writing; restaurant management without bar focus \u2192 content-and-marketing-writing; finding bartending jobs or shift-gig platforms (Instawork, Qwick, GigSalad) \u2192 service-industry-job-hunting; service-industry resume craft, ATS design, trail shift prep, situational interview questions \u2192 service-industry-resume-and-interview.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude Code",
-    "section": "claude-code",
-    "rel_path": "claude-code/bartending-career-track",
-    "category": "Frontend & Web Development"
-  },
-  {
-    "name": "big-bank-IT",
-    "description": "A large/global bank's IT estate \u2014 what it runs and how it's changing \u2014 so a MongoDB TAM or pre-sales engineer can speak credibly to bank architects. Vendor-neutral; educational. TRIGGER: core-banking, mainframe/COBOL estate and packaged cores (Temenos, Thought Machine, Mambu); system-of-record vs system-of-engagement; bank cloud posture and architect constraints (concentration, exit, portability, residency, sovereign cloud); trading infra and payments rails (RTGS, FedNow, ISO 20022); mainframe modernization (strangler-fig, batch windows); change-freeze, segregation-of-duties, regulated SDLC; resiliency & DR (RTO/RPO, active-active) and SRE; data platform & integration (lakehouse, Kafka/CDC, ESB/API). SKIP: why banks buy / the regulatory map -> fsi-banking-regulatory-context; a named bank -> jpmorgan-chase-account-intelligence; MongoDB config -> mongodb-* hubs; Linux/K8s/CI-CD -> devops-infra; DORA/TPRM -> enterprise-vendor-management-and-tprm; consumer banking -> personal-banking.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude Code",
-    "section": "claude-code",
-    "rel_path": "claude-code/big-bank-IT",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
     "name": "bitcoin-protocol-expert",
     "description": "Bitcoin protocol & ecosystem expert \u2014 base-layer mechanics, upgrades, and the L2/metaprotocol landscape. TRIGGER: the UTXO model & coin selection; tx structure (txid/wtxid, weight/vbytes, implicit fees); Bitcoin Script & addresses (P2PKH/P2SH/P2WPKH/P2WSH/P2TR, multisig, CLTV/CSV, bech32/bech32m); block/header structure & Merkle root; PoW mining, difficulty retargeting, the halving & 21M cap; mempool & fees (sat/vByte, RBF, CPFP, TRUC); SegWit, Taproot/Schnorr/MAST, soft-fork activation; Lightning (channels, HTLCs, routing, BOLTs); ordinals, BRC-20, Runes; BitVM & the Bitcoin-L2/restaking frontier (sidechains, drivechains, covenants, Babylon); full nodes, wallets, UTXO-vs-account design. SKIP: consensus theory (PoW-as-a-class, BFT, PoS, finality) \u2192 distributed-systems-consensus; crypto-primitive math (ECDSA/Schnorr/SHA-256) \u2192 blockchain-crypto-primitives; token-economics/valuation \u2192 blockchain-economics; other whole chains (Ethereum/Solana) \u2192 per-chain skills; MongoDB \u2192 mongodb-* hubs.",
     "has_references": true,
@@ -1989,28 +1967,6 @@
     "section": "claude-code",
     "rel_path": "claude-code/concept-family-explorer",
     "category": "AI, Agents & Prompt Engineering"
-  },
-  {
-    "name": "consumer-credit-and-debt",
-    "description": "Hub for US consumer credit & debt \u2014 credit health, lending, collections, and governing law (federal + NC); routes to 11 spokes. Educational, NOT financial or legal advice (as of 2026). TRIGGER: credit reports or scores (FICO/VantageScore, bureaus); building or rebuilding credit; charge-offs, collections, settling debt, 1099-C; a collector contacting/suing me (FDCPA); home-mortgage or auto lending; predatory/high-cost loans (payday/title/rent-to-own); identity theft & credit fraud; consumer bankruptcy (Ch.7/13); US credit statutes (FCRA/FDCPA/ECOA/TILA/FCBA/CROA/EFTA) or NC debt law. SKIP: personal/household finance \u2014 student loans, banking, income taxes, insurance (personal & health), medical bills, budgeting, investing/retirement, estate planning & wills \u2192 consumer-finance (sibling hub); NC business/nonprofit/real-estate \u2192 venture-nc-business-formation-tax / venture-nc-nonprofit-formation / venture-nc-real-estate-law; business credit/D&B; MongoDB / TAM / data-analytics \u2192 own hubs.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude Code",
-    "section": "claude-code",
-    "rel_path": "claude-code/consumer-credit-and-debt",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
-    "name": "consumer-finance",
-    "description": "Hub for US personal/consumer finance \u2014 money management, coverage, and life planning; routes to 9 spokes. Educational only, NOT advice (as of 2026). TRIGGER: student loans (IDR/SAVE/PSLF, FAFSA, default); personal banking (FDIC/NCUA, HYSA, neobanks); individual income taxes (brackets, deductions, W-4, self-employment, NC); personal insurance (auto, home/renters, life, disability); health insurance (ACA, HSA, Medicare, Medicaid); medical bills & billing disputes; budgeting & saving; investing & retirement (401k, IRA, Roth, Social Security); estate planning & wills (POA, NC probate). SKIP: credit reports/scores, building credit, charge-offs, debt collectors, mortgages, auto loans, predatory lending, identity theft, bankruptcy, or US/NC credit-debt LAW \u2192 consumer-credit-and-debt; NC business/nonprofit/payroll \u2192 venture-nc-business-formation-tax, venture-nc-employer-payroll, venture-nc-nonprofit-formation; MongoDB/TAM \u2192 their own hubs.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude Code",
-    "section": "claude-code",
-    "rel_path": "claude-code/consumer-finance",
-    "category": "Databases, Data Engineering & Analytics"
   },
   {
     "name": "content-and-marketing-writing",
@@ -2717,17 +2673,6 @@
     "category": "Cloud, DevOps & Infrastructure"
   },
   {
-    "name": "fsi-banking-regulatory-context",
-    "description": "Financial-services-industry (FSI) fluency for a B2B technology SELLER (e.g. a MongoDB TAM): how banking segments differ as tech buyers, the regulation shaping their buying, and WHY banks buy that way. Educational, NOT legal advice. TRIGGER: selling/positioning tech into banks, capital markets, payments, wealth/asset mgmt, or insurance; a segment's tech needs (core banking, low-latency trading, ISO 20022); pointer-level \"what is Basel III, Dodd-Frank, SOX, GLBA, FFIEC, BCBS 239, PCI-DSS, SR 11-7, SEC 17a-4, FINRA, CAT for a bank\"; why FSI buyers are risk-averse and want auditability, data residency, segregation-of-duties; FSI cloud adoption, proof burden (SOC 2/SIG/CAIQ), build-vs-buy. SKIP: CONSUMER finance/banking -> consumer-finance, personal-banking; MongoDB compliance config -> mongodb-compliance; third-party-risk/DORA -> enterprise-vendor-management-and-tprm; buying-committee psychology -> applied-psychology; trading/markets -> trading-and-investing.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude Code",
-    "section": "claude-code",
-    "rel_path": "claude-code/fsi-banking-regulatory-context",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
     "name": "fundraising-and-donor-psychology",
     "description": "Apply fundraising PRACTICE psychology: donor retention (leaky bucket, trust\u2192commitment chain, identity/wellbeing predictors); psychology of the ask (ask-string anchoring, legitimizing paltry contributions / LPC, social information); recurring giving; donor stewardship & recognition (Burk's three requirements, thank-you timing); overhead myth & impact trust; lapsed-donor reactivation (recency>frequency). TRIGGER: donor retention; first-year attrition; leaky bucket; ask-string anchoring; even-a-penny / LPC; social information fundraising; recurring giving; sustainer; stewardship program; donor recognition; thank-you letter; board thank-you call; overhead myth; lapsed donor win-back; relationship fundraising; donor LTV. SKIP: why donors give -> psychology-of-charitable-giving; reciprocity / ELM -> persuasion-and-influence-psychology; fundraising CRM -> venture-nonprofit-fundraising-ops; donor-journey -> venture-cause-nonprofit-marketing; anchoring -> behavioral-decision-making; CLV math -> da-analytical-methods.",
     "has_references": true,
@@ -2748,17 +2693,6 @@
     "section": "claude-code",
     "rel_path": "claude-code/generative-engine-optimization",
     "category": "Security, Auth & Diagnostics"
-  },
-  {
-    "name": "health-behavior-change-and-donor-registration",
-    "description": "Apply health-behavior models and organ-donor registration intervention evidence. HBM (susceptibility, severity, benefits, barriers, cues, self-efficacy); TPB/TRA (attitude, norm, PBC, intention\u2192behavior); EPPM (threat x efficacy, danger- vs fear-control); COM-B (capability, opportunity, motivation); the willingness-registration GAP; mandated/prompted/active choice, opt-in vs opt-out/presumed consent (behavioral-defaults evidence), reciprocity priming, loss-framing, social norms, UK BIT RCT 1M+. TRIGGER: HBM/TPB/EPPM for a health campaign; fear-appeal design; intention-action gap; donor registration campaign design; opt-in/opt-out/mandated/prompted-choice evidence (not policy advocacy); reciprocity or loss-framing for donation messaging; COM-B barrier mapping; social-norm messaging for registration; why supporters don't register. SKIP: SDT/Fogg/habit loops/stages-of-change \u2192 applied-psychology (references/behavior-change-psychology.md); OPO/OPTN/system/consent law \u2192 venture-organ-donation-system; presumed-consent policy advocacy \u2192 venture-organ-donation-frontier; Cialdini/norm theory/ELM/reactance \u2192 applied-psychology (references/persuasion-and-influence-psychology.md); nudge/defaults/choice-architecture \u2192 applied-psychology (references/behavioral-decision-making.md); EPPM for charitable giving/prosocial framing \u2192 psychology-of-charitable-giving.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude Code",
-    "section": "claude-code",
-    "rel_path": "claude-code/health-behavior-change-and-donor-registration",
-    "category": "Cloud, DevOps & Infrastructure"
   },
   {
     "name": "integration-clients",
@@ -2838,17 +2772,6 @@
     "category": "Cloud, DevOps & Infrastructure"
   },
   {
-    "name": "legal",
-    "description": "Hub for NC criminal law, drug law, criminal defense, rehabilitation, parole/probation, bail/bond, and recording laws; routes to spokes. Educational, NOT legal or attorney advice (as of 2026). TRIGGER: NC criminal charges or arrest; drug schedules (GS Ch.90); bail/bond/pretrial release (GS 15A-531-547); NC criminal defense (indigent defense, open-file discovery, plea); structured sentencing; NC parole/probation/post-release supervision; NC drug rehabilitation, MAT, harm reduction, naloxone, syringe exchange; 42 CFR Part 2; Good Samaritan overdose immunity; bond forfeiture, bail bondsman licensure; NC recording laws, one-party consent, GS 15A-287, recording police NC, wiretapping NC. SKIP: family/estate/civil/tax/immigration/contract law \u2192 consult a licensed NC attorney; consumer debt \u2192 consumer-credit-and-debt; NC business/nonprofit \u2192 venture-business / venture-nonprofit-cause; NC real estate \u2192 venture-business (references/venture-nc-real-estate-law.md).",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude Code",
-    "section": "claude-code",
-    "rel_path": "claude-code/legal",
-    "category": "Cloud, DevOps & Infrastructure"
-  },
-  {
     "name": "mongodb-atlas-expert",
     "description": "Broad MongoDB Atlas platform hub \u2014 control plane, Admin API v2, Atlas CLI, Terraform, Kubernetes Operator (AKO), tiers, security (IP access list, private networking, db vs Atlas users), alerts/metrics/limits. 27 references. TRIGGER: Atlas architecture & surface choice (UI/Admin API/CLI/Terraform/AKO); tier/version/limit; security/networking design; alert/metric posture; sub-areas \u2014 Atlas Search/$search, Vector Search/$vectorSearch, Stream Processing, Charts, Data Federation, App Services, Triggers/Functions, Device SDK/Realm sync, Online Archive, Flex/Serverless, Global Clusters, Search Nodes, Service Accounts, IAM/RBAC, Federated Auth (SAML/SSO), AWS/Azure/GCP networking & PrivateLink, BI Connector, analytics nodes. SKIP: data-plane query/index/schema/engine \u2192 mongodb-expert; live diagnostics/perf \u2192 atlas-diagnostics-expert; backup/DR/migration/security/encryption/connectors/cost \u2192 mongodb-operations-expert; KB lookup \u2192 mongodb-kb.",
     "has_references": true,
@@ -2882,28 +2805,6 @@
     "category": "Databases, Data Engineering & Analytics"
   },
   {
-    "name": "nc-criminal-defense",
-    "description": "NC criminal law hub \u2014 bail/bond, drug law, DWI, juvenile, mental health, DV, sex crimes, procedure, sentencing, expungement. NOT legal advice. TRIGGER: NC bail bond GS 15A-531-545, drug law (trafficking GS 90-95(h), PWIMSD, habitual felon, conditional discharge GS 90-96, marijuana 2026), NC DWI GS 20-138.1 (implied consent, Intox EC-IR II, ignition interlock GS 20-17.8, habitual DWI GS 20-138.5), juvenile justice GS 7B (Raise the Age, YDC), competency GS 15A-1001, NGRI GS 15A-959, domestic violence DVPO GS 50B, sex crimes GS 14-27, SORN, expungement GS 15A-145, collateral consequences, post-conviction MAR GS 15A-1411. SKIP: federal criminal \u2192 federal resource; civil/family \u2192 consumer-credit-and-debt; NC business \u2192 venture-nc-*; probation/parole \u2192 nc-parole-probation; SUD/MAT \u2192 nc-drug-rehabilitation-treatment.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude Code",
-    "section": "claude-code",
-    "rel_path": "claude-code/nc-criminal-defense",
-    "category": "Finance, Banking & Business"
-  },
-  {
-    "name": "nc-drug-rehabilitation-treatment",
-    "description": "NC substance use disorder (SUD) treatment law hub \u2014 harm reduction, MAT, drug courts, confidentiality, involuntary commitment, Medicaid, facility licensing, collateral consequences, opioid settlement, recovery housing. NOT legal advice. TRIGGER: NC Good Samaritan GS 90-96.2; naloxone standing order GS 90-12.7; syringe exchange GS 90-113.27; fentanyl test strips NC; 42 CFR Part 2 SUD records; NC drug treatment courts GS 7A-790; involuntary SUD commitment GS 122C-281; MAT/OTP 42 CFR Part 8; methadone clinic NC; opioid treatment program NC; SAMHSA accreditation NC; DHHS SUD facility licensing; NC LME-MCO Medicaid behavioral health; MHPAEA parity SUD; buprenorphine X-waiver repeal; NC peer support specialist CPSS; SUD collateral consequences NC; SUD custody/CPS NC; NC opioid settlement funds MOA; NC recovery housing NCARR. SKIP: drug charge trial defense \u2192 nc-criminal-defense; probation/parole \u2192 nc-parole-probation; private health insurance \u2192 consumer-finance.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude Code",
-    "section": "claude-code",
-    "rel_path": "claude-code/nc-drug-rehabilitation-treatment",
-    "category": "Psychology & Behavioral Science"
-  },
-  {
     "name": "nc-parole-probation",
     "description": "NC parole, probation & community supervision hub \u2014 PRS, conditions, violations, electronic monitoring, CRV sanctions, DAC, reentry. Educational only, NOT legal advice. TRIGGER: NC probation/parole/post-release supervision PRSPC, NC CRV confinement-in-response-to-violation, NC absconder warrants ACE SOIU, NC ICAOS interstate compact, NC JMARC drug court, NC Justice Reinvestment Act JRA 2011, NC MAPP parole, NC medical geriatric parole GS 15A-1369, NC sex offender SORNA SBM, NC electronic monitoring GPS, NC day reporting DRC, NC-PASE risk assessment, NC evidence-based practices recidivism, NC Reentry 2030 SAVAN victim services, NC split sentence GS 15A-1351, NC probation length GS 15A-1342. SKIP: NC criminal trial/defense/pre-conviction \u2192 nc-criminal-defense (sentencing grids refs/nc-structured-sentencing.md; expungement refs/nc-expungement-record-sealing.md); SUD treatment/MAT/OTP \u2192 nc-drug-rehabilitation-treatment; specific case advice \u2192 consult a licensed NC attorney.",
     "has_references": true,
@@ -2913,17 +2814,6 @@
     "section": "claude-code",
     "rel_path": "claude-code/nc-parole-probation",
     "category": "Science, Biology & Medicine"
-  },
-  {
-    "name": "nc-recording-laws",
-    "description": "NC recording law (legal-family spoke) \u2014 one-party consent (GS 15A-287), criminal/civil penalties, audio vs video, recording police (First Amendment/Sharpe 4th Cir. 2023), attorney-client recording, AI/smart devices (Plaud), workplace, public meetings, body cameras (GS 132-1.4A), voyeurism (GS 14-202), ECPA, interstate calls. NOT legal advice (2026). TRIGGER: can I record a conversation in NC; recording phone calls NC; one-party consent North Carolina; GS 15A-287 wiretapping; recording police NC; NC video surveillance; GS 14-202 voyeurism; workplace recording NC; public meeting recording NC; body cam public records NC; illegal recording NC penalty; ECPA NC; attorney-client recording NC; Plaud/AI recorder legal NC; recording at NC courthouse. SKIP: NC drug charges \u2192 nc-criminal-defense; NC probation/parole \u2192 nc-parole-probation; federal wiretap prosecution \u2192 legal (no federal-criminal skill); NC civil privacy torts \u2192 licensed NC attorney.",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude Code",
-    "section": "claude-code",
-    "rel_path": "claude-code/nc-recording-laws",
-    "category": "Cloud, DevOps & Infrastructure"
   },
   {
     "name": "networking",
@@ -2946,17 +2836,6 @@
     "section": "claude-code",
     "rel_path": "claude-code/okta-incident-response",
     "category": "Databases, Data Engineering & Analytics"
-  },
-  {
-    "name": "options-trading-and-strategies",
-    "description": "SPOKE of trading-and-investing \u2014 listed equity/ETF & index OPTIONS for a US retail participant. Educational ONLY, NOT financial/investment/tax advice; a long option can lose 100% of its premium and short (naked) options carry large or unlimited risk (2026). TRIGGER: calls vs puts, strike/expiration/premium, the 100-share multiplier, intrinsic vs extrinsic value, moneyness (ITM/ATM/OTM), American vs European, exercise & assignment, the options chain, open interest vs volume, LEAPS/weeklies/0DTE; the Greeks (delta/gamma/theta/vega/rho); implied vs realized volatility, IV rank/percentile, vol smile/skew, VIX, conceptual Black-Scholes; strategies (long call/put, covered call, cash-secured put, protective put, vertical/credit/debit spreads, straddle/strangle, iron condor, butterfly, calendar/diagonal); defined- vs undefined-risk; assignment, pin & ex-dividend early-assignment risk; options approval levels & margin; bid/ask & liquidity. SKIP: futures/forwards/swaps \u2192 derivatives-futures-and-swaps; position sizing/stops/Kelly \u2192 trading-risk-management; charting/indicators/entry timing \u2192 technical-analysis; wash-sale/Section-1256/trader-tax detail \u2192 trading-regulation-compliance-and-taxes; long-term passive/retirement investing \u2192 investing-and-retirement.",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude Code",
-    "section": "claude-code",
-    "rel_path": "claude-code/options-trading-and-strategies",
-    "category": "Frontend & Web Development"
   },
   {
     "name": "physical-access-control",
@@ -3256,17 +3135,6 @@
     "category": "General & Specialized Utilities"
   },
   {
-    "name": "trading-and-investing",
-    "description": "FOUNDATION + HUB for active trading & how US-retail financial markets work; routes to 16 spokes. Educational ONLY, NOT financial/investment/tax advice; trading can lose money (2026). TRIGGER: how markets work; asset classes (stocks, bonds, forex, commodities, crypto, ETFs, derivatives); participants (market makers, broker-dealers, exchanges, clearinghouses); order routing (PFOF, NBBO, T+1) & order types; sessions & circuit breakers; investing-vs-trading; trading styles; margin/short-selling/PDT; checking a trading broker; DEX/AMM/DeFi/on-chain trading; impermanent loss; MEV/sandwich attacks; ML/AI for trading; feature engineering; alt-data signals; RL for execution. SKIP: long-term passive/retirement investing (401k/IRA/Roth, index buy-and-hold, Social Security, fiduciary) \u2192 investing-and-retirement; budgeting \u2192 budgeting-and-saving; bank/CD/FDIC \u2192 personal-banking; income-tax \u2192 personal-income-taxes; investment-fraud recovery \u2192 identity-theft-and-credit-fraud.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude Code",
-    "section": "claude-code",
-    "rel_path": "claude-code/trading-and-investing",
-    "category": "Security, Auth & Diagnostics"
-  },
-  {
     "name": "venture-business",
     "description": "Hub for a North Carolina FOR-PROFIT solo/lean founder doing it themselves \u2014 entity, money, real estate, marketing; routes to 10 spokes. Educational, NOT legal/tax/financial advice (as of 2026). TRIGGER: NC entity formation & choice (LLC/PLLC/S-corp/C-corp, sole prop), EIN, DBA, registered agent, NC business tax (sales/use, withholding, franchise, corporate income), CTA/FinCEN BOI, annual report; becoming an employer & running NC payroll (SUTA/DES, workers comp, 941/940, I-9, W-2-vs-1099 misclassification); entity lifecycle (dissolution, conversion, foreign qualification, reinstatement, PTET/SALT-cap); business planning, financial modeling, unit economics, break-even, pricing, funding (SBA/grants/NC IDEA); pitch deck, 3-statement model, cap table, SAFE/priced round; NC real-estate licensing & brokerage law (NCREC, GS 93A, BIC, trust accounts, agency, fair housing); real-estate marketing & investing (cap rate, BRRRR, flip, DSCR, 1031, NAR settlement); property-management law, short-term/vacation rentals, seller financing; founder marketing strategy & local SEO (Google Business Profile, CAN-SPAM/TCPA/FTC); Canva brand & print collateral. SKIP: nonprofit/cause/501(c)(3)/fundraising/organ-donation \u2192 venture-nonprofit-cause (sibling hub); personal finance (individual income tax, banking, insurance, investing, estate) \u2192 consumer-finance; consumer credit/debt \u2192 consumer-credit-and-debt.",
     "has_references": true,
@@ -3353,17 +3221,6 @@
     "section": "claude/archived-treearch",
     "rel_path": "claude/archived-treearch/nfc-ndef-protocols",
     "category": "Science, Biology & Medicine"
-  },
-  {
-    "name": "options-trading-and-strategies",
-    "description": "SPOKE of trading-and-investing \u2014 listed equity/ETF & index OPTIONS for a US retail participant. Educational ONLY, NOT financial/investment/tax advice; a long option can lose 100% of its premium and short (naked) options carry large or unlimited risk (2026). TRIGGER: calls vs puts, strike/expiration/premium, the 100-share multiplier, intrinsic vs extrinsic value, moneyness (ITM/ATM/OTM), American vs European, exercise & assignment, the options chain, open interest vs volume, LEAPS/weeklies/0DTE; the Greeks (delta/gamma/theta/vega/rho); implied vs realized volatility, IV rank/percentile, vol smile/skew, VIX, conceptual Black-Scholes; strategies (long call/put, covered call, cash-secured put, protective put, vertical/credit/debit spreads, straddle/strangle, iron condor, butterfly, calendar/diagonal); defined- vs undefined-risk; assignment, pin & ex-dividend early-assignment risk; options approval levels & margin; bid/ask & liquidity. SKIP: futures/forwards/swaps \u2192 derivatives-futures-and-swaps; position sizing/stops/Kelly \u2192 trading-risk-management; charting/indicators/entry timing \u2192 technical-analysis; wash-sale/Section-1256/trader-tax detail \u2192 trading-regulation-compliance-and-taxes; long-term passive/retirement investing \u2192 investing-and-retirement.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude (Archived)",
-    "section": "claude/archived-treearch",
-    "rel_path": "claude/archived-treearch/options-trading-and-strategies",
-    "category": "Frontend & Web Development"
   },
   {
     "name": "pacs-access-control-architecture",
@@ -3520,39 +3377,6 @@
     "category": "Databases, Data Engineering & Analytics"
   },
   {
-    "name": "bank-genai-model-risk-governance",
-    "description": "GenAI/LLM governance and model-risk framing for BANKS (FSI), for a MongoDB TAM advising banks on AI/LLM/vector-search. Educational, NOT legal/compliance advice. TRIGGER: model risk management for AI/LLM (SR 11-7 and its 2026 successor SR 26-2; effective challenge; model inventory); how MRM applies to non-deterministic GenAI & third-party/vendor models; NIST AI RMF 1.0 (GOVERN/MAP/MEASURE/MANAGE) and the Generative AI Profile (NIST-AI-600-1); EU AI Act (Reg 2024/1689) risk tiers, GPAI obligations, applicability timeline, credit-scoring as high-risk; validating a RAG/vector-search system. SKIP: company-specific account intel -> goldman-sachs-account-intelligence / jpmorgan-chase-account-intelligence; general FSI regulation -> fsi-banking-regulatory-context; vendor/third-party-risk -> enterprise-vendor-management-and-tprm; prompt-injection -> rag-prompt-injection-defense; security controls -> atlas-vector-search-pii-isolation / mongodb-operations-expert.",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/bank-genai-model-risk-governance",
-    "category": "Science, Biology & Medicine"
-  },
-  {
-    "name": "bartending-career-track",
-    "description": "Bartending career progression, certifications, competitions, and portfolio building \u2014 the full professional track from barback to F&B director. TRIGGER: bartending career path or ladder; barback to bartender promotion; bar manager or beverage director role; event bartending or freelance bartending; bartending certifications (TIPS, ServSafe Alcohol, state RBS/TABC/MAST/OLCC); Cicerone levels and costs; WSET spirits; BarSmarts; competitive bartending (Diageo World Class, Speed Rack, Bacardi Legacy, Bombay Sapphire Most Imaginative); USBG membership; event bartending licensing and insurance; cocktail menu portfolio; bartender resume conventions and volume metrics. SKIP: general resume writing, wine sommelier career (non-bartending), or food safety \u2192 career-and-formal-writing; restaurant management without bar focus \u2192 content-and-marketing-writing; finding bartending jobs or shift-gig platforms (Instawork, Qwick, GigSalad) \u2192 service-industry-job-hunting; service-industry resume craft, ATS design, trail shift prep, situational interview questions \u2192 service-industry-resume-and-interview.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/bartending-career-track",
-    "category": "Frontend & Web Development"
-  },
-  {
-    "name": "big-bank-IT",
-    "description": "A large/global bank's IT estate \u2014 what it runs and how it's changing \u2014 so a MongoDB TAM or pre-sales engineer can speak credibly to bank architects. Vendor-neutral; educational. TRIGGER: core-banking, mainframe/COBOL estate and packaged cores (Temenos, Thought Machine, Mambu); system-of-record vs system-of-engagement; bank cloud posture and architect constraints (concentration, exit, portability, residency, sovereign cloud); trading infra and payments rails (RTGS, FedNow, ISO 20022); mainframe modernization (strangler-fig, batch windows); change-freeze, segregation-of-duties, regulated SDLC; resiliency & DR (RTO/RPO, active-active) and SRE; data platform & integration (lakehouse, Kafka/CDC, ESB/API). SKIP: why banks buy / the regulatory map -> fsi-banking-regulatory-context; a named bank -> jpmorgan-chase-account-intelligence; MongoDB config -> mongodb-* hubs; Linux/K8s/CI-CD -> devops-infra; DORA/TPRM -> enterprise-vendor-management-and-tprm; consumer banking -> personal-banking.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/big-bank-IT",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
     "name": "bitcoin-protocol-expert",
     "description": "Bitcoin protocol & ecosystem expert \u2014 base-layer mechanics, upgrades, and the L2/metaprotocol landscape. TRIGGER: the UTXO model & coin selection; tx structure (txid/wtxid, weight/vbytes, implicit fees); Bitcoin Script & addresses (P2PKH/P2SH/P2WPKH/P2WSH/P2TR, multisig, CLTV/CSV, bech32/bech32m); block/header structure & Merkle root; PoW mining, difficulty retargeting, the halving & 21M cap; mempool & fees (sat/vByte, RBF, CPFP, TRUC); SegWit, Taproot/Schnorr/MAST, soft-fork activation; Lightning (channels, HTLCs, routing, BOLTs); ordinals, BRC-20, Runes; BitVM & the Bitcoin-L2/restaking frontier (sidechains, drivechains, covenants, Babylon); full nodes, wallets, UTXO-vs-account design. SKIP: consensus theory (PoW-as-a-class, BFT, PoS, finality) \u2192 distributed-systems-consensus; crypto-primitive math (ECDSA/Schnorr/SHA-256) \u2192 blockchain-crypto-primitives; token-economics/valuation \u2192 blockchain-economics; other whole chains (Ethereum/Solana) \u2192 per-chain skills; MongoDB \u2192 mongodb-* hubs.",
     "has_references": true,
@@ -3649,28 +3473,6 @@
     "platform": "Claude",
     "section": "claude/standalone",
     "rel_path": "claude/standalone/concept-family-explorer",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
-    "name": "consumer-credit-and-debt",
-    "description": "Hub for US consumer credit & debt \u2014 credit health, lending, collections, and governing law (federal + NC); routes to 11 spokes. Educational, NOT financial or legal advice (as of 2026). TRIGGER: credit reports or scores (FICO/VantageScore, bureaus); building or rebuilding credit; charge-offs, collections, settling debt, 1099-C; a collector contacting/suing me (FDCPA); home-mortgage or auto lending; predatory/high-cost loans (payday/title/rent-to-own); identity theft & credit fraud; consumer bankruptcy (Ch.7/13); US credit statutes (FCRA/FDCPA/ECOA/TILA/FCBA/CROA/EFTA) or NC debt law. SKIP: personal/household finance \u2014 student loans, banking, income taxes, insurance (personal & health), medical bills, budgeting, investing/retirement, estate planning & wills \u2192 consumer-finance (sibling hub); NC business/nonprofit/real-estate \u2192 venture-nc-business-formation-tax / venture-nc-nonprofit-formation / venture-nc-real-estate-law; business credit/D&B; MongoDB / TAM / data-analytics \u2192 own hubs.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/consumer-credit-and-debt",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
-    "name": "consumer-finance",
-    "description": "Hub for US personal/consumer finance \u2014 money management, coverage, and life planning; routes to 9 spokes. Educational only, NOT advice (as of 2026). TRIGGER: student loans (IDR/SAVE/PSLF, FAFSA, default); personal banking (FDIC/NCUA, HYSA, neobanks); individual income taxes (brackets, deductions, W-4, self-employment, NC); personal insurance (auto, home/renters, life, disability); health insurance (ACA, HSA, Medicare, Medicaid); medical bills & billing disputes; budgeting & saving; investing & retirement (401k, IRA, Roth, Social Security); estate planning & wills (POA, NC probate). SKIP: credit reports/scores, building credit, charge-offs, debt collectors, mortgages, auto loans, predatory lending, identity theft, bankruptcy, or US/NC credit-debt LAW \u2192 consumer-credit-and-debt; NC business/nonprofit/payroll \u2192 venture-nc-business-formation-tax, venture-nc-employer-payroll, venture-nc-nonprofit-formation; MongoDB/TAM \u2192 their own hubs.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/consumer-finance",
     "category": "Databases, Data Engineering & Analytics"
   },
   {
@@ -4015,17 +3817,6 @@
     "category": "Cloud, DevOps & Infrastructure"
   },
   {
-    "name": "fsi-banking-regulatory-context",
-    "description": "Financial-services-industry (FSI) fluency for a B2B technology SELLER (e.g. a MongoDB TAM): how banking segments differ as tech buyers, the regulation shaping their buying, and WHY banks buy that way. Educational, NOT legal advice. TRIGGER: selling/positioning tech into banks, capital markets, payments, wealth/asset mgmt, or insurance; a segment's tech needs (core banking, low-latency trading, ISO 20022); pointer-level \"what is Basel III, Dodd-Frank, SOX, GLBA, FFIEC, BCBS 239, PCI-DSS, SR 11-7, SEC 17a-4, FINRA, CAT for a bank\"; why FSI buyers are risk-averse and want auditability, data residency, segregation-of-duties; FSI cloud adoption, proof burden (SOC 2/SIG/CAIQ), build-vs-buy. SKIP: CONSUMER finance/banking -> consumer-finance, personal-banking; MongoDB compliance config -> mongodb-compliance; third-party-risk/DORA -> enterprise-vendor-management-and-tprm; GenAI/AI model-risk governance (SR 11-7/SR 26-2, NIST AI RMF, EU AI Act for an LLM deployment) -> bank-genai-model-risk-governance; buying-committee psychology -> applied-psychology; trading/markets -> trading-and-investing.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/fsi-banking-regulatory-context",
-    "category": "Science, Biology & Medicine"
-  },
-  {
     "name": "fundraising-and-donor-psychology",
     "description": "Apply fundraising PRACTICE psychology: donor retention (leaky bucket, trust\u2192commitment chain, identity/wellbeing predictors); psychology of the ask (ask-string anchoring, legitimizing paltry contributions / LPC, social information); recurring giving; donor stewardship & recognition (Burk's three requirements, thank-you timing); overhead myth & impact trust; lapsed-donor reactivation (recency>frequency). TRIGGER: donor retention; first-year attrition; leaky bucket; ask-string anchoring; even-a-penny / LPC; social information fundraising; recurring giving; sustainer; stewardship program; donor recognition; thank-you letter; board thank-you call; overhead myth; lapsed donor win-back; relationship fundraising; donor LTV. SKIP: why donors give -> psychology-of-charitable-giving; reciprocity / ELM -> persuasion-and-influence-psychology; fundraising CRM -> venture-nonprofit-fundraising-ops; donor-journey -> venture-cause-nonprofit-marketing; anchoring -> behavioral-decision-making; CLV math -> da-analytical-methods.",
     "has_references": true,
@@ -4057,17 +3848,6 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/goldman-sachs-account-intelligence",
     "category": "Science, Biology & Medicine"
-  },
-  {
-    "name": "health-behavior-change-and-donor-registration",
-    "description": "Apply health-behavior models and organ-donor registration intervention evidence. HBM (susceptibility, severity, benefits, barriers, cues, self-efficacy); TPB/TRA (attitude, norm, PBC, intention\u2192behavior); EPPM (threat x efficacy, danger- vs fear-control); COM-B (capability, opportunity, motivation); the willingness-registration GAP; mandated/prompted/active choice, opt-in vs opt-out/presumed consent (behavioral-defaults evidence), reciprocity priming, loss-framing, social norms, UK BIT RCT 1M+. TRIGGER: HBM/TPB/EPPM for a health campaign; fear-appeal design; intention-action gap; donor registration campaign design; opt-in/opt-out/mandated/prompted-choice evidence (not policy advocacy); reciprocity or loss-framing for donation messaging; COM-B barrier mapping; social-norm messaging for registration; why supporters don't register. SKIP: SDT/Fogg/habit loops/stages-of-change \u2192 applied-psychology (references/behavior-change-psychology.md); OPO/OPTN/system/consent law \u2192 venture-organ-donation-system; presumed-consent policy advocacy \u2192 venture-organ-donation-frontier; Cialdini/norm theory/ELM/reactance \u2192 applied-psychology (references/persuasion-and-influence-psychology.md); nudge/defaults/choice-architecture \u2192 applied-psychology (references/behavioral-decision-making.md); EPPM for charitable giving/prosocial framing \u2192 psychology-of-charitable-giving.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/health-behavior-change-and-donor-registration",
-    "category": "Cloud, DevOps & Infrastructure"
   },
   {
     "name": "integration-clients",
@@ -4147,17 +3927,6 @@
     "category": "Cloud, DevOps & Infrastructure"
   },
   {
-    "name": "legal",
-    "description": "Hub for NC criminal law, drug law, criminal defense, rehabilitation, parole/probation, bail/bond, and recording laws; routes to spokes. Educational, NOT legal or attorney advice (as of 2026). TRIGGER: NC criminal charges or arrest; drug schedules (GS Ch.90); bail/bond/pretrial release (GS 15A-531-547); NC criminal defense (indigent defense, open-file discovery, plea); structured sentencing; NC parole/probation/post-release supervision; NC drug rehabilitation, MAT, harm reduction, naloxone, syringe exchange; 42 CFR Part 2; Good Samaritan overdose immunity; bond forfeiture, bail bondsman licensure; NC recording laws, one-party consent, GS 15A-287, recording police NC, wiretapping NC. SKIP: family/estate/civil/tax/immigration/contract law \u2192 consult a licensed NC attorney; consumer debt \u2192 consumer-credit-and-debt; NC business/nonprofit \u2192 venture-business / venture-nonprofit-cause; NC real estate \u2192 venture-business (references/venture-nc-real-estate-law.md).",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/legal",
-    "category": "Cloud, DevOps & Infrastructure"
-  },
-  {
     "name": "logql-grafana-loki",
     "description": "LogQL \u2014 the query language for Grafana Loki, the label-indexed \"schema-at-query\" log system. PromQL-inspired; two query types: log queries (return lines) and metric queries (logs \u2192 time series). Sibling of splunk-platform-spl, kql-kusto-query-language, and elasticsearch-opensearch under \"Log & event query languages\". TRIGGER: writing/debugging a LogQL query; the required log stream selector {label=\"value\"} and matchers (=, !=, =~, !~); the log pipeline (line filters |= != |~ !~, pattern |> !>, parsers json/logfmt/pattern/regexp/unpack, label filters, line_format, label_format); metric queries (rate, count_over_time, *_over_time, sum/avg/quantile by/without); unwrap for numeric values; the __error__ parse-failure label; left-to-right filter ordering; Loki's low-cardinality-label discipline and why high-cardinality labels destroy performance; LogQL-vs-PromQL / -vs-SPL / -vs-KQL. SKIP: Loki cluster operation, ingesters/queriers, TSDB index, retention/deployment \u2192 Grafana Loki operational docs directly; PromQL on Prometheus/Mimir \u2192 Prometheus docs; shipping logs into Loki (Promtail/Alloy/Fluent Bit/OTel Collector) \u2192 telemetry-pipeline; OTel SDK, Pino, Sentry, eBPF \u2192 devops-observability; Splunk SPL \u2192 splunk-platform-spl; KQL \u2192 kql-kusto-query-language; Elasticsearch ES|QL / OpenSearch PPL / Query DSL \u2192 elasticsearch-opensearch.",
     "has_references": false,
@@ -4202,28 +3971,6 @@
     "category": "Databases, Data Engineering & Analytics"
   },
   {
-    "name": "nc-criminal-defense",
-    "description": "NC criminal law hub \u2014 bail/bond, drug law, DWI, juvenile, mental health, DV, sex crimes, procedure, sentencing, expungement. NOT legal advice. TRIGGER: NC bail bond GS 15A-531-545, drug law (trafficking GS 90-95(h), PWIMSD, habitual felon, conditional discharge GS 90-96, marijuana 2026), NC DWI GS 20-138.1 (implied consent, Intox EC-IR II, ignition interlock GS 20-17.8, habitual DWI GS 20-138.5), juvenile justice GS 7B (Raise the Age, YDC), competency GS 15A-1001, NGRI GS 15A-959, domestic violence DVPO GS 50B, sex crimes GS 14-27, SORN, expungement GS 15A-145, collateral consequences, post-conviction MAR GS 15A-1411. SKIP: federal criminal \u2192 federal resource; civil/family \u2192 consumer-credit-and-debt; NC business \u2192 venture-nc-*; probation/parole \u2192 nc-parole-probation; SUD/MAT \u2192 nc-drug-rehabilitation-treatment.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/nc-criminal-defense",
-    "category": "Finance, Banking & Business"
-  },
-  {
-    "name": "nc-drug-rehabilitation-treatment",
-    "description": "NC substance use disorder (SUD) treatment law hub \u2014 harm reduction, MAT, drug courts, confidentiality, involuntary commitment, Medicaid, facility licensing, collateral consequences, opioid settlement, recovery housing. NOT legal advice. TRIGGER: NC Good Samaritan GS 90-96.2; naloxone standing order GS 90-12.7; syringe exchange GS 90-113.27; fentanyl test strips NC; 42 CFR Part 2 SUD records; NC drug treatment courts GS 7A-790; involuntary SUD commitment GS 122C-281; MAT/OTP 42 CFR Part 8; methadone clinic NC; opioid treatment program NC; SAMHSA accreditation NC; DHHS SUD facility licensing; NC LME-MCO Medicaid behavioral health; MHPAEA parity SUD; buprenorphine X-waiver repeal; NC peer support specialist CPSS; SUD collateral consequences NC; SUD custody/CPS NC; NC opioid settlement funds MOA; NC recovery housing NCARR. SKIP: drug charge trial defense \u2192 nc-criminal-defense; probation/parole \u2192 nc-parole-probation; private health insurance \u2192 consumer-finance.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/nc-drug-rehabilitation-treatment",
-    "category": "Psychology & Behavioral Science"
-  },
-  {
     "name": "nc-parole-probation",
     "description": "NC parole, probation & community supervision hub \u2014 PRS, conditions, violations, electronic monitoring, CRV sanctions, DAC, reentry. Educational only, NOT legal advice. TRIGGER: NC probation/parole/post-release supervision PRSPC, NC CRV confinement-in-response-to-violation, NC absconder warrants ACE SOIU, NC ICAOS interstate compact, NC JMARC drug court, NC Justice Reinvestment Act JRA 2011, NC MAPP parole, NC medical geriatric parole GS 15A-1369, NC sex offender SORNA SBM, NC electronic monitoring GPS, NC day reporting DRC, NC-PASE risk assessment, NC evidence-based practices recidivism, NC Reentry 2030 SAVAN victim services, NC split sentence GS 15A-1351, NC probation length GS 15A-1342. SKIP: NC criminal trial/defense/pre-conviction \u2192 nc-criminal-defense (sentencing grids refs/nc-structured-sentencing.md; expungement refs/nc-expungement-record-sealing.md); SUD treatment/MAT/OTP \u2192 nc-drug-rehabilitation-treatment; specific case advice \u2192 consult a licensed NC attorney.",
     "has_references": true,
@@ -4233,17 +3980,6 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/nc-parole-probation",
     "category": "Science, Biology & Medicine"
-  },
-  {
-    "name": "nc-recording-laws",
-    "description": "NC recording law (legal-family spoke) \u2014 one-party consent (GS 15A-287), criminal/civil penalties, audio vs video, recording police (First Amendment/Sharpe 4th Cir. 2023), attorney-client recording, AI/smart devices (Plaud), workplace, public meetings, body cameras (GS 132-1.4A), voyeurism (GS 14-202), ECPA, interstate calls. NOT legal advice (2026). TRIGGER: can I record a conversation in NC; recording phone calls NC; one-party consent North Carolina; GS 15A-287 wiretapping; recording police NC; NC video surveillance; GS 14-202 voyeurism; workplace recording NC; public meeting recording NC; body cam public records NC; illegal recording NC penalty; ECPA NC; attorney-client recording NC; Plaud/AI recorder legal NC; recording at NC courthouse. SKIP: NC drug charges \u2192 nc-criminal-defense; NC probation/parole \u2192 nc-parole-probation; federal wiretap prosecution \u2192 legal (no federal-criminal skill); NC civil privacy torts \u2192 licensed NC attorney.",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/nc-recording-laws",
-    "category": "Cloud, DevOps & Infrastructure"
   },
   {
     "name": "networking",
@@ -4266,17 +4002,6 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/okta-incident-response",
     "category": "Databases, Data Engineering & Analytics"
-  },
-  {
-    "name": "options-trading-and-strategies",
-    "description": "SPOKE of trading-and-investing \u2014 listed equity/ETF & index OPTIONS for a US retail participant. Educational ONLY, NOT financial/investment/tax advice; a long option can lose 100% of its premium and short (naked) options carry large or unlimited risk (2026). TRIGGER: calls vs puts, strike/expiration/premium, the 100-share multiplier, intrinsic vs extrinsic value, moneyness (ITM/ATM/OTM), American vs European, exercise & assignment, the options chain, open interest vs volume, LEAPS/weeklies/0DTE; the Greeks (delta/gamma/theta/vega/rho); implied vs realized volatility, IV rank/percentile, vol smile/skew, VIX, conceptual Black-Scholes; strategies (long call/put, covered call, cash-secured put, protective put, vertical/credit/debit spreads, straddle/strangle, iron condor, butterfly, calendar/diagonal); defined- vs undefined-risk; assignment, pin & ex-dividend early-assignment risk; options approval levels & margin; bid/ask & liquidity. SKIP: futures/forwards/swaps \u2192 derivatives-futures-and-swaps; position sizing/stops/Kelly \u2192 trading-risk-management; charting/indicators/entry timing \u2192 technical-analysis; wash-sale/Section-1256/trader-tax detail \u2192 trading-regulation-compliance-and-taxes; long-term passive/retirement investing \u2192 investing-and-retirement.",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/options-trading-and-strategies",
-    "category": "Frontend & Web Development"
   },
   {
     "name": "physical-access-control",
@@ -4620,39 +4345,6 @@
     "category": "Databases, Data Engineering & Analytics"
   },
   {
-    "name": "bank-genai-model-risk-governance",
-    "description": "GenAI/LLM governance and model-risk framing for BANKS (FSI), for a MongoDB TAM advising banks on AI/LLM/vector-search. Educational, NOT legal/compliance advice. TRIGGER: model risk management for AI/LLM (SR 11-7 and its 2026 successor SR 26-2; effective challenge; model inventory); how MRM applies to non-deterministic GenAI & third-party/vendor models; NIST AI RMF 1.0 (GOVERN/MAP/MEASURE/MANAGE) and the Generative AI Profile (NIST-AI-600-1); EU AI Act (Reg 2024/1689) risk tiers, GPAI obligations, applicability timeline, credit-scoring as high-risk; validating a RAG/vector-search system. SKIP: company-specific account intel -> goldman-sachs-account-intelligence / jpmorgan-chase-account-intelligence; general FSI regulation -> fsi-banking-regulatory-context; vendor/third-party-risk -> enterprise-vendor-management-and-tprm; prompt-injection -> rag-prompt-injection-defense; security controls -> atlas-vector-search-pii-isolation / mongodb-operations-expert.",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/bank-genai-model-risk-governance",
-    "category": "Science, Biology & Medicine"
-  },
-  {
-    "name": "bartending-career-track",
-    "description": "Bartending career progression, certifications, competitions, and portfolio building \u2014 the full professional track from barback to F&B director. TRIGGER: bartending career path or ladder; barback to bartender promotion; bar manager or beverage director role; event bartending or freelance bartending; bartending certifications (TIPS, ServSafe Alcohol, state RBS/TABC/MAST/OLCC); Cicerone levels and costs; WSET spirits; BarSmarts; competitive bartending (Diageo World Class, Speed Rack, Bacardi Legacy, Bombay Sapphire Most Imaginative); USBG membership; event bartending licensing and insurance; cocktail menu portfolio; bartender resume conventions and volume metrics. SKIP: general resume writing, wine sommelier career (non-bartending), or food safety \u2192 career-and-formal-writing; restaurant management without bar focus \u2192 content-and-marketing-writing; finding bartending jobs or shift-gig platforms (Instawork, Qwick, GigSalad) \u2192 service-industry-job-hunting; service-industry resume craft, ATS design, trail shift prep, situational interview questions \u2192 service-industry-resume-and-interview.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/bartending-career-track",
-    "category": "Frontend & Web Development"
-  },
-  {
-    "name": "big-bank-IT",
-    "description": "A large/global bank's IT estate \u2014 what it runs and how it's changing \u2014 so a MongoDB TAM or pre-sales engineer can speak credibly to bank architects. Vendor-neutral; educational. TRIGGER: core-banking, mainframe/COBOL estate and packaged cores (Temenos, Thought Machine, Mambu); system-of-record vs system-of-engagement; bank cloud posture and architect constraints (concentration, exit, portability, residency, sovereign cloud); trading infra and payments rails (RTGS, FedNow, ISO 20022); mainframe modernization (strangler-fig, batch windows); change-freeze, segregation-of-duties, regulated SDLC; resiliency & DR (RTO/RPO, active-active) and SRE; data platform & integration (lakehouse, Kafka/CDC, ESB/API). SKIP: why banks buy / the regulatory map -> fsi-banking-regulatory-context; a named bank -> jpmorgan-chase-account-intelligence; MongoDB config -> mongodb-* hubs; Linux/K8s/CI-CD -> devops-infra; DORA/TPRM -> enterprise-vendor-management-and-tprm; consumer banking -> personal-banking.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/big-bank-IT",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
     "name": "blockchain",
     "description": "Blockchain & crypto-protocol hub \u2014 how chains work beneath the app layer, their economics & on-chain security. TRIGGER: Bitcoin protocol (UTXO, Script, Taproot, Lightning, halving/21M, mempool/fees, ordinals/Runes); Ethereum protocol (account model, EVM/gas, EIP-1559, Proof of Stake/Gasper, EIP-4844 blobs, L2 rollups); Solana (account model, Sealevel/SVM, programs, compute units/priority fees, tx landing, Jito bundles, MEV/sandwich defense); tokenomics & cryptoeconomics (emission/burns, staking economics, security budget, fee markets, MEV/PBS, governance); smart-contract security & auditing (reentrancy, oracle/flash-loan, EVM & Solana pitfalls, audit process, Slither/Mythril/Foundry/Echidna/Certora). SKIP: consensus THEORY (CAP/FLP/Paxos/Raft/BFT, PoW-vs-PoS as a class) \u2192 distributed-systems-consensus; Rust/Solidity LANGUAGE syntax \u2192 lang-rust; crypto-primitive math (ECDSA/Schnorr/BLS/KZG) \u2192 blockchain-crypto-primitives; crypto trading/investing \u2192 trading-and-investing.",
     "has_references": true,
@@ -4782,28 +4474,6 @@
     "platform": "Claude",
     "section": "claude/standalone",
     "rel_path": "claude/standalone/concept-family-explorer",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
-    "name": "consumer-credit-and-debt",
-    "description": "Hub for US consumer credit & debt \u2014 credit health, lending, collections, and governing law (federal + NC); routes to 11 spokes. Educational, NOT financial or legal advice (as of 2026). TRIGGER: credit reports or scores (FICO/VantageScore, bureaus); building or rebuilding credit; charge-offs, collections, settling debt, 1099-C; a collector contacting/suing me (FDCPA); home-mortgage or auto lending; predatory/high-cost loans (payday/title/rent-to-own); identity theft & credit fraud; consumer bankruptcy (Ch.7/13); US credit statutes (FCRA/FDCPA/ECOA/TILA/FCBA/CROA/EFTA) or NC debt law. SKIP: personal/household finance \u2014 student loans, banking, income taxes, insurance (personal & health), medical bills, budgeting, investing/retirement, estate planning & wills \u2192 consumer-finance (sibling hub); NC business/nonprofit/real-estate \u2192 venture-nc-business-formation-tax / venture-nc-nonprofit-formation / venture-nc-real-estate-law; business credit/D&B; MongoDB / TAM / data-analytics \u2192 own hubs.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/consumer-credit-and-debt",
-    "category": "Databases, Data Engineering & Analytics"
-  },
-  {
-    "name": "consumer-finance",
-    "description": "Hub for US personal/consumer finance \u2014 money management, coverage, and life planning; routes to 9 spokes. Educational only, NOT advice (as of 2026). TRIGGER: student loans (IDR/SAVE/PSLF, FAFSA, default); personal banking (FDIC/NCUA, HYSA, neobanks); individual income taxes (brackets, deductions, W-4, self-employment, NC); personal insurance (auto, home/renters, life, disability); health insurance (ACA, HSA, Medicare, Medicaid); medical bills & billing disputes; budgeting & saving; investing & retirement (401k, IRA, Roth, Social Security); estate planning & wills (POA, NC probate). SKIP: credit reports/scores, building credit, charge-offs, debt collectors, mortgages, auto loans, predatory lending, identity theft, bankruptcy, or US/NC credit-debt LAW \u2192 consumer-credit-and-debt; NC business/nonprofit/payroll \u2192 venture-nc-business-formation-tax, venture-nc-employer-payroll, venture-nc-nonprofit-formation; MongoDB/TAM \u2192 their own hubs.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/consumer-finance",
     "category": "Databases, Data Engineering & Analytics"
   },
   {
@@ -5124,17 +4794,6 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/document-formats",
     "category": "Databases, Data Engineering & Analytics"
-  },
-  {
-    "name": "dropshipping-and-fulfillment",
-    "description": "Dropshipping business model \u2014 supplier sourcing (AliExpress, CJ Dropshipping, Spocket, print-on-demand via Printful/Printify), fulfillment automation, margin structure and pricing, platform tooling (Shopify + dropship apps, Oberlo successors), and the dropship+subscription HYBRID model's specific inventory-timing and fulfillment challenges. TRIGGER: dropshipping supplier sourcing/vetting; print-on-demand setup; dropship margin/pricing structure; dropship order-fulfillment automation tooling; combining dropshipping with a subscription/recurring-box model (inventory timing, supplier lead-time vs billing-cycle conflicts). SKIP: general ecommerce platform/unit-economics/payments \u2192 ecommerce-fundamentals; subscription billing/churn/dunning mechanics themselves \u2192 subscription-commerce; workflow automation tools in general (Zapier/Make), inventory-sync/repricing, email-SMS flows \u2192 ecommerce-automation-and-tools.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/dropshipping-and-fulfillment",
-    "category": "Science, Biology & Medicine"
   },
   {
     "name": "ecommerce-automation-and-tools",
@@ -5599,17 +5258,6 @@
     "category": "Cloud, DevOps & Infrastructure"
   },
   {
-    "name": "fsi-banking-regulatory-context",
-    "description": "Financial-services-industry (FSI) fluency for a B2B technology SELLER (e.g. a MongoDB TAM): how banking segments differ as tech buyers, the regulation shaping their buying, and WHY banks buy that way. Educational, NOT legal advice. TRIGGER: selling/positioning tech into banks, capital markets, payments, wealth/asset mgmt, or insurance; a segment's tech needs (core banking, low-latency trading, ISO 20022); pointer-level \"what is Basel III, Dodd-Frank, SOX, GLBA, FFIEC, BCBS 239, PCI-DSS, SR 11-7, SEC 17a-4, FINRA, CAT for a bank\"; why FSI buyers are risk-averse and want auditability, data residency, segregation-of-duties; FSI cloud adoption, proof burden (SOC 2/SIG/CAIQ), build-vs-buy. SKIP: CONSUMER finance/banking -> consumer-finance, personal-banking; MongoDB compliance config -> mongodb-compliance; third-party-risk/DORA -> enterprise-vendor-management-and-tprm; GenAI/AI model-risk governance (SR 11-7/SR 26-2, NIST AI RMF, EU AI Act for an LLM deployment) -> bank-genai-model-risk-governance; buying-committee psychology -> applied-psychology; trading/markets -> trading-and-investing.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/fsi-banking-regulatory-context",
-    "category": "Science, Biology & Medicine"
-  },
-  {
     "name": "fundraising-and-donor-psychology",
     "description": "Apply fundraising PRACTICE psychology: donor retention (leaky bucket, trust\u2192commitment chain, identity/wellbeing predictors); psychology of the ask (ask-string anchoring, legitimizing paltry contributions / LPC, social information); recurring giving; donor stewardship & recognition (Burk's three requirements, thank-you timing); overhead myth & impact trust; lapsed-donor reactivation (recency>frequency). TRIGGER: donor retention; first-year attrition; leaky bucket; ask-string anchoring; even-a-penny / LPC; social information fundraising; recurring giving; sustainer; stewardship program; donor recognition; thank-you letter; board thank-you call; overhead myth; lapsed donor win-back; relationship fundraising; donor LTV. SKIP: why donors give -> psychology-of-charitable-giving; reciprocity / ELM -> persuasion-and-influence-psychology; fundraising CRM -> venture-nonprofit-fundraising-ops; donor-journey -> venture-cause-nonprofit-marketing; anchoring -> behavioral-decision-making; CLV math -> da-analytical-methods.",
     "has_references": true,
@@ -5641,17 +5289,6 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/goldman-sachs-account-intelligence",
     "category": "Science, Biology & Medicine"
-  },
-  {
-    "name": "health-behavior-change-and-donor-registration",
-    "description": "Apply health-behavior models and organ-donor registration intervention evidence. HBM (susceptibility, severity, benefits, barriers, cues, self-efficacy); TPB/TRA (attitude, norm, PBC, intention\u2192behavior); EPPM (threat x efficacy, danger- vs fear-control); COM-B (capability, opportunity, motivation); the willingness-registration GAP; mandated/prompted/active choice, opt-in vs opt-out/presumed consent (behavioral-defaults evidence), reciprocity priming, loss-framing, social norms, UK BIT RCT 1M+. TRIGGER: HBM/TPB/EPPM for a health campaign; fear-appeal design; intention-action gap; donor registration campaign design; opt-in/opt-out/mandated/prompted-choice evidence (not policy advocacy); reciprocity or loss-framing for donation messaging; COM-B barrier mapping; social-norm messaging for registration; why supporters don't register. SKIP: SDT/Fogg/habit loops/stages-of-change \u2192 applied-psychology (references/behavior-change-psychology.md); OPO/OPTN/system/consent law \u2192 venture-organ-donation-system; presumed-consent policy advocacy \u2192 venture-organ-donation-frontier; Cialdini/norm theory/ELM/reactance \u2192 applied-psychology (references/persuasion-and-influence-psychology.md); nudge/defaults/choice-architecture \u2192 applied-psychology (references/behavioral-decision-making.md); EPPM for charitable giving/prosocial framing \u2192 psychology-of-charitable-giving.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/health-behavior-change-and-donor-registration",
-    "category": "Cloud, DevOps & Infrastructure"
   },
   {
     "name": "integration-clients",
@@ -5775,17 +5412,6 @@
     "category": "Cloud, DevOps & Infrastructure"
   },
   {
-    "name": "legal",
-    "description": "Hub for NC criminal law, drug law, criminal defense, rehabilitation, parole/probation, bail/bond, and recording laws; routes to spokes. Educational, NOT legal or attorney advice (as of 2026). TRIGGER: NC criminal charges or arrest; drug schedules (GS Ch.90); bail/bond/pretrial release (GS 15A-531-547); NC criminal defense (indigent defense, open-file discovery, plea); structured sentencing; NC parole/probation/post-release supervision; NC drug rehabilitation, MAT, harm reduction, naloxone, syringe exchange; 42 CFR Part 2; Good Samaritan overdose immunity; bond forfeiture, bail bondsman licensure; NC recording laws, one-party consent, GS 15A-287, recording police NC, wiretapping NC. SKIP: family/estate/civil/tax/immigration/contract law \u2192 consult a licensed NC attorney; consumer debt \u2192 consumer-credit-and-debt; NC business/nonprofit \u2192 venture-business / venture-nonprofit-cause; NC real estate \u2192 venture-business (references/venture-nc-real-estate-law.md).",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/legal",
-    "category": "Cloud, DevOps & Infrastructure"
-  },
-  {
     "name": "llm-quantization-strategies",
     "description": "name: llm-quantization-strategies",
     "has_references": true,
@@ -5885,28 +5511,6 @@
     "category": "Databases, Data Engineering & Analytics"
   },
   {
-    "name": "nc-criminal-defense",
-    "description": "NC criminal law hub \u2014 bail/bond, drug law, DWI, juvenile, mental health, DV, sex crimes, procedure, sentencing, expungement. NOT legal advice. TRIGGER: NC bail bond GS 15A-531-545, drug law (trafficking GS 90-95(h), PWIMSD, habitual felon, conditional discharge GS 90-96, marijuana 2026), NC DWI GS 20-138.1 (implied consent, Intox EC-IR II, ignition interlock GS 20-17.8, habitual DWI GS 20-138.5), juvenile justice GS 7B (Raise the Age, YDC), competency GS 15A-1001, NGRI GS 15A-959, domestic violence DVPO GS 50B, sex crimes GS 14-27, SORN, expungement GS 15A-145, collateral consequences, post-conviction MAR GS 15A-1411. SKIP: federal criminal \u2192 federal resource; civil/family \u2192 consumer-credit-and-debt; NC business \u2192 venture-nc-*; probation/parole \u2192 nc-parole-probation; SUD/MAT \u2192 nc-drug-rehabilitation-treatment.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/nc-criminal-defense",
-    "category": "Finance, Banking & Business"
-  },
-  {
-    "name": "nc-drug-rehabilitation-treatment",
-    "description": "NC substance use disorder (SUD) treatment law hub \u2014 harm reduction, MAT, drug courts, confidentiality, involuntary commitment, Medicaid, facility licensing, collateral consequences, opioid settlement, recovery housing. NOT legal advice. TRIGGER: NC Good Samaritan GS 90-96.2; naloxone standing order GS 90-12.7; syringe exchange GS 90-113.27; fentanyl test strips NC; 42 CFR Part 2 SUD records; NC drug treatment courts GS 7A-790; involuntary SUD commitment GS 122C-281; MAT/OTP 42 CFR Part 8; methadone clinic NC; opioid treatment program NC; SAMHSA accreditation NC; DHHS SUD facility licensing; NC LME-MCO Medicaid behavioral health; MHPAEA parity SUD; buprenorphine X-waiver repeal; NC peer support specialist CPSS; SUD collateral consequences NC; SUD custody/CPS NC; NC opioid settlement funds MOA; NC recovery housing NCARR. SKIP: drug charge trial defense \u2192 nc-criminal-defense; probation/parole \u2192 nc-parole-probation; private health insurance \u2192 consumer-finance; AA/NA meeting culture, rituals, speech conventions \u2192 twelve-step-culture.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/nc-drug-rehabilitation-treatment",
-    "category": "Psychology & Behavioral Science"
-  },
-  {
     "name": "nc-parole-probation",
     "description": "NC parole, probation & community supervision hub \u2014 PRS, conditions, violations, electronic monitoring, CRV sanctions, DAC, reentry. Educational only, NOT legal advice. TRIGGER: NC probation/parole/post-release supervision PRSPC, NC CRV confinement-in-response-to-violation, NC absconder warrants ACE SOIU, NC ICAOS interstate compact, NC JMARC drug court, NC Justice Reinvestment Act JRA 2011, NC MAPP parole, NC medical geriatric parole GS 15A-1369, NC sex offender SORNA SBM, NC electronic monitoring GPS, NC day reporting DRC, NC-PASE risk assessment, NC evidence-based practices recidivism, NC Reentry 2030 SAVAN victim services, NC split sentence GS 15A-1351, NC probation length GS 15A-1342. SKIP: NC criminal trial/defense/pre-conviction \u2192 nc-criminal-defense (sentencing grids refs/nc-structured-sentencing.md; expungement refs/nc-expungement-record-sealing.md); SUD treatment/MAT/OTP \u2192 nc-drug-rehabilitation-treatment; specific case advice \u2192 consult a licensed NC attorney.",
     "has_references": true,
@@ -5916,17 +5520,6 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/nc-parole-probation",
     "category": "Science, Biology & Medicine"
-  },
-  {
-    "name": "nc-recording-laws",
-    "description": "NC recording law (legal-family spoke) \u2014 one-party consent (GS 15A-287), criminal/civil penalties, audio vs video, recording police (First Amendment/Sharpe 4th Cir. 2023), attorney-client recording, AI/smart devices (Plaud), workplace, public meetings, body cameras (GS 132-1.4A), voyeurism (GS 14-202), ECPA, interstate calls. NOT legal advice (2026). TRIGGER: can I record a conversation in NC; recording phone calls NC; one-party consent North Carolina; GS 15A-287 wiretapping; recording police NC; NC video surveillance; GS 14-202 voyeurism; workplace recording NC; public meeting recording NC; body cam public records NC; illegal recording NC penalty; ECPA NC; attorney-client recording NC; Plaud/AI recorder legal NC; recording at NC courthouse. SKIP: NC drug charges \u2192 nc-criminal-defense; NC probation/parole \u2192 nc-parole-probation; federal wiretap prosecution \u2192 legal (no federal-criminal skill); NC civil privacy torts \u2192 licensed NC attorney.",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/nc-recording-laws",
-    "category": "Cloud, DevOps & Infrastructure"
   },
   {
     "name": "networking",
@@ -6336,28 +5929,6 @@
     "category": "Science, Biology & Medicine"
   },
   {
-    "name": "trading-and-investing",
-    "description": "FOUNDATION + HUB for active trading & how US-retail financial markets work; routes to 46 spokes. Educational ONLY, NOT financial/investment/tax advice; trading can lose money (2026). TRIGGER: how markets work; asset classes (stocks, bonds, forex, commodities, crypto, ETFs, derivatives); participants (market makers, broker-dealers, exchanges, clearinghouses); order routing (PFOF, NBBO, T+1) & types; sessions & circuit breakers; investing-vs-trading; margin/short-selling/PDT; DEX/AMM/DeFi, impermanent loss, MEV; ML/AI for trading; Jupiter Perps/JLP; grid trading/bots; on-chain P&L/cost basis & tax lots; coding/backtesting indicator signals; why strategies/indicators fail & how to pair them. SKIP: long-term passive/retirement investing (401k/IRA/Roth, index buy-and-hold, Social Security, fiduciary) \u2192 investing-and-retirement; budgeting \u2192 budgeting-and-saving; bank/CD/FDIC \u2192 personal-banking; income-tax \u2192 personal-income-taxes; investment-fraud recovery \u2192 identity-theft-and-credit-fraud.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/trading-and-investing",
-    "category": "Security, Auth & Diagnostics"
-  },
-  {
-    "name": "twelve-step-culture",
-    "description": "Twelve-step meeting culture, rituals, and speech conventions (AA primarily; NA/Al-Anon variants) for verisimilitude and ethnographic understanding. Organizing fact: the iconic rituals are folk practice, not official \u00b7 chips (local autonomy), slogans, no-crosstalk. Covers meeting types, the ritual arc (Preamble, \"How It Works\", 7th Tradition, closing circle), speech conventions (identification ritual, share etiquette, slogan canon), sponsorship & 13th-stepping, anonymity, chips (AA colors NOT standardized; NA key tags ARE), higher-power language & secular AA, court cards, NA-vs-AA markers, storytelling scholarship (Cain, Humphreys), and a LOCAL-vs-UNIVERSAL portability guide. TRIGGER: AA/NA/Al-Anon meeting culture, rituals, format, slogans, chips, sponsorship, crosstalk, writing an AA scene, what happens at a meeting. SKIP: SUD treatment law/MAT \u2192 nc-drug-rehabilitation-treatment; addiction therapy \u2192 clinical-therapeutic-psychology; general fiction craft \u2192 writing-expert.",
-    "has_references": false,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/twelve-step-culture",
-    "category": "Science, Biology & Medicine"
-  },
-  {
     "name": "venture-business",
     "description": "Hub for a North Carolina FOR-PROFIT solo/lean founder doing it themselves \u2014 entity, money, real estate, marketing; routes to 10 spokes. Educational, NOT legal/tax/financial advice (as of 2026). TRIGGER: NC entity formation & choice (LLC/PLLC/S-corp/C-corp, sole prop), EIN, DBA, registered agent, NC business tax (sales/use, withholding, franchise, corporate income), CTA/FinCEN BOI, annual report; becoming an employer & running NC payroll (SUTA/DES, workers comp, 941/940, I-9, W-2-vs-1099 misclassification); entity lifecycle (dissolution, conversion, foreign qualification, reinstatement, PTET/SALT-cap); business planning, financial modeling, unit economics, break-even, pricing, funding (SBA/grants/NC IDEA); pitch deck, 3-statement model, cap table, SAFE/priced round; NC real-estate licensing & brokerage law (NCREC, GS 93A, BIC, trust accounts, agency, fair housing); real-estate marketing & investing (cap rate, BRRRR, flip, DSCR, 1031, NAR settlement); property-management law, short-term/vacation rentals, seller financing; founder marketing strategy & local SEO (Google Business Profile, CAN-SPAM/TCPA/FTC); Canva brand & print collateral. SKIP: nonprofit/cause/501(c)(3)/fundraising/organ-donation \u2192 venture-nonprofit-cause (sibling hub); personal finance (individual income tax, banking, insurance, investing, estate) \u2192 consumer-finance; consumer credit/debt \u2192 consumer-credit-and-debt.",
     "has_references": true,
@@ -6488,17 +6059,6 @@
     "section": "claude/standalone",
     "rel_path": "claude/standalone/telemetry-pipeline",
     "category": "Databases, Data Engineering & Analytics"
-  },
-  {
-    "name": "trading-and-investing",
-    "description": "FOUNDATION + HUB for active trading & how US-retail financial markets work; routes to 16 spokes. Educational ONLY, NOT financial/investment/tax advice; trading can lose money (2026). TRIGGER: how markets work; asset classes (stocks, bonds, forex, commodities, crypto, ETFs, derivatives); participants (market makers, broker-dealers, exchanges, clearinghouses); order routing (PFOF, NBBO, T+1) & order types; sessions & circuit breakers; investing-vs-trading; trading styles; margin/short-selling/PDT; checking a trading broker; DEX/AMM/DeFi/on-chain trading; impermanent loss; MEV/sandwich attacks; ML/AI for trading; feature engineering; alt-data signals; RL for execution. SKIP: long-term passive/retirement investing (401k/IRA/Roth, index buy-and-hold, Social Security, fiduciary) \u2192 investing-and-retirement; budgeting \u2192 budgeting-and-saving; bank/CD/FDIC \u2192 personal-banking; income-tax \u2192 personal-income-taxes; investment-fraud recovery \u2192 identity-theft-and-credit-fraud.",
-    "has_references": true,
-    "has_scripts": false,
-    "has_examples": false,
-    "platform": "Claude",
-    "section": "claude/standalone",
-    "rel_path": "claude/standalone/trading-and-investing",
-    "category": "Security, Auth & Diagnostics"
   },
   {
     "name": "venture-business",

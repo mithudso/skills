@@ -105,6 +105,23 @@ def is_glean_compatible(skill_dir):
         for kw in exclude_keywords:
             if kw in content:
                 return False
+                
+        # Domain exclusions based on folder name
+        folder_name = os.path.basename(skill_dir).lower()
+        domain_exclusions = [
+            "invest", "trading", "finance", "bank", "credit", "debt", 
+            "health", "addiction", "rehab", "twelve-step", "bartend", 
+            "legal", "law", "criminal", "dropshipping"
+        ]
+        
+        for kw in domain_exclusions:
+            if kw in folder_name:
+                return False
+                
+        # Special case for "personal" so it doesn't match "personality" (psychology)
+        if "personal" in folder_name and "psychology" not in folder_name and "personality" not in folder_name:
+            return False
+            
         return True
     except:
         return False
@@ -387,7 +404,7 @@ def generate_glean_skills(skills):
         shutil.rmtree(glean_dir)
     os.makedirs(glean_dir, exist_ok=True)
     
-    CHUNK_SIZE = 10
+    CHUNK_SIZE = 50
     
     for i, s in enumerate(skills):
         src_dir = os.path.join(REPO_DIR, s["rel_path"])
