@@ -1,0 +1,55 @@
+{
+  "family": "writing",
+  "skillsRoot": "__HOME__/.claude/skills",
+  "standalone": ["kill-the-AI-ism"],
+  "hubs": {
+    "writing-expert": {
+      "keepExisting": true,
+      "title": "Writing Expert (prose craft, voice, style, editing) — hub",
+      "spokes": [
+        "editing-and-revision", "rhetorical-frameworks-deep", "storytelling-and-narrative", "headline-craft",
+        "plain-language", "inclusive-language", "localization-friendly-writing", "anti-jargon-translator",
+        "brand-voice-guide-writing", "audience-modeler", "visual-writing", "accessibility-writing",
+        "ai-collaboration-writing", "realtime-writing-under-pressure", "interview-and-conversational", "profile-writing",
+        "email-craft"
+      ]
+    },
+    "technical-writing-craft": {
+      "keepExisting": true,
+      "title": "Technical & Product Writing (docs, specs, engineering comms) — hub",
+      "spokes": [
+        "api-docs-craft", "howto-writing", "tutorial-writing", "knowledge-base-authoring", "reference-doc-writing",
+        "explanation-doc-writing", "runbook-craft", "spec-writing", "prd-writing", "rfc-and-design-docs",
+        "user-story-and-acceptance-criteria", "meeting-minutes-and-decision-log", "changelog-and-release-notes",
+        "changelogs-for-humans", "error-message-craft", "microcopy-and-ui-writing", "commit-message-craft",
+        "pr-description-craft", "code-plan-writing", "agent-plan-writing", "postmortem-writing", "incident-comms"
+      ]
+    },
+    "executive-comms": {
+      "keepExisting": true,
+      "title": "Executive & Business Communication (leadership, persuasion, decks) — hub",
+      "spokes": [
+        "one-pager-writing", "okr-writing", "proposal-and-grant-writing", "pitch-deck-writing",
+        "negotiation-and-persuasion", "public-speaking-and-presentations", "speech-writing",
+        "founder-letter-writing", "whitepaper-writing", "case-study-writing"
+      ]
+    },
+    "content-and-marketing-writing": {
+      "keepExisting": false,
+      "title": "Content, Marketing & External Comms (PR, newsletters, launch, social)",
+      "spokes": [
+        "sales-and-marketing-copy", "press-release-writing", "crisis-pr-writing", "newsletter-writing",
+        "op-ed-writing", "release-blog-and-launch-narrative", "chatbot-conversation-writing", "audio-script-writing",
+        "nps-response-writing", "support-ticket-writing"
+      ]
+    },
+    "career-and-formal-writing": {
+      "keepExisting": false,
+      "title": "Career, Academic, Legal & Formal Writing",
+      "spokes": [
+        "resume-and-cv-writing", "cover-letter-writing", "job-description-writing", "performance-review-writing",
+        "academic-and-citation-writing", "legal-adjacent-writing", "policy-and-governance-writing", "survey-question-writing"
+      ]
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "mcp-builder",
+  "owner": "anthropics",
+  "repo": "skills",
+  "path": "skills/mcp-builder",
+  "branch": "main",
+  "sha": "b866bcfb57b780c10b587c7b543e871a91661ce0",
+  "source": "manual"
+}

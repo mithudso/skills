@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "agent-harness-construction",
+  "owner": "luagam",
+  "repo": "agent-delivery",
+  "path": "everything-claude-code/docs/zh-CN/skills/agent-harness-construction",
+  "branch": "main",
+  "sha": "de2f86ee8d5a0e1edaf89d8fb9dd032cf5d042b0",
+  "source": "manual"
+}

@@ -1,0 +1,15 @@
+{
+  "eval_id": 0,
+  "eval_name": "standup-dump-actionability",
+  "prompt": "here are my notes from this week, they're a total mess. can you sort them out so i know what i owe people and what got decided? file is at <INPUT>/raw-standup-dump.md",
+  "assertions": [
+    "Leads with a short diagnosis stating what the notes are and which organizing shape was chosen",
+    "All TODO/action items appear in an actions section, with the duplicate incident-writeup TODO merged to one entry",
+    "A Problems section exists and contains the EU latency regression (analyzer change never rolled back on EU cluster, p99 still degraded), cross-referenced to its action",
+    "A Wins section exists and contains the primary-cluster rollback fix (p99 back to 120ms) and/or Dana's confirmed 60-day answer",
+    "Decisions section contains: usage-based tier chosen (flat killed), hold pricing page until marketing signs off",
+    "No invented owners, dates, or facts (every owner/date in output traces to the input)",
+    "The trust-page idea (incl. uptime addition) is preserved in an ideas section, and the release-slip question is preserved",
+    "Ends with a counts line whose numbers reconcile"
+  ]
+}

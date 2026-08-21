@@ -1,0 +1,64 @@
+{
+  "_comment": "TEMPLATE — no real secrets. setup.sh substitutes ${ENV} from .env, then merges each server into ~/.claude.json (non-destructive: existing servers are kept). Any server still containing an unresolved ${...} after substitution is SKIPPED, so teammates only get servers they have creds/paths for.",
+  "mcpServers": {
+    "glean_default": {
+      "type": "http",
+      "url": "https://mongodb-be.glean.com/mcp/default"
+    },
+    "granola": {
+      "type": "http",
+      "url": "https://mcp.granola.ai/mcp"
+    },
+    "headroom": {
+      "type": "stdio",
+      "command": "headroom",
+      "args": ["mcp", "serve"],
+      "env": {}
+    },
+    "monday-access-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@mondaydotcomorg/monday-api-mcp", "-t", "${MONDAY_API_TOKEN}"]
+    },
+    "monday-apps-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@mondaydotcomorg/monday-api-mcp", "-t", "${MONDAY_API_TOKEN}", "--mode", "apps"]
+    },
+    "firecrawl": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": { "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}" }
+    },
+    "exa": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "exa-mcp-server"],
+      "env": { "EXA_API_KEY": "${EXA_API_KEY}" }
+    },
+    "tam_mcp": {
+      "type": "http",
+      "url": "${TAM_MCP_URL}"
+    },
+    "mdb_tam_account_context": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${DASHBOARD_MCP_PATH}"],
+      "env": {
+        "DASHBOARD_API_TOKEN": "${DASHBOARD_API_TOKEN}",
+        "DASHBOARD_URL": "${DASHBOARD_URL}"
+      }
+    },
+    "mdb_case_assistant": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${CASE_ASSISTANT_MCP_PATH}"]
+    },
+    "skills-relay": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${SKILLS_RELAY_PATH}"]
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "family": "psychology",
+  "builtAt": "2026-05-31T17:50:00.000Z",
+  "note": "Nested fold: spokes are /dr-built multi-file skills, so each whole spoke dir was recursively copied to references/<spoke>/ (preserving its own references/). referenceFile points at the spoke's SKILL.md inside the nested copy.",
+  "hubs": {
+    "applied-psychology": {
+      "keepExisting": true,
+      "title": "Applied Human Psychology — decision, persuasion, trust, learning, emotion, performance, personality, moral & behavior-change psychology",
+      "spokes": [
+        { "spoke": "behavior-change-psychology", "referenceFile": "references/behavior-change-psychology/SKILL.md", "routingLine": "behavior change & adoption (motivation, SDT, Fogg B=MAP, habits, goal-setting)" },
+        { "spoke": "behavioral-decision-making", "referenceFile": "references/behavioral-decision-making/SKILL.md", "routingLine": "cognitive biases, prospect theory, nudge, dual-process, debiasing, RPD, neuroeconomics" },
+        { "spoke": "trust-and-psychological-safety", "referenceFile": "references/trust-and-psychological-safety/SKILL.md", "routingLine": "interpersonal trust, rapport, repair, psychological safety" },
+        { "spoke": "human-ai-interaction-psychology", "referenceFile": "references/human-ai-interaction-psychology/SKILL.md", "routingLine": "trust in automation, automation bias, algorithm aversion/appreciation, calibrated reliance" },
+        { "spoke": "persuasion-and-influence-psychology", "referenceFile": "references/persuasion-and-influence-psychology/SKILL.md", "routingLine": "attitude-change theory: ELM, HSM, dissonance, reactance, attribution, norms" },
+        { "spoke": "learning-and-expertise-psychology", "referenceFile": "references/learning-and-expertise-psychology/SKILL.md", "routingLine": "cognitive load, retrieval practice, spacing, interleaving, deliberate practice, andragogy" },
+        { "spoke": "emotion-and-affect-psychology", "referenceFile": "references/emotion-and-affect-psychology/SKILL.md", "routingLine": "appraisal, emotion regulation, affect-as-information, affective forecasting, EI, emotional labor" },
+        { "spoke": "performance-and-resilience-psychology", "referenceFile": "references/performance-and-resilience-psychology/SKILL.md", "routingLine": "mindset, grit, flow, self-efficacy, achievement goals, stress/coping, burnout, resilience" },
+        { "spoke": "personality-and-individual-differences", "referenceFile": "references/personality-and-individual-differences/SKILL.md", "routingLine": "Big Five, HEXACO, person-situation, MBTI critique, Dark Triad" },
+        { "spoke": "moral-psychology", "referenceFile": "references/moral-psychology/SKILL.md", "routingLine": "moral foundations, social intuitionism, dual-process morality, fairness/justice, moral licensing/disengagement" }
+      ]
+    }
+  },
+  "skillsRoot": "__HOME__/.claude/skills",
+  "standalone": []
+}

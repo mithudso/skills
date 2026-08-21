@@ -1,0 +1,31 @@
+{
+  "skillsRoot": "__HOME__/.claude/skills",
+  "consolidationRoot": "__HOME__/.claude/skill-consolidation",
+  "manifests": [
+    "data-analytics-manifest.json",
+    "mongodb-manifest.json",
+    "writing-manifest.json",
+    "chrome-extension-manifest.json",
+    "ai-agent-manifest.json",
+    "software-manifest.json",
+    "integration-manifest.json",
+    "devops-manifest.json",
+    "frontend-manifest.json",
+    "psychology-manifest.json",
+    "document-formats-manifest.json",
+    "content-ingestion-extraction-manifest.json",
+    "tam-operations-manifest.json",
+    "lang-manifest.json",
+    "aws-cloud-manifest.json",
+    "security-review-manifest.json",
+    "claude-code-manifest.json",
+    "deep-research-manifest.json",
+    "networking-manifest.json",
+    "optimizers-manifest.json"
+  ],
+  "promoteThreshold": 2,
+  "windowDays": 7,
+  "demoteAfterDays": 14,
+  "maxHot": 28,
+  "_notes": "Add more *-manifest.json (mongodb-manifest.json, writing-manifest.json) to `manifests` to tier those families too. promoteThreshold = accesses within windowDays to move a cold spoke into the index; demoteAfterDays = idle days before a hot spoke returns to cold; maxHot = LRU cap on promoted standalones so the index cannot re-bloat."
+}

@@ -1,0 +1,79 @@
+{
+  "expectations": [
+    {
+      "text": "Leads with a short diagnosis stating what the notes are and which organizing shape was chosen",
+      "passed": true,
+      "evidence": "Output opens with '**Diagnosis:** Operational dump — standup and meeting captures full of actions, decisions, blockers, and one running incident... actionability sort.' Names both the note type and the chosen shape."
+    },
+    {
+      "text": "All TODO/action items appear in an actions section, with the duplicate incident-writeup TODO merged to one entry",
+      "passed": true,
+      "evidence": "Actions section contains all four action items: incident writeup (single entry with '(dedup: captured Mon and again Weds)' merging the two TODOs from input lines 4 and 13), EU cluster ticket (Carlos), ping marketing (Sam), update pricing page draft (Sam). No input TODO is missing from Actions."
+    },
+    {
+      "text": "A Problems section exists and contains the EU latency regression (analyzer change never rolled back on EU cluster, p99 still degraded), cross-referenced to its action",
+      "passed": true,
+      "evidence": "Problems section, first bullet: 'EU p99 is still degraded. The analyzer change shipped to the EU cluster too and was never rolled back there (Carlos, Thurs)... addressed by the EU-ticket action above.' Explicit cross-reference to the Actions entry, plus a flagged Mon-vs-Thurs rollback conflict."
+    },
+    {
+      "text": "A Wins section exists and contains the primary-cluster rollback fix (p99 back to 120ms) and/or Dana's confirmed 60-day answer",
+      "passed": true,
+      "evidence": "Wins section contains both: 'Rollback fixed p99 on the main cluster: 800ms → back to 120ms (Kavya, Mon)' and 'Dana confirmed 60 days, per the DPA addendum (Thurs)'. Both match input lines 10 and 19."
+    },
+    {
+      "text": "Decisions section contains: usage-based tier chosen (flat killed), hold pricing page until marketing signs off",
+      "passed": true,
+      "evidence": "Decisions section: 'Usage-based tier for the API; flat tier killed (Mon). Confirmed Weds: it goes in the September release.' and 'Hold the pricing page until marketing signs off the tier names (Thurs).' Both decisions present and correctly dated."
+    },
+    {
+      "text": "No invented owners, dates, or facts (every owner/date in output traces to the input)",
+      "passed": true,
+      "evidence": "Spot-checked every owner and date: Kavya/rollback (input 'kavya says rollback fixed p99'), Sam/pricing-page ('sam has it') and ping-marketing ('sam owns'), Carlos/EU ticket (Thurs), Dana/60-day DPA addendum, JT/3-week metering estimate, tier names Builder/Scale/Enterprise, 800ms/120ms, 30-day/60-day, 3-vs-5-week timing — all trace to the input. The un-owned incident-writeup TODO is explicitly flagged as 'no owner stated' rather than assigned an invented owner."
+    },
+    {
+      "text": "The trust-page idea (incl. uptime addition) is preserved in an ideas section, and the release-slip question is preserved",
+      "passed": true,
+      "evidence": "Ideas section: 'Customer-facing trust page: expose the latency dashboard to customers; could also show uptime — status.io does this (merged from two notes, Mon + Weds).' Questions section preserves 'Does the Sept release date slip if usage metering isn't done?' with its in-notes answer (3 wks vs 5 wks)."
+    },
+    {
+      "text": "Ends with a counts line whose numbers reconcile",
+      "passed": true,
+      "evidence": "Counts line: '22 items in → 16 appear above, 3 merged as duplicates, 3 folded into other items... 22 = 16 + 3 + 3'. Arithmetic verified: 16+3+3=22. Independent recount of the input yields 22 items when the Monday standup line is split into its two facts (spike + rollback); the 3 named merges (dup incident TODO, uptime idea, EU degraded+ticket line) and 3 named folds (Sept confirmation, Dana confirmation, metering estimate) each trace to real input items, leaving exactly 16 displayed."
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 0,
+    "total": 8,
+    "pass_rate": 1.0
+  },
+  "claims": [
+    {
+      "claim": "22 items in the input",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Input has 21 content lines; the Monday standup line contains two distinct facts (latency spike report + rollback action), giving 22 under the output's stated splitting. Defensible, though item granularity is inherently judgment-dependent."
+    },
+    {
+      "claim": "Monday's 'rolled back' note conflicts with Thursday's EU finding",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Input line 3 says 'rolled back the analyzer change'; input line 17 says 'analyzer change actually shipped to EU cluster too, never rolled back there'. The flagged conflict is real and correctly scoped to main-cluster-only."
+    },
+    {
+      "claim": "The release-slip question is answered in the notes",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Input: 'metering work estimate: 3 wks (jt), release is 5 wks out so ok' — supports the output's 'no slip expected'."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "Ends with a counts line whose numbers reconcile",
+        "reason": "Input item granularity is ambiguous (21 lines vs 22 facts), so almost any internally consistent arithmetic passes. Consider asserting instead that every input line is traceable to an output entry (a losslessness check), which is harder to satisfy with a fabricated-but-consistent counts line."
+      }
+    ],
+    "overall": "Assertions are well-targeted and discriminating overall; the output also correctly caught the rollback conflict, which assertion 3 only implicitly rewards — a dedicated conflict-detection assertion would make that outcome explicit."
+  }
+}

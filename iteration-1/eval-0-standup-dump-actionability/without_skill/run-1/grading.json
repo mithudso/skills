@@ -1,0 +1,45 @@
+{
+  "expectations": [
+    {
+      "text": "Leads with a short diagnosis stating what the notes are and which organizing shape was chosen",
+      "passed": false,
+      "evidence": "Opens with 'Cleaned up from the week's raw dump. Two things you asked for are up top' \u2014 no diagnosis of what kind of notes these are and no named organizing shape."
+    },
+    {
+      "text": "All 5 TODO/action items appear in an actions section, with the duplicate incident-writeup TODO merged to one entry",
+      "passed": true,
+      "evidence": "Action-items table contains incident writeup (merged: 'noted Mon and again Wed'), pricing-page draft, ping marketing, Carlos EU ticket, plus the check-with-Dana item."
+    },
+    {
+      "text": "Decisions section contains: usage-based tier chosen (flat killed), hold pricing page until marketing signs off, EU notice = 60 days",
+      "passed": true,
+      "evidence": "'What got decided' lists 'Usage-based tier for the API is a go. Flat tier is killed', '60 days for EU customers... in the DPA addendum', and 'Hold the pricing page until marketing signs off'."
+    },
+    {
+      "text": "The unresolved EU latency regression (analyzer change never rolled back on EU cluster, p99 still degraded) appears prominently, not buried or dropped",
+      "passed": true,
+      "evidence": "Top-of-doc blockquote: 'Heads-up: The Friday latency incident is not actually closed... never rolled back there, so EU p99 is still degraded'; also a dedicated 'Open incident' section."
+    },
+    {
+      "text": "No invented owners, dates, or facts (every owner/date in output traces to the input)",
+      "passed": false,
+      "evidence": "Table assigns owner '**You**' to the incident writeup, but the input's 'TODO file incident writeup' states no owner \u2014 an invented owner (Dana is likewise inverted as owner of the 'check with dana' item)."
+    },
+    {
+      "text": "The trust-page idea (incl. uptime addition) is preserved in an ideas section, and the release-slip question is preserved (answered inline only with the metering estimate the input contains)",
+      "passed": true,
+      "evidence": "'Ideas / parking lot' keeps the trust page and 'could also show uptime \u2014 the way status.io does it'; 'Resolved question' answers the Sept-slip question with only the 3-week (jt) vs 5-week facts from the input."
+    },
+    {
+      "text": "Ends with a counts line (items in vs out, dups merged, flags, parked) whose numbers reconcile",
+      "passed": false,
+      "evidence": "Document ends with a Timeline section; there is no counts/reconciliation line anywhere."
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 3,
+    "total": 7,
+    "pass_rate": 0.5714
+  }
+}

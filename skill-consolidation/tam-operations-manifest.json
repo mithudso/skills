@@ -1,0 +1,108 @@
+{
+  "family": "tam-operations",
+  "builtAt": "2026-06-01T04:21:18.112Z",
+  "hubs": {
+    "tam-operations": {
+      "keepExisting": false,
+      "title": "TAM Operations (account deliverables, health, case & incident ops, reporting, support-API)",
+      "spokes": [
+        {
+          "spoke": "tam-expertise",
+          "referenceFile": "references/tam-expertise.md",
+          "routingLine": "Technical Account Management expertise covering account deliverables, health scoring, churn risk, customer sentiment, and success frameworks. Use when…",
+          "srcBytes": 4164
+        },
+        {
+          "spoke": "tam-reference",
+          "referenceFile": "references/tam-reference.md",
+          "routingLine": "MongoDB Premium Services TAM Operating Reference — role taxonomy (TAM/NTSE/IR/DCE), incident",
+          "srcBytes": 33448
+        },
+        {
+          "spoke": "tam-account-reports",
+          "referenceFile": "references/tam-account-reports.md",
+          "routingLine": "Generate any TAM account document on demand with live MCP data — Account Review, Support Plan,",
+          "srcBytes": 24293
+        },
+        {
+          "spoke": "account-health-scorer",
+          "referenceFile": "references/account-health-scorer.md",
+          "routingLine": "Account health scoring algorithms — weighted composite scores, signal categories, grading",
+          "srcBytes": 18732
+        },
+        {
+          "spoke": "account-artifacts-collector",
+          "referenceFile": "references/account-artifacts-collector.md",
+          "routingLine": "Orchestrates parallel data collection across all MCP and local sources for a customer account,",
+          "srcBytes": 13459
+        },
+        {
+          "spoke": "operator-report-generator",
+          "referenceFile": "references/operator-report-generator.md",
+          "routingLine": "Operator report generation expert — shift handoff (SBAR), meeting prep documents, quality",
+          "srcBytes": 18335
+        },
+        {
+          "spoke": "customer-file-consolidator",
+          "referenceFile": "references/customer-file-consolidator.md",
+          "routingLine": "Collect, deduplicate, version-consolidate, and semantically analyze all local files for a named",
+          "srcBytes": 14605
+        },
+        {
+          "spoke": "case-tracker",
+          "referenceFile": "references/case-tracker.md",
+          "routingLine": "Authoritative reference for building, extending, and debugging the Customer Dashboard active",
+          "srcBytes": 19359
+        },
+        {
+          "spoke": "case-timeline-visualization",
+          "referenceFile": "references/case-timeline-visualization.md",
+          "routingLine": "Rendering temporal event sequences in vanilla JS for dashboards — data modeling,",
+          "srcBytes": 17811
+        },
+        {
+          "spoke": "incident-response",
+          "referenceFile": "references/incident-response/SKILL.md",
+          "routingLine": "Incident response lifecycle expert — severity classification (SEV0-SEV3/P0-P4), incident roles",
+          "srcBytes": 16143
+        },
+        {
+          "spoke": "autoremediation",
+          "referenceFile": "references/autoremediation.md",
+          "routingLine": "Design and implement self-healing systems: retry/circuit-breaker patterns, automated error recovery, graceful degradation, and AI-assisted code repair agents.",
+          "srcBytes": 6404
+        },
+        {
+          "spoke": "firedrill-integration-tester",
+          "referenceFile": "references/firedrill-integration-tester/SKILL.md",
+          "routingLine": "Firedrill integration testing patterns — scenario execution, safety mechanisms, abort conditions,",
+          "srcBytes": 17137
+        },
+        {
+          "spoke": "ts-tools-support-api",
+          "referenceFile": "references/ts-tools-support-api.md",
+          "routingLine": "MongoDB TS Tools Support API implementation patterns — auth cascade (Hub-tab cookie fetch →",
+          "srcBytes": 23507
+        },
+        {
+          "spoke": "tstools-reference",
+          "referenceFile": "references/tstools-reference.md",
+          "routingLine": "TS Tools Support API Integration Reference — all 92 endpoints grouped by domain, full",
+          "srcBytes": 16356
+        },
+        {
+          "spoke": "monday-board-audit",
+          "referenceFile": "references/monday-board-audit.md",
+          "routingLine": "-",
+          "srcBytes": 15141
+        },
+        {
+          "spoke": "slack-subscription-auditor",
+          "referenceFile": "references/slack-subscription-auditor.md",
+          "routingLine": "-",
+          "srcBytes": 26424
+        }
+      ]
+    }
+  }
+}

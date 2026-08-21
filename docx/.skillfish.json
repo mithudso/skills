@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "docx",
+  "owner": "anthropics",
+  "repo": "skills",
+  "path": "skills/docx",
+  "branch": "main",
+  "sha": "a0d216202f9793a78da44cf96aabe48f42e627ac",
+  "source": "manual"
+}

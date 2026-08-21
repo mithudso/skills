@@ -1,0 +1,78 @@
+{
+  "family": "consumer-credit-and-debt",
+  "builtAt": "2026-06-20T20:08:41.720Z",
+  "hubs": {
+    "consumer-credit-and-debt": {
+      "keepExisting": true,
+      "title": "US Consumer Credit & Debt (hub)",
+      "spokes": [
+        {
+          "spoke": "credit-reports-and-scores",
+          "referenceFile": "references/credit-reports-and-scores.md",
+          "routingLine": "US consumer credit reporting & scoring: bureaus/furnishers, what's on a",
+          "srcBytes": 17506
+        },
+        {
+          "spoke": "improving-and-rebuilding-credit",
+          "referenceFile": "references/improving-and-rebuilding-credit.md",
+          "routingLine": "Playbook to build, improve, or rebuild a US consumer credit score: on-time-payment systems, lowering utilization, account age, inquiries, credit mix…",
+          "srcBytes": 18610
+        },
+        {
+          "spoke": "charge-offs-collections-and-debt-resolution",
+          "referenceFile": "references/charge-offs-collections-and-debt-resolution.md",
+          "routingLine": "Resolving defaulted US consumer debt: what a charge-off means, how debt moves creditor -> agency -> debt buyer, how to settle, \"pay for delete,\" the 1099-C…",
+          "srcBytes": 20810
+        },
+        {
+          "spoke": "debt-collectors-and-fdcpa-rights",
+          "referenceFile": "references/debt-collectors-and-fdcpa-rights.md",
+          "routingLine": "Third-party debt collectors and your FDCPA / Regulation F rights. Legal INFORMATION, not advice (as of 2026). Spoke of consumer-credit-and-debt.",
+          "srcBytes": 18526
+        },
+        {
+          "spoke": "home-mortgage-lending",
+          "referenceFile": "references/home-mortgage-lending.md",
+          "routingLine": "US home-mortgage lending fundamentals (credit/underwriting-centered), NC notes:",
+          "srcBytes": 20163
+        },
+        {
+          "spoke": "auto-lending-and-financing",
+          "referenceFile": "references/auto-lending-and-financing.md",
+          "routingLine": "US auto loans / car financing + NC repo notes. Spoke of",
+          "srcBytes": 18289
+        },
+        {
+          "spoke": "predatory-lending-and-high-cost-credit",
+          "referenceFile": "references/predatory-lending-and-high-cost-credit.md",
+          "routingLine": "Recognizing predatory, high-cost consumer credit and safe alternatives. Spoke",
+          "srcBytes": 18373
+        },
+        {
+          "spoke": "identity-theft-and-credit-fraud",
+          "referenceFile": "references/identity-theft-and-credit-fraud.md",
+          "routingLine": "Identity theft and credit/financial fraud — prevention, detection, and the",
+          "srcBytes": 19578
+        },
+        {
+          "spoke": "bankruptcy-ch7-ch13",
+          "referenceFile": "references/bankruptcy-ch7-ch13.md",
+          "routingLine": "US consumer bankruptcy: Chapter 7 (liquidation) vs Chapter 13",
+          "srcBytes": 23176
+        },
+        {
+          "spoke": "us-consumer-credit-and-debt-law",
+          "referenceFile": "references/us-consumer-credit-and-debt-law.md",
+          "routingLine": "US FEDERAL consumer-credit & debt statute reference — what each law does,",
+          "srcBytes": 27376
+        },
+        {
+          "spoke": "north-carolina-credit-and-debt-law",
+          "referenceFile": "references/north-carolina-credit-and-debt-law.md",
+          "routingLine": "North Carolina consumer credit & debt-law overlays: NC rules that change",
+          "srcBytes": 24369
+        }
+      ]
+    }
+  }
+}

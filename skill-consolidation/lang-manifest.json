@@ -1,0 +1,192 @@
+{
+  "family": "lang",
+  "builtAt": "2026-06-01T19:55:34.745Z",
+  "hubs": {
+    "lang-python": {
+      "keepExisting": false,
+      "title": "lang-python",
+      "spokes": [
+        {
+          "spoke": "python-patterns",
+          "referenceFile": "references/python-patterns.md",
+          "routingLine": "Python patterns and best practices: modern idioms (3.12-3.14), async/await (asyncio, TaskGroup,",
+          "srcBytes": 44043
+        },
+        {
+          "spoke": "python-testing",
+          "referenceFile": "references/python-testing.md",
+          "routingLine": "Python testing expert — pytest (fixtures, parametrization, markers, configuration),",
+          "srcBytes": 13645
+        },
+        {
+          "spoke": "python-static-type-checking",
+          "referenceFile": "references/python-static-type-checking.md",
+          "routingLine": "Python static type checkers and the gradual-typing model they implement — the four-checker land",
+          "srcBytes": 17968
+        },
+        {
+          "spoke": "python-supply-chain-security",
+          "referenceFile": "references/python-supply-chain-security.md",
+          "routingLine": "Python supply-chain and application security tooling — auditing dependencies for known",
+          "srcBytes": 17384
+        },
+        {
+          "spoke": "uv-python-toolchain",
+          "referenceFile": "references/uv-python-toolchain.md",
+          "routingLine": "uv — the unified Python toolchain (Astral, Rust): the single fast binary that consolidates",
+          "srcBytes": 20959
+        },
+        {
+          "spoke": "pydantic-v2",
+          "referenceFile": "references/pydantic-v2.md",
+          "routingLine": "Pydantic v2 expert — runtime data validation and modeling in Python powered by",
+          "srcBytes": 17536
+        },
+        {
+          "spoke": "cpython-runtime-internals",
+          "referenceFile": "references/cpython-runtime-internals.md",
+          "routingLine": "CPython interpreter and runtime internals for the 3.12–3.14 concurrency/performance overhaul — ",
+          "srcBytes": 15982
+        },
+        {
+          "spoke": "cpython-performance-profiling",
+          "referenceFile": "references/cpython-performance-profiling.md",
+          "routingLine": "CPython performance profiling and acceleration — the measure-then-optimize toolchain for Python",
+          "srcBytes": 18304
+        },
+        {
+          "spoke": "python-in-browser-wasm",
+          "referenceFile": "references/python-in-browser-wasm.md",
+          "routingLine": "Python in the browser and on WebAssembly — running CPython client-side and server-side via WASM",
+          "srcBytes": 15719
+        },
+        {
+          "spoke": "python-concurrency",
+          "referenceFile": "references/python-concurrency.md",
+          "routingLine": "deep asyncio, structured concurrency (TaskGroup), cancellation/timeouts, anyio/trio, fire-and-forget pitfalls",
+          "srcBytes": 11500
+        },
+        {
+          "spoke": "python-cli-tui",
+          "referenceFile": "references/python-cli-tui.md",
+          "routingLine": "building CLIs (argparse/Click/Typer) and terminal UIs (Rich, Textual)",
+          "srcBytes": 8567
+        },
+        {
+          "spoke": "python-metaprogramming",
+          "referenceFile": "references/python-metaprogramming.md",
+          "routingLine": "descriptors, metaclasses, __init_subclass__, the data model/dunders, Protocols vs ABCs, runtime introspection",
+          "srcBytes": 8401
+        },
+        {
+          "spoke": "python-app-packaging",
+          "referenceFile": "references/python-app-packaging.md",
+          "routingLine": "shipping standalone apps (PyInstaller, Nuitka, shiv/pex, zipapp, Briefcase)",
+          "srcBytes": 6078
+        },
+        {
+          "spoke": "python-logging-observability",
+          "referenceFile": "references/python-logging-observability.md",
+          "routingLine": "the stdlib logging model, structlog, loguru, OpenTelemetry log correlation",
+          "srcBytes": 7719
+        },
+        {
+          "spoke": "python-data-modeling",
+          "referenceFile": "references/python-data-modeling.md",
+          "routingLine": "choosing dataclasses vs attrs vs msgspec vs pydantic; NamedTuple/TypedDict/enum; serialization",
+          "srcBytes": 6611
+        },
+        {
+          "spoke": "python-ast-codegen",
+          "referenceFile": "references/python-ast-codegen.md",
+          "routingLine": "the ast module, LibCST codemods, import hooks, source transformation & code generation",
+          "srcBytes": 6584
+        }
+      ]
+    },
+    "lang-js-ts": {
+      "keepExisting": false,
+      "title": "lang-js-ts",
+      "spokes": [
+        {
+          "spoke": "javascript-nodejs",
+          "referenceFile": "references/javascript-nodejs.md",
+          "routingLine": "JavaScript and Node.js expert reference for language semantics, runtime APIs,",
+          "srcBytes": 15803
+        },
+        {
+          "spoke": "javascript-runtimes-deno-bun-edge",
+          "referenceFile": "references/javascript-runtimes-deno-bun-edge.md",
+          "routingLine": "<!--",
+          "srcBytes": 17338
+        },
+        {
+          "spoke": "javascript-node-html-css-debugging-expert",
+          "referenceFile": "references/javascript-node-html-css-debugging-expert.md",
+          "routingLine": "JavaScript, Node.js, HTML, and CSS debugging expert: breakpoints (all 8 Chrome DevTools types),",
+          "srcBytes": 38700
+        },
+        {
+          "spoke": "nodejs-concurrency-internals",
+          "referenceFile": "references/nodejs-concurrency-internals.md",
+          "routingLine": "Deep Node.js runtime-concurrency reference: the libuv event loop phase model and",
+          "srcBytes": 23003
+        },
+        {
+          "spoke": "nodejs-native-addons-napi",
+          "referenceFile": "references/nodejs-native-addons-napi.md",
+          "routingLine": "<!--",
+          "srcBytes": 18523
+        },
+        {
+          "spoke": "nodejs-typescript-and-runtime-features",
+          "referenceFile": "references/nodejs-typescript-and-runtime-features.md",
+          "routingLine": "<!--",
+          "srcBytes": 15248
+        },
+        {
+          "spoke": "typescript-expert",
+          "referenceFile": "references/typescript-expert.md",
+          "routingLine": "TypeScript general expert: project setup, tsconfig strategy, module resolution, everyday types,",
+          "srcBytes": 10718
+        },
+        {
+          "spoke": "typescript-advanced-types",
+          "referenceFile": "references/typescript-advanced-types.md",
+          "routingLine": "Advanced TypeScript type-system patterns: conditional types with infer, mapped type transforms,",
+          "srcBytes": 24430
+        },
+        {
+          "spoke": "zod-schema-validation",
+          "referenceFile": "references/zod-schema-validation.md",
+          "routingLine": "\"Zod runtime schema validation expert — core API, schema composition, transforms/pipes, error h",
+          "srcBytes": 19984
+        },
+        {
+          "spoke": "v8-engine-internals",
+          "referenceFile": "references/v8-engine-internals.md",
+          "routingLine": "Deep V8 JavaScript-engine internals: the object model (Maps/hidden classes, DescriptorArrays,",
+          "srcBytes": 22819
+        }
+      ]
+    },
+    "lang-go-and-mobile": {
+      "keepExisting": false,
+      "title": "lang-go-and-mobile",
+      "spokes": [
+        {
+          "spoke": "go-patterns",
+          "referenceFile": "references/go-patterns.md",
+          "routingLine": "\"Go (Golang) production patterns expert — idiomatic Go code, concurrency primitives, error hand",
+          "srcBytes": 8949
+        },
+        {
+          "spoke": "compose-multiplatform-patterns",
+          "referenceFile": "references/compose-multiplatform-patterns.md",
+          "routingLine": "Compose Multiplatform and Jetpack Compose patterns for KMP projects — state management,",
+          "srcBytes": 9745
+        }
+      ]
+    }
+  }
+}
