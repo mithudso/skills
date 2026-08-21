@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "deep-research",
+  "owner": "affaan-m",
+  "repo": "everything-claude-code",
+  "path": ".agents/skills/deep-research",
+  "branch": "main",
+  "sha": "5e9717c45dde573986e648d87f6d50701c6c30ea",
+  "source": "manual"
+}

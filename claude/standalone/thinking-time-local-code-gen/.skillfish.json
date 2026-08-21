@@ -1,0 +1,8 @@
+{
+  "version": "0.1",
+  "skillId": "thinking-time-local-code-gen",
+  "metadata": {
+    "discoverable": true,
+    "experimental": false
+  }
+}

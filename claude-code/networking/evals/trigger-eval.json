@@ -1,0 +1,22 @@
+[
+{"query": "why does my domain resolve on my laptop but not in the k8s pod", "should_trigger": true},
+{"query": "SERVFAIL only on some resolvers — DNSSEC?", "should_trigger": true},
+{"query": "dig +trace works fine but plain dig times out, what gives", "should_trigger": true},
+{"query": "new subdomain takes forever to appear — how does negative caching of NXDOMAIN work", "should_trigger": true},
+{"query": "DoT vs DoH vs DoQ — which should we deploy internally?", "should_trigger": true},
+{"query": "internal hostnames are leaking to public resolvers, how do I do split-horizon properly", "should_trigger": true},
+{"query": "systemd-resolved gives a different answer than 8.8.8.8 for the same name, why", "should_trigger": true},
+{"query": "can't put a CNAME at the apex — is the HTTPS/SVCB record the fix?", "should_trigger": true},
+{"query": "UDP DNS responses getting truncated, something about EDNS bufsize 1232?", "should_trigger": true},
+{"query": "delv shows a DS mismatch after our KSK rollover, zone now SERVFAILs", "should_trigger": true},
+{"query": "use ss and tcpdump to figure out what's hogging port 443 on this box", "should_trigger": false},
+{"query": "site behind Cloudflare keeps throwing 520 errors, origin looks healthy", "should_trigger": false},
+{"query": "design a VPC with PrivateLink so partners can reach our service privately", "should_trigger": false},
+{"query": "mongodb+srv:// connection string fails with DNSHostNotFound in the driver", "should_trigger": false},
+{"query": "how do I use dns.promises.resolve4 vs dns.lookup in Node.js", "should_trigger": false},
+{"query": "Atlas private endpoint hostname won't resolve from inside our VPC", "should_trigger": false},
+{"query": "chrome shows NET::ERR_CERT_DATE_INVALID on our site, how do I fix it", "should_trigger": false},
+{"query": "k8s Ingress isn't routing to my Service even though ClusterIP looks right", "should_trigger": false},
+{"query": "Cloudflare proxied record returns Cloudflare IPs — how do I get the real origin IP", "should_trigger": false},
+{"query": "write an nftables rule to redirect all port 53 traffic to my local resolver", "should_trigger": false}
+]

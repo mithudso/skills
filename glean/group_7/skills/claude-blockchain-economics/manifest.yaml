@@ -1,0 +1,35 @@
+name: blockchain-economics
+description: "Blockchain economics & cryptoeconomics — the incentive/mechanism layer above protocol mechanics. TRIGGER: tokenomics (issuance/emission schedules, inflation/disinflation, burns/sinks, ultrasound-money debate, vesting & unlock cliffs, fair-launch vs VC, airdrops, utility/governance/security-token taxonomy + Howey, the token-velocity / MV=PQ problem); cryptoeconomics & mechanism design (incentive-compatibility, the security budget & 51%/cost-of-attack economics, staking economics — real yield/slashing/liquid staking/restaking, PoS-vs-PoW economic security, Schelling points, the verifier's dilemma); fee-market design (EIP-1559 base fee & why it's not a pure auction, priority fees, EIP-4844 blob fees, Solana local fee markets, first-vs-second-price TFM); MEV (arbitrage/sandwich/liquidation/JIT, the searcher→builder→relay→proposer supply chain, PBS & enshrined-PBS, Flashbots/MEV-Boost, order-flow auctions, intents/solvers, encrypted mempools); governance economics (token-weighted/quadratic/conviction voting, vote-buying & bribe markets, DAO treasuries). SKIP: DeFi protocol mechanics/AMM math → defi; consensus theory/safety proofs → distributed-systems-consensus; per-chain protocol detail → bitcoin-protocol-expert / ethereum-protocol-expert; crypto-primitive math → blockchain-crypto-primitives; crypto investing/trading → investing-and-retirement / trading-and-investing (mechanism economics, NOT trading advice)."
+version: 1.0.0
+updated: 2026-06-16
+category: blockchain
+whenToUse: Use when reasoning about the economics and incentive design of a blockchain or token system — token supply/issuance and value capture, the economic security budget and cost-of-attack, staking and restaking yield, transaction-fee mechanism design (EIP-1559, blobs, Solana local markets), MEV and its supply chain / mitigation, or governance and DAO-treasury economics. This is the mechanism/incentive layer; defer protocol mechanics, consensus theory, and trading advice to the peer skills named in SKIP.
+keywords:
+  - tokenomics
+  - cryptoeconomics
+  - MEV
+  - maximal extractable value
+  - EIP-1559
+  - fee market
+  - proposer-builder separation
+  - staking economics
+  - security budget
+  - token velocity
+  - vesting unlock
+  - governance token
+  - DAO treasury
+  - quadratic voting
+  - liquid staking
+  - restaking
+  - slashing
+  - EIP-4844 blob fee
+  - Flashbots MEV-Boost
+  - bribe market
+tags:
+  - blockchain
+  - blockchain-economics
+  - cryptoeconomics
+  - tokenomics
+  - mev
+  - defi-adjacent
+  - mechanism-design
