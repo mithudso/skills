@@ -82,7 +82,8 @@ Time series collections are the preferred choice over the manual bucket pattern 
 - MongoDB 5.0: Initial release (create, insert, query, TTL, basic indexing)
 - MongoDB 5.1: $densify aggregation stage
 - MongoDB 5.2: Columnar compression format (major storage improvement)
-- MongoDB 6.0: $fill aggregation stage; partial index support with $or/$in/$geoWithin
+- MongoDB 5.3: $fill aggregation stage
+- MongoDB 6.0: partial index support with $or/$in/$geoWithin
 - MongoDB 6.3: Custom bucketing parameters (`bucketMaxSpanSeconds`, `bucketRoundingSeconds`)
 - MongoDB 7.0: $out can write to time series collections; TTL partial filter on metaField
 - MongoDB 8.0: Block processing — direct write into column-compressed format (2-3x throughput, 10-20x cache reduction); timeField shard key deprecated
@@ -403,7 +404,7 @@ db.weather.aggregate([
 - `"partition"` — spans min to max within each partition group.
 - `[lower, upper]` — explicit range; lower inclusive, upper exclusive.
 
-#### $fill (MongoDB 6.0+)
+#### $fill (MongoDB 5.3+)
 
 Populates `null` or missing fields in densified documents using interpolation or last-observed-carry-forward (LOCF).
 
@@ -487,7 +488,7 @@ Atlas Charts works natively with time series collections. The time-series-optimi
 - Infrastructure metrics with aggregated panels (mean, p95, max)
 - Financial dashboards showing OHLCV candlestick data
 
-**Limitation:** Charts embeds querying time series collections with high cardinality `metaField` can generate expensive scatter-gather queries. Use time-range filters and `metaField` equality filters in embedded chart filters to scope queries.
+**Limitation:** Embedded charts querying time series collections with a high-cardinality `metaField` can generate expensive scatter-gather queries. Use time-range and `metaField` equality filters in the embedded chart filter to scope queries.
 
 **Sources:**
 - [Visualizing Atlas Data with Charts](https://www.mongodb.com/resources/products/platform/visualizing-your-data-with-atlas-charts)
@@ -874,13 +875,13 @@ sh.shardCollection("metrics.events", { "metadata.region": 1 })
 
 ### Anti-Pattern 2: Wrong Granularity for Ingestion Rate
 
-**Mismatch 1 — granularity too coarse (high-frequency data):** Setting `granularity: "hours"` for a sensor that reports every second means each bucket can remain open for up to 30 days before the *time* limit triggers a close. In practice, the *size* limit (~1,000 documents) is hit first (after ~17 minutes at 1/s), but this still produces far more bucket churn than needed and misrepresents the intended data cadence to the storage engine, degrading compression locality.
+**Mismatch 1 — granularity too coarse (high-frequency data):** Setting `granularity: "hours"` for a sensor that reports every second means each bucket can remain open for up to 30 days before the *time* limit triggers a close. In practice, the *measurement-count* limit (~1,000 documents) is hit first (after ~17 minutes at 1/s), but this still produces far more bucket churn than needed and misrepresents the intended data cadence to the storage engine, degrading compression locality.
 
 **Mismatch 2 — granularity too fine (low-frequency data):** Setting `granularity: "seconds"` for a sensor that only reports once per hour means each bucket closes after 1 hour (time limit), typically containing only ~1 measurement. This destroys compression — you lose all the benefit of columnar storage across many measurements.
 
 ```javascript
 // BAD for 1/second data: granularity implies 30-day lifecycle
-// (size-limit fires at ~17min but bucket metadata is misleading)
+// (count limit fires at ~17min but bucket metadata is misleading)
 { granularity: "hours" }
 
 // BAD for 1/hour data: each bucket closes after 1 hour with ~1 document

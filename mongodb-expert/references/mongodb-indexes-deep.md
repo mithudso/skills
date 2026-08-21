@@ -475,7 +475,6 @@ sh.shardCollection("mydb.events", { _id: "hashed" });
 
 - Support **equality queries only** — range queries (`$gt`, `$lt`) cannot use hashed indexes.
 - Hash is computed deterministically; queries with `$eq` resolve to one hash bucket.
-- MongoDB uses a FNV-1a variant hash.
 - A hashed index on `_id` distributes writes evenly across shards, avoiding hotspots.
 - **Compound hashed shard keys (MongoDB 4.4+):** a shard key may combine a range prefix
   with one hashed component — e.g., `{ country: 1, _id: "hashed" }` — giving locality on

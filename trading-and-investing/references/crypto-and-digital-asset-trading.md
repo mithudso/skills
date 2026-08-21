@@ -274,7 +274,7 @@ The **Terra UST/LUNA collapse** (May 2022) destroyed approximately $40B in value
 | **Bybit** | Dubai | 0.10% / 0.10% | 100x | Limited | Major perps volume; large insurance fund |
 | **BitMEX** | Seychelles | 0.02% (maker rebate) / 0.075% | 100x | Limited | Invented perpetuals; smaller share now |
 
-**Note on Binance regulatory status (verified-as-of: 2026-06-21):** SEC case against Binance was **dismissed with prejudice on 2025-05-29** (SEC Litigation Release 26316). February 13, 2025 was a 60-day *stay*, not the dismissal -- a distinction that is widely misreported and was corrected here on 2026-08-05; DOJ settlement from 2023 resulted in $4.3B penalty and departure of CZ (Changpeng Zhao) as CEO. Binance.US operates as a separate, significantly reduced entity. OKX exited the US market.
+**Note on Binance regulatory status (verified-as-of: 2026-06-21):** SEC case against Binance was dropped in February 2025; DOJ settlement from 2023 resulted in $4.3B penalty and departure of CZ (Changpeng Zhao) as CEO. Binance.US operates as a separate, significantly reduced entity. OKX exited the US market.
 
 ---
 

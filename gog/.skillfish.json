@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "gog",
+  "owner": "openclaw",
+  "repo": "openclaw",
+  "path": "skills/gog",
+  "branch": "main",
+  "sha": "2c9b7bc934b67d90a276472304b3af7b14122fd6",
+  "source": "manual"
+}

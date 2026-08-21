@@ -12,8 +12,8 @@ title: "Research Note-Taking & Personal Knowledge Management (PKM)"
 description: >-
   Design and operate a personal note/knowledge-management (PKM) system for a large, ongoing body of technical research — methods, tool choice, and the capture->synthesis->writing pipeline that turn captured material into durable, linkable knowledge and output. Covers Zettelkasten (atomic notes, stable IDs, linking, MOCs), Building a Second Brain (CODE/PARA, progressive summarization), evergreen notes, spaced repetition, the PKM tool landscape (Obsidian/Logseq/Roam/Notion/Tana), and anti-patterns (collector's fallacy, over-structuring, tool-churn). TRIGGER: setting up or fixing a note/PKM system; "which note app should I use"; organizing, linking, or atomizing research notes; building a slip-box or second brain; "my notes aren't useful". SKIP: drafting prose -> writing-expert; citation styles -> career-and-formal-writing; web sources -> deep-research; coding/labeling notes for analysis -> research-data-annotation-coding; customer doc stores -> content-ingestion-extraction.
 category: custom
-version: 1.1.0
-updated: 2026-06-15
+version: 1.1.1
+updated: 2026-07-04
 whenToUse:
   - "setting up or fixing a personal note / PKM system"
   - "choosing a note-taking method or PKM tool (Obsidian, Logseq, Notion, Roam, Tana)"
@@ -49,6 +49,8 @@ This skill is about the *capture/knowledge system itself*: the note methods, the
 choice, and the capture→synthesis→writing pipeline. It is **not** about drafting prose,
 finding/synthesizing web sources, or standing up shared engagement doc stores (see SKIP
 routes in the description).
+
+> Routing detail: reorganizing an existing messy note dump right now (not designing or choosing a system) → note-organizer.
 
 The single most important reframing, from Andy Matuschak: **"'Better note-taking' misses
 the point; what matters is 'better thinking.'"** Every method below is a means to develop

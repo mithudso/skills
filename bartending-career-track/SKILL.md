@@ -63,23 +63,6 @@ Expert reference for the bartending profession — career progression, certifica
 
 *verified-as-of: 2026-06-23*
 
-## Contents
-
-1. [Career Ladder](#1-career-ladder)
-2. [Venue Type Comparison](#2-venue-type-comparison)
-3. [Alcohol Service Certifications (Required)](#3-alcohol-service-certifications-required)
-4. [State Mandatory Server Training](#4-state-mandatory-server-training)
-5. [Professional Beverage Certifications](#5-professional-beverage-certifications)
-6. [Competitive Bartending](#6-competitive-bartending)
-7. [USBG — United States Bartenders Guild](#7-usbg--united-states-bartenders-guild)
-8. [Event & Freelance Bartending](#8-event--freelance-bartending)
-9. [Portfolio Building](#9-portfolio-building)
-10. [Resume Conventions](#10-resume-conventions)
-11. [Anti-Patterns](#11-anti-patterns)
-12. [References](#12-references)
-
----
-
 ## 1. Career Ladder
 
 ### Stage 1: Barback

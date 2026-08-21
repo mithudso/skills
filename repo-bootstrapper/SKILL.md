@@ -144,6 +144,8 @@ Every repo that meets this standard must have ALL of the following files.
 |---|---|
 | `docs/codebase-overview.md` | Human-readable file map grouped by directory — must cover EVERY workspace component (a missing component section is a major finding) |
 | `docs/high_signal_file_index.json` | Machine-readable per-file index for LLM retrieval |
+| `scripts/semantic_indexer.py` | Local semantic embedding pipeline (Ollama + ChromaDB) triggered by file watcher |
+| `scripts/watch_and_index.sh` | Filesystem hook to trigger semantic indexing on file creation/modification |
 | `scripts/check-doc-indexes.mjs` (or equivalent) | Path-validates every entry in the retrieval indexes; `--prune` removes dead entries; wired into CI so index rot fails the build |
 | `docs/integrations-and-assumptions.md` | External services, hardcoded assumptions, env differences |
 | `docs/known-issues.md` | Active bugs, workarounds, inferred from TODO/FIXME |

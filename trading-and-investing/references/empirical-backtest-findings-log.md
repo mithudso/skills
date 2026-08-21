@@ -418,6 +418,65 @@ Method and the full rung ladder: `references/cross-asset-generalisation-testing.
 
 Reproduce with `~/Downloads/sol-backtest-data/_scripts/run_walkforward_book.py`.
 
+### 9.8 Nine coins, 54 cells — 48 beat buy-and-hold, 1 survived, and that one still lost
+
+**The largest search in this log, and the cleanest demonstration of data snooping it
+contains.** 9 coins (BTC, ETH, SOL, BNB, XRP, DOGE, LINK, AVAX, TRX), 6 signal strategies,
+120–600 configurations each, 58 common months on 1-hour bars, 46 out-of-sample months
+after a 12-month trailing selection window.
+
+| Test | Passed |
+|---|---:|
+| Best config beat buy-and-hold — in-sample | **48 / 54** |
+| Survived the Deflated Sharpe adjustment | **1 / 54** |
+| Beat buy-and-hold — walk-forward | **4 / 54** |
+| Walk-forward even positive | 25 / 54 |
+
+**Selection decay was universal: 54 of 54 pairs lost edge out of sample**, median 3.57
+pp/month, **median 40% of the in-sample edge retained**. Median modal-config share across
+refits was 20% — the selection rarely settled.
+
+**The lone DSR survivor loses to buy-and-hold.** `trend`/SOL cleared DSR 0.995 at Sharpe
++1.10 (buy-and-hold +0.62). Walk-forwarded: **+2.93%/mo against buy-and-hold's +5.86%**.
+It survived DSR partly *because trend has only 108 configs* — its best-of-N bar (`sr0`
++0.25) is far below a 600-config RSI grid's (+0.66). RSI/TRX posted a higher raw Sharpe
+(+1.58) and failed at DSR 0.321. **Raw Sharpe is not comparable across differently-sized
+grids**, which is the entire point of the deflation.
+
+**A random baseline caught what the headline hid.** Per strategy, averaged over 9 coins,
+trend led the walk-forward table at +1.01%/mo — but its **random-config baseline was
++1.06%**. Trend configs are broadly decent on these coins and *selecting* among them
+destroyed value. Only `donchian` showed selection genuinely adding (+0.12% vs −0.91%
+random), and it still lost to buy-and-hold.
+
+**DSR and cross-asset transfer disagree systematically.** Applying each coin's best config
+unchanged to the other eight (50 = carries no information): donchian 75.0, macd 74.8, rsi
+69.5, ma_cross 63.3, bollinger 49.2, **trend 47.6**. The strategy producing the only DSR
+survivor has the *worst* transfer — below chance — while donchian and macd transfer well
+and never survived DSR anywhere. **The two tests ask different questions** — DSR asks
+whether you searched too hard on this asset, transfer asks whether the answer means
+anything off it — and neither implies the other.
+
+**A silent exclusion worth recording as a process failure.** `grid` produced **zero**
+configurations in the first run and reported no error: its `lower`/`upper` come from
+`derive_params()` on the prior month, and the sweep's up-front `build()` validation
+rejected every combination. An empty grid is indistinguishable from a strategy that
+simply has nothing to say. Once fixed (validate context params with placeholders, supply
+the real prior-month range per month, preserving no-lookahead), grid's best config **failed
+to beat buy-and-hold on 8 of 9 coins**, every cell flagged LUCK — consistent with §9.4,
+where 240 configurations found zero that rescued a bear month.
+
+**Scope.** One venue, spot 1h bars, 6 bps fee, no slippage or failed-transaction
+modelling; monthly returns so 58 months is 58 observations, which is why `sr0` is high and
+almost everything fails DSR. Each month is simulated independently, so this measures
+parameter sets rather than a continuously-held position. Grid's walk-forward, completed after the
+first draft, **loses to buy-and-hold on 9 of 9 coins** — but with decay of only 0.16–0.59
+pp against the signals' 3.57 pp median, because 24 configurations leave far less to
+overfit. Reproduce with
+`~/Downloads/sol-backtest-data/_scripts/run_sweep.py` and `run_sweep_walkforward.py`;
+full write-up at `~/dev/solmargintrader/research/SWEEP-9COIN.md`.
+
+
 ## References
 
 Internal: `references/strategy-failure-modes-and-synergy.md` (the conceptual framework under test);

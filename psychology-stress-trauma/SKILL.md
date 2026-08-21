@@ -11,8 +11,8 @@ description: >-
   epigenetics, "Body Keeps the Score") vs PE/CPT/EMDR. SKIP: coping with or preventing burnout,
   recovery, emotion regulation -> applied-psychology; ADHD/autism ->
   psychology-neurodevelopmental; PERMA/post-traumatic growth -> psychology-positive; personality
-  disorders/attachment -> psychology-clinical-personality; diagnosis/medical advice -> a clinician.
-version: "1.0.0"
+  disorders/attachment -> psychology-clinical-personality; institutional betrayal / DARVO / survivor disbelief -> psychology-institutional-betrayal; diagnosis/medical advice -> a clinician.
+version: "1.0.1"
 updated: "2026-06-23"
 category: spoke
 model: claude-opus-4-8

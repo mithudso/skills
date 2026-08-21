@@ -278,7 +278,7 @@ function findById(coll, id) {
 
 ### `mongosh.conf.yaml` — Global Config File
 
-**Location**: 
+**Location**:
 - Linux/macOS: `/etc/mongosh.conf`
 - Windows: `%ProgramData%\MongoDB\mongosh.conf`
 
@@ -643,7 +643,7 @@ Int32(42)
 NumberInt(42)          // legacy alias — still works
 
 // Long — 64-bit signed integer
-Long(9007199254740993)
+Long("9007199254740993")        // pass as string — an integer literal > 2^53 is truncated by JS before Long sees it
 NumberLong("9007199254740993")  // use string to avoid JS precision loss
 // Note: NumberLong() in mongosh ONLY accepts strings, not integers
 

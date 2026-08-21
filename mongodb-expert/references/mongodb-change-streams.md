@@ -148,16 +148,16 @@ Every notification is a BSON document with the following top-level fields:
   wallTime: ISODate("2023-04-03T12:30:03.000Z"), // MongoDB 6.0+
   ns: { db: "mydb", coll: "orders" },
   documentKey: { _id: ObjectId("..."), /* shard key fields on sharded collections */ },
-  
+
   // Varies by operationType — see below
   fullDocument: { /* ... */ },
   fullDocumentBeforeChange: { /* ... */ },
   updateDescription: { /* ... */ },
-  
+
   // Multi-document transactions only
   lsid: { id: UUID("..."), uid: BinData(...) },
   txnNumber: NumberLong(1),
-  
+
   // MongoDB 6.0+ with showExpandedEvents
   collectionUUID: UUID("...")
 }
@@ -260,7 +260,7 @@ const stream = collection.watch([], {
 async function consumeChangeStream(collection, initialToken = null) {
   const options = initialToken ? { startAfter: initialToken } : {};
   const stream = collection.watch([], options);
-  
+
   try {
     for await (const event of stream) {
       await processEvent(event);
@@ -398,7 +398,7 @@ collection.watch([
 
 // Filter by field value on inserts
 collection.watch([
-  { $match: { 
+  { $match: {
     operationType: 'insert',
     'fullDocument.status': 'PENDING'
   }}
@@ -552,16 +552,16 @@ const { MongoClient } = require('mongodb');
 async function startChangeStream(uri, dbName, collName) {
   const client = new MongoClient(uri, { maxPoolSize: 20 });
   await client.connect();
-  
+
   const collection = client.db(dbName).collection(collName);
   let resumeToken = await loadPersistedToken();
-  
+
   const options = resumeToken ? { startAfter: resumeToken } : {};
   const changeStream = collection.watch(
     [{ $match: { operationType: { $in: ['insert', 'update', 'replace'] } } }],
     options
   );
-  
+
   changeStream.on('change', async (event) => {
     try {
       await processEvent(event);
@@ -572,7 +572,7 @@ async function startChangeStream(uri, dbName, collName) {
       // Do not advance token on processing failure
     }
   });
-  
+
   changeStream.on('error', async (err) => {
     if (err.code === 286) {
       console.error('ChangeStreamHistoryLost — oplog window exceeded');
@@ -583,11 +583,11 @@ async function startChangeStream(uri, dbName, collName) {
       console.error('Change stream error:', err);
     }
   });
-  
+
   changeStream.on('close', () => {
     console.log('Change stream closed');
   });
-  
+
   return changeStream;
 }
 ```
@@ -599,7 +599,7 @@ async function* watchOrders(collection) {
   const changeStream = collection.watch([
     { $match: { operationType: 'insert' } }
   ]);
-  
+
   try {
     for await (const event of changeStream) {
       yield event;
@@ -658,18 +658,18 @@ func watchCollection(ctx context.Context, collection *mongo.Collection, token bs
     pipeline := mongo.Pipeline{
         {{"$match", bson.D{{"operationType", bson.D{{"$in", bson.A{"insert", "update"}}}}}}},
     }
-    
+
     opts := options.ChangeStream().SetFullDocument(options.UpdateLookup)
     if token != nil {
         opts.SetStartAfter(token)
     }
-    
+
     stream, err := collection.Watch(ctx, pipeline, opts)
     if err != nil {
         return err
     }
     defer stream.Close(ctx)
-    
+
     for stream.Next(ctx) {
         var event bson.M
         if err := stream.Decode(&event); err != nil {
@@ -762,7 +762,7 @@ foreach (var change in cursor.ToEnumerable())
 // Database-level
 { resource: { db: "mydb", collection: "" }, actions: ["find", "changeStream"] }
 
-// Deployment-level  
+// Deployment-level
 { resource: { db: "", collection: "" }, actions: ["find", "changeStream"] }
 ```
 
@@ -946,7 +946,7 @@ sourceCollection.watch([{
 | Error / Symptom | Cause | Resolution |
 |---|---|---|
 | `ChangeStreamHistoryLost` (code 286) | Resume token no longer in oplog | Increase oplog size; restart stream without token; handle data gap |
-| Stream sends no events after cluster change | PSA topology: only 1 data node, majority cannot be reached | Ensure 2+ data-bearing nodes or check `writeConcernMajorityJournalDefault` |
+| Stream sends no events after cluster change | PSA topology with the secondary down: only 1 data-bearing node available (the arbiter holds no data), so no write can be majority-committed | Restore/add a data-bearing node so majority is met; check `writeConcernMajorityJournalDefault` |
 | High latency on sharded cluster | Cold shards blocking `mongos` merge | Lower `periodicNoopIntervalSecs`; run `appendOplogNote` on cold shards |
 | `16MB document limit exceeded` | Large `fullDocument` or event on big document | Use `$changeStreamSplitLargeEvent`; filter fields with `$project` |
 | Pre-image is `null` with `'required'` | Pre-images not enabled on collection, or expired | Enable `changeStreamPreAndPostImages`; configure `expireAfterSeconds` |

@@ -1,5 +1,3 @@
-The task asks me to return the fixed file content directly:
-
 ---
 name: misc-catch-all
 title: "Misc / Catch-All (hub)"

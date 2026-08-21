@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "xlsx",
+  "owner": "anthropics",
+  "repo": "skills",
+  "path": "skills/xlsx",
+  "branch": "main",
+  "sha": "f5fb1cdb7993b2feee8367e983e9d4d58d2eedd4",
+  "source": "manual"
+}

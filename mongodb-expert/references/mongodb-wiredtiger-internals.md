@@ -895,7 +895,7 @@ Background index builds (post-4.2) hold uncommitted entries in the WiredTiger ca
 | 4.2 | Distributed transactions; introduces durable history store work |
 | 4.4 | **History store (`WiredTigerHS.wt`)** replaces lookaside; major rewrite of the MVCC retention layer |
 | 5.0 | `minSnapshotHistoryWindowInSeconds` parameter introduced; time-series collections default to zstd |
-| 6.0 | `cacheSizePct` configuration; queryable encryption GA leveraging WT layer |
+| 6.0 | `cacheSizePct` configuration; queryable encryption GA built on the WT layer |
 | 7.0 | **Dynamic ticketing algorithm** for concurrent transactions; lower baseline ticket usage |
 | 8.0 | TCMalloc switch (lower fragmentation); SBE/ExpressPlan integration with WT B-tree traversal; reader-writer mutex improvements; 36% read perf, 32% mixed perf gains |
 | 8.2 | Continued tuning; minor WT subsystem improvements |

@@ -1,11 +1,11 @@
 ---
-description: >-
-  Acquire, extract, audit & restructure content from heterogeneous sources — aging docs, doc folders/KBs, live web DOM, meeting-audio devices, one-off docs to templatize. TRIGGER: doc archaeology (staleness, dead links, process drift, deprecate/archive decisions); doc-store bootstrapping (numbered taxonomy, _meta indexes, archive policy); Chrome content-script DOM extractor (selector fallback, MutationObserver/waitForElement, shadow-DOM, SPA nav, partial extraction); Granola transcript/notes fetch (REST, native-host, ProseMirror, polling sync); Plaud recorder ecosystem (devices, Developer API/OAuth, MCP, AutoFlow); reverse-engineer a doc into a reconstruction prompt with {{placeholders}} + data-manifest. SKIP: producing/parsing a finished file FORMAT → document-formats; general Chrome-extension architecture → chrome-extension-expert; prose/voice → writing-expert.
 name: content-ingestion-extraction
+description: >-
+  Acquire, extract, audit & restructure content from heterogeneous sources — aging docs, doc folders/KBs, live web DOM, meeting-audio devices, one-off docs to templatize. TRIGGER: doc archaeology (staleness, dead links, process drift, deprecate/archive decisions); doc-store bootstrapping (numbered taxonomy, _meta indexes, archive policy); Chrome content-script DOM extractor (selector fallback, MutationObserver/waitForElement, shadow-DOM, SPA nav, partial extraction); Granola transcript/notes fetch (REST, native-host, ProseMirror, polling sync); Plaud recorder ecosystem (devices, Developer API/OAuth, MCP, AutoFlow); reverse-engineer a doc into a reconstruction prompt with {{placeholders}} + data-manifest. SKIP: producing/parsing a finished file FORMAT → document-formats; general Chrome-extension architecture → chrome-extension-expert; prose/voice → writing-expert; a skill file's factual currency → skill-refresher.
 title: "Content Ingestion & Extraction"
 category: developer
-version: "1.0.0"
-updated: "2026-05-31"
+version: "1.0.1"
+updated: "2026-07-20"
 tags: [ingestion, extraction, scraping, transcription, doc-audit, templatize, knowledge-base, hub]
 keywords:
   - document staleness drift audit doc-archaeology

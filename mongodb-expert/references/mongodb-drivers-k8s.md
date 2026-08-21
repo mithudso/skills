@@ -85,7 +85,7 @@ Activate when the task involves any of:
 
 ## Prerequisites
 
-- Transactions and change streams require a **replica set** (minimum 3 members) or sharded cluster. They do not work on standalone `mongod`.
+- Transactions and change streams require a **replica set** or sharded cluster; they do not work on a standalone `mongod`. A single-member replica set is enough for local development, but production replica sets use 3+ members so `w: "majority"` survives a node loss.
 - Change streams require MongoDB 3.6+; pre/post images require MongoDB 6.0+.
 - The Atlas Kubernetes Operator requires an Atlas account and API keys.
 - The Enterprise Operator requires a MongoDB Enterprise Advanced license and Ops Manager.
@@ -294,7 +294,7 @@ const results = await db.collection('employees').aggregate(pipeline).toArray();
 ```js
 async function watchOrders(db) {
   const collection = db.collection('orders');
-  
+
   // Filter to only insert/update events
   const pipeline = [
     { $match: { operationType: { $in: ['insert', 'update', 'replace'] } } }
@@ -533,12 +533,12 @@ from motor.motor_asyncio import AsyncIOMotorClient
 async def main():
     client = AsyncIOMotorClient(os.environ['MONGODB_URI'])
     db = client['myapp']
-    
+
     await db['users'].insert_one({'name': 'Alice'})
-    
+
     async for doc in db['users'].find({'age': {'$gte': 18}}):
         print(doc)
-    
+
     # Aggregation
     async for result in db['orders'].aggregate([
         {'$match': {'status': 'shipped'}},
@@ -912,7 +912,7 @@ async function commitWithRetry(session) {
 ### Transaction Limits
 
 - Max 60 seconds by default (`transactionLifetimeLimitSeconds`)
-- Each operation counts against the 16MB document limit for oplog entries
+- MongoDB 4.4+ chains a large transaction across multiple oplog entries (each still ≤16 MB BSON), so total size is bounded by oplog space and WiredTiger cache — not by a single 16 MB entry (the pre-4.4 cap)
 - Avoid long-running transactions; they hold locks and cause blocking
 
 ---

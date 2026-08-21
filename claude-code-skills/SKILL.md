@@ -3,9 +3,9 @@ name: claude-code-skills
 description: >-
   Expert reference for Claude Code skills — anatomy (SKILL.md, frontmatter, references/), authoring, discovery, distribution (plugins, marketplaces, security), management (precedence, token budgets, skillOverrides), composition (hooks, agents), optimization (quality gates, CI/CD), and Claude Code workflows (plan mode, TDD/verification loops, hooks automation, headless/CI, worktrees, context management). Use when creating, editing, publishing, or debugging skills, or applying Claude Code workflow patterns. TRIGGER: "write a SKILL.md", "skill frontmatter fields", "skill not triggering", "install a skill", "skill marketplace", "skill token budget", "skill precedence", "skill security audit", "Claude Code workflow / plan mode / headless / worktrees". SKIP: plugin packaging and hook configuration (use claude-code-plugins); searching the prompts.chat registry to install a skill (use skill-lookup); creating a skill from scratch interactively (use skill-creator).
 origin: local
-version: 1.2.0
+version: 1.2.1
 category: developer
-updated: 2026-06-10
+updated: 2026-07-20
 whenToUse:
   - "how do I write a SKILL.md"
   - "skill frontmatter fields and options"
@@ -36,6 +36,7 @@ Ref: Claude Code skills ecosystem — anatomy, authoring, discovery, distributio
 - Search prompts.chat registry for existing skill → use `skill-lookup`
 - Create new skill from description → use `skill-creator`
 - Fix trigger accuracy, over-triggering, prose quality of existing skill → use `skill-optimizer`
+- Whole-tree taxonomy rebalance, hub cap-balance, cross-hub placement, reshape for a new family → use `skill-tree-architect`
 
 ## Quick reference
 
@@ -102,6 +103,7 @@ origin: local
 | Plugin packaging, hooks config, agent definitions | Plugin-level work | `references/claude-code-plugins.md` |
 | Claude Code workflows | Plan mode, verification/TDD loops, hooks automation, headless/CI, Agent SDK routines, worktree/subagent/team parallelism, context management, workflow failure modes | `references/claude-code-workflows.md` |
 | Model-migration & prompt/skill portability | Migrating prompt/skill library across model versions — prompt rot, capability-shift regression, regression-eval/golden-transcript/canary gating, re-optimization order, pinning vs floating | `references/model-migration-prompt-portability.md` |
+| Headless `-p` / stream-json **client** contract | Building a program on top of `claude`: NDJSON event types, `stream_event` SSE passthrough, the four terminal states, why `result` is neither guaranteed nor last, in-band `control_request` interrupt (cancel requires `--input-format stream-json`), session resume + the cwd-mismatch trap, SIGTERM→143, the 3s open-stdin tax, `CLAUDECODE` nested-hang, pipe-vs-PTY buffering | `references/claude-headless-streaming.md` |
 
 ## Full reference
 

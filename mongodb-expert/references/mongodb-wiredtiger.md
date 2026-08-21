@@ -412,9 +412,9 @@ Journal entries contain:
 
 ### Disabling the Journal (--nojournal)
 
-**Removed in MongoDB 4.0** for WiredTiger: `--nojournal` / `storage.journal.enabled: false` is no longer accepted by WiredTiger-backed nodes. Attempting to start mongod 4.0+ with journaling disabled will result in a startup error. Prior to 4.0 it was permitted only on **standalone** (non-replica-set) nodes.
+**Removed in MongoDB 6.1** for WiredTiger: journaling is always enabled, and the `storage.journal.enabled` option along with the `--journal` / `--nojournal` command-line flags were removed. Starting a MongoDB 6.1+ node with any of these options is a startup error. Before 6.1, journaling could be disabled only on **standalone** (non-replica-set) WiredTiger nodes; replica set members always required it.
 
-If you encounter this on a pre-4.0 deployment: disabling journaling means that a crash loses all writes since the last checkpoint (up to 60 seconds). **Never disable journaling on replica set members** — it violates the durability contract. Treat any pre-4.0 standalone with journaling disabled as unacceptably risky in production.
+If you encounter this on a pre-6.1 deployment: disabling journaling means that a crash loses all writes since the last checkpoint (up to 60 seconds). **Never disable journaling on replica set members** — it violates the durability contract. Treat any pre-6.1 standalone with journaling disabled as unacceptably risky in production.
 
 ### j:true Write Concern Performance
 

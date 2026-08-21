@@ -13,7 +13,7 @@ name: mongodb-error-codes
 description: >-
   Diagnose MongoDB server error codes and drive correct driver retry behavior.
   Catalogs numeric codes (6, 9001, 24, 50, 89, 91, 112, 121, 133, 134, 148,
-  189, 211, 251, 262, 280, 286, 11000, 18/8000, 40415), error labels
+  189, 211, 251, 262, 280, 286, 292, 11000, 18/8000, 40415), error labels
   (RetryableWriteError, TransientTransactionError, UnknownTransactionCommitResult,
   NoWritesPerformed), retryable-writes/reads spec semantics, Client-Side Operations
   Timeout (timeoutMS/CSOT), withTransaction patterns, exponential backoff with
@@ -164,17 +164,17 @@ Each entry follows the same shape: **code, name, server family, retry semantics,
 - **Fix:** Inspect `db.currentOp({ "active": true, "secs_running": { $gte: 1 } })` for the lock holder and `db.serverStatus().globalLock.currentQueue`. Often resolves itself if the blocker completes; if persistent, kill the blocker (after confirming safe), reduce write concurrency, or split the offending operation. From 4.2+ `createIndex` is always background — older guidance about `background: true` no longer applies.
 - **Note:** Code 24 sometimes surfaces alongside or interleaved with code 50 / 251 depending on whether the lock-wait was bounded by `maxTimeMS`, the transaction-lock-timeout, or the global lock-acquire timeout.
 
-### Code 50 — ExceededTimeLimit / MaxTimeMSExpired
+### Code 50 — MaxTimeMSExpired
 
 - **Family:** Timeout
-- **Retryable:** Yes since Nov 2023 (added to retryable-error list when `retryWrites=true` and the operation is otherwise retryable). Read paths retry under `retryReads=true`.
-- **Note:** The server has overloaded code 50 for **two distinct conditions**: `maxTimeMS`-induced timeouts AND unrelated lock-wait timeouts. Always read the error message, not just the code.
+- **Retryable:** No — `MaxTimeMSExpired` is a deliberate client-imposed deadline (`maxTimeMS`), so the driver does not auto-retry it; retrying would just re-hit the same cap. Do not confuse it with `ExceededTimeLimit` (code **262**), a separate server-internal timeout that the driver *does* treat as retryable (it carries the `RetryableWriteError` label).
+- **Note:** Code 50 (`MaxTimeMSExpired`) and code 262 (`ExceededTimeLimit`) are both timeout-family but distinct; only 262 is driver-retryable. Always read the error message and code together, since a `maxTimeMS` budget can also be tripped by a slow lock wait.
 - **Common causes:**
   - `maxTimeMS` per-operation budget exceeded (intentional client cap).
   - Aggregation pipeline that scans too many documents without an index.
   - Sort spilling to disk and falling outside the time budget.
   - In sharded clusters, mongos waiting for a slow shard.
-- **Fix:** Run `explain()` on the query — look for `COLLSCAN` or large `nReturned/nScanned` ratios. Add an index. Increase `maxTimeMS` if the work genuinely needs more headroom, but treat large jumps as a symptom of a missing index, not a tuning fix. With CSOT (`timeoutMS`), the driver may auto-retry retryable operations until the timeout budget is exhausted.
+- **Fix:** Run `explain()` on the query — look for `COLLSCAN` or large `nReturned/nScanned` ratios. Add an index. Increase `maxTimeMS` if the work genuinely needs more headroom, but treat large jumps as a symptom of a missing index, not a tuning fix.
 
 ### Code 89 — NetworkTimeout
 
@@ -281,7 +281,7 @@ Each entry follows the same shape: **code, name, server family, retry semantics,
   - A previous operation in the transaction failed, aborting it, but the application kept sending ops.
 - **Fix:** Rewrap in `withTransaction`. Audit transaction body for ops that take longer than 60s (split into batches). Tune `transactionLifetimeLimitSeconds` only as a last resort — long transactions are usually a design smell.
 
-### Code 262 — ExceededMemoryLimit
+### Code 292 — QueryExceededMemoryLimitNoDiskUseAllowed (ExceededMemoryLimit)
 
 - **Family:** Aggregation / sort
 - **Retryable:** No (deterministic without changes)
@@ -345,7 +345,7 @@ Error labels are how MongoDB tells drivers (and you) what kind of error this is,
 
 - **Where it appears:** On the top-level error object's `errorLabels` array.
 - **Driver behavior:** If `retryWrites=true` on the `MongoClient`, the driver retries the operation exactly **once** on a new primary (one retry per spec, not infinite — except under CSOT, see below).
-- **What carries it:** Network errors, `PoolClearedError`, `NotWritablePrimary` (10107), `NotWritablePrimaryNoSlaveOk` (13435), `InterruptedAtShutdown` (11600), `InterruptedDueToReplStateChange` (11602), `LegacyNotPrimary` (10058), `NotPrimaryOrSecondary` (13436), `PrimarySteppedDown` (189), `ShutdownInProgress` (91), `HostNotFound` (7), `HostUnreachable` (6), `NetworkTimeout` (89), `SocketException` (9001), `ExceededTimeLimit` (50, since 2023).
+- **What carries it:** Network errors, `PoolClearedError`, `NotWritablePrimary` (10107), `NotWritablePrimaryNoSlaveOk` (13435), `InterruptedAtShutdown` (11600), `InterruptedDueToReplStateChange` (11602), `LegacyNotPrimary` (10058), `NotPrimaryOrSecondary` (13436), `PrimarySteppedDown` (189), `ShutdownInProgress` (91), `HostNotFound` (7), `HostUnreachable` (6), `NetworkTimeout` (89), `SocketException` (9001), `ExceededTimeLimit` (262).
 - **What does NOT carry it:** Any error inside a transaction other than `commitTransaction` / `abortTransaction`. Drivers MUST NOT add this label inside a non-commit/abort transaction op.
 
 ### `TransientTransactionError`
@@ -569,7 +569,7 @@ Wrap the MongoDB client behind a circuit breaker (e.g., `opossum` in Node, `resi
 - **Open:** after N consecutive failures, short-circuit calls for a cooldown period.
 - **Half-open:** after cooldown, allow one test call.
 
-Trip the breaker on **infrastructure** errors (6, 9001, 91, 189, 133 when chronic) — NOT on logical errors (121, 251, 262). Closing too aggressively on logical errors masks bugs.
+Trip the breaker on **infrastructure** errors (6, 9001, 91, 189, 133 when chronic) — NOT on logical errors (121, 251, 292). Closing too aggressively on logical errors masks bugs.
 
 ### Pattern 3: Idempotency keys
 
@@ -646,7 +646,7 @@ Change streams have a specific error model:
 
 Drivers automatically resume on **resumable errors** (network, step-down, shutdown) using the last seen `_id` (resume token), but only **once**. Any error during the resume itself is fatal — the application must catch it and decide policy.
 
-### Robust change stream pattern
+### Resilient change stream pattern
 
 ```javascript
 async function watchWithRecovery(coll, pipeline, checkpoint) {
@@ -746,7 +746,7 @@ When triaging a MongoDB error in production:
 | 7 | HostNotFound | Yes (driver) | Network |
 | 18 | AuthenticationFailed | No | Auth |
 | 24 | LockTimeout | No (app-level only) | Concurrency |
-| 50 | ExceededTimeLimit / MaxTimeMSExpired | Yes (since 2023) | Timeout |
+| 50 | MaxTimeMSExpired | No | Timeout |
 | 64 | WriteConcernFailed | Yes (on commit) | Write concern |
 | 89 | NetworkTimeout | Yes (driver) | Network |
 | 91 | ShutdownInProgress | Yes (driver) | Lifecycle |
@@ -758,9 +758,10 @@ When triaging a MongoDB error in production:
 | 189 | PrimarySteppedDown | Yes (driver) | Lifecycle |
 | 211 | KeyNotFound (HMAC) | Yes (driver) | Cluster time |
 | 251 | NoSuchTransaction | Yes (whole txn) | Transaction |
-| 262 | ExceededMemoryLimit | No | Aggregation |
+| 262 | ExceededTimeLimit | Yes (driver) | Timeout |
 | 280 | ChangeStreamFatalError | No | Change streams |
 | 286 | ChangeStreamHistoryLost | No (reset token) | Change streams |
+| 292 | QueryExceededMemoryLimitNoDiskUseAllowed | No | Aggregation |
 | 8000 | AtlasError (auth/permission) | No | Atlas |
 | 9001 | SocketException | Yes (driver) | Network |
 | 10107 | NotWritablePrimary | Yes (driver) | Topology |
@@ -789,4 +790,3 @@ When triaging a MongoDB error in production:
 - [Atlas Flex Clusters management](https://www.mongodb.com/docs/atlas/manage-serverless-instances/)
 - [SERVER-35031 — ExceededTimeLimit overloaded code 50](https://jira.mongodb.org/browse/SERVER-35031)
 - [DRIVERS-525 — Retryable writes label coverage](https://jira.mongodb.org/browse/DRIVERS-525)
-

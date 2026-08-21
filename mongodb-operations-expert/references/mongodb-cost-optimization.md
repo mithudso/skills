@@ -194,7 +194,7 @@ Configure in Atlas UI → Project → Alerts → Add Alert:
 ## 5. Backup Cost Optimization
 
 ### Backup pricing model
-Atlas charges for backup storage separately from cluster storage. Snapshot storage is billed at approximately $0.025/GB-month (varies by cloud provider and region). Continuous (PIT) backups add overhead for oplog tailing.
+Atlas charges for backup storage separately from cluster storage. Snapshot storage list price starts at approximately $0.14/GB-month (varies by cloud provider and region; see `references/mongodb-backup-restore.md` for the same figure). Snapshots are incremental after the first, so realized cost is typically well under the full dataset size times that rate. Continuous (PIT) backups add overhead for oplog tailing.
 
 ### Snapshot retention tuning
 Default Atlas backup policies are often set to 7 daily + 4 weekly + 12 monthly + 2 yearly. For non-production environments, this is severe overkill.

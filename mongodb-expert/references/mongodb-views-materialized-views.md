@@ -239,7 +239,7 @@ The most under-used view feature is **role-based projection**. A view can:
 
 ### 2a. Row-level filtering with `$$USER_ROLES`
 
-`$$USER_ROLES` is available from **MongoDB 7.0+**. It is an array of objects, each with `role`, `db`, and `roleName` fields. The `$in` check below matches documents whose `tenantId` field equals the *name* of any role the authenticated user holds — so you must name Atlas roles after tenant IDs for this pattern to work (e.g., custom role `"acme"` grants access to all documents where `tenantId: "acme"`).
+`$$USER_ROLES` is available from **MongoDB 7.0+**. It is an array of objects, each with `_id`, `role`, and `db` fields (`_id` is the `"<db>.<role>"` identifier). The `$in` check below matches documents whose `tenantId` field equals the *name* of any role the authenticated user holds — so you must name Atlas roles after tenant IDs for this pattern to work (e.g., custom role `"acme"` grants access to all documents where `tenantId: "acme"`).
 
 ```javascript
 // Tenants only see their own documents (MongoDB 7.0+)
@@ -319,8 +319,9 @@ Key semantics:
 - **`into`** creates the target collection if it does not exist (replica set /
   standalone only — on sharded clusters the target database must already exist).
 - **`on`** defaults to `_id`. Any other field set requires a **unique** (and
-  non-partial) index that matches the aggregation's collation. The `on` value
-  cannot be an array.
+  non-partial) index that matches the aggregation's collation. `on` may be a
+  single field or a list of fields, but a field named in `on` cannot hold an
+  array value.
 - **`whenMatched: "merge"`** is the default — fields on the new doc overwrite,
   others are kept.
 - **`whenMatched: [pipeline]`** allows custom update logic referencing the existing
@@ -666,7 +667,7 @@ db.createView("active_customer_public", "active_customers", [ { $project: { ssn:
 | **Stale view never refreshed** | A materialized view diverges from the source; consumers ship wrong numbers. | Each materialized view MUST have a documented refresh cadence and a monitor. Store `refreshedAt` in every doc and alert when it goes stale. |
 | **Refreshing too often** | Every refresh is a full re-scan; you saturate the primary. | Process only the changed window (`$match` on a time field, use a high-water mark). |
 | **Materialized view as a transactional read path** | The view lags reality; the user reads their own write and doesn't see it. | Either read the source directly for write-followed-by-read, or move to Atlas Stream Processing for sub-second freshness. |
-| **`$out` to a busy target** | `$out` does a `dropTarget: true` rename — drops Atlas Search indexes, breaks change-stream consumers, briefly invalidates cached cursors. | Use `$merge` with `whenMatched: "replace"` instead — same logical effect, no rebuild. |
+| **`$out` to a busy target** | `$out` does a `dropTarget: true` rename — drops Atlas Search indexes, breaks change-stream consumers, briefly invalidates cached cursors. | Use `$merge` with `whenMatched: "replace"` instead — no full-collection rebuild. Note `$merge` keeps target docs absent from the new result, whereas `$out` drops them; if you need those removed, keep `$out` or delete stale keys explicitly. |
 | **`$merge` into a sharded target with a non-matching `on`** | Pipeline fails or, worse, writes to the wrong shard. | The `on` set MUST include every shard key field, backed by a unique index with the same collation. |
 | **No unique index for non-`_id` `on`** | `$merge` fails with `IllegalOperation`. | `createIndex(..., { unique: true })` before the first `$merge` run. |
 | **Sensitive constants in view definitions** | `system.views` is readable; pipelines may leak secrets. | Never put API keys or salts in `pipeline`. Reference data via `$lookup` from a collection that has its own ACL. |

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "ebay-listing",
+  "owner": "isaacrowntree",
+  "repo": "claude-social-skills",
+  "path": "plugins/ebay-listing/skills/ebay-listing",
+  "branch": "main",
+  "sha": "77c461b9b1e50544930d362bf6f0b8a17f984a5d",
+  "source": "manual"
+}

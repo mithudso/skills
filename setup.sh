@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# setup.sh — clone-and-go bootstrapper for the skills repo (github.com/mithudso/skills).
+# setup.sh — clone-and-go bootstrapper for the skills repo (github.com/10gen/tam-skills).
 # Installs Homebrew+Git, clones the repo to ~/.claude/skills, then: prompt keys
 # (~/.claude/.env) -> lay down ~/.claude config (non-destructive) -> Ollama+model ->
 # build index -> embed -> boot refresh agent -> merge MCP servers -> nightly cron.
@@ -15,7 +15,7 @@ ENV_FILE="$HOME/.claude/.env"                          # secrets live here (git-
 MODEL="${SKILLS_EMBED_MODEL:-qwen3-embedding:4b}"
 OS="$(uname -s)"
 DO_OLLAMA=1; DO_SERVICE=1; DO_MCP=1; DO_KEYS=1; DO_CONFIG=1; DO_CRON=1
-REPO_URL="${REPO_URL:-https://github.com/mithudso/skills.git}"
+REPO_URL="${REPO_URL:-https://github.com/10gen/tam-skills.git}"
 TARGET_DIR="${TARGET_DIR:-$HOME/.claude/skills}"
 
 while [ $# -gt 0 ]; do case "$1" in
@@ -65,15 +65,46 @@ ensure_git(){
   else warn "no package manager available — install git manually, then re-run"; return 1; fi
   command -v git >/dev/null 2>&1 && ok "git installed"
 }
+# On macOS, `gh` shells out to `git` for repo-local commands (push/remote/etc.),
+# and that git only works with the Xcode Command Line Tools present — a plain
+# `brew install git` doesn't supply the linker/headers gh's git invocations need.
+ensure_xcode_clt(){
+  [ "$OS" = "Darwin" ] || return 0
+  xcode-select -p >/dev/null 2>&1 && { ok "Xcode Command Line Tools present"; return 0; }
+  warn "Xcode Command Line Tools not found — triggering install (accept the GUI prompt if one appears)"
+  xcode-select --install >/dev/null 2>&1 || true
+  for _ in 1 2 3 4 5 6 7 8 9 10 11 12; do
+    xcode-select -p >/dev/null 2>&1 && break
+    sleep 10
+  done
+  xcode-select -p >/dev/null 2>&1 && ok "Xcode Command Line Tools installed" \
+    || warn "still missing — finish the install-tools prompt, then re-run setup.sh"
+}
+ensure_gh(){
+  command -v gh >/dev/null 2>&1 && { ok "gh $(gh --version 2>/dev/null | head -1 | awk '{print $3}')"; return 0; }
+  warn "gh (GitHub CLI) not found — installing"
+  if   command -v brew    >/dev/null 2>&1; then brew install gh
+  elif command -v apt-get >/dev/null 2>&1; then sudo apt-get update -y && sudo apt-get install -y gh
+  elif command -v dnf     >/dev/null 2>&1; then sudo dnf install -y gh
+  elif command -v yum     >/dev/null 2>&1; then sudo yum install -y gh
+  elif command -v pacman  >/dev/null 2>&1; then sudo pacman -S --noconfirm github-cli
+  else warn "no package manager available — install gh manually (https://cli.github.com), then re-run"; return 1; fi
+  command -v gh >/dev/null 2>&1 && ok "gh installed" || warn "gh install failed"
+}
 
 # Already inside the cloned skills repo?
 IN_REPO=0; [ -f "$SC_DIR/gen-skills-index.mjs" ] && IN_REPO=1
 
-# ── 1. Dependencies: Homebrew (macOS) + Git ──────────────────────────────────
-say "1/11 Dependencies (Homebrew + Git)"
+# ── 1. Dependencies: Xcode CLT (macOS) + Homebrew + Git + gh ─────────────────
+say "1/11 Dependencies (Xcode CLT + Homebrew + Git + gh)"
+ensure_xcode_clt || warn "continuing without confirmed Xcode Command Line Tools (git/gh may misbehave)"
 if [ "$OS" = "Darwin" ]; then ensure_brew || warn "continuing without Homebrew (later steps may be skipped)"
 else command -v brew >/dev/null 2>&1 && ok "Homebrew present" || warn "no Homebrew (Linux uses native package managers below)"; fi
 ensure_git || { [ "$IN_REPO" -eq 1 ] || { echo "   git is required to clone the repo"; exit 1; }; }
+ensure_gh || warn "gh not installed — PR-creation steps in other tools will fail until it is"
+if command -v gh >/dev/null 2>&1; then
+  gh --version >/dev/null 2>&1 && ok "gh runs" || warn "gh is installed but failed to run — check PATH / Xcode CLT above"
+fi
 
 # ── 2. Clone / update the repo, then re-exec from inside it ───────────────────
 say "2/11 Repository"
@@ -206,7 +237,11 @@ fi
 
 # ── 7. Build the regex index (offline, no server) ────────────────────────────
 say "7/11 Build SKILLS-INDEX.{json,md}"
-node "$SC_DIR/gen-skills-index.mjs" >/dev/null && ok "index regenerated from ~/.claude/skills"
+if node "$SC_DIR/gen-skills-index.mjs" >/dev/null 2>&1; then
+  ok "index regenerated from ~/.claude/skills"
+else
+  warn "index build failed — re-run 'node skill-consolidation/gen-skills-index.mjs' later to see the error"
+fi
 
 # ── 8. Build / sync the vector corpus (best-effort, fail-open) ───────────────
 say "8/11 Embed SKILLS-EMBEDDINGS.json"
@@ -226,9 +261,12 @@ elif [ "$OS" = "Darwin" ]; then
   sed -e "s#__DIR__#$SC_DIR#g" -e "s#__HOME__#$HOME#g" "$SC_DIR/com.skills-embed.plist.template" > "$PLIST"
   plutil -lint "$PLIST" >/dev/null
   launchctl bootout "gui/$(id -u)/com.skills-embed" >/dev/null 2>&1 || true
-  launchctl bootstrap "gui/$(id -u)" "$PLIST" 2>/dev/null || launchctl load "$PLIST" 2>/dev/null || true
-  launchctl enable "gui/$(id -u)/com.skills-embed" 2>/dev/null || true
-  ok "launchd agent com.skills-embed loaded (RunAtLoad + WatchPaths + 6h)"
+  if launchctl bootstrap "gui/$(id -u)" "$PLIST" 2>/dev/null || launchctl load "$PLIST" 2>/dev/null; then
+    launchctl enable "gui/$(id -u)/com.skills-embed" 2>/dev/null || true
+    ok "launchd agent com.skills-embed loaded (RunAtLoad + WatchPaths + 6h)"
+  else
+    warn "could not load launchd agent — run manually: launchctl bootstrap gui/\$(id -u) $PLIST"
+  fi
 else
   UD="$HOME/.config/systemd/user"; mkdir -p "$UD"
   for u in service timer path; do
@@ -300,3 +338,10 @@ say "Done"
 echo "   Read skill-consolidation/SKILLS-INDEX.md to route by keyword;"
 echo "   'node skill-consolidation/gen-skills-index.mjs --search \"...\"' for semantic search."
 echo "   Restart Claude Code to pick up MCP server + config changes."
+echo
+echo "   Further reading:"
+echo "   - Hub-and-spoke skill strategy: https://docs.google.com/document/d/1z3xVqyaRKNBYBmbm70o8ZAJFyD0fHYhQ-3o7zmGe79E/edit?tab=t.0#heading=h.dau39xa4rjjw"
+echo "   - How to use cfe / dr / skill-tree-architect / deep-optimizer family: https://docs.google.com/document/d/1J1n4xZFbynAq8MgF7dAq4vc6_nIG9DRnn9Xz60Q7fLo/edit?tab=t.0#heading=h.382lyy7dd8vs"
+echo "   - Skill-Library Indexing System - Technical Architecture: https://docs.google.com/document/d/10ZTBXtnU-eQ-pGQysQQ3AG7Hfn55HJLhcJrY3Uqe1_s/edit?tab=t.0#heading=h.qiwzxf642ge"
+echo "   - Skills Ecosystem - Showcase & Field Guide: https://docs.google.com/document/d/1PedNawIj06dgVUfa5Kt96KZQXWM7kB9ZuZvm1_9BQn8/edit?usp=sharing"
+echo "   - Skills Ecosystem - Showcase & Field Guide (additional section): https://docs.google.com/document/d/1PedNawIj06dgVUfa5Kt96KZQXWM7kB9ZuZvm1_9BQn8/edit?tab=t.5v4qadbd4ux3"

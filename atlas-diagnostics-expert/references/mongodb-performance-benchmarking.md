@@ -11,8 +11,8 @@
 ---
 name: mongodb-performance-benchmarking
 title: MongoDB Performance Benchmarking and Load Testing
-version: "1.1.0"
-last-updated: "2026-05-29"
+version: "1.1.1"
+last-updated: "2026-07-14"
 category: mongodb
 description: >
   MongoDB performance benchmarking and load testing — proactive methodology, tool selection, and
@@ -82,6 +82,7 @@ related_skills:
   - mongodb-connection-string
   - mongodb-monitoring-observability
   - mongodb-atlas-expert
+  - mongodb-stress-and-resilience-testing
 ---
 
 # MongoDB Performance Benchmarking and Load Testing

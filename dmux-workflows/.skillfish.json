@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "dmux-workflows",
+  "owner": "affaan-m",
+  "repo": "everything-claude-code",
+  "path": ".agents/skills/dmux-workflows",
+  "branch": "main",
+  "sha": "1ee8a8ac5b7308c45ae06c0f0b4714ce2d00be14",
+  "source": "manual"
+}

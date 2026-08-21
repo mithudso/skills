@@ -43,6 +43,10 @@ telemetry/
 sessions/
 paste-cache/
 
+# ── private skills — personal-only, never committed here, never mirrored
+# into any curated/coworker-facing repo (e.g. 10gen/mdb-tam-skills) ─────────
+private-skills/
+
 # ── backups & logs ───────────────────────────────────────────────────────────
 *.bak
 *.bak.*
@@ -66,3 +70,12 @@ skill-consolidation/tiering/tier-state.json
 # regenerable rewrite ledger (audit artifact)
 skill-consolidation/referents-ledger.json
 .git-commit-msg.tmp
+
+# ── local git worktrees (scratch checkouts for parallel skill work) ─────────
+.claude/worktrees/
+
+# ── nc-real-estate: personal NC skill, kept private (see private-skills/)
+nc-real-estate/
+
+# local claude session state (only worktrees/ was ignored before)
+.claude/

@@ -1,20 +1,22 @@
 ---
 name: atlas-diagnostics-expert
-version: 1.2.1
-updated: "2026-05-31"
+version: 1.4.3
+updated: "2026-07-20"
+model: claude-opus-4-8
+effort: high
 description: >-
-  MongoDB and Atlas live-diagnostics, performance, monitoring, and capacity hub — ts-diag,
-  Atlas diagnostic workflows, FTDC/log tooling, KB-backed troubleshooting, diagnostic-tool
-  design constraints, the @mdb-tam/atlas-diagnostics Chrome-extension package. TRIGGER:
-  triaging an Atlas support case; choosing a diagnostic surface (ts-diag, FTDC, logs,
-  explain plans, Performance Advisor); Atlas alert conditions; designing diagnostic tooling;
+  MongoDB/Atlas live-diagnostics, perf, monitoring, capacity hub — ts-diag, FTDC/log
+  tooling, KB troubleshooting. TRIGGER: triaging an Atlas case; choosing a diagnostic
+  surface (ts-diag, FTDC, logs, explain plans, Performance Advisor); Atlas alerts;
   HELP-ticket escalation; perf troubleshooting (slow queries, high CPU, cache pressure);
-  benchmarking/load testing (YCSB); monitoring/observability (metrics,
-  Prometheus/Datadog/Grafana, alerting); capacity planning (working-set sizing, IOPS
-  forecasting, tier right-sizing). SKIP: non-live query/index/schema design →
-  mongodb-expert; Atlas platform config/architecture → mongodb-atlas-expert;
-  backups/DR/migration/security → mongodb-operations-expert; KB lookup → mongodb-kb;
-  running 10gen repos → 10gen.
+  benchmarking/load testing (YCSB); regression-testing methodology — real regression vs.
+  noise (change point detection, CI perf-gating, canary/shadow-traffic);
+  stress/soak/chaos-resilience testing (breaking-point, overload, kill-primary); monitoring/observability
+  (metrics, Prometheus/Datadog/Grafana, alerting); capacity planning (working-set sizing,
+  IOPS forecasting, tier right-sizing). SKIP: non-live query/index/schema design →
+  mongodb-expert; what changed 7.0→8.0, backups/DR/migration/security →
+  mongodb-operations-expert; Atlas platform config → mongodb-atlas-expert; KB lookup,
+  10gen repos → misc-catch-all.
 origin: local
 category: custom
 tags:
@@ -50,16 +52,21 @@ whenToUse:
   - "interpret Atlas alert conditions and their severity"
   - "troubleshoot MongoDB/Atlas performance symptoms — slow queries, high CPU, cache pressure"
   - "plan a performance benchmark or load test (YCSB, load generation)"
+  - "decide whether a benchmark delta after a version/config/driver change is a real regression or noise"
   - "set up monitoring/observability — metrics, FTDC, Prometheus/Datadog/Grafana"
   - "do capacity planning — working-set sizing, IOPS forecasting, tier right-sizing"
 whenNotToUse:
   - "data-plane query/index/schema design that is not live perf-troubleshooting — use mongodb-expert"
   - "Atlas platform config/architecture (control plane, tiers, networking, security posture) — use mongodb-atlas-expert"
   - "backups, DR, migration, or security architecture — use mongodb-operations-expert"
-  - "KB article lookup — use mongodb-kb"
-  - "cloning/installing/running 10gen repos — use 10gen"
+  - "KB article lookup — use misc-catch-all (references/mongodb-kb.md)"
+  - "cloning/installing/running 10gen repos — use misc-catch-all (references/10gen.md)"
 ---
 # Atlas Diagnostics Expert
+
+## Routing detail
+
+- SKIP (description-overflow seed, Glean 1000-char cap): WiredTiger storage-engine root-cause internals — cache-fill/eviction/checkpoint/MVCC mechanics behind a live perf symptom → mongodb-expert (references/mongodb-wiredtiger-internals.md)
 
 ## When to use this skill
 
@@ -74,26 +81,28 @@ whenNotToUse:
 - Data-plane query/index/schema design not live perf troubleshooting — use `mongodb-expert`
 - Atlas platform config/architecture (control plane, tiers, networking, security posture) — use `mongodb-atlas-expert`
 - Backups, DR, migration, or security architecture — use `mongodb-operations-expert`
-- KB article lookup — use `mongodb-kb`
-- Cloning/installing/running 10gen repos — use `10gen`
+- KB article lookup — use `misc-catch-all` (references/mongodb-kb.md)
+- Cloning/installing/running 10gen repos — use `misc-catch-all` (references/10gen.md)
 
 ## Skill guidance
 
 - Prefer documented Atlas diagnostic workflow before improvising.
 - Call out what directly documented vs inferred when evidence thin.
-- Use `mongodb-kb` alongside when need article-level troubleshooting playbooks or customer-shareable links.
+- Use `misc-catch-all` (references/mongodb-kb.md) alongside when need article-level troubleshooting playbooks or customer-shareable links.
 
 ---
 
 ## Sub-skill routing table
 
-Consolidates 5 diagnostics/performance sub-skills as on-demand references — **Read listed `references/…md` file before answering deep questions**.
+Consolidates 8 diagnostics/performance sub-skills as on-demand references — **Read listed `references/…md` file before answering deep questions**.
 
 | Sub-topic | When to load | Reference file |
 | --- | --- | --- |
 | `atlas-diagnostics-package` | Expert reference for @mdb-tam/atlas-diagnostics package and diagnostic-recommendation engine | `references/atlas-diagnostics-package.md` |
 | `mongodb-performance-troubleshooting` | MongoDB performance diagnosis — slow queries, explain plans, high CPU, cache pressure, symptom triage | `references/mongodb-performance-troubleshooting.md` |
-| `mongodb-performance-benchmarking` | MongoDB perf benchmarking and load testing — proactive methodology, tool selection (YCSB, load generation) | `references/mongodb-performance-benchmarking.md` |
+| `mongodb-performance-benchmarking` | MongoDB perf benchmarking and load testing — proactive methodology, tool selection (YCSB, load generation) — "how fast does it go" | `references/mongodb-performance-benchmarking.md` |
+| `mongodb-performance-regression-testing` | Regression *testing* methodology — deciding, with statistical defensibility, whether a deployment got slower after a version upgrade/schema/config/driver change; baseline capture, change point detection, CI perf-gating, canary/shadow-traffic comparison, MongoDB 7.0→8.0-style upgrade regression detection — "did it get worse, or is that noise" | `references/mongodb-performance-regression-testing.md` |
+| `mongodb-stress-and-resilience-testing` | MongoDB breaking-point, soak, and chaos-resilience testing — deliberately pushing past limits to find failure modes, safe non-prod execution — "where does it break" | `references/mongodb-stress-and-resilience-testing.md` |
 | `mongodb-monitoring-observability` | Monitoring MongoDB Atlas and self-managed — Atlas metrics, FTDC, Prometheus/Datadog/Grafana integration, alerting | `references/mongodb-monitoring-observability.md` |
 | `mongodb-capacity-planning` | MongoDB Atlas capacity planning — working-set sizing, IOPS forecasting, tier right-sizing | `references/mongodb-capacity-planning.md` |
 | `mql-perf-harness` | Heuristic, index-aware performance scorer plus 50-query anti-pattern benchmark corpus | `references/mql-perf-harness.md` |
@@ -402,17 +411,17 @@ When extending this context, read tool's current README or operator guide before
 <!-- cross-hub-map -->
 ## Cross-hub map — where every MongoDB topic lives
 
-All MongoDB knowledge split across **four hubs** (plus `mongodb-kb` for KB-article lookups and `10gen` for repo install/run). If task's deep material **not** in this hub's Sub-skill routing table, it is reference file under sibling hub — **activate that hub or Read its `references/<name>.md` directly**.
+All MongoDB knowledge split across **four hubs** (plus `misc-catch-all` for KB-article lookups via references/mongodb-kb.md and repo install/run via references/10gen.md). If task's deep material **not** in this hub's Sub-skill routing table, it is reference file under sibling hub — **activate that hub or Read its `references/<name>.md` directly**.
 
 | Hub | Owns | Example reference files |
 | --- | --- | --- |
 | `mongodb-expert` | Core data plane + **engine internals**: CRUD/MQL, aggregation, indexes, query performance, schema design, transactions, change streams, time-series, geospatial, views, BSON, error codes, connection strings, driver internals, **WiredTiger cache/eviction/checkpoint internals**, mongosh, database tools, multi-tenancy, sharding, replication, Compass | `references/mongodb-wiredtiger-internals.md`, `mongodb-indexes-deep.md`, `mongodb-sharding.md`, `mongodb-replication.md` |
 | `mongodb-atlas-expert` | Atlas **cloud platform**: control plane, Atlas Search, Vector Search, Stream Processing, Charts, Data Federation, App Services, Triggers, Online Archive, Flex, networking, IAM/RBAC, Terraform, AKO | `references/mongodb-atlas-search.md`, `mongodb-atlas-vector-search.md` |
-| `atlas-diagnostics-expert` | Live **diagnostics & performance**: ts-diag, FTDC, performance-troubleshooting symptom triage, benchmarking, monitoring/observability, capacity planning | `references/mongodb-performance-troubleshooting.md` |
+| `atlas-diagnostics-expert` | Live **diagnostics & performance**: ts-diag, FTDC, performance-troubleshooting symptom triage, benchmarking, regression detection/testing methodology, stress/soak/chaos-resilience testing, monitoring/observability, capacity planning | `references/mongodb-performance-troubleshooting.md`, `mongodb-performance-regression-testing.md`, `mongodb-stress-and-resilience-testing.md` |
 | `mongodb-operations-expert` | **Ops & data movement**: backup/restore, DR, Ops Manager, upgrades, migration, mongosync, relational migrator, CDC, data lifecycle, security architecture, encryption, compliance, cost, Kafka/Spark connectors | `references/mongosync.md`, `mongodb-backup-restore.md` |
 
 **High-overlap routing notes:**
 - Performance **symptom triage** (high CPU, cache pressure, slow queries, latency spikes) starts at `atlas-diagnostics-expert`, but **storage-engine root-cause internals** (WiredTiger cache fill / dirty trigger / eviction threads / reconciliation / checkpoints) owned by `mongodb-expert` — cross-load `mongodb-expert/references/mongodb-wiredtiger-internals.md` (and `mongodb-wiredtiger.md`) for depth.
 - Migration symptoms vs migration **execution**: live-cluster diagnosis → `atlas-diagnostics-expert`; migration/mongosync runbook → `mongodb-operations-expert`.
 - Atlas Search/Vector **query syntax & index design** → `mongodb-atlas-expert`; slowness *triage* of running search → `atlas-diagnostics-expert`.
-- **Host-OS memory tuning** for self-managed `mongod` host (transparent hugepages disable — THP/`defrag=never`, `vm.swappiness=1`, swap sizing, kernel OOM killer and `oom_score_adj`, NUMA placement / interleave for WiredTiger cache, `vm.max_map_count`) lives in `devops-infra` hub → cross-load `devops-infra/references/linux-memory-numa.md`. This skill owns MongoDB-side cache-pressure *symptom triage*; that reference owns Linux memory/NUMA mechanisms and sysctls beneath it.
+- **Host-OS memory tuning** for self-managed `mongod` host (transparent hugepages disable — THP/`defrag=never`, `vm.swappiness=1`, swap sizing, kernel OOM killer and `oom_score_adj`, NUMA placement / interleave for WiredTiger cache, `vm.max_map_count`) lives under the `devops-infra` router's `devops-linux-internals` sub-hub → cross-load `devops-linux-internals/references/linux-memory-numa.md`. This skill owns MongoDB-side cache-pressure *symptom triage*; that reference owns Linux memory/NUMA mechanisms and sysctls beneath it.

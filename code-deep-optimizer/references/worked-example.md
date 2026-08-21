@@ -2,11 +2,11 @@
 
 Worked example: `/cdo src/fetch-all.js` (default apply+verify mode). Demonstrates the report
 format from SKILL.md "## Report format" end-to-end on one small file — Stage 0 detection,
-the 16-pass audit, applied diffs, the verify gate (including one backed-out regression), the
+the 18-pass audit, applied diffs, the verify gate (including one backed-out regression), the
 convergence loop, the blind re-audit gate, and the final Summary + rollback line.
 
-The numbers below are internally consistent: a single file with no manifest → M3, T2, and T3 are N/A
-(architecture, dependency/supply-chain, and tooling-gap are repo-scope), so 13 of 16 passes run; the file has a detected test surface, so the verify
+The numbers below are internally consistent: a single non-test file with no manifest → M3, T2, T3, and T4 are N/A
+(architecture, dependency/supply-chain, and tooling-gap are repo-scope; test-suite performance targets test files only), so 14 of 18 passes run; the file has a detected test surface, so the verify
 gate is live rather than degenerating to a syntax check.
 
 ---
@@ -85,7 +85,7 @@ Detected commands (SKILL.md § Verify gate): `node --check src/fetch-all.js` (sy
 | S3 | `src/fetch-all.js:6` | Medium | `ids` is untrusted/unbounded and used directly in the URL path and loop | Guard: require an array; cap length; encode each id | Applied |
 | M1 | `src/fetch-all.js:21` | Low | `summarize` lacks a guard for items missing `name` | (Low — skipped per Medium+ bar) | Skipped |
 
-**N/A this run (single file):** M3 (architecture — no cross-module structure), T2 (dependency/supply-chain — no manifest in scope), and T3 (tooling-gap — no project/repo context) — all three are repo-scope. **Ran clean:** S4 (runtime-compat — `fetch` available on the target Node; no version flags) and M4 (doc-correctness — the comments match behavior). T1 noted the new error paths want tests — the C3 counterexample test covers the error branch. The one Low (M1) is recorded but not fixed.
+**N/A this run (single file):** M3 (architecture — no cross-module structure), T2 (dependency/supply-chain — no manifest in scope), T3 (tooling-gap — no project/repo context), and T4 (test-suite performance — non-test source file). **Ran clean:** S4 (runtime-compat — `fetch` available on the target Node; no version flags), S5 (logging coverage — the S2 fix adds the missing error-path log; no other unlogged critical paths), and M4 (doc-correctness — the comments match behavior). T1 noted the new error paths want tests — the C3 counterexample test covers the error branch. The one Low (M1) is recorded but not fixed.
 
 ---
 
@@ -186,7 +186,7 @@ accepted:
 
 ## Iteration 2 — clean
 
-Re-ran the 13 active passes on the patched file: **0 Critical / 0 High / 0 Medium** (the lone
+Re-ran the 14 active passes on the patched file: **0 Critical / 0 High / 0 Medium** (the lone
 M1 Low remains, below the bar). A CLEAN exit triggers the **blind re-audit gate** (SKILL.md
 § Convergence loop): a fresh-context subagent received only the final code + the pass list and
 ran the finding passes once → **0 corroborated Medium+ findings**. Gate corroborates nothing →
@@ -204,7 +204,7 @@ Per-iteration severity table:
 ## Summary
 
 ```
-Iterations: 2. Active passes: 13/16 (M3, T2, T3 N/A — single file, no manifest). Profile: standard. Final: 0 Critical, 0 High, 0 Medium, 1 Low. Verify: PASS. Status: CLEAN.
+Iterations: 2. Active passes: 14/18 (M3, T2, T3, T4 N/A — single non-test file, no manifest). Profile: standard. Final: 0 Critical, 0 High, 0 Medium, 1 Low. Verify: PASS. Status: CLEAN.
 ```
 
 ---

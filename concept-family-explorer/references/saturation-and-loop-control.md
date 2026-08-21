@@ -65,23 +65,24 @@ Saturation is the stop condition. Evaluate after each frontier re-expansion
 different things.
 
 ### 1. Frontier saturation (the strong signal)
-A full re-expansion round (Step 7) produced **zero new gaps scoring ≥ threshold**.
-The frontier has stopped yielding worthwhile concepts. This mirrors `/dr`'s own
-"2 consecutive searches yield nothing new" — applied at the family level instead
-of the source level. This is the condition you *want* to hit: it means the family
-is genuinely explored, not merely that a list ran out.
+**Two consecutive** re-expansion rounds (Step 7) each produced **zero new gaps
+scoring ≥ threshold**. The frontier has stopped yielding worthwhile concepts.
+This mirrors `/dr`'s own "2 consecutive searches yield nothing new" — applied
+at the family level instead of the source level. This is the condition you
+*want* to hit: it means the family is genuinely explored, not merely that a
+list ran out.
 
-Require **two** consecutive empty rounds before declaring it, to avoid a false
-stop when one batch happened to be narrow. One empty round = "probably done";
-two = "saturated". Note the budget interaction: under the default
+Two rounds, not one, to avoid a false stop when one batch happened to be
+narrow. One empty round = "probably done"; two = "saturated". Note the budget interaction: under the default
 `maxRounds=3`, the two empty rounds consume 2 of 3 re-expansions — exactly as
 the worked trace below shows (2/3 used).
 
 **Base-size precondition.** Frontier saturation may only be declared after
 (i) at least one *productive* round — any round, explicitly including the
 initial Round-0 research batch, in which ≥1 concept was researched via `/dr` —
-AND (ii) a Round-0 map meeting the 5–12-names-per-neighborhood floor.
-Otherwise the verdict must say "map-bounded, not saturated".
+AND (ii) a Round-0 map meeting the 5-names-per-neighborhood floor (5–12 is the
+Step 1 target band; 5 is the floor). Otherwise the verdict must say
+"map-bounded, not saturated".
 
 **Empty rounds must be evidence-grounded.** A re-expansion round only counts
 as a completed probe if its candidates were harvested from external evidence
@@ -105,7 +106,13 @@ ask it to name missing concepts per neighborhood. Score any proposals through
 Step 4; corroborated ≥ threshold gaps re-enter the queue for at most ONE
 additional round (counting against `maxRounds`), then the gate runs once more.
 Persistent dissent exits `SATURATION-DISSENT`, listing the gaps in the
-verdict. If no isolated dispatch is available, run the gate in-context with
+verdict. **No-rounds-left precedence:** when corroborated gaps arrive but
+`maxRounds` (or another budget cap) is already exhausted, skip the extra
+round and exit `SATURATION-DISSENT` immediately, listing the gaps — never
+run a round no budget permits, and never report frontier saturation over
+corroborated dissent. On a dissent exit Steps 9–9c still run as normal over
+everything researched this run (only the corroborated-but-unresearched gaps
+stay open, listed in the verdict). If no isolated dispatch is available, run the gate in-context with
 prior rationale set aside and label it "blind gate: in-context". Budget and
 coverage exits stay ungated, exactly as the contract leaves cap exits ungated.
 Optional `--cross-model` (default OFF): run the gate's second pass on a
@@ -115,9 +122,10 @@ egress-confidentiality precondition before sending family content off-host.
 
 ### 2. Coverage saturation
 Every node in the mapped family is now in a terminal state: HAVE, researched-
-this-run, or scored-below-threshold (a logged deliberate skip). Nothing is left
-undecided — AND every Step 1 competency question in
-`~/.claude/skill-consolidation/evals/<family>.cq.md` resolves to a HAVE or
+this-run, decision-SKIP (a logged deliberate skip — below threshold **or
+hard-gated**, e.g. Novelty 0 at CVS ≥ threshold), or **failed (a logged failed
+gap — Step 6 terminal, not a hole)**. Nothing is left undecided — AND every Step 1 competency question in
+`~/.claude/skill-consolidation/evals/<subject-slug>.cq.md` resolves to a HAVE or
 researched node. This is exhaustive coverage of the *mapped* family — weaker than
 frontier saturation because it cannot speak to concepts the map never named.
 When you stop here, note that the map itself bounded the result.
@@ -134,6 +142,10 @@ the Step 10 verdict. This is a resource limit, not evidence of
 completeness. When you stop here you **must**:
 - report the unresearched above-threshold queue (concept + CVS), and
 - recommend a re-run with a larger budget to continue.
+
+On this path Steps 9/9b (optimization + rebalance) are **skipped and listed as
+owed work** — but Step 9c's batch sync and Step 10's report always run:
+persistence completeness is never budget-gated.
 
 Never report budget exhaustion as "saturated." The user needs to know the family
 still has worthwhile gaps that budget — not evidence — left unfilled.
@@ -170,10 +182,10 @@ above) — never re-page the whole tree mid-run.
 ## Worked loop trace — subject "prompt-optimization algorithms"
 
 ```
-Round 0  map → 14 candidates across 5 neighborhoods
+Round 0  map → 27 candidates across 5 neighborhoods (≥5 each — floor met)
          inventory → HAVE: APE, OPRO, ProTeGi (in prompt-deep-optimizer)
                      GAP: GEPA, TextGrad, EvoPrompt, DSPy/MIPROv2, PromptBreeder, …
-         score → 6 gaps ≥ 3.2; select top 5 (budget 8, room left)
+         score → 24 gaps scored; 5 ≥ 3.2; select all 5 (budget 8, room left)
          /dr "GEPA, TextGrad, EvoPrompt"  (related cluster → one skill)
          /dr "DSPy MIPROv2"
          /dr "PromptBreeder"
@@ -182,14 +194,22 @@ Round 1  re-expand on the 5 new concepts
          score → both < 3.2 (low Viability: thin sources) → SKIP, logged
          0 new above-threshold gaps  →  empty round #1
 Round 2  re-expand → 0 new candidates  →  empty round #2
-         FRONTIER SATURATION reached (2 empty rounds)
-Optimize  /sko on the 3 new/updated skills with --no-sync (the cluster skill's
-          embedded algorithm-selection prompt is covered inside its sko run —
-          no separate /pdo); one batch sync after; /pdo only for standalone
-          saved prompts
-Verdict   Reached by: frontier saturation. Budget used 5/8 concepts via 3 /dr calls; 2/3 re-expansion rounds.
+         blind saturation gate → fresh-context probe proposes 1 concept;
+         scored 2.8 < 3.2 → not corroborated → gate PASSES
+         FRONTIER SATURATION reached (2 empty rounds + gate; Round 0 is the
+         one productive round — precondition (i) met)
+Optimize  /sko on the 3 new/updated skills with --no-sync (all standalone —
+          no hub gained a spoke, so the item-2 hub re-audit is a no-op this
+          run; the cluster skill's embedded algorithm-selection prompt is
+          covered inside its sko run — no separate /pdo); one batch sync
+          after (Step 9c)
+Verdict   Reached by: frontier saturation (SATURATED-FRONTIER).
+          New-information rate: R1 0/26 (0%; 2 new candidates scored, both
+          below threshold), R2 0/26 (0%), gate 0 corroborated.
+          Budget used: 5/8 concepts via 3 /dr calls; 2/3 rounds.
 ```
 
-The trace shows the ideal shape: a couple of productive rounds, then the frontier
+The trace shows the ideal shape: one productive round, then the frontier
 goes quiet for two rounds, and the loop stops on *evidence* (empty above-threshold
-rounds) with budget to spare — not because it ran out of room.
+rounds plus a passed blind gate) with budget to spare — not because it ran out
+of room.

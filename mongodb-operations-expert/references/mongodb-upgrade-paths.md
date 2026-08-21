@@ -11,8 +11,8 @@
 ---
 name: mongodb-upgrade-paths
 category: mongodb
-version: "1.1.0"
-updated: "2026-05-29"
+version: "1.1.1"
+updated: "2026-07-14"
 description: >
   MongoDB self-managed upgrade-path expert — sequential 4.4→5.0→6.0→7.0→8.0 paths,
   "Straight-to-8" same-cluster rollout, Feature Compatibility Version (FCV) pinning,
@@ -29,8 +29,10 @@ description: >
   version"; sharded cluster upgrade ordering; PSA stepdown failure; oplog window sizing
   for maintenance; "Straight-to-8"; Goldman Sachs Cookie upgrade; cold cache after
   rolling upgrade.
-  SKIP: Atlas-managed upgrades driven purely through the Atlas UI (use
-  mongodb-atlas-expert); patch-revision upgrades within a major version with no FCV
+  SKIP: Atlas-managed upgrades driven purely through the Atlas UI — auto-upgrade
+  cadence, maintenance windows, EOL forced upgrades, 7.0->8.0 Atlas-only gotchas
+  (use mongodb-atlas-expert references/mongodb-atlas-managed-upgrades.md);
+  patch-revision upgrades within a major version with no FCV
   change; schema migration or aggregation changes (use mongodb-migration-patterns);
   backup/restore design (use mongodb-backup-restore).
 tags:
@@ -84,7 +86,7 @@ Active customer context (2026): **Goldman Sachs "Cookie" 7.0 → 8.0** and **Str
 
 ## When NOT to use this skill
 
-- Atlas-managed upgrades driven entirely through the Atlas UI — point at `mongodb-atlas-expert` instead (this skill covers Atlas-specific FCV pin behaviour but not the UI workflow).
+- Atlas-managed upgrades driven entirely through the Atlas UI — point at `mongodb-atlas-expert` references/mongodb-atlas-managed-upgrades.md instead (this skill covers Atlas-specific FCV pin behaviour but not the auto-upgrade cadence, maintenance windows, or 7.0->8.0 Atlas-only gotchas covered there).
 - Patch-revision upgrades within a major (e.g., 8.0.3 → 8.0.10) when no FCV change is needed — the procedure is the same rolling pattern minus FCV, and is documented inline only as a reference.
 - Driver-internal questions unrelated to server upgrades — point at the driver-specific skill (`mongodb-drivers-k8s`, etc.).
 - Schema migration or aggregation changes — use `mongodb-migration-patterns` or `mongodb-aggregation-pipeline`.
@@ -92,6 +94,7 @@ Active customer context (2026): **Goldman Sachs "Cookie" 7.0 → 8.0** and **Str
 
 ## Related skills
 
+- `mongodb-7.0-vs-8.0-differences` (this hub) — what actually changed technically between 7.0 and 8.0 (engine internals, new APIs, deprecations, default-value changes, performance benchmarks) — the behavior-risk counterpart to this file's procedure; read it for pre-upgrade *what will be different* risk assessment.
 - `mongodb-atlas-expert` — Atlas UI flows, Atlas-managed FCV pin window, Atlas-only safety rails.
 - `mongodb-replication` — replica-set internals, election theory, write-concern semantics that this skill assumes.
 - `mongodb-sharding` — sharded-cluster topology, config-shard vs dedicated-config-server, balancer internals.

@@ -1,7 +1,7 @@
 ---
 name: security-review
-version: "1.3.0"
-updated: "2026-06-11"
+version: "1.3.1"
+updated: "2026-07-20"
 description: >-
   Application & infrastructure security-review hub. TRIGGER: web app / Chrome extension / backend security review — OWASP, ASVS, CSP/CORS, session/auth (security-reviewer); compliance audit — secrets, supply-chain, PII/logging (security-compliance-auditor); security headers — Helmet.js, CSP, HSTS (http-security-headers); Okta platform — Identity Engine, OAuth/OIDC, management APIs (okta-expert); Okta admin/tenant hardening — ThreatInsight, breakglass (okta-admin-hardening); phishing-resistant auth — FastPass, passkeys (okta-phishing-resistant-auth); Zero Trust & device posture — 800-207, device assurance (okta-zero-trust-device); Okta ITDR — MFA fatigue, stolen-cookie replay, Universal Logout (okta-itdr-session-security); OIG — certification campaigns, SoD, SOX evidence (okta-identity-governance). SKIP: Web Crypto/vault review → webcrypto-vault-reviewer; auth-flow design → software-engineering-patterns (references/web-auth-patterns.md); AI-agent identity → agent-identity-authz-payments; LLM/RAG prompt-injection defense → rag-prompt-injection-defense; embedding inversion / vector-store leakage → embedding-inversion-threat-model.
 origin: local
@@ -38,3 +38,5 @@ All security-review spokes are reference files under this hub. If a topic is not
 | Hub | Owns | Reference files |
 | --- | --- | --- |
 | `security-review` | Application & infrastructure security review + Okta security management | `references/security-reviewer.md`, `references/security-compliance-auditor.md`, `references/http-security-headers.md`, `references/okta-expert.md`, `references/okta-admin-hardening.md`, `references/okta-phishing-resistant-auth.md`, `references/okta-zero-trust-device.md`, `references/okta-itdr-session-security.md`, `references/okta-identity-governance.md` |
+
+Fix-loop handoff: a security review that must also apply and verify code fixes across a file/repo to convergence (not review-only) → `code-deep-optimizer`.

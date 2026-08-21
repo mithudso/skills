@@ -3,8 +3,8 @@ description: >-
   Technical & product writing hub — software docs, specs, engineering comms. Sentence mechanics & structure (Given/New, active voice, imperative mood, nominalization/zombie nouns, heading discipline, cohesion/coherence, RFC 2119, Diátaxis, show-first); style-guide grounded (Google, Microsoft WSG, Strunk & White, Williams). TRIGGER: technical writing, API docs, README, readability, passive voice, heading structure; how-to & tutorials; KB articles; reference & explanation docs; runbooks/on-call; specs; PRDs; RFCs & design docs; user stories & acceptance criteria; meeting minutes & ADRs; changelogs & release notes; error messages; microcopy/UI writing; commit & PR messages; code/agent plans; postmortems; incident/status-page comms. SKIP: general prose/voice/editing → writing-expert; exec/business/persuasion → executive-comms; marketing/PR/newsletters → content-and-marketing-writing; career/academic/legal/policy/survey → career-and-formal-writing.
 name: technical-writing-craft
 origin: local
-version: "1.4.0"
-updated: "2026-05-30"
+version: "1.4.1"
+updated: "2026-07-04"
 keywords:
   - technical-writing-craft
   - Given/New principle
@@ -74,6 +74,8 @@ whenToUse:
 
 Reference for sentence-level and document-level craft in API docs, runbooks,
 RFCs, and README files. Style-guide grounded; distinct from business writing.
+
+> Routing detail: sorting or restructuring an existing raw meeting-notes dump into a usable structure (not capturing/writing minutes) → note-organizer.
 
 Primary sources cited throughout:
 - **Williams** — Joseph Williams, *Style: Lessons in Clarity and Grace*, 12th ed.

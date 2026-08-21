@@ -2,8 +2,8 @@
 description: >-
   General prose craft, voice, style & editing hub. Sentence/paragraph craft; frameworks (BLUF, Minto Pyramid, SCQA, STAR, Inverted Pyramid, 5W1H); tone/voice by audience; anti-AI-ism; data storytelling; 18 sub-skills on demand. TRIGGER: write/draft/edit/improve/review general prose; revision; rhetorical/argument frameworks; storytelling/narrative; headlines; plain & inclusive language; localization-friendly; anti-jargon; brand voice; audience modeling; visual writing (captions, alt text); accessibility writing; AI-collaboration writing; writing under pressure; interview/profile writing; email craft; nominalization/cohesion/flow; 'make this better'. SKIP: software/eng docs → technical-writing-craft; exec/persuasion → executive-comms; marketing/PR/newsletters → content-and-marketing-writing; career/academic/legal/policy/survey → career-and-formal-writing; AI-voice cleanup → kill-the-ai-ism; multi-pass doc critique → document-critique.
 name: writing-expert
-version: 1.6.1
-updated: 2026-06-11
+version: 1.6.2
+updated: 2026-07-06
 origin: local
 category: custom
 tags:
@@ -349,3 +349,5 @@ of these hubs (nothing was deleted).
 | `executive-comms` | Executive & Business Communication (leadership, persuasion, decks) — hub | `references/one-pager-writing.md`, `references/okr-writing.md`, `references/proposal-and-grant-writing.md`, `references/pitch-deck-writing.md`, … |
 | `content-and-marketing-writing` | Content, Marketing & External Comms (PR, newsletters, launch, social) | `references/sales-and-marketing-copy.md`, `references/press-release-writing.md`, `references/crisis-pr-writing.md`, `references/newsletter-writing.md`, … |
 | `career-and-formal-writing` | Career, Academic, Legal & Formal Writing | `references/resume-and-cv-writing.md`, `references/cover-letter-writing.md`, `references/job-description-writing.md`, `references/performance-review-writing.md`, … |
+| `fiction-writing-craft` | Fiction craft (plot, POV, dialogue, character psychology) — hub | `references/dialogue-craft.md`, `references/plot-structure-and-story-beats.md`, `references/narrative-construction-and-pov.md`, … |
+| `poetry-craft` | Poetry craft (meter/scansion, fixed forms, imagery, sound craft, revision) — hub | `references/poetic-form-and-meter.md`, `references/poetic-language-and-sound-craft.md` |

@@ -32,10 +32,11 @@ SKILL body — they are logic, not part of the skeleton below.
 skill-tree-architect handoff row each — never re-filed from here>
 
 ## Saturation verdict
-Reached by: [frontier saturation | coverage saturation | budget exhausted | SATURATION-DISSENT].
+Reached by: [frontier saturation (SATURATED-FRONTIER) | coverage saturation (SATURATED-COVERAGE) | budget exhausted (BUDGET_EXHAUSTED) | SATURATION-DISSENT] — status token doubles as the telemetry exit_status.
 State the per-round new-information rate (new above-threshold gaps /
 cumulative candidates scored) — treat ~5% as a starting default, not
 validated truth.
+Budget used: <n>/<maxConcepts> concepts via <k> /dr calls; <r>/<maxRounds> rounds[; wall <m> min]   ← mandatory line
 <if budget: list the unresearched above-threshold queue + suggested re-run; include wall time when budgetMinutes was set>
 
 ## Updated concept tree

@@ -1,6 +1,6 @@
 <!-- hub-reference-banner -->
 > **Reference file — part of the `mongodb-operations-expert` hub.** Formerly the standalone `database-migrations` skill.
-> Sibling topics in this family are now reference files under the hubs (`mongodb-operations-expert`) — **not** standalone
+> Sibling topics in this family are now reference files under the hubs (`mongodb-expert`, `atlas-diagnostics-expert`, `mongodb-operations-expert`) — **not** standalone
 > skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
 > skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
 

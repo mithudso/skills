@@ -343,8 +343,7 @@ Jegadeesh and Titman's seminal paper documented that stocks with high returns ov
 
 - **Trading strategies and styles** (backtesting a discretionary strategy, momentum/mean-reversion for discretionary traders) → `references/trading-strategies-and-styles.md` (sister spoke — shares the backtesting methodology foundation)
 - **Market microstructure and execution** (order book dynamics, Reg NMS, dark pools, SIP vs direct feeds) → `references/market-microstructure-and-execution.md` (planned spoke)
-- **AI/ML for trading** (predictive models, feature engineering, reinforcement learning for execution) → `references/ai-and-ml-for-trading.md`
-- **ML backtesting pitfalls & production ML ops** (look-ahead bias taxonomy, PBO/HLZ multiple testing, factor decay, point-in-time infrastructure, IC/drift monitoring) → `references/ml-backtesting-pitfalls-and-production-systems.md`
+- **AI/ML for trading** (predictive models, feature engineering, reinforcement learning for execution, ML backtesting pitfalls) → `references/ai-and-ml-for-trading.md` (planned spoke)
 - **Data engineering / quantitative methods** (regression, time-series analysis, cross-validation mechanics) → `da-analytical-methods` and `da-data-engineering-platform` hubs
 - **Statistical arbitrage background mathematics** (ADF/unit root tests, Ornstein-Uhlenbeck process) → `da-analytical-methods` hub
 

@@ -1,7 +1,7 @@
 ---
 name: devops-containers-cicd
 description: >-
-  Containers, orchestration, CI/CD, IaC & delivery sub-hub (devops family). TRIGGER: Docker/Dockerfile, image optimization, container runtime; Kubernetes workloads/networking/ingress; CI/CD pipeline design (GitHub Actions, reusable workflows, caching, release automation); Terraform/OpenTofu & Apache Kafka infra; git branching/merge/rebase, conventional commits, branch protection, monorepo CI, semantic-release; library packaging & distribution (npm/PyPI/crates, ESM/CJS, monorepo, semver, provenance); self-healing systems & autonomic computing (MAPE-K, Kubernetes reconciliation, AIOps remediation, runbook automation, agentic-SRE); chaos engineering & resilience testing (fault injection, GameDays, blast-radius control, chaos-in-CI). SKIP: Linux kernel/admin internals → devops-linux-internals / devops-linux-admin; logging/tracing/metrics → devops-observability.
+  Containers, orchestration, CI/CD, IaC & delivery sub-hub (devops family). TRIGGER: Docker/Dockerfile, image optimization, container runtime; Kubernetes workloads/networking/ingress; CI/CD pipeline design (GitHub Actions, reusable workflows, caching, release automation); Terraform/OpenTofu & Apache Kafka infra; git branching/merge/rebase, conventional commits, branch protection, monorepo CI, semantic-release; library packaging & distribution (npm/PyPI/crates, ESM/CJS, monorepo, semver, provenance); self-healing systems & autonomic computing (MAPE-K, Kubernetes reconciliation, AIOps remediation, runbook automation, agentic-SRE); chaos engineering & resilience testing (fault injection, GameDays, blast-radius control, chaos-in-CI); git internals (object model, commit DAG, plumbing/refs/reflog, packfiles/gc, worktrees, history rewriting); build automation (make/Makefile, .PHONY, task runners — just/Task/Ninja). SKIP: Linux kernel/admin internals → devops-linux-internals / devops-linux-admin; logging/tracing/metrics → devops-observability.
 origin: local
 ---
 
@@ -23,5 +23,5 @@ of these hubs (nothing was deleted).
 | --- | --- | --- |
 | `devops-linux-internals` | devops-linux-internals | `references/linux-kernel-architecture.md`, `references/linux-boot-init.md`, `references/linux-memory-numa.md`, `references/linux-storage-filesystems.md`, … |
 | `devops-linux-admin` | devops-linux-admin | `references/linux-sysadmin.md`, `references/systemd.md`, `references/linux-package-management.md`, `references/shell-scripting.md`, … |
-| `devops-containers-cicd` | devops-containers-cicd | `references/docker-containers.md`, `references/kubernetes-networking.md`, `references/cicd-pipelines.md`, `references/terraform-kafka-infra.md`, … |
+| `devops-containers-cicd` | devops-containers-cicd | `references/docker-containers.md`, `references/kubernetes-networking.md`, `references/cicd-pipelines.md`, `references/terraform-kafka-infra.md`, `references/git-workflows.md`, `references/git-internals.md`, `references/build-automation-make.md`, … |
 | `devops-observability` | devops-observability | `references/nodejs-observability.md`, `references/pino-structured-logging.md`, `references/sentry-monitoring.md`, `references/ebpf-observability.md`, … |

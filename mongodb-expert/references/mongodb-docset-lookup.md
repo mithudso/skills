@@ -59,7 +59,7 @@ related_skills:
   - mongodb-atlas-expert
   - mongodb-operations-expert
   - atlas-diagnostics-expert
-  - mongodb-kb
+  - misc-catch-all
 ---
 
 # MongoDB Manual Offline Lookup (Dash docset)

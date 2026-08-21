@@ -134,7 +134,7 @@ db.places.insertOne({
 
 ## 2. 2dsphere Indexes
 
-A **2dsphere** index supports queries on GeoJSON geometry computed over a sphere modelled on WGS84 (the same datum used by GPS). Version 3 is the default since MongoDB 3.2. It handles Points, LineStrings, and Polygons stored as GeoJSON and supports all geospatial query operators.
+A **2dsphere** index supports queries on GeoJSON geometry computed over a sphere modelled on WGS84 (the same datum used by GPS). Version 3 has been the default since MongoDB 3.2; MongoDB 8.3+ defaults to version 4. It handles Points, LineStrings, and Polygons stored as GeoJSON and supports all geospatial query operators.
 
 ```js
 // Basic 2dsphere index on a GeoJSON field
@@ -154,7 +154,7 @@ db.places.createIndex({ location: "2dsphere" }, { "2dsphereIndexVersion": 3 });
 Key properties:
 - Handles wraparound at the anti-meridian (180° longitude) correctly.
 - Required by `$geoNear`, `$near`, `$nearSphere`, `$geoWithin` with `$centerSphere`.
-- A compound 2dsphere index is automatically sparse when combined with non-geo fields: documents missing the geo field are excluded from the index. A standalone 2dsphere index is **not** sparse.
+- 2dsphere indexes are **always sparse** (MongoDB ignores the `sparse` option). A document missing the geo field — or where it is `null` or an empty array — is not indexed, whether the index is standalone or compound. In a compound 2dsphere index, only the geo field determines whether a document is indexed.
 
 ---
 

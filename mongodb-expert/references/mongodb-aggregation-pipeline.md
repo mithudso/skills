@@ -184,9 +184,10 @@ db.orders.aggregate([
 - Index every `foreignField` (or the first field in the sub-pipeline `$match`).
 - Place `$match` **inside** the sub-pipeline to push filtering before the join materialises.
 - Avoid interleaving `$unwind` → `$lookup` → `$unwind`; chain all lookups, then unwind.
-- On sharded clusters, `$lookup` requires both collections on the same shard, or use
-  Atlas Data Federation for cross-shard joins (a `CommandNotSupported` error is returned
-  otherwise).
+- On sharded clusters, joining a **sharded** foreign collection is supported (MongoDB 5.1+),
+  but each input document fans out to every shard holding the foreign collection
+  (scatter-gather). Co-locate the collections on the same shard key, or use Atlas Data
+  Federation, to avoid the fan-out.
 
 ---
 
@@ -829,7 +830,7 @@ When running aggregation pipelines against **time series collections** (MongoDB 
 
 **$dateTrunc for downsampling:** Use `$dateTrunc` with `binSize` to downsample raw measurements into fixed time buckets (hourly/daily OHLCV, hourly averages). It is more efficient than `$dateToString` + `$group` for time-bucket aggregations.
 
-**$out to time series (MongoDB 7.0+):** `$out` can write directly into a time series collection. `$merge` into a time series collection is not supported — use `$out` instead.
+**$out to time series (MongoDB 7.0.3+):** `$out` can write directly into a time series collection. `$merge` into a time series collection is not supported — use `$out` instead.
 
 **Cannot use `distinct()` on time series** — use `$group` with a supporting metaField compound index instead.
 
@@ -839,6 +840,6 @@ For full time series aggregation patterns including IoT multi-sensor, financial 
 
 ## See also
 
-- **`mongodb-aggregation-stages-deep`** — deep-dive reference for high-leverage stages: `$lookup` (equality, pipeline-with-let, Atlas Search), `$graphLookup` (recursive joins, tree/BOM patterns), `$facet` (16 MB ceiling, pagination idiom), `$bucket`/`$bucketAuto` (Renard / POWERSOF2 granularity), `$merge`/`$out` (materialized-view refresh, idempotency), `$setWindowFields` (rank, shift, derivative, integral), `$densify`/`$fill` (gap filling), `$unionWith`, plus 100 MB-per-stage memory limits, `allowDiskUse`, and `explain("executionStats")` spill detection.
+- **`mongodb-aggregation-stages-deep`** — deep-dive reference for high-value stages: `$lookup` (equality, pipeline-with-let, Atlas Search), `$graphLookup` (recursive joins, tree/BOM patterns), `$facet` (16 MB ceiling, pagination idiom), `$bucket`/`$bucketAuto` (Renard / POWERSOF2 granularity), `$merge`/`$out` (materialized-view refresh, idempotency), `$setWindowFields` (rank, shift, derivative, integral), `$densify`/`$fill` (gap filling), `$unionWith`, plus 100 MB-per-stage memory limits, `allowDiskUse`, and `explain("executionStats")` spill detection.
 
-- **`mongodb-spark-connector`** — when an aggregation pipeline runs as part of a Spark/Databricks job. The connector accepts the same MQL aggregation pipeline syntax via the `aggregation.pipeline` read option, and Catalyst pushes Spark filters/projections/limit down by prepending `$match`/`$project`/`$limit` stages to the user-supplied pipeline. Pipeline tuning rules from this skill (index-backed `$match` first, `$project` early, `allowDiskUse` for large `$sort`/`$group`) apply identically. Use the Spark Connector skill when the pipeline result becomes a DataFrame for downstream Spark work; stay in this skill for pipelines that run only inside the Mongo cluster.
+- **`mongodb-operations-expert` (references/mongodb-spark-connector.md)** — when an aggregation pipeline runs as part of a Spark/Databricks job. The connector accepts the same MQL aggregation pipeline syntax via the `aggregation.pipeline` read option, and Catalyst pushes Spark filters/projections/limit down by prepending `$match`/`$project`/`$limit` stages to the user-supplied pipeline. Pipeline tuning rules from this skill (index-backed `$match` first, `$project` early, `allowDiskUse` for large `$sort`/`$group`) apply identically. Use the Spark connector reference when the pipeline result becomes a DataFrame for downstream Spark work; stay in this skill for pipelines that run only inside the Mongo cluster.

@@ -256,7 +256,7 @@ The read concern set on `startTransaction()` applies to all reads within the tra
 
 | Read Concern | Behavior in transactions |
 |---|---|
-| `local` | Reads the latest data on the node; may read uncommitted data from aborted txns if using pre-4.0 replica sets (not recommended) |
+| `local` | Reads the latest data on the node; not guaranteed majority-committed, so reads can be rolled back on a failover — weakest durability guarantee of the three |
 | `majority` | Reads data acknowledged by a majority of replica set members; slower but consistent with majority writes |
 | `snapshot` | **Default since 4.0 for transactions.** Reads a consistent snapshot of data as of the transaction's start time; provides the strongest isolation |
 
@@ -346,8 +346,7 @@ try {
 ## 6. Transaction Limits
 
 ### Operation count
-- Historically limited to **1000 operations** (reads + writes) per transaction
-- MongoDB 4.2+ relaxed this limit significantly; the practical limit is oplog/cache pressure
+- No fixed cap on the number of operations (reads + writes) per transaction; the practical limit is oplog size and WiredTiger cache pressure (see below). (A "1,000 per transaction" figure sometimes cited is the driver bulk-write batch-group size, not a transaction limit.)
 
 ### Oplog entry size
 - MongoDB 4.2 and earlier: each transaction generates a single oplog entry capped at **16 MB**
@@ -630,9 +629,9 @@ When many concurrent transactions attempt to modify the same document, MongoDB a
 ```js
 // Detect write conflict storms in server status
 const status = await db.admin().serverStatus();
-// MongoDB 6.0+: opWriteConflicts counts write-conflict retries at the storage layer
-console.log("writeConflicts:", status.opWriteConflicts);
-// Pre-6.0 fallback: WiredTiger transaction conflict counter
+// metrics.operation.writeConflicts — count of write-conflict retries at the storage layer
+console.log("writeConflicts:", status.metrics.operation.writeConflicts);
+// WiredTiger transaction conflict counter (equivalent low-level metric):
 console.log("wtConflicts:", status.wiredTiger.transaction["transaction conflicts between concurrent transactions"]);
 ```
 

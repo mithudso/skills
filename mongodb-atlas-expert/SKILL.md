@@ -1,6 +1,6 @@
 ---
 description: >-
-  Broad MongoDB Atlas platform hub — control plane, Admin API v2, Atlas CLI, Terraform, Kubernetes Operator (AKO), tiers, security (IP access list, private networking, db vs Atlas users), alerts/metrics/limits. 27 references. TRIGGER: Atlas architecture & surface choice (UI/Admin API/CLI/Terraform/AKO); tier/version/limit; security/networking design; alert/metric posture; sub-areas — Atlas Search/$search, Vector Search/$vectorSearch, Stream Processing, Charts, Data Federation, App Services, Triggers/Functions, Device SDK/Realm sync, Online Archive, Flex/Serverless, Global Clusters, Search Nodes, Service Accounts, IAM/RBAC, Federated Auth (SAML/SSO), AWS/Azure/GCP networking & PrivateLink, BI Connector, analytics nodes. SKIP: data-plane query/index/schema/engine → mongodb-expert; live diagnostics/perf → atlas-diagnostics-expert; backup/DR/migration/security/encryption/connectors/cost → mongodb-operations-expert; KB lookup → mongodb-kb.
+  Broad MongoDB Atlas platform hub — control plane, Admin API v2, Atlas CLI, Terraform, Kubernetes Operator (AKO), tiers, security (IP access list, private networking, db vs Atlas users), alerts/metrics/limits. TRIGGER: Atlas architecture & surface choice (UI/Admin API/CLI/Terraform/AKO); tier/version/limit; security/networking design; alert/metric posture; sub-areas — Atlas Search/$search, Vector Search/$vectorSearch, Stream Processing, Charts, Data Federation, App Services, Triggers/Functions, Device SDK, Online Archive, Flex/Serverless, Global Clusters, Search Nodes, Service Accounts, IAM/RBAC, Federated Auth (SAML/SSO), AWS/Azure/GCP networking & PrivateLink, BI Connector. SKIP: data-plane query/index/schema/engine → mongodb-expert; live diagnostics/perf → atlas-diagnostics-expert; backup/DR/migration/security architecture/encryption/connectors/cost → mongodb-operations-expert; vector-search tenant/PII isolation → atlas-vector-search-pii-isolation; KB lookup/10gen → misc-catch-all.
 name: mongodb-atlas-expert
 category: mongodb
 tags:
@@ -23,23 +23,25 @@ whenToUse:
   - "Atlas security design: IP access list, private endpoints, VPC peering"
   - "Atlas alerts, metrics, limits, or Performance Advisor setup"
   - "deep Atlas sub-area: Atlas Search, Vector Search, Stream Processing, Charts, Triggers, IAM/RBAC, federated auth"
-  - "recent MongoDB or Atlas release: 8.0, 8.2, 8.3, Flex, Stream Processing"
+  - "recent Atlas platform/availability release: Flex GA, Stream Processing GA, Search Nodes, Automated Embedding"
   - "Atlas Admin API rate limiting or service account authentication"
   - "Terraform Provider 2.0 migration or AKO upgrade"
-  - "which Atlas feature for this workload: search, vector, streaming, QE"
+  - "which Atlas feature fits a workload: search, vector, or streaming"
 whenNotToUse:
   - "Data-plane query, index, schema, aggregation, or storage-engine work — use mongodb-expert"
   - "Diagnosing a live cluster: metrics, slow queries, performance, monitoring, capacity — use atlas-diagnostics-expert"
-  - "Backups, DR, Ops Manager, migration, mongosync, security, encryption, compliance, Kafka/Spark connectors, or cost — use mongodb-operations-expert"
-  - "Looking up a MongoDB KB article — use mongodb-kb"
-  - "Cloning, installing, or running this repo — use 10gen"
+  - "Backups, DR, Ops Manager, migration, mongosync, security architecture, encryption/CSFLE/Queryable Encryption setup, compliance, Kafka/Spark connectors, or cost — use mongodb-operations-expert"
+  - "What changed between MongoDB engine versions (e.g. 7.0→8.0 behavior/feature diffs) — use mongodb-operations-expert"
+  - "Tenant/PII isolation and entitlement boundaries for Atlas Vector Search — use atlas-vector-search-pii-isolation"
+  - "Looking up a MongoDB KB article, or cloning/installing/running this repo — use misc-catch-all"
 related_skills:
   - mongodb-expert
   - atlas-diagnostics-expert
   - mongodb-operations-expert
+  - atlas-vector-search-pii-isolation
   - misc-catch-all
-version: "1.2.1"
-updated: "2026-05-31"
+version: "1.4.0"
+updated: "2026-07-17"
 ---
 
 # MongoDB Atlas Expert
@@ -48,7 +50,7 @@ Generated from `docs/mongodb-atlas-expert-context.md` in `10gen/mdb-tam`. Use it
 
 ## Sub-skill routing table
 
-This skill consolidates 27 Atlas sub-skills as on-demand references — match the task to the table and **Read the listed `references/…md` file before answering deep questions**. Do not rely on this table alone for depth.
+This skill consolidates 29 Atlas sub-skills as on-demand references — match the task to the table and **Read the listed `references/…md` file before answering deep questions**. Do not rely on this table alone for depth.
 
 | Sub-topic | When to load | Reference file |
 | --- | --- | --- |
@@ -56,15 +58,17 @@ This skill consolidates 27 Atlas sub-skills as on-demand references — match th
 | `mongodb-atlas-azure` | Azure-specific Private Link, NSG, Entra ID, Key Vault BYOK, MACC | `references/mongodb-atlas-azure.md` |
 | `mongodb-atlas-charts` | Atlas Charts — chart types, data sources, aggregation pipelines in Charts | `references/mongodb-atlas-charts.md` |
 | `mongodb-atlas-cli` | Deep Atlas CLI command reference and scripting | `references/mongodb-atlas-cli.md` |
-| `mongodb-atlas-data-federation` | Atlas Data Federation and Online Archive federated queries | `references/mongodb-atlas-data-federation.md` |
+| `mongodb-atlas-data-federation` | Atlas Data Federation (formerly Atlas Data Lake) and Online Archive federated queries | `references/mongodb-atlas-data-federation.md` |
 | `mongodb-atlas-device-sdk` | Atlas Device SDK (Realm successor): object model, Flexible Sync, Atlas Edge | `references/mongodb-atlas-device-sdk.md` |
 | `mongodb-atlas-federated-auth` | Org-level SSO via SAML 2.0 federated authentication | `references/mongodb-atlas-federated-auth.md` |
 | `mongodb-atlas-flex-serverless` | Flex/Serverless tier deep-dive, decision matrix, pricing, migration | `references/mongodb-atlas-flex-serverless.md` |
+| `mongodb-atlas-tiers-upgrades` | Dedicated tier specs (M30: 2 vCPU/8GB/3000 conns, WT cache 25%), connection limits per tier, rolling-upgrade election mechanics, Atlas Gen2 ARM hardware generations, post-upgrade cache-warming expectations. For auto-upgrade cadence/FCV ceiling/write-blocking see `mongodb-atlas-managed-upgrades` below | `references/mongodb-atlas-tiers-upgrades.md` |
 | `mongodb-atlas-gcp` | GCP-specific PSC, Workload Identity, networking | `references/mongodb-atlas-gcp.md` |
 | `mongodb-atlas-global-clusters` | Global Clusters: zone-based sharding for geo-distributed data | `references/mongodb-atlas-global-clusters.md` |
 | `mongodb-atlas-iac` | Atlas IaC — Terraform provider v2.x + AKO v2.14 CRDs together | `references/mongodb-atlas-iac.md` |
-| `mongodb-atlas-iam-rbac` | Atlas identity, access control, three-tier identity model, 30+ built-in roles | `references/mongodb-atlas-iam-rbac.md` |
+| `mongodb-atlas-iam-rbac` | Atlas identity, access control, three-tier identity model, 30+ built-in roles, org-level Resource Policies/governance guardrails | `references/mongodb-atlas-iam-rbac.md` |
 | `mongodb-atlas-kubernetes-operator` | AKO-only Kubernetes work, custom resources, reconciliation | `references/mongodb-atlas-kubernetes-operator.md` |
+| `mongodb-atlas-managed-upgrades` | Atlas-managed major-version upgrade mechanics — auto-upgrade cadence, maintenance windows, EOL forced upgrades, 7.0→8.0 gotchas (write-blocking, defaultMaxTimeMS, Search index rebuild, App Services timing) | `references/mongodb-atlas-managed-upgrades.md` |
 | `mongodb-atlas-multicloud` | Multi-cloud replica set topology, cross-cloud DR, egress costs | `references/mongodb-atlas-multicloud.md` |
 | `mongodb-atlas-online-archive` | Automated data tiering from M10+ clusters to object storage | `references/mongodb-atlas-online-archive.md` |
 | `mongodb-atlas-search` | Deep Atlas Search index design, analyzers, `$search` query syntax | `references/mongodb-atlas-search.md` |
@@ -85,93 +89,93 @@ This skill consolidates 27 Atlas sub-skills as on-demand references — match th
 ### Atlas platform and architecture
 
 - **Atlas docs home:** deployment types, regions, access control, connection,
-  alerts, optimization entry points  
+  alerts, optimization entry points
   <https://www.mongodb.com/docs/atlas/>
 - **Atlas Architecture Center:** Atlas well-architected guidance across
   operational efficiency, security, reliability, performance, and cost
-  optimization  
+  optimization
   <https://www.mongodb.com/docs/atlas/architecture/current/>
 
 ### Atlas administration and automation
 
 - **Atlas Admin API v2 reference:** canonical Atlas administration endpoint
-  inventory and auth model  
+  inventory and auth model
   <https://www.mongodb.com/docs/api/doc/atlas-admin-api-v2/>
 - **Configure Atlas API access:** service-account/API-key setup, IP access list
-  behavior, and the REST/data-plane boundary  
+  behavior, and the REST/data-plane boundary
   <https://www.mongodb.com/docs/atlas/configure-api-access/>
-- **Atlas CLI docs:** command-line Atlas management surface and setup flow  
+- **Atlas CLI docs:** command-line Atlas management surface and setup flow
   <https://www.mongodb.com/docs/atlas/cli/current/>
 - **Atlas Terraform provider guide:** infrastructure-as-code surface for Atlas
-  provisioning and lifecycle management  
+  provisioning and lifecycle management
   <https://www.mongodb.com/docs/atlas/terraform/>
 - **Atlas Kubernetes Operator:** Kubernetes control-plane integration and
-  lifecycle caveats  
+  lifecycle caveats
   <https://www.mongodb.com/docs/atlas/operator/stable/>
 
 ### Connection, security, and access control
 
 - **Connect to a database deployment:** connection prerequisites, private
-  networking choices, firewall requirements, and data-plane connection flow  
+  networking choices, firewall requirements, and data-plane connection flow
   <https://www.mongodb.com/docs/atlas/connect-to-database-deployment/>
 - **Atlas IP access list:** project-scoped client network allow-list behavior,
-  limits, temporary entries, and CLI entry points  
+  limits, temporary entries, and CLI entry points
   <https://www.mongodb.com/docs/atlas/security/ip-access-list/>
 - **Atlas database users:** Atlas-vs-database-user boundary, auth mechanisms,
-  role model, and operational limits  
+  role model, and operational limits
   <https://www.mongodb.com/docs/atlas/security-add-mongodb-users/>
 
 ### Data access and MongoDB application design
 
-- **MongoDB drivers:** official application client surfaces by language  
+- **MongoDB drivers:** official application client surfaces by language
   <https://www.mongodb.com/docs/drivers/>
 - **MongoDB data modeling:** access-pattern-first schema design, embedding vs
-  referencing, and flexible-schema guidance  
+  referencing, and flexible-schema guidance
   <https://www.mongodb.com/docs/manual/data-modeling/>
 - **MongoDB indexes:** index types, write/read tradeoffs, Atlas UI/CLI index
-  management, and Performance Advisor entry points  
+  management, and Performance Advisor entry points
   <https://www.mongodb.com/docs/manual/indexes/>
 - **MongoDB aggregation:** preferred aggregation-pipeline model and stage-based
-  data processing  
+  data processing
   <https://www.mongodb.com/docs/manual/aggregation/>
 
 ### Atlas search and AI surfaces
 
 - **Atlas Search:** full-text search, analyzers, mappings, `$search`,
-  `$searchMeta`, pagination, faceting, and autocomplete  
+  `$searchMeta`, pagination, faceting, and autocomplete
   <https://www.mongodb.com/docs/atlas/atlas-search/>
 - **Atlas Vector Search:** ANN/ENN vector search, hybrid search, RAG, automated
-  embedding, and version availability  
+  embedding, and version availability
   <https://www.mongodb.com/docs/atlas/atlas-vector-search/>
 
 ### Streaming, encryption, and newer surfaces
 
 - **Atlas Stream Processing:** continuous stream processing using
-  aggregation-pipeline syntax over Atlas and Kafka sources  
+  aggregation-pipeline syntax over Atlas and Kafka sources
   <https://www.mongodb.com/docs/atlas/atlas-stream-processing/>
 - **Queryable Encryption:** query encrypted fields without exposing plaintext;
-  equality/range GA, prefix/suffix/substring in preview on 8.2+  
+  equality/range GA, prefix/suffix/substring in preview on 8.2+
   <https://www.mongodb.com/docs/manual/core/queryable-encryption/>
 - **Atlas AI Integrations:** consolidated RAG, agent memory, and embedding
-  pattern documentation  
+  pattern documentation
   <https://www.mongodb.com/docs/atlas/ai-integrations/>
 
 ### Operations, backup, observability, and limits
 
 - **Atlas alerts:** alert conditions, lifecycle, acknowledgement, and org/project
-  settings  
+  settings
   <https://www.mongodb.com/docs/atlas/alerts/>
 - **Atlas cluster metrics:** health metrics, real-time metrics, search metrics,
-  and operator-facing signals  
+  and operator-facing signals
   <https://www.mongodb.com/docs/atlas/monitor-cluster-metrics/>
 - **Atlas Cloud Backup overview:** backup enablement, redundancy, compliance,
-  restore-role requirements, and topology caveats  
+  restore-role requirements, and topology caveats
   <https://www.mongodb.com/docs/atlas/backup/cloud-backup/overview/>
 - **Atlas limits:** component, connection, and topology limits that shape
-  designs and operating posture  
+  designs and operating posture
   <https://www.mongodb.com/docs/atlas/reference/atlas-limits/>
 - **Atlas Performance Advisor:** slow-query analysis, index suggestions, and
-  read-vs-write tradeoff reminders  
+  read-vs-write tradeoff reminders
   <https://www.mongodb.com/docs/atlas/performance-advisor/>
 
 ## Atlas quick rules
@@ -198,32 +202,28 @@ This skill consolidates 27 Atlas sub-skills as on-demand references — match th
    same feature.
 10. Check **deployment tier, MongoDB version, and Atlas limits** before giving
     prescriptive advice.
-11. Know the **Flex / Free / Dedicated** tier model; Serverless and M2/M5 are
-    deprecated.
+11. Know the **Flex / Free / Dedicated** tier model; Serverless and M2/M5 have
+    been removed and auto-migrated to Flex — they cannot be newly provisioned.
 12. Consider **Atlas Stream Processing** for event-driven and real-time ETL
     workloads before building external pipelines.
 13. For hybrid retrieval, use **`$rankFusion`** (MongoDB 8.1+) to merge
     full-text and vector results in a single query.
-14. Use **Queryable Encryption** for sensitive fields that still need to be
-    queried; equality/range queries are GA, prefix/suffix/substring are in
-    preview on 8.2+.
+14. **Queryable Encryption** is available for sensitive fields that still need
+    to be queried; equality/range queries are GA, prefix/suffix/substring are
+    in preview on 8.2+. For CSFLE/QE setup and key management, use
+    `mongodb-operations-expert`.
 
 ## What Atlas expertise should mean
 
-An Atlas-focused assistant should be able to reason across:
-
-- **control plane design:** organizations, projects, deployments, users,
-  network boundaries, backups, monitoring, limits, and automation
-- **application access:** drivers, connection strings, connection pooling,
-  query/index fit, aggregation, search, vector search
-- **operations:** alerts, metrics, performance advisor, capacity, topology, and
-  backup/disaster-recovery posture
-- **delivery models:** UI, Admin API, CLI, Terraform, and Atlas Kubernetes
-  Operator
-- **streaming and event-driven:** Atlas Stream Processing for real-time
-  pipelines and time-series ingestion
-- **AI and agentic patterns:** automated embedding, vector search, hybrid
-  search, RAG, agent memory, and framework integrations
+Atlas expertise spans **control-plane design** (organizations, projects,
+deployments, users, network boundaries, backups, monitoring, limits,
+automation), **application access** (drivers, connection strings, pooling,
+query/index fit, aggregation, search, vector search), **operations** (alerts,
+metrics, Performance Advisor, capacity, topology, backup/DR posture),
+**delivery models** (UI, Admin API, CLI, Terraform, AKO), **streaming**
+(Atlas Stream Processing), and **AI/agentic patterns** (automated embedding,
+vector search, hybrid search, RAG, agent memory) — the areas mapped
+throughout this file.
 
 ## Atlas operating model
 
@@ -248,8 +248,8 @@ An Atlas-focused assistant should be able to reason across:
 
 - Atlas lets teams choose deployment tier (**Free, Flex, or Dedicated**), cloud
   provider, and region based on application latency, cost, and security
-  requirements. Serverless instances and M2/M5 clusters are deprecated; Flex
-  is their replacement.
+  requirements. Serverless instances and M2/M5 clusters have been removed and
+  auto-migrated to Flex, their replacement; neither can be newly provisioned.
 - Application environments must satisfy both **network access** and
   **database-user authentication** to reach an Atlas deployment.
 - Private connectivity choices include **VPC/VNet peering** and **private
@@ -257,21 +257,22 @@ An Atlas-focused assistant should be able to reason across:
 
 ## Atlas interaction methods inventory
 
-This is the high-value inventory of **how you can work with Atlas**. For exact
-subcommands or endpoints, follow the linked source sections.
+This is the high-value inventory of **how you can work with Atlas** — surface,
+best fit, and representative methods in one place. For exact subcommands or
+endpoints, follow the linked source sections.
 
-| Surface | What it is for | Best fit | Primary source |
+| Surface | Best fit | Representative methods/actions | Primary source |
 | --- | --- | --- | --- |
-| Atlas UI | interactive administration, dashboards, backup/alerts/metrics, one-off ops | manual ops, investigations, operator workflows | Atlas docs home |
-| Atlas Admin API v2 | REST control plane for org/project/deployment/network/user/backup/alert automation | CI/CD, automation, inventory, governance, integration tooling | Admin API v2 |
-| Atlas CLI | terminal UX over Atlas management APIs | local operator workflows, scripts, quick admin actions | Atlas CLI |
-| Atlas Terraform provider | declarative infrastructure as code | reproducible provisioning, policy-reviewed infra, GitOps-style Atlas infra | Terraform |
-| Atlas Kubernetes Operator | manage Atlas resources from Kubernetes custom resources | platform teams aligning Atlas lifecycle to Kubernetes control planes | AKO |
-| MongoDB drivers | application data-plane access to Atlas clusters | production application code | Drivers |
-| mongosh / Compass / connection strings | debugging, admin inspection, direct database access | local exploration, DBA/dev workflows | Connect to deployment + Manual/Drivers |
-| Atlas Search | relevance/full-text search on Atlas data | autocomplete, faceting, ranked text search | Atlas Search |
-| Atlas Vector Search | semantic similarity, hybrid search, RAG | AI applications, semantic retrieval, agentic systems | Atlas Vector Search |
-| Atlas Stream Processing | continuous stream processing using aggregation-pipeline syntax | event-driven apps, real-time ETL, time-series ingestion | Atlas Stream Processing |
+| Atlas UI | manual ops, investigations, operator workflows | interactive administration, dashboards, backup/alerts/metrics, one-off ops | Atlas docs home |
+| Atlas Admin API v2 | CI/CD, automation, inventory, governance, integration tooling | OAuth token exchange, org/project listing, deployment management, DB user management, IP address retrieval, alert/backup administration | Admin API v2 |
+| Atlas CLI | local operator workflows, scripts, quick admin actions | `atlas setup`, `atlas api`, `atlas accessLists list`, `atlas accessLists describe`, resource-family subcommands | Atlas CLI |
+| Atlas Terraform provider | reproducible provisioning, policy-reviewed infra, GitOps-style Atlas infra | `terraform init`, `terraform plan`, `terraform apply`, `terraform destroy` against Atlas provider resources | Terraform |
+| Atlas Kubernetes Operator | platform teams aligning Atlas lifecycle to Kubernetes control planes | `AtlasProject`, `AtlasDeployment`, `AtlasDatabaseUser` custom resources and reconciliation | AKO docs |
+| MongoDB drivers | production application code | official driver CRUD/query/aggregation/index/transaction APIs by language | Drivers |
+| mongosh / Compass / connection strings | local exploration, DBA/dev workflows | debugging, admin inspection, direct database access | Connect to deployment + Manual/Drivers |
+| Atlas Search | autocomplete, faceting, ranked text search | `$search`, `$searchMeta`, analyzers, mappings, facet, pagination | Atlas Search |
+| Atlas Vector Search | AI applications, semantic retrieval, agentic systems | vector index creation, ANN/ENN vector search, hybrid search, automated embedding | Atlas Vector Search |
+| Atlas Stream Processing | event-driven apps, real-time ETL, time-series ingestion | continuous stream processing using aggregation-pipeline syntax | Atlas Stream Processing |
 
 ## Atlas Admin API standards
 
@@ -435,6 +436,9 @@ usually falls into these buckets:
 
 ## Backup, reliability, and disaster-recovery standards
 
+Platform-level facts only — for restore procedure, RTO/RPO planning, and DR
+runbooks, use `mongodb-operations-expert`.
+
 - Atlas Cloud Backup uses the cloud provider’s native snapshot functionality and
   inherits provider redundancy guarantees.
 - Atlas supports **multi-region snapshot distribution** for added redundancy and
@@ -470,28 +474,10 @@ usually falls into these buckets:
 - Atlas docs explicitly recommend **connection pooling**, application tuning,
   autoscaling, and tier scaling when nearing connection limits.
 
-## High-value method inventory
-
-This is the condensed inventory to keep handy. For exhaustive method lists, use
-the linked references directly.
-
-### Atlas control-plane methods
-
-| Surface | Representative methods/actions | Source for exact inventory |
-| --- | --- | --- |
-| Admin API | OAuth token exchange, org/project listing, deployment management, DB user management, IP address retrieval, alert/backup administration | Admin API v2 |
-| Atlas CLI | `atlas setup`, `atlas api`, `atlas accessLists list`, `atlas accessLists describe`, resource-family subcommands | Atlas CLI |
-| Terraform | `terraform init`, `terraform plan`, `terraform apply`, `terraform destroy` against Atlas provider resources | Terraform guide |
-| AKO | `AtlasProject`, `AtlasDeployment`, `AtlasDatabaseUser` custom resources and reconciliation model | AKO docs |
-
-### Atlas-connected application/data methods
-
-| Surface | Representative methods/actions | Source for exact inventory |
-| --- | --- | --- |
-| Drivers | official driver CRUD/query/aggregation/index/transaction APIs by language | Drivers |
-| MongoDB query layer | filters, projections, updates, aggregation pipelines | Manual data-modeling/index/aggregation docs |
-| Atlas Search | `$search`, `$searchMeta`, analyzers, mappings, autocomplete, facet, pagination | Atlas Search |
-| Atlas Vector Search | vector index creation, ANN/ENN vector search, hybrid search, automated embedding | Atlas Vector Search |
+(Representative methods for each surface are folded into the **Atlas
+interaction methods inventory** table above. For the MongoDB data-plane query
+layer itself — filters, projections, updates, aggregation pipelines — see
+`mongodb-expert`.)
 
 ## Practical defaults for future Atlas coding/review tasks
 
@@ -510,158 +496,15 @@ the linked references directly.
 
 ## Recent platform changes (2025-2026 refresh)
 
-This section captures major Atlas and MongoDB platform changes since late 2024.
-Last refreshed: **2026-05-25**.
-
-### MongoDB server versions on Atlas
-
-- **MongoDB 8.0** (GA October 2024): 32% query throughput improvement, 56%
-  faster bulk writes, 200% faster time-series aggregations, 50x faster data
-  distribution for sharding at 50% lower cost. Introduced default maximum time
-  limits for queries and the ability to reject recurring problem queries.
-  <https://www.mongodb.com/docs/manual/release-notes/8.0/>
-- **MongoDB 8.2** (2025): Public preview of enhanced Queryable Encryption
-  (prefix, suffix, substring queries on encrypted fields), `$currentDate` in
-  `aggregate()`, standardized spill-to-disk metrics in explain output.
-  <https://www.mongodb.com/docs/manual/release-notes/8.2/>
-- **MongoDB 8.3** (May 2026): ~45% more reads and ~35% more writes vs 8.0,
-  sub-100ms retrieval targets for agent workloads, new `$hash` and `$hexHash`
-  aggregation expressions (MD5, SHA-256, XXH64), `arrayIndexAs` field in
-  `$map`/`$filter`/`$reduce`, `removeShard` deprecated in favor of four new
-  drain/removal commands, security hardening and native type-coercion
-  expressions.
-  <https://www.mongodb.com/docs/manual/release-notes/8.3/>
-
-### Flex clusters (replaces Shared and Serverless tiers)
-
-- **Atlas Flex tier** is the unified replacement for M2, M5, and Serverless
-  instances. It combines the best of Shared and Serverless into a single
-  offering with dynamic scaling.
-- As of **March 2025**, Serverless instances are no longer supported; existing
-  instances were migrated to Free, Flex, or Dedicated clusters.
-- As of **May 2025**, all M2/M5 clusters have been auto-migrated to Flex.
-- As of **January 2026**, the old `createGroupCluster` (M2/M5) and
-  `createGroupServerlessInstance` API endpoints only support Flex clusters.
-- Flex includes 100 ops/sec and 5 GB storage by default, scales to 500 ops/sec
-  dynamically, $8 base + usage-based billing capped at $30/month.
-  <https://www.mongodb.com/docs/atlas/manage-flex-clusters/>
-- **Flex key limits:** 500 connections max, 5 GB storage hard cap (no auto-expand),
-  500 collections max, 100 databases max, MongoDB 8.0 minimum (auto-upgrade only).
-- **Flex does NOT support:** Private Endpoints (no PrivateLink/VPC peering),
-  Continuous Backup/PITR (daily snapshot only), BYOK encryption at rest, Database
-  Auditing, Performance Advisor, Rolling index builds, `allowDiskUse`, server-side JS.
-- **Flex DOES support** (unlike old M2/M5): Atlas Search, Atlas Vector Search,
-  Change Streams, Triggers — but Vector Search shares resources with `mongod` on Flex;
-  upgrade to M10+ with dedicated Search Nodes before production Vector Search.
-- **Migration is one-way:** Flex → dedicated is supported (downtime required);
-  dedicated → Flex downgrade is NOT supported. Download Flex snapshots before upgrading
-  as they do not transfer to dedicated clusters.
-- For full Flex decision matrix, pricing breakdown, and tooling migration, see
-  `mongodb-atlas-flex-serverless` skill.
-
-### Atlas Stream Processing (GA)
-
-- **Atlas Stream Processing** reached general availability as of **March 2025**.
-- Enables continuous stream processing pipelines over Atlas data using
-  aggregation-pipeline syntax.
-- Supports emitting to **Time Series Collections**, Kafka headers, and
-  multiple tiers (SP10 for low-traffic, SP30 for production).
-- Available on AWS and Azure across global regions.
-  <https://www.mongodb.com/docs/atlas/atlas-stream-processing/>
-
-### Voyage AI acquisition and Automated Embedding
-
-- MongoDB acquired **Voyage AI** in February 2025 (~$220M) to embed
-  high-accuracy embedding models directly into Atlas Vector Search.
-- **Automated Embedding** (public preview May 2026) uses the `autoEmbed` index
-  field type to automatically generate Voyage AI vector embeddings on insert,
-  update, and query -- no external pipeline needed.
-- Available models: `voyage-4-large`, `voyage-4`, `voyage-4-lite`,
-  `voyage-code-3`.
-- Pricing: per million tokens ($0.12 large / $0.06 standard / $0.02 lite);
-  first 200M tokens free per account; Batch API gives 33% discount.
-  <https://www.mongodb.com/docs/atlas/atlas-vector-search/>
-
-### Lexical Prefilters for Vector Search
-
-- **Lexical Prefilters** allow advanced text and geo analysis filters (fuzzy
-  search, phrase matching, wildcards, `geoWithin`) as prefilters before vector
-  similarity search.
-- Unlike standard `$vectorSearch` filters (equals, range, exists), lexical
-  prefilters use full analyzed-text capabilities from Atlas Search operators.
-- Create a `$search` index with vector type fields and use
-  `$search.vectorSearch` in aggregation pipelines.
-  <https://www.mongodb.com/company/blog/product-release-announcements/semantic-power-lexical-precision-advanced-filtering-for-vector-search>
-
-### Hybrid Search with `$rankFusion`
-
-- The **`$rankFusion`** aggregation operator merges and re-ranks results from
-  multiple search pipelines (full-text + vector).
-- Requires **MongoDB 8.1+** on Atlas.
-- Enables true hybrid search combining keyword precision with semantic
-  intelligence in a single query.
-  <https://www.mongodb.com/docs/atlas/atlas-vector-search/hybrid-search/>
-
-### Search Nodes (dedicated search infrastructure)
-
-- **Search Nodes** are generally available on AWS, Google Cloud, and Azure for
-  both development and production deployments.
-- Provide dedicated infrastructure for Atlas Search and Vector Search,
-  independent of database compute, with up to 60% query-time reduction.
-- **Multi-region Search Nodes** are available in preview for multi-region and
-  multi-cloud clusters.
-  <https://www.mongodb.com/docs/atlas/atlas-search/>
-
-### Queryable Encryption enhancements
-
-- **Equality and range queries** on encrypted fields are GA and production-ready
-  at no additional cost on Atlas, Enterprise Advanced, and Community Edition.
-- **Prefix, suffix, and substring queries** on encrypted string fields are in
-  public preview starting MongoDB 8.2.
-  <https://www.mongodb.com/docs/manual/core/queryable-encryption/>
-
-### Terraform Provider 2.0
-
-- **MongoDB Atlas Terraform Provider 2.0** shipped in 2025 with semantic
-  versioning, no-breaking-change guarantees in minor/patch releases, eliminated
-  hanging timeouts, and simplified advanced-cluster migrations.
-- **Migration required** from 1.x; see the 2.0.0 Upgrade Guide.
-- Atlas Architecture Center examples now target Provider 2.x.
-  <https://www.mongodb.com/products/updates/terraform-mongodb-atlas-provider-2-0-now-available/>
-
-### Atlas Admin API standardized rate limiting
-
-- **Standardized rate limiting** for the Atlas Admin API v2 became GA in
-  **March 2026**, using a token-bucket algorithm.
-- Automation and integration code should handle `429 Too Many Requests`
-  responses and respect `Retry-After` headers.
-  <https://www.mongodb.com/company/blog/product-release-announcements/introducing-standardized-atlas-admin-api-rate-limiting>
-
-### Atlas Architecture Center compliance additions
-
-- **PCI DSS Compliance** page added February 2026.
-- **HIPAA Compliance** page added February 2026.
-- Multi-region opinionated guidance, Reliability section, and Operational
-  Readiness Checklist added August 2025.
-  <https://www.mongodb.com/docs/atlas/architecture/current/changelog/>
-
-### Atlas CLI updates (2025-2026)
-
-- `atlas api` subcommand reached **GA** in October 2025.
-- TLS 1.3 support added for `atlas api clusters` commands (December 2025).
-- `atlas api aiModelRateLimits resetModelRateLimit` command added April 2026.
-  <https://www.mongodb.com/docs/atlas/cli/current/atlas-cli-changelog/>
-
-### AI and agentic positioning
-
-- MongoDB is positioning Atlas as a **converged datastore for agentic AI**:
-  operational data + vector search + stream processing + agent memory in one
-  platform.
-- First-class integrations with **LangGraph.js** (long-term memory store, GA),
-  and major agent frameworks.
-- Atlas AI Integrations documentation consolidates RAG, agent, and embedding
-  patterns.
-  <https://www.mongodb.com/docs/atlas/ai-integrations/>
+Dated platform changes since late 2024 — MongoDB 8.0/8.2/8.3 server releases,
+the Flex tier migration timeline and limits, Atlas Stream Processing GA, the
+Voyage AI acquisition and Automated Embedding, Lexical Prefilters, `$rankFusion`
+hybrid search, Search Nodes GA, Queryable Encryption enhancements, Terraform
+Provider 2.0, Admin API rate-limiting GA, and Architecture Center/CLI updates —
+are enumerated in `references/mongodb-atlas-platform-changelog.md` (last
+refreshed 2026-05-25). Read it when a version cutoff, GA date, or pricing
+figure is load-bearing; otherwise confirm against the linked official release
+notes.
 
 ## Known ambiguities and guardrails
 
@@ -677,20 +520,20 @@ Last refreshed: **2026-05-25**.
 
 ## See Also
 
-For deep Atlas sub-areas (Azure, GCP, multicloud, Search, Vector Search, and 22 more), use the **Sub-skill routing table** above and read the matching `references/…md` file — those topics are now consolidated into this hub.
+For deep Atlas sub-areas (Azure, GCP, multicloud, Search, Vector Search, and 24 more), use the **Sub-skill routing table** above and read the matching `references/…md` file — those topics are now consolidated into this hub.
 
 Peer hubs to hand off to:
 
 - [[mongodb-expert]] — data-plane query, index, schema, aggregation, and storage-engine work
 - [[atlas-diagnostics-expert]] — live cluster diagnostics, performance, monitoring, and capacity
 - [[mongodb-operations-expert]] — backups, DR, Ops Manager, migration, mongosync, security architecture, encryption, compliance, connectors, and cost
-- [[mongodb-kb]] — MongoDB knowledge-base article lookup
+- [[misc-catch-all]] — MongoDB knowledge-base article lookup, 10gen repo cloning/install/run
 
 <!-- cross-hub-map -->
 ## Cross-hub map — where every MongoDB topic lives
 
-All MongoDB knowledge is split across **four hubs** (plus `mongodb-kb` for KB-article lookups and
-`10gen` for repo install/run). If a task's deep material is **not** in this hub's Sub-skill routing
+All MongoDB knowledge is split across **four hubs** (plus `misc-catch-all` for KB-article lookups
+and 10gen repo install/run). If a task's deep material is **not** in this hub's Sub-skill routing
 table, it is a reference file under a sibling hub — **activate that hub or Read its `references/<name>.md` directly**.
 
 | Hub | Owns | Example reference files |

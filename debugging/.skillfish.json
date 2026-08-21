@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "debugging",
+  "owner": "jobayerarman",
+  "repo": "supplier_management_system",
+  "path": ".claude/skills/debugging",
+  "branch": "main",
+  "sha": "35787f15175b6cb65689ce6d90ab5414e6539a1c",
+  "source": "manual"
+}

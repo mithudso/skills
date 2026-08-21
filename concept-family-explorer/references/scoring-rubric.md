@@ -107,18 +107,25 @@ surer `/dr` win) → higher Relevance (keeps the family coherent) → higher Int
 
 ## Worked example — subject: "data observability"
 
+Ranked by CVS descending (the output table must be ranked):
+
 | Concept | Rel | Use | Nov | Int | Via | CVS | Decision |
 |---------|-----|-----|-----|-----|-----|-----|----------|
 | Data contracts | 5 | 5 | 4 | 4 | 5 | **4.65** | RESEARCH |
-| Anomaly detection on metrics | 4 | 4 | 2 | 3 | 5 | 3.60 | RESEARCH |
 | OpenLineage / column lineage | 5 | 4 | 5 | 4 | 4 | **4.45** | RESEARCH |
 | Data downtime SLOs | 4 | 5 | 4 | 3 | 4 | 4.10 | RESEARCH |
-| Semantic layer (covered, fresh) | 4 | 4 | 0 | 3 | 5 | — | SKIP (Novelty 0 → dup) |
 | "Observability for ML feature drift" | 3 | 4 | 5 | 5 | 2 | **3.80** | RESEARCH (Via=2 > 1, passes gate) |
+| Anomaly detection on metrics | 4 | 4 | 2 | 3 | 5 | 3.60 | RESEARCH |
+| Semantic layer (alias-missed dup) | 4 | 4 | 0 | 3 | 5 | 3.20 | SKIP (Novelty 0 hard gate → dup) |
 | General DevOps observability | 2 | 3 | 3 | 2 | 5 | 2.90 | SKIP (< 3.2) |
 
 Reading the table: "Data contracts" and "column lineage" are the highest-value
-gaps and lead the queue; the fresh semantic-layer node is a duplicate (Novelty
-0 → SKIP); "general DevOps observability" is relevant-ish but below threshold and
-logged as a deliberate skip — that logged skip is what later proves the frontier
-was actually explored, not skimmed.
+gaps and lead the queue. The semantic-layer row is a duplicate that slipped
+past Step 2's alias expansion into the scored set (a fresh HAVE would normally
+never be scored — `GAPS = family − HAVE`); scoring catches it — Novelty 0 —
+and it clears the raw threshold (CVS 3.20 ≥ 3.2) yet is SKIPPED, because hard
+gates beat threshold. That is the gate's real job: the last line of defense
+against inventory misses. Every row carries its computed CVS so `cvs_check.py`
+can recompute it (never leave "—"). "General DevOps observability" is
+relevant-ish but below threshold and logged as a deliberate skip — that logged
+skip is what later proves the frontier was actually explored, not skimmed.

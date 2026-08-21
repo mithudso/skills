@@ -3,23 +3,24 @@ name: code-deep-optimizer
 description: >-
   Multi-stage review-and-fix optimizer for a source file or whole repo. Auto-detects languages,
   frameworks, and domains, activates matching reviewer skills, runs an 18-pass audit plus an
-  opt-in advisory track (features, architecture, migration), applies every Medium+ fix in place,
+  opt-in advisory track, applies every Medium+ fix in place,
   verifies via build/lint/tests (backing out regressions), and loops to convergence.
   TRIGGER: "optimize this code", "run cdo", "deep code review and fix", "review and fix this
   file or repo", "audit this codebase and fix it until clean", "find and fix bugs in this repo".
   SKIP: one-shot diff review → /code-review; prose or docs → document-critique; production
   prompt → prompt-deep-optimizer; skill file → skill-optimizer; pure formatting → the language's
   formatter; create-from-scratch tooling setup with no code to review → repo-bootstrapper;
-  advisory-only ask with no code artifact → software-engineering-patterns or mongodb-operations-expert.
+  advisory-only ask with no code artifact → software-engineering-patterns or mongodb-operations-expert;
+  MQL/aggregation hot-spot → deep-mongodb-mql-query-optimizer; SQL hot-spot → deep-query-optimizer.
 origin: local
-version: 1.6.0
-updated: "2026-06-23"
+version: 1.7.0
+updated: "2026-07-20"
 category: developer
 model: claude-opus-4-8
 effort: xhigh
 tags: [code-review, optimizer, convergence-loop, static-analysis, security, performance, refactoring, verify-gate]
 related_skills:
-  - coding-standards
+  - software-engineering-patterns
   - prompt-deep-optimizer
   - skill-optimizer
   - document-critique
@@ -40,13 +41,15 @@ whenNotToUse:
   - "create-from-scratch tooling setup with no code to review — set up eslint, scaffold CI (use repo-bootstrapper)"
   - "advisory-only ask with no code artifact — recommend an architecture, plan a migration (use software-engineering-patterns or mongodb-operations-expert)"
   - "production-log or runtime-error triage — root-cause a live error and open a remediation PR (use the error-monitor-remediator agent)"
+  - "MQL/aggregation query hot-spot (use deep-mongodb-mql-query-optimizer)"
+  - "standalone SQL query hot-spot (use deep-query-optimizer)"
 metadata:
   changelog: |
+    2026-07-20 sko v1.6.1->1.7.0 — Pass H 10/10 pos, 9/10->10/10 neg (predicted); 1 High + 8 Medium fixed across 2 iters: champion-challenger contract path restored (symlink at ~/.claude/skill-consolidation/), references synced 16->18-pass (map +S5/T4 rows, worked-example 14/18), cold-spoke citations hub-aware, SQL hot-spot SKIP edge -> deep-query-optimizer, O-seeded security-review + dmqo; exit BLIND-AUDIT-DISSENT (1 residual Medium: worked-example no-manifest wording vs npm-test verify baseline).
     2026-06-23 sko v1.5.0->1.6.0 — Pass H 10/10 pos, 0/15 neg (predicted); 2 Medium fixed: added advisory model/effort frontmatter (Step 4.6 -> claude-opus-4-8 / xhigh, long-horizon agentic tier); trimmed changelog 8->5 entries (family 5-cap). No content/routing/over-ceiling/hygiene findings.
     2026-06-23 v1.4.0->1.5.0 — Empirical mode now default-on (gated auto-promote + persist) per § Default policy in the shared contract: when a test/benchmark eval set + must-pass checks are present the champion–challenger loop runs without a trigger, auto-promotes through the unchanged gate (held-out margin + must-pass veto = suite green + API unchanged), and persists the champion across runs (prior champion archived for rollback); mandatory holdout rotation/budget/noise to prevent reusable-holdout overfitting; honest guarantee = monotonically non-decreasing on the holdout, not "better every run"; opt out --dry-run/--no-promote/--structural-only; loud no-eval fallback. Per operator request.
     2026-06-23 v1.3.0->1.4.0 — added Empirical mode (champion–challenger held-out loop) section + --empirical flag, citing the new shared contract ~/.claude/skill-consolidation/champion-challenger.md; calibration: score = pass rate on a held-out test/benchmark subset (or perf metric), must-pass veto = full pre-existing suite green + no new lint/type errors + public API unchanged (reuse Verify-gate baseline). Orthogonal to the fix-track passes — no pass-count change. Per operator request.
     2026-06-23 v1.2.0->1.3.0 — added T4 Test-suite performance pass to Group 5: fake timers replacing real sleeps, beforeEach→beforeAll hoisting for deterministic setup, parallelization eligibility at repo scope, describe-scoped fixture isolation; fix-track count 17→18 across body+description+report; architecture steps 3+4 updated to route T4 repo-scope and per-file. Per operator request 2026-06-23.
-    2026-06-23 v1.1.2->1.2.0 — added S5 Logging & observability coverage pass to Group 2 (important paths emit useful, structured, secret-free, tested logs; error/security/external-call/state-transition paths; → devops-observability); strengthened T1 to drive meaningful coverage of important/changed paths toward docs/TESTING.md target with anti-coverage-gaming guard (not a blanket 100% mandate); fix-track count 16→17 across body+description+report; added SKIP/route edge to error-monitor-remediator for production-log/runtime-error triage (static-code optimizer has no telemetry access, does not open PRs from prod logs). Frontmatter description untouched except equal-length 16→17 digit. Per operator request 2026-06-23.
 ---
 > **Output rules:** Skip preamble and recaps. When delivering code changes, output diffs/edits directly — no prose narration of what you changed. Required structured outputs (convergence table, findings table, diff preview) are not preamble; keep them.
 
@@ -68,6 +71,7 @@ Skip this skill when:
 - **Create-from-scratch tooling setup with no code to review** (set up eslint, scaffold CI) → `repo-bootstrapper`.
 - **Advisory-only ask with no code artifact** (recommend architecture, plan migration) → `software-engineering-patterns` or `mongodb-operations-expert`.
 - **Production-log / runtime-error triage** (review prod logs, root-cause a live error, verify a fix, open a remediation PR) → the `error-monitor-remediator` agent (rule book: `docs/error-monitoring-guide.md`). This skill is a static-code optimizer with no telemetry access; it does not read production logs or open PRs from runtime errors. It complements that loop — once a root-cause file is identified, run cdo on it to harden the fix (incl. the S5 log the error path was missing).
+- **MQL/aggregation or SQL query hot-spot** → mongodb-expert (references/deep-mongodb-mql-query-optimizer.md) (MQL) / `deep-query-optimizer` (SQL). Those are query-level tuning loops; run cdo on the surrounding app code, not the query.
 
 ## Invocation
 
@@ -122,12 +126,12 @@ Representative rows (full matrix — incl. frontend, Node-async, MongoDB, REST/G
 
 | Detected | Activate |
 | --- | --- |
-| JS / TS | `lang-js-ts` (+ `typescript-advanced-types` for heavy generics) |
+| JS / TS | `lang-js-ts` (+ its `references/typescript-advanced-types.md` for heavy generics) |
 | Python | `lang-python` |
 | Go / Kotlin | `lang-go-and-mobile` |
-| `crypto.subtle` / AES / PBKDF2 | `webcrypto-vault-reviewer` |
+| `crypto.subtle` / AES / PBKDF2 | `misc-catch-all (references/webcrypto-vault-reviewer.md)` |
 | Chrome extension (MV3) / auth / untrusted input | `chrome-extension-expert`, `security-review` |
-| Always-on baseline | `software-engineering-patterns (references/code-reviewer.md)`, `coding-standards` |
+| Always-on baseline | `software-engineering-patterns (references/code-reviewer.md + references/coding-standards.md)` |
 
 Full matrix: `references/language-skill-map.md`.
 
@@ -139,7 +143,7 @@ If mapped skill in session's available-skills list, invoke via Skill tool; other
 
 - **Don't over-activate** — six reviewers on 40-line file = noise (the ddo guard); scope activation to what was actually detected.
 - Status **blocking** if security/crypto/regulated domain detected but no reviewer skill available; **pass** when coverage complete; **minor** if domain detected but no skill exists.
-- Activated skills feed matching passes — `security-review` informs S1, `coding-standards` informs M1, `nodejs-concurrency-internals` informs P2, `devops-observability` informs S5, etc.
+- Activated skills feed matching passes — `security-review` informs S1, `software-engineering-patterns (references/coding-standards.md)` informs M1, `lang-js-ts (references/nodejs-concurrency-internals.md)` informs P2, `devops-observability` informs S5, etc.
 
 ## Severity calibration
 
@@ -162,10 +166,10 @@ Fix everything Medium-or-above; loop terminates when no Medium+ findings remain 
 **Group 1 — Correctness & Contract**
 - C1 Correctness/logic — control-flow, off-by-one, null/undefined deref, type coercion, wrong API usage, unreachable code, broken error propagation.
 - C2 Interface/contract & type safety — signatures vs call sites, return-shape consistency, public API stability; `any`/unsafe casts, missing null/undefined guards type system would catch, unsound assertions.
-- C3 Adversarial bug-hunt — don't review by category, *try to break it*: construct boundary/edge/error-path inputs, hunt state-machine violations and resource exhaustion, check invariants/properties (what must always hold; find violating paths). **Counterexample mechanic:** when build/test harness exists, write *failing test* that reproduces suspected bug, confirm red, then fix to green (verified, regression-guarded fix); with no harness, report bug + repro sketch and apply only obvious correction. → security-review / nodejs-concurrency-internals per Stage 0.
+- C3 Adversarial bug-hunt — don't review by category, *try to break it*: construct boundary/edge/error-path inputs, hunt state-machine violations and resource exhaustion, check invariants/properties (what must always hold; find violating paths). **Counterexample mechanic:** when build/test harness exists, write *failing test* that reproduces suspected bug, confirm red, then fix to green (verified, regression-guarded fix); with no harness, report bug + repro sketch and apply only obvious correction. → security-review / lang-js-ts (references/nodejs-concurrency-internals.md) per Stage 0.
 
 **Group 2 — Safety & Robustness**
-- S1 Security — injection (SQL/command/XSS/path), unsafe deserialization, secrets in source, authn/authz gaps, SSRF, unsafe crypto → security-review / webcrypto-vault-reviewer.
+- S1 Security — injection (SQL/command/XSS/path), unsafe deserialization, secrets in source, authn/authz gaps, SSRF, unsafe crypto → security-review / misc-catch-all (references/webcrypto-vault-reviewer.md).
 - S2 Error handling & resources — swallowed errors, missing try/catch around I/O, unhandled rejections, resource leaks, missing timeouts/retries/backoff.
 - S3 Input validation & trust boundaries — untrusted input treated as data not code, bounds checks, sanitization, encoding.
 - S4 Portability & runtime-compat — runtime/version/OS assumptions: Node/Deno/Bun version features, browser-support targets, OS-specific paths, hardened-runtime constraints (SES/lockdown frozen-intrinsics, CSP, no-eval). → language/runtime skill per Stage 0.
@@ -176,7 +180,7 @@ Fix everything Medium-or-above; loop terminates when no Medium+ findings remain 
 - P2 Concurrency & async — races, deadlocks, event-loop blocking, await-in-loop, unsynchronized shared-state mutation → lang-js-ts (references/nodejs-concurrency-internals.md).
 
 **Group 4 — Maintainability, Docs & Architecture**
-- M1 Readability & standards — naming, dead code, magic numbers, comment density, over-long functions, cyclomatic complexity → coding-standards.
+- M1 Readability & standards — naming, dead code, magic numbers, comment density, over-long functions, cyclomatic complexity → software-engineering-patterns (references/coding-standards.md).
 - M2 Duplication & simplification — copy-paste, reinvented utilities, DRY/KISS/YAGNI.
 - M3 Architecture (repo scope only; N/A single file) — layering, dependency cycles, module boundaries, dead modules → software-engineering-patterns (references/software-architect.md).
 - M4 Documentation correctness — comments/docstrings contradicting code (real bug source), stale references, undocumented public API. *Correctness* of docs, distinct from M1's density check. → technical-writing-craft.

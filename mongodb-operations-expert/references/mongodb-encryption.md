@@ -183,7 +183,7 @@ Introduced in MongoDB 4.2 (automatic encryption in Enterprise/Atlas, explicit in
 
 ### Queryable Encryption (QE)
 
-Introduced in MongoDB 6.0 (equality queries), with range queries GA in MongoDB 8.0 and prefix/suffix/substring queries in public preview in MongoDB 8.2. QE uses structured encryption based on recent academic cryptographic research, providing randomized encryption for all fields while still supporting queries. Unlike CSFLE's deterministic mode, QE never leaks whether two ciphertexts correspond to the same plaintext. QE is the recommended approach for new projects unless multi-key-per-field isolation is needed ([QE features](https://www.mongodb.com/docs/manual/core/queryable-encryption/features/), [Choosing CSFLE vs QE](https://www.mongodb.com/docs/manual/core/queryable-encryption/about-qe-csfle/)).
+Introduced in MongoDB 6.0 as public preview (equality queries), reaching **GA for equality queries in MongoDB 7.0** (the GA release is incompatible with the 6.0 preview — do not mix them). Range queries reached GA in MongoDB 8.0, and prefix/suffix/substring queries are in public preview in MongoDB 8.2. QE uses structured encryption based on recent academic cryptographic research, providing randomized encryption for all fields while still supporting queries. Unlike CSFLE's deterministic mode, QE never leaks whether two ciphertexts correspond to the same plaintext. QE is the recommended approach for new projects unless multi-key-per-field isolation is needed ([QE features](https://www.mongodb.com/docs/manual/core/queryable-encryption/features/), [Choosing CSFLE vs QE](https://www.mongodb.com/docs/manual/core/queryable-encryption/about-qe-csfle/)).
 
 Both approaches use the **AES-256-CBC** encryption algorithm with **HMAC-SHA-512** authentication (AEAD) under the hood and share the same envelope encryption key management architecture ([MongoDB encryption announcement](https://www.mongodb.com/company/blog/product-release-announcements/mongodb-announces-queryable-encryption)).
 
@@ -257,7 +257,7 @@ QE always uses **randomized encryption** but adds cryptographic metadata structu
 
 | Query Type | CSFLE | QE | MongoDB Version | Status |
 |------------|-------|----|-----------------|--------|
-| Equality (`$eq`, `$ne`, `$in`) | Deterministic fields only | Yes | 6.0+ | GA |
+| Equality (`$eq`, `$ne`, `$in`) | Deterministic fields only | Yes | 6.0 preview / 7.0+ GA | GA |
 | Range (`$gt`, `$gte`, `$lt`, `$lte`) | No | Yes | 8.0+ | GA |
 | Prefix (`$startsWith`) | No | Yes | 8.2+ | Public Preview |
 | Suffix (`$endsWith`) | No | Yes | 8.2+ | Public Preview |

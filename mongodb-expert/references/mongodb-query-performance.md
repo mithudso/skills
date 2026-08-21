@@ -883,7 +883,7 @@ WiredTiger provides document-level concurrency control:
 
 **Write tickets:**
 WiredTiger uses a ticketing system to limit the number of concurrent read and write operations:
-- Default: 128 read tickets, 128 write tickets
+- Before MongoDB 7.0: a static default of 128 read + 128 write tickets. MongoDB 7.0+ replaces the fixed cap with a dynamic, self-tuning concurrency algorithm; override with `storageEngineConcurrentReadTransactions` / `storageEngineConcurrentWriteTransactions` only when instructed.
 - When tickets are exhausted, operations queue, creating backpressure
 - Monitor via `serverStatus().wiredTiger.concurrentTransactions`
 

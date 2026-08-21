@@ -1,19 +1,19 @@
 ---
 name: deep-optimizer
 description: >-
-  Convergence-loop optimizer family ROUTER. Multi-pass audit-and-fix loops for code, prose, prompts, skills, SQL queries, and UI/UX designs — each loops to zero Medium+ findings with build/verify gates. Routes to: code-deep-optimizer (source files & repos, 16-pass audit, CDO alias /cdo); document-critique (prose docs, passes 0–14, DDO alias /ddo); prompt-deep-optimizer (production prompts in code, PDO alias /pdo); skill-optimizer (SKILL.md files, 15 passes, SKO alias /sko); deep-query-optimizer (SQL queries, EXPLAIN-verified, DQO alias /dqo); design-deep-optimizer (graphic/UI/UX screens, 11-pass critique, DDeSO alias /deso). Route to the matching sub-hub. SKIP: MongoDB MQL/aggregation → mongodb-expert (references/deep-mongodb-mql-query-optimizer.md).
+  Convergence-loop optimizer family ROUTER. Multi-pass audit-and-fix loops for code, prose, prompts, skills, SQL queries, UI/UX designs, and trading strategies — each loops to zero Medium+ findings with build/verify gates. Routes to: code-deep-optimizer (source files & repos, 16-pass audit, CDO alias /cdo); document-critique (prose docs, passes 0–14, DDO alias /ddo); prompt-deep-optimizer (production prompts in code, PDO alias /pdo); skill-optimizer (SKILL.md files, 15 passes, SKO alias /sko); deep-query-optimizer (SQL queries, EXPLAIN-verified, DQO alias /dqo); design-deep-optimizer (graphic/UI/UX screens, 11-pass critique, DDeSO alias /deso); deep-strategy-optimizer (trading strategies, cards & backtests, 19 passes, DSO alias /dso). Route to the matching sub-hub. SKIP: MongoDB MQL/aggregation → mongodb-expert (references/deep-mongodb-mql-query-optimizer.md).
 origin: local
 model: claude-opus-4-8
 effort: high
-version: "1.0.0"
-updated: "2026-06-21"
+version: "1.1.0"
+updated: "2026-08-04"
 ---
 
 > **Output rules:** Skip preamble and recaps. When delivering fixes, output diffs/edits directly. Required structured outputs (convergence tables, findings tables) are not preamble; keep them.
 
 # deep-optimizer — convergence-loop optimizer family ROUTER
 
-Six siblings. Each runs a domain-specific multi-pass audit, applies every Medium+ fix in place, verifies the result, and loops to convergence.
+Seven siblings. Each runs a domain-specific multi-pass audit, applies every Medium+ fix in place, verifies the result, and loops to convergence.
 
 | Sub-hub | Domain | Alias | Key gates |
 |---|---|---|---|
@@ -23,18 +23,20 @@ Six siblings. Each runs a domain-specific multi-pass audit, applies every Medium
 | `skill-optimizer` | `SKILL.md` files | `/sko` | 15 passes A–O; Pass H trigger eval; hub sync |
 | `deep-query-optimizer` | SQL queries (Postgres/MySQL/SQLite/SQL Server) | `/dqo` | EXPLAIN/EXPLAIN ANALYZE verify; index DDL |
 | `design-deep-optimizer` | Graphic/brand & UI/UX screens | `/deso` | 11-pass critique; WCAG verify; code-backed fixes |
+| `deep-strategy-optimizer` | Trading strategies, their cards & backtests | `/dso` | 19 passes; project test + figure-verification gate; opt-in held-out promotion |
 
 ## Routing
 
 Identify the artifact type and route:
 
 - **Code (`.js`, `.ts`, `.py`, `.go`, `.rs`, `.java`, any source file or repo)** → `code-deep-optimizer`
-- **Prose document (spec, RFC, README, runbook, KB article, weekly update)** → `document-critique`
+- **Prose document (spec, RFC, README, runbook, KB article, weekly update)** → document-critique
 - **Production prompt (system prompt, agent instruction block, tool template in codebase)** → `prompt-deep-optimizer`
 - **Skill file (`SKILL.md`, Claude Code skill)** → `skill-optimizer`
 - **SQL query** → `deep-query-optimizer`
-- **MongoDB MQL / aggregation pipeline** → `mongodb-expert` (references/deep-mongodb-mql-query-optimizer.md) (mongodb family)
+- **MongoDB MQL / aggregation pipeline** → mongodb-expert (references/deep-mongodb-mql-query-optimizer.md) (mongodb family)
 - **UI/UX screen, mockup, design asset, or HTML/CSS** → `design-deep-optimizer`
+- **Trading strategy, strategy card, or the backtest/research that measured it** → `deep-strategy-optimizer`. Route here for "is this number real" (lookahead, cost path, overfitting, evidence floor); route to `code-deep-optimizer` for the same file's code health. Educational market questions go to `trading-and-investing`, not here.
 
 ## Cross-hub map
 

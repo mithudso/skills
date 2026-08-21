@@ -1,19 +1,15 @@
 ---
 name: ai-and-ml-for-trading
-description: "Machine learning applied to financial markets: feature engineering on market data (info bars, fractional differentiation, PIT normalization), gradient boosting for cross-sectional equity signals (Gu/Kelly/Xiu, SHAP, purged CV), neural networks (918-experiment architecture study), alternative data taxonomy (satellite, transaction, NLP), LLMs in finance (FinBERT, BloombergGPT, hallucination risk), RL for execution (Nevmyvaka, failure modes). Backtest integrity (look-ahead taxonomy, HLZ, McLean & Pontiff decay, PBO) and production systems (IC monitoring, drift, risk layering) now in ml-backtesting-pitfalls-and-production-systems.md. SPOKE of trading-and-investing hub. Educational only — NOT trading/investment advice."
+description: "Machine learning applied to financial markets: feature engineering on market data (info bars, fractional differentiation, PIT normalization), gradient boosting for cross-sectional equity signals (Gu/Kelly/Xiu, SHAP, purged CV), neural networks (918-experiment architecture study), alternative data taxonomy (satellite, transaction, NLP), LLMs in finance (FinBERT, BloombergGPT, hallucination risk), RL for execution (Nevmyvaka, failure modes), ML backtesting pitfalls (look-ahead bias taxonomy, HLZ multiple testing, McLean & Pontiff factor decay, PBO), and production systems (IC monitoring, drift detection, layered risk controls). SPOKE of trading-and-investing hub. Educational only — NOT trading/investment advice."
 spoke: ai-and-ml-for-trading
 hub: trading-and-investing
-version: "1.1.0"
+version: "1.0.0"
 created: "2026-06-21"
-updated: "2026-08-04"
 research_agents: "3 parallel (feature-engineering + gradient-boosting/NNs, alt-data + LLMs, RL + backtesting + production)"
 sources_gathered: "55+"
 verification: "spot-fetched all 4 post-cutoff citations; all 4 confirmed real"
 claim_verification: "ON — volatile claims stamped verified-as-of: 2026-06-21"
-scope_excludes: "classical TA indicators (→ technical-analysis), general ML theory depth (→ da-analytical-methods), DeFi/on-chain (→ defi-and-onchain-trading), backtesting framework mechanics (→ algorithmic-and-quant-trading), ML backtest-integrity + production-ops (→ ml-backtesting-pitfalls-and-production-systems)"
-metadata:
-  changelog:
-    - "2026-08-04 v1.0.0->v1.1.0 SPLIT (was ~11,979 est. tokens, 1.2x over the ~10k cap) — §8 ML-Specific Backtesting Pitfalls and §9 Production ML Trading Systems moved verbatim to references/ml-backtesting-pitfalls-and-production-systems.md, keeping their §8/§9 numbering and footnotes ^20-^23 (^2 duplicated, still cited by §1). Pointer table left at the §8-§9 slot. Nothing condensed or deleted."
+scope_excludes: "classical TA indicators (→ technical-analysis), general ML theory depth (→ da-analytical-methods), DeFi/on-chain (→ defi-and-onchain-trading), backtesting framework mechanics (→ algorithmic-and-quant-trading)"
 ---
 
 # AI and ML for Trading
@@ -29,7 +25,8 @@ metadata:
 5. [Alternative Data and NLP Signals](#5-alternative-data-and-nlp-signals)
 6. [LLMs Applied to Finance](#6-llms-applied-to-finance)
 7. [Reinforcement Learning for Execution Optimization](#7-reinforcement-learning-for-execution-optimization)
-8–9. [Backtest Pitfalls and Production Systems — moved](#89-backtest-pitfalls-and-production-systems--see-the-dedicated-reference)
+8. [ML-Specific Backtesting Pitfalls](#8-ml-specific-backtesting-pitfalls)
+9. [Production ML Trading Systems](#9-production-ml-trading-systems)
 10. [Seams with Sibling Spokes](#10-seams-with-sibling-spokes)
 11. [References](#references)
 
@@ -43,7 +40,7 @@ Before surveying methods, the baseline problem is worth stating clearly: financi
 
 **Non-stationarity.** The joint distribution of features and returns changes over time as market regimes shift, participant composition changes, and new regulations take effect. A model trained on 2018–2021 data encounters a different market in 2022 (rate-hiking regime) and again in 2025–2026 (AI-adoption-driven correlation clustering). This means cross-validation strategies that work in other ML domains (random splits) produce systematically optimistic estimates when applied to time series.
 
-**Reflexivity.** When a strategy is widely adopted, it degrades its own signal. This is not merely theoretical: a 2026 modeling study[^2] estimated that AI adoption in institutional investing (~70% of assets under management) compresses signal half-lives to approximately 18 months, versus 5–7 years in the pre-AI era (verified-as-of: 2026-06-21; single-source preliminary estimate, treat as directional). A signal that was strongly alpha-generating before publication may be near-zero post-publication; see `references/ml-backtesting-pitfalls-and-production-systems.md` §8 on the McLean & Pontiff documentation of this effect.
+**Reflexivity.** When a strategy is widely adopted, it degrades its own signal. This is not merely theoretical: a 2026 modeling study[^2] estimated that AI adoption in institutional investing (~70% of assets under management) compresses signal half-lives to approximately 18 months, versus 5–7 years in the pre-AI era (verified-as-of: 2026-06-21; single-source preliminary estimate, treat as directional). A signal that was strongly alpha-generating before publication may be near-zero post-publication; see §8 on the McLean & Pontiff documentation of this effect.
 
 **Low observation count.** A daily equity return series for 20 years yields ~5,000 observations. Monthly rebalancing gives ~240. Even with cross-sectional expansion across thousands of stocks, the effective number of independent observations is lower than the raw count due to cross-sectional correlations. This limits model complexity relative to domains where millions of training examples are available.
 
@@ -85,7 +82,7 @@ Lopez de Prado's **fractional differentiation** operator[^4] applies a fractiona
 
 ### 2.4 Look-ahead bias in feature construction
 
-Look-ahead bias in features is subtler than the "trained on future data" failure — see `references/ml-backtesting-pitfalls-and-production-systems.md` §8 for the full taxonomy. In feature construction specifically:
+Look-ahead bias in features is subtler than the "trained on future data" failure — see §8 for the full taxonomy. In feature construction specifically:
 
 - **Normalization leakage:** computing z-scores using full-sample mean and standard deviation includes future data in the normalization. Fix: rolling or expanding-window normalization computed only on past data.
 - **Survivorship bias in the universe:** the set of stocks that exist at a historical backtest start date includes only those that survived. Stocks that delisted due to bankruptcy are absent from most commercial data providers' end-of-history files unless specifically flagged.
@@ -202,7 +199,7 @@ A 2026 Korean equity study[^3] compared (a) simple feature engineering + linear 
 
 **Satellite imagery of retail traffic:** Katona, Painter, Patatoukas & Ziegler (2023) showed satellite-based retail parking lot occupancy predicts same-store sales revisions, generating significant abnormal returns.[^11] Alpha decay horizon estimated at 3–5 years before commoditization.
 
-**Credit card / transaction data:** Multiple academic studies document that transaction-level spending data can predict quarterly earnings surprises with 30–60-day lead time. The typical alpha horizon before broad adoption: 12–24 months after academic publication (consistent with McLean & Pontiff's general finding in `references/ml-backtesting-pitfalls-and-production-systems.md` §8).
+**Credit card / transaction data:** Multiple academic studies document that transaction-level spending data can predict quarterly earnings surprises with 30–60-day lead time. The typical alpha horizon before broad adoption: 12–24 months after academic publication (consistent with McLean & Pontiff's general finding in §8).
 
 **Job postings:** Green, Huang, Wen & Zhou (2019)[^12] showed corporate hiring intensity predicts future returns; the predictive effect concentrates in R&D-related postings. The signal has partially but not fully decayed.
 
@@ -217,7 +214,7 @@ Alternative data signals decay due to:
 
 The economic logic: a dataset exclusively held by one fund has no competition for the signal. Once 50+ funds have the same dataset, the signal is competed away in proportion to aggregate capital deploying on it.
 
-**Sourcing advantage:** first-mover advantage on novel data is substantial. Quantitative firms run dedicated alternative data sourcing teams to identify new datasets before academic publication. Once a dataset is documented in an academic paper, alpha decay is rapid (see `references/ml-backtesting-pitfalls-and-production-systems.md` §8 for McLean & Pontiff quantification).
+**Sourcing advantage:** first-mover advantage on novel data is substantial. Quantitative firms run dedicated alternative data sourcing teams to identify new datasets before academic publication. Once a dataset is documented in an academic paper, alpha decay is rapid (see §8 for McLean & Pontiff quantification).
 
 ---
 
@@ -317,17 +314,101 @@ RL for *directional signal generation* (predicting which stocks to buy/sell) rem
 
 ---
 
-## 8–9. Backtest Pitfalls and Production Systems — see the dedicated reference
+## 8. ML-Specific Backtesting Pitfalls
 
-Both sections now live in **`references/ml-backtesting-pitfalls-and-production-systems.md`**, keeping their §8/§9 numbering and footnote labels. This file keeps the modeling material they evaluate.
+The financial ML literature has extensively documented ways backtests overstate performance. This section focuses on ML-specific failure modes; general backtesting mechanics are covered in `references/algorithmic-and-quant-trading.md`.
 
-| What is there | Which claim here it supports |
-|---|---|
-| Look-ahead bias, four mechanisms (leakage, PIT failure, survivorship, label construction) | §2.4 feature-construction bias; §1's rule that 60%+ in-sample accuracy signals leakage |
-| Multiple testing — Harvey/Liu/Zhu's 316 factors, the t > 3.0 threshold, Bailey's PBO | §3 model selection; purged CV (§3.2) is the fold-level fix, PBO the strategy-level one |
-| McLean & Pontiff factor decay; the Meng & Chen AI-crowding half-life | §1 reflexivity and the ~18-month figure; §5.2–§5.3 alt-data alpha decay |
-| PIT data infrastructure; concept drift vs crowding decay; rolling IC monitoring | §2.4 PIT feature construction; §3–§4 model obsolescence |
-| The layered signal → optimizer → risk-check → execution pipeline; vendor landscape | §7 — RL execution is the execution layer of that pipeline |
+### 8.1 Look-ahead bias: four mechanisms
+
+**Type 1 — Data leakage:** future data enters feature computation. Classic example: normalizing features using the full dataset's statistics. Fix: expanding-window or rolling-window normalization, computed strictly from past data at each historical date.
+
+**Type 2 — Point-in-time failure:** using restated fundamental data at historical dates. A company's 2018 earnings figure may have been restated in 2020; using the 2020 value in a 2018 backtest introduces look-ahead. Fix: point-in-time databases (see §2.4).
+
+**Type 3 — Survivorship bias:** the universe at a historical date includes only companies that survived. Companies that went bankrupt or delisted are systematically absent from "as-of-today" data pulls. This introduces optimistic bias because the worst performers are excluded from the historical pool. Estimated return inflation: 1.5–2.0% annually in long-only equity backtests.[^20]
+
+**Type 4 — Label construction leakage:** the label itself (e.g., "did this stock outperform over the next month?") is computed from future data by definition. Correct cross-validation requires ensuring no feature window overlaps with the label period. This is the purge/embargo problem (§3.2).
+
+### 8.2 Multiple hypothesis testing (p-hacking)
+
+Harvey, Liu & Zhu (2016)[^21] audited the factor-zoo literature: as of 2016, 316+ factors had been published as "statistically significant" in finance journals (where p < 0.05 is the threshold). With 316 tests and i.i.d. noise, you'd expect ~15 spurious discoveries by chance. HLZ argued the field-wide t-statistic threshold should be raised from 2.0 to 3.0+ to account for multiple testing — and that most published factors below t = 3.0 are likely false discoveries.
+
+For ML models, the analogous problem is **strategy mining**: running hundreds of parameter combinations and selecting the one with the best backtest Sharpe. The selected Sharpe is upward-biased by the selection. The more hyperparameter combinations tested, the larger the bias. Bailey et al.'s **Probability of Backtest Overfitting (PBO)**[^22] formalizes this: higher exploration of parameter space → higher probability that the "best" backtest is an overfit artifact.
+
+Mitigations:
+- **Reserve a final holdout set** that is *never* touched until after all model selection decisions are made.
+- **Combinatorial purged cross-validation (CPCV)** provides a distribution of backtest paths; backtest Sharpes near the bottom quartile of this distribution are more conservative estimates.
+- **Minimum Description Length (MDL)** principle: penalize model complexity.
+- **Pre-registration of the test:** define the hypothesis before data access (rare in practice, but standard in academic replications).
+
+### 8.3 Factor decay post-publication (McLean & Pontiff)
+
+McLean & Pontiff (2016)[^23] tested 97 factors documented in published academic papers. They found:
+
+- Average return in the pre-publication sample: **100%** (the original paper result).
+- Average return *post-publication* (in sample data after the paper's publication year): **74%** — a 26% decay while still in-sample but known by publication date.
+- Average return in *out-of-sample* data after the paper's publication: **42%** — a 58% total decay from the original estimate.
+
+Interpretation: some decay is statistical (the original estimate was upward-biased due to data-mining); the additional out-of-sample decay above in-sample post-publication decay is attributed to arbitrage by practitioners who read the papers and trade on them.
+
+Implication for ML signal development: signals documented in publicly available academic literature have already experienced substantial decay. Novel proprietary signals have the highest expected value; documented signals have had substantial time for crowding.
+
+### 8.4 The AI crowding effect and alpha half-life
+
+The 2026 Meng & Chen study[^2] modeled the effect of AI adoption on signal half-lives using an optimal-stopping framework applied to 99.5 million SEC Form 13F holdings (2013–2024). Key claims (verified-as-of: 2026-06-21; single source, theoretical model + empirical validation on institutional filing data):
+
+- Institutional portfolio convergence (correlation of holdings across hedge funds) increased 42% from 2013 to 2024.
+- At ~70% AI adoption, the model estimates signal half-lives of ~18 months (vs 5–7 years pre-AI).
+- Cross-sectional dispersion of returns among simulated AI-adopting funds declines as adoption increases — the "Red Queen" equilibrium where every fund runs harder to stay in place.
+- US signal effectiveness decays at approximately 5.6% annually; European at 9.9% annually (methodology and assumptions drive these estimates; treat as directional).
+
+Note: this is *one modeling paper* from early 2026. The qualitative direction (higher AI adoption → faster alpha decay) is broadly corroborated by practitioner observation; the specific numbers should be treated as preliminary estimates from a single methodological approach.
+
+---
+
+## 9. Production ML Trading Systems
+
+Building a model that works in backtest is distinct from running it in production. Production ML trading adds operational challenges absent from research.
+
+### 9.1 Point-in-time data infrastructure
+
+All the PIT concerns in §2.4 and §8.1 apply in production: the data pipeline must serve *current* values only, with no look-ahead. This requires:
+
+- **Database timestamps:** all fundamental and alternative data stored with "as-of" and "received-at" timestamps. The signal computation engine queries by as-of date, not by "current" value.
+- **Data vendor selection:** confirm whether the vendor provides PIT or restated data. This is non-trivial — many popular data products serve restated current values by default.
+- **Streaming alternatives:** for high-frequency signals, tick data arrives in real time; the PIT problem is less acute but data quality (dropped ticks, late or out-of-sequence messages) introduces a different class of noise.
+
+### 9.2 Model drift and alpha decay monitoring
+
+A deployed model degrades over time for two distinct reasons:
+
+1. **Concept drift (distributional shift):** the joint distribution of features and returns changes. A model trained pre-2020 may have learned that value stocks underperform (2017–2019 value drawdown period) and fail when value reverses (2022+). Monitoring for concept drift: track **information coefficient (IC)** — the rank correlation of model predictions to realized returns — on a rolling basis. IC decay signals model obsolescence.
+
+2. **Alpha decay from crowding:** as other participants learn the same signal (through academic publication, data vendor commoditization, or factor crowding), the expected return from the signal declines. Monitoring: track **prediction distribution drift** — if a model's score distribution across the universe becomes more compressed (everyone is being scored similarly), information content is declining.
+
+Standard practice: retrain models quarterly to monthly on an expanding window, with incremental learning updates between retraining cycles. Alert thresholds on rolling IC (e.g., trailing 20-day IC drops below historical 10th percentile) trigger review.
+
+### 9.3 Risk controls layered on ML signals
+
+ML signal outputs are *not* directly used as order quantities in production systems at serious shops. Typical pipeline:
+
+1. **Raw ML signal** → normalized score (cross-sectional z-score or rank).
+2. **Portfolio optimizer** applies factor constraints (limit exposure to market cap, sector, beta, vol), turnover constraints, and transaction cost estimates. Tools: quadratic programming (mean-variance optimization with constraints), Gurobi/CVXPY.
+3. **Pre-trade risk checks:** position limits, concentration limits, gross/net exposure caps.
+4. **Execution layer:** order generation from target weights → execution via TWAP/VWAP/RL execution (§7), routed through the OMS/EMS.
+5. **Post-trade monitoring:** attribution of realized PnL to signal vs execution vs risk factors.
+
+The layered architecture means a degraded ML signal does not cause unbounded loss — the optimizer's constraints and risk checks bound downside. The signal's IC decline shows up in PnL attribution before it becomes catastrophic.
+
+### 9.4 Vendor landscape for ML trading infrastructure
+
+As of 2026 (verified-as-of: 2026-06-21; market is fast-moving):
+
+- **Quantitative research platforms:** Quantopian (defunct; absorbed into Robinhood); QuantConnect (open-source backtesting + live brokerage connections); Numerai (crowdsourced ML factor model tournament); SigTech (institutional).
+- **Alternative data vendors:** Eagle Alpha, YipitData, Second Measure (transaction data); Orbital Insight, Ursa Space (satellite); Thinknum (web/job data); Quandl/Nasdaq Data Link.
+- **Execution / OMS / EMS:** FlexTrade, Fidessa, Charles River (OMS); Portware, Liquidnet, ITG (EMS). Most institutional ML shops connect to prime broker execution infrastructure.
+- **Cloud ML infrastructure:** AWS SageMaker, Google Vertex AI, Azure ML — all support the training/inference pipeline; latency-sensitive execution is typically on-prem or co-located.
+
+Custom infrastructure dominates at hedge fund level ($100M+ AUM); vendor platforms are common for smaller quantitative firms and family offices.
 
 ---
 
@@ -337,8 +418,7 @@ Both sections now live in **`references/ml-backtesting-pitfalls-and-production-s
 |---|---|---|
 | **Classical TA indicators** (RSI, MACD, moving averages, chart patterns) | Out of scope | `references/technical-analysis.md` |
 | **ML method depth** (derivations, statistical theory, cross-validation theory) | Market applications only | `da-analytical-methods` hub |
-| **Backtesting frameworks** (walk-forward, paper trading setup, framework mechanics) | Out of scope | `references/algorithmic-and-quant-trading.md` |
-| **Backtest integrity & production ML ops** (look-ahead taxonomy, PBO/HLZ, factor decay, PIT infra, IC/drift monitoring, risk layering) | Moved out of this file | `references/ml-backtesting-pitfalls-and-production-systems.md` |
+| **Backtesting frameworks** (walk-forward, paper trading setup, framework mechanics) | ML-specific pitfalls only | `references/algorithmic-and-quant-trading.md` |
 | **Execution algo benchmarks** (TWAP/VWAP/IS mechanics, full Almgren-Chriss) | RL layer only; benchmarks referenced | `references/market-microstructure-and-execution.md` |
 | **On-chain / DeFi ML** (on-chain data as ML features, MEV bots) | Out of scope | `references/defi-and-onchain-trading.md` |
 | **Options pricing ML** (vol surface fitting, neural options pricing) | Out of scope | `references/options-trading-and-strategies.md` |
@@ -386,3 +466,10 @@ Both sections now live in **`references/ml-backtesting-pitfalls-and-production-s
 
 [^19]: 10.3% IS improvement figure: from a 2024 synthesis review aggregating multiple deep RL execution papers. This aggregates across different baselines and methodology; not a result from a single controlled experiment. Treat as directional upper-bound estimate.
 
+[^20]: Survivorship bias estimate (1.5–2.0% annual return inflation): from Elton, Gruber & Blake (1996) mutual fund survivorship study and Eling (2009) hedge fund database survivorship analysis; the range is widely cited in practitioner backtesting literature.
+
+[^21]: Harvey, C.R., Liu, Y., & Zhu, H. (2016). "… And the Cross-Section of Expected Returns." *Review of Financial Studies*, 29(1), 5–68. The "316 factors" paper; t-statistic threshold recommendation. Open access at SSRN 2249314.
+
+[^22]: Bailey, D.H., Borwein, J., Lopez de Prado, M., & Zhu, Q.J. (2014). "Pseudo-Mathematics and Financial Charlatanism: The Effects of Backtest Overfitting on Out-of-Sample Performance." *Notices of the AMS*, 61(5). PBO methodology; also formalized in Lopez de Prado (2018) Ch. 11.
+
+[^23]: McLean, R.D., & Pontiff, J. (2016). "Does Academic Research Destroy Stock Return Predictability?" *Journal of Finance*, 71(1), 5–32. 97 factors, pre-/post-publication decay: 26% in-sample decay, 58% total out-of-sample decay. Core reference for factor-mining overfitting.

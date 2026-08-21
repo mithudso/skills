@@ -1,6 +1,6 @@
 <!-- hub-reference-banner -->
 > **Reference file — part of the `software-engineering-patterns` hub.** Formerly the standalone `coding-standards` skill.
-> Sibling topics in this family are now reference files under the hubs (`programming-languages`, `software-engineering-patterns`) — **not** standalone
+> Sibling topics in this family are now reference files under the hubs (`software-engineering-patterns`) — **not** standalone
 > skills. Ignore any "use the X skill" / `related_skills` / SKIP pointers below that name a bare sibling
 > skill; load that topic's `references/<name>.md` from the owning hub (see the hub's "Cross-hub map").
 
@@ -18,11 +18,9 @@ updated: "2026-05-29"
 category: developer
 tags: [coding-standards, naming, readability, immutability, error-handling, javascript, typescript]
 related_skills:
-  - coding-patterns
-  - code-reviewer
-  - frontend-design
-  - backend-patterns
-  - typescript-expert
+  - software-engineering-patterns
+  - frontend-ui
+  - lang-js-ts
 whenToUse:
   - enforcing naming conventions across a project
   - reviewing code for readability and maintainability
@@ -36,16 +34,15 @@ whenNotToUse:
   - design pattern selection for structural decisions (use coding-patterns)
   - domain-specific framework guidance when a narrower skill already exists
 ---
-
 # Coding Standards & Best Practices
 
-Baseline coding conventions applicable across JavaScript/TypeScript projects.
+Baseline conventions for JavaScript/TypeScript projects.
 
-**Scope:** This skill is the shared floor — naming, readability, immutability, error handling, and code-smell detection. It is not the framework playbook.
+**Scope:** Shared floor — naming, readability, immutability, error handling, code-smell detection. Not framework playbook.
 
-- Use `frontend-design` for React, state, forms, rendering, and UI architecture.
-- Use `backend-patterns` or `api-design-patterns` for repository/service layers, endpoint design, and server-specific concerns.
-- Use `coding-patterns` for structural design decisions (factory, observer, state machine, etc.).
+- `frontend-design` → React, state, forms, rendering, UI architecture.
+- `backend-patterns` or `api-design-patterns` → repo/service layers, endpoint design, server concerns.
+- `coding-patterns` → structural design decisions (factory, observer, state machine, etc.).
 
 ---
 
@@ -53,10 +50,10 @@ Baseline coding conventions applicable across JavaScript/TypeScript projects.
 
 | Principle | Rule |
 |-----------|------|
-| **Readability first** | Code is read more than written. Clear names and consistent formatting beat clever code. |
-| **KISS** | Use the simplest solution that works. Optimize only when you have evidence of a bottleneck. |
-| **DRY** | Extract logic used in 3+ places into a shared function. Avoid copy-paste programming. |
-| **YAGNI** | Don't build features before they're needed. Add complexity only when a second concrete case requires it. |
+| **Readability first** | Code read more than written. Clear names + consistent formatting beat clever code. |
+| **KISS** | Simplest solution that works. Optimize only with bottleneck evidence. |
+| **DRY** | Extract logic used 3+ places into shared function. No copy-paste. |
+| **YAGNI** | Don't build features before needed. Add complexity only when second concrete case requires it. |
 
 ---
 
@@ -176,7 +173,7 @@ function getMarket(id: any): Promise<any> { /* ... */ }
 
 ## Comments
 
-Comment *why*, not *what*. The code states what; the comment explains the non-obvious reasoning.
+Comment *why*, not *what*. Code states what; comment explains non-obvious reasoning.
 
 ```typescript
 // GOOD: Explains non-obvious reasoning
@@ -206,7 +203,7 @@ export async function searchMarkets(query: string, limit = 10): Promise<Market[]
 ## Code Smell Detection
 
 ### Long functions
-Split functions over ~50 lines into focused sub-functions. Each function should do one thing.
+Split functions over ~50 lines into focused sub-functions. One thing per function.
 
 ```typescript
 // BAD: 100-line monolith
@@ -280,7 +277,7 @@ test('calculates similarity correctly', () => {
 ```
 
 ### Test naming
-Name tests as behavioral specifications.
+Name tests as behavioral specs.
 
 ```typescript
 // GOOD
@@ -310,4 +307,4 @@ File naming: `Button.tsx` (PascalCase for components), `useAuth.ts` (camelCase w
 
 ---
 
-> Code quality is not optional. Clear, maintainable code is what enables fast, confident refactoring.
+> Code quality not optional. Clear, maintainable code enables fast, confident refactoring.

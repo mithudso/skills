@@ -6,7 +6,7 @@
 
 ## What the advisory track is (and is not)
 
-The fix-track (the 16 passes) finds **objective defects** that can be applied in place, verified by
+The fix-track (the 18 passes) finds **objective defects** that can be applied in place, verified by
 the build/lint/test gate, and converged to zero. Some valuable review output is not that shape —
 *new features, better architecture, tooling you don't have yet*. Those are **recommendations**, not
 fixes:

@@ -75,7 +75,7 @@ related_skills:
   - mongodb-aggregation-stages-deep
 ---
 
-# MongoDB Schema Design -- Comprehensive Expert Reference
+# MongoDB Schema Design -- Expert Reference
 
 ## Overview
 
@@ -288,7 +288,7 @@ MongoDB recognizes 12+ design patterns that address common data modeling challen
   }
 }
 
-// On new review, use $inc and recalculate average
+// On new review, increment counters with $inc; recompute averageRating from totals in a separate step
 db.products.updateOne(
   { _id: ObjectId("p1") },
   {
@@ -970,7 +970,7 @@ Use this checklist when reviewing or designing a MongoDB schema:
 2. **Embedding vs. referencing justified?** Each relationship should have a documented reason for the chosen approach.
 3. **Arrays bounded?** No array should grow without an application-enforced limit. Use the Outlier or Bucket Pattern for exceptions.
 4. **Document size estimated?** Calculate worst-case document size and ensure it stays well under 16 MB.
-5. **Working set fits in RAM?** The most-queried data should fit in the WiredTiger cache (50% of RAM minus 1 GB by default).
+5. **Working set fits in RAM?** The most-queried data should fit in the WiredTiger cache (50% of (RAM minus 1 GB) by default).
 6. **Indexes aligned to queries?** Every frequent query should be covered by an index. Use `explain()` to verify.
 7. **Schema validation applied?** $jsonSchema rules enforce data integrity at the database level.
 8. **Schema versioning planned?** If the schema will evolve, include a `schemaVersion` field from day one.

@@ -309,7 +309,7 @@ NumberLong(9007199254740993)  // Use Long for values > Number.MAX_SAFE_INTEGER
 // JavaScript numbers lose precision for integers > 2^53
 // Always use Long/BigInt for large MongoDB int64 values in Node.js
 const { Long } = require('bson');
-Long.fromNumber(9007199254740993)  // safe
+Long.fromString("9007199254740993")  // safe — pass as string; fromNumber(9007199254740993) truncates before it runs
 ```
 
 ### Monetary Data Best Practice

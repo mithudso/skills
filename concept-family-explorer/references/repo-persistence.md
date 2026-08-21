@@ -51,21 +51,24 @@ there.
    and re-verify. (The live tree already contains an anonymous node with no
    concept name — unswept integrity defects are real, and an unlinked child is
    invisible to every future parent-down inventory.)
-5. **Sync once, verify it stuck.** After ALL skills are persisted,
-   batch-canonicalize ONCE: `node scripts/persist-spoke.mjs <last-id> --hub
-   <hub> --sync` (or `npm run sync:skills`) — the batch form dr.md Phase 3
-   step 3 addresses to concept-family-explorer by name; per-skill `--sync` is
-   wasteful in a batch. Confirm each id survives (`grep` the id in
-   `skills/registry.json`, confirm `skills/contexts/<id>.md` regenerated).
-   Missing post-sync ⇒ not pinned — re-run step 2 and re-sync.
-6. **Repair referents.** If this run routed a topic into a hub or
-   created/folded a spoke, run
+5. **Sync once, verify it stuck — AT STEP 9c, not here.** Steps 1–4 run per
+   skill as its agent returns; this step and steps 6–7 are deferred to
+   SKILL.md Step 9c (after the Step 9b rebalance, which can re-file skills) and
+   run ONCE per run. The sync itself: batch-canonicalize with
+   `node scripts/persist-spoke.mjs <last-id> --hub <hub> --sync` (or
+   `npm run sync:skills`) — the batch form dr.md Phase 3 step 3 addresses to
+   concept-family-explorer by name; per-skill `--sync` is wasteful in a batch.
+   Confirm each id survives (`grep` the id in `skills/registry.json`, confirm
+   `skills/contexts/<id>.md` regenerated). Missing post-sync ⇒ not pinned —
+   re-run step 2 and re-sync.
+6. **Repair referents (at Step 9c, with step 5).** If this run routed a topic
+   into a hub or created/folded a spoke, run
    `node ~/.claude/skill-consolidation/referents.mjs --repair` (dry-run first
    to inspect, then `--apply`). Skip for standalone-only runs.
-7. **Workflow log.** Follow the repo rule for the resulting repo change:
-   append `prompts.md`, update `memory.md`, bump the patch version in
-   `package.json` / `package-lock.json` / `mcp-server/src/constants.ts`; note
-   that `sync:skills` ran.
+7. **Workflow log (at Step 9c, with step 5).** Follow the repo rule for the
+   resulting repo change: append `prompts.md`, update `memory.md`, bump the
+   patch version in `package.json` / `package-lock.json` /
+   `mcp-server/src/constants.ts`; note that `sync:skills` ran.
 
 Checkpoint: set the concept's `persisted: true` in
 `~/.claude/skill-consolidation/run-state/cfe-<subject-slug>.json` only after

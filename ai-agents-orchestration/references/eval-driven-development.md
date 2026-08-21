@@ -11,34 +11,26 @@ name: eval-driven-development
 title: Eval-Driven Development for LLM Apps
 description: >
   The BUILD-TIME discipline of evaluating LLM/agent applications — the
-  analyze→measure→improve loop with **error analysis as the engine**, distinct
-  from runtime production monitoring (llm-observability) and academic benchmark
-  leaderboards (da-7). Covers eval-driven development as a practice (Hamel Husain's
-  "your AI product needs evals", 60-80% of effort on error analysis; the analyze→
-  measure→improve loop; "evaluators for errors you discover, not imagine"); the
-  Three Gulfs (Specification / Generalization / Comprehension); error analysis &
-  qualitative coding (open/axial coding of traces, the SME "benevolent dictator");
-  criteria drift & "Who Validates the Validators?" (Shankar UIST 2024, EvalGen /
-  SPADE assertion synthesis); eval levels (code/assertion vs LLM-as-judge vs human;
-  offline dev-time vs online feedback flywheel); LLM-as-judge depth (position /
-  verbosity / self-preference bias, calibration vs human labels via Cohen's kappa /
-  Krippendorff's alpha / TPR-TNR, binary-beats-Likert, pairwise vs pointwise);
-  golden datasets & synthetic eval-data (silver→gold, 50-100 curated inputs);
-  metric design (assertions, rubric scoring, pairwise/Elo, pass@k vs pass^k,
-  faithfulness/groundedness); CI/CD eval gating & regression suites; agent/
-  trajectory evaluation (tool-call correctness, earliest-critical-decision); and
-  the tooling landscape (promptfoo, DeepEval, Ragas, LangSmith, OpenAI Evals,
-  Inspect/AISI, Arize Phoenix, Langfuse, Braintrust). TRIGGER: "evals for my LLM
-  app", eval-driven development, error analysis, LLM-as-judge design/calibration/
-  bias, golden dataset / synthetic eval data, rubric vs binary scoring, pass@k vs
-  pass^k, eval-gated CI / regression suite, agent/trajectory eval, choosing an
-  eval tool (promptfoo/DeepEval/Ragas/Braintrust/LangSmith). SKIP: production
-  runtime tracing / live monitoring / OTel dashboards (use llm-observability — EDD
-  only owns the feedback flywheel into the dataset); academic leaderboard harnesses
-  HELM/MMLU/LLM-as-judge-benchmarking (use da-analytical-methods ▸
-  da-7-machine-learning); prompt-optimization algorithms that consume eval signals
-  (use prompt-deep-optimizer / prompt-helper-optimizer); RAG-specific retrieval
-  eval depth (use advanced-rag-patterns).
+  analyze→measure→improve loop with error analysis as the engine, distinct from
+  runtime monitoring and academic leaderboards. Covers eval-driven development as
+  a practice (error analysis is 60-80% of effort; "evaluators for errors you
+  discover, not imagine"); the Three Gulfs (Specification/Generalization/
+  Comprehension); error analysis & qualitative coding of traces; criteria drift &
+  "Who Validates the Validators?"; eval levels (code/assertion vs LLM-as-judge vs
+  human; offline vs online feedback flywheel); LLM-as-judge depth (position/
+  verbosity/self-preference bias, calibration via Cohen's kappa/Krippendorff's
+  alpha, binary-beats-Likert, pairwise vs pointwise); golden & synthetic datasets;
+  metric design (rubric, Elo, pass@k vs pass^k, faithfulness/groundedness); CI/CD
+  eval gating; agent/trajectory eval; tooling (promptfoo,
+  DeepEval, Ragas, LangSmith, Inspect, Phoenix, Langfuse, Braintrust). TRIGGER:
+  evals for my LLM app, error analysis, LLM-as-judge design/calibration/bias,
+  golden/synthetic eval data, rubric vs binary scoring, pass@k vs pass^k,
+  eval-gated CI/regression suite, agent/trajectory eval, choosing an eval tool.
+  SKIP: production runtime tracing / live monitoring / OTel dashboards (use
+  llm-observability); academic leaderboard harnesses HELM/MMLU (use
+  da-analytical-methods); prompt-optimization algorithms that consume eval signals
+  (use prompt-deep-optimizer); RAG-specific retrieval eval depth (use
+  advanced-rag-patterns).
 origin: local
 category: developer
 version: "1.0"
@@ -175,7 +167,7 @@ widen coverage. Always validate synthetic data against human judgment.
 - **Agent/trajectory eval:** beyond final-answer correctness — tool-call
   correctness (right tool, right args), step ordering, plan quality, multi-step
   success; find the *earliest critical decision* that triggered a failure cascade.
-  pass^k is especially relevant. (Coding-agent eval depth → coding-agents; agent
+  pass^k is especially relevant. (Coding-agent eval depth → ai-agents-orchestration (references/coding-agents.md); agent
   harness → `ai-agents-orchestration` (references/agent-harness-construction.md).)
 
 ## Tooling landscape

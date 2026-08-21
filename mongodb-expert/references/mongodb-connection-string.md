@@ -408,7 +408,8 @@ Read preference determines which cluster members the driver routes read operatio
 | `secondary` | Always reads from a secondary | Offload read traffic from primary |
 | `secondaryPreferred` | Secondary if available; primary if no secondary | Analytics, reporting; tolerates stale data |
 | `nearest` | Lowest network latency member (any role) | Globally distributed reads; geographically local data |
-| `analytics` | Analytics nodes only (Atlas) | Dedicated Analytics Node (DAN) reads |
+
+> **Note:** There is no `analytics` read-preference *mode*. Atlas Analytics Nodes are targeted with `readPreference=secondary` plus `readPreferenceTags=nodeType:ANALYTICS` (see §5.3).
 
 ### 5.3 Tag Sets
 
@@ -827,7 +828,7 @@ mongodb://host/db?uuidRepresentation=standard
 | `serverMonitoringMode` | `auto` | Timeout | `stream` (push-based), `poll` (request-based), `auto` (driver chooses) |
 | `socketTimeoutMS` | none | Timeout | **Deprecated** — use `timeoutMS` |
 | `timeoutMS` | unset | CSOT | Single operation deadline (experimental) |
-| `readPreference` | `primary` | ReadPref | primary, primaryPreferred, secondary, secondaryPreferred, nearest, analytics |
+| `readPreference` | `primary` | ReadPref | primary, primaryPreferred, secondary, secondaryPreferred, nearest (Analytics Nodes via `readPreferenceTags`, not a mode) |
 | `readPreferenceTags` | — | ReadPref | `key:value` tag filter (multiple allowed) |
 | `maxStalenessSeconds` | no limit | ReadPref | Min: 90s; secondary only |
 | `hedgedReads` | `false` | ReadPref | Atlas only |

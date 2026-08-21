@@ -49,10 +49,8 @@ triggers:
   - /tam-report
 related_skills:
   - tam-operations
-  - customer-file-consolidator
   - document-critique
   - content-ingestion-extraction
-  - operator-report-generator
 ---
 
 # TAM Account Reports

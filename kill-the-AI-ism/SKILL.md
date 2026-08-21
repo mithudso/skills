@@ -50,7 +50,6 @@ whenToUse:
   - user has an AI-generated draft that needs voice normalization before use
   - user asks to clean up generator artifacts (voice scope — not full structural critique)
 related_skills:
-  - writing-expert
   - document-critique
 ---
 

@@ -1,10 +1,9 @@
 ---
 # provenance: built by /dr 2026-06-21 — do NOT hand-edit the frontmatter block
-# 2026-08-04: frontmatter edited under an explicit split instruction (size-cap remediation); see changelog
 name: defi-and-onchain-trading
 hub: trading-and-investing
-version: "1.1.0"
-updated: "2026-08-04"
+version: "1.0.0"
+updated: "2026-06-21"
 verified-as-of: "2026-06-21"
 category: reference
 description: >-
@@ -14,9 +13,8 @@ description: >-
   how to defend against them (private mempools, slippage tolerance, intent
   protocols), intent-based order flow (CoW Protocol, UniswapX, 1inch Fusion),
   perpetual DEXs (GMX, dYdX, Hyperliquid) vs CEX perps, cross-chain bridges
-  (mechanics, risk tiers, selection). Self-custody wallets and key security
-  (MetaMask, Rabby, Ledger, Trezor, seed and token-approval hygiene, ERC-4337)
-  now live in self-custody-wallets-and-key-security.md. Educational only — NOT financial advice.
+  (mechanics, risk tiers, selection), and self-custody wallets (MetaMask, Rabby,
+  Ledger, Trezor, account abstraction). Educational only — NOT financial advice.
 keywords:
   - DeFi
   - decentralized exchange
@@ -34,10 +32,8 @@ keywords:
   - dYdX
   - Hyperliquid
   - cross-chain bridge
+  - self-custody wallet
   - on-chain trading
-metadata:
-  changelog:
-    - "2026-08-04 v1.0.0->v1.1.0 SPLIT (was ~10,734 est. tokens, 1.07x over the ~10k cap) — §10 Self-Custody Wallets moved verbatim to references/self-custody-wallets-and-key-security.md, keeping its §10 numbering and footnotes ^29-^34. Pointer table left at the §10 slot; `self-custody wallet` keyword and `wallets` tag moved to the new file. Nothing condensed or deleted."
 tags:
   - defi
   - trading-and-investing
@@ -45,6 +41,7 @@ tags:
   - dex
   - mev
   - bridges
+  - wallets
   - perp-dex
   - intent-trading
 ---
@@ -64,7 +61,7 @@ tags:
 7. [Intent-Based Order Flow (CoW Protocol, UniswapX, 1inch Fusion)](#7-intent-based-order-flow-cow-protocol-uniswapx-1inch-fusion)
 8. [Perpetual DEXs: GMX, dYdX, Hyperliquid](#8-perpetual-dexs-gmx-dydx-hyperliquid)
 9. [Cross-Chain Bridges](#9-cross-chain-bridges)
-10. [Self-Custody Wallets — moved](#10-self-custody-wallets--see-the-dedicated-reference)
+10. [Self-Custody Wallets](#10-self-custody-wallets)
 11. [References](#references)
 
 ---
@@ -542,23 +539,88 @@ Bridge hacks have accounted for **over 69% of funds stolen in DeFi since 2022** 
 
 ---
 
-## 10. Self-Custody Wallets — see the dedicated reference
+## 10. Self-Custody Wallets
 
-The wallet and key-custody material now lives in **`references/self-custody-wallets-and-key-security.md`**, keeping its §10 numbering and footnote labels. Everything in this file assumes you already hold your own keys; that reference is where the holding is covered.
+### Hot Wallets: MetaMask and Rabby
 
-| What is there | Which claim here it supports |
-|---|---|
-| Hot wallets — MetaMask vs Rabby, BIP-39 seed derivation, pre-transaction simulation | §1 "user holds assets in own wallet" — the mechanism that makes a DEX non-custodial |
-| Hardware wallets — Ledger Secure Element vs Trezor open source, blind-signing risk | §6 and §9 — you approve MEV-protected swaps and bridge transactions from these devices |
-| Seed-phrase practice, metal backup, phishing | The seed-phrase risk named in Cross-Cutting Notes below |
-| Token-approval management and revocation (Revoke.cash) | §9 — protocol and bridge approvals persist indefinitely after you stop using a protocol |
-| Safe multisig and ERC-4337 account abstraction (paymasters, batching, social recovery) | §7 gas abstraction — intent protocols and AA solve overlapping UX problems |
+Both are browser-extension hot wallets. "Hot" means the private key is accessible to the browser environment — convenient, but security is only as strong as the machine and browser.[^29][^30]
+
+**Shared mechanics:**
+- Non-custodial: only you hold keys; neither provider can recover your funds.
+- BIP-39 seed phrase (12 or 24 words) derives all private keys for all accounts.
+- Multi-account support: multiple accounts from one seed, or separate seeds.
+
+**MetaMask:**
+- Most widely supported by DeFi protocols and dApps.
+- Largest install base → largest phishing target.
+- Manual network switching (improved in recent versions).
+
+**Rabby (by DeBank):**
+- **Pre-transaction simulation:** shows token flows and expected outputs before you sign; flags suspicious contract interactions.
+- **Automatic network detection:** switches to the chain the dApp requires without prompting.
+- Cross-chain portfolio view across all EVM chains.
+- Same key-security model as MetaMask — seed phrase security is equally critical.
+
+### Hardware Wallets: Ledger and Trezor
+
+Hardware wallets store private keys on a dedicated offline device. The key never leaves the device; signing happens on the device, and only the signed transaction is transmitted to the internet.[^31][^32]
+
+**How they connect to DeFi:** Link via USB/Bluetooth to MetaMask or Rabby as a hardware signer. The software wallet handles UI and transaction construction; the hardware wallet handles the signature with physical button confirmation.
+
+**Ledger:**
+- Uses a **Secure Element chip** (same hardware as passports/credit cards) for key isolation.
+- Wide DeFi dApp support via MetaMask connection.
+- *Controversy (`verified-as-of: 2026-06-21`):* Ledger's 2023 "Ledger Recover" opt-in seed backup service demonstrated that firmware can theoretically export seed shards — debated by security researchers. The 2020 customer data breach exposed email/shipping data (not keys).
+
+**Trezor:**
+- No Secure Element chip — uses open-source firmware on a general microcontroller.
+- Fully auditable open-source code; independently reviewed.
+- Physical attack surface: if stolen and PIN is weak, keys could theoretically be extracted (mitigated by strong PIN + passphrase).
+
+**DeFi limitations of hardware wallets:**
+- Each transaction requires physical button confirmation — slow for active DeFi.
+- **Blind signing risk:** complex DeFi calldata may display as unreadable hex on the device screen. You may confirm opaque data rather than human-readable parameters. Both vendors have improved this; it remains a practical limitation.
+
+### Wallet Security Practices
+
+**Seed phrase (non-negotiable):**
+- Write offline only. Never photograph, type into any app, or store in cloud storage.
+- **Metal backup** (Cryptosteel, etc.) survives fire and water. Paper does not. For any significant funds, metal backup is standard practice.
+- The seed phrase *is* the wallet. Anyone with it owns your funds with no recourse.
+
+**Phishing:**
+- Fake wallet support, Discord DMs, and phishing sites are constant threats.
+- Never enter your seed phrase on any website or app.
+- Rabby's pre-signing simulation helps detect suspicious contract interactions but cannot protect you if you hand over the seed phrase.
+
+**Token approval management:**
+- Every DeFi interaction granting a contract permission to spend your tokens creates an **approval** that persists indefinitely.
+- Each active approval is an attack surface: a protocol you approved months ago still has permission if later exploited.
+- **Revoke.cash** — connect wallet, view all active approvals, revoke unnecessary ones. Use monthly if actively using DeFi.
+- Best practice: revoke approvals immediately after finishing with a protocol.
+
+**Wallet isolation:**
+- Use a separate "hot" wallet address with minimal funds for new or experimental protocols. Keep main holdings in a hardware wallet or separate address.
+
+### Smart Contract Wallets and Account Abstraction
+
+**Safe (Gnosis Safe) — multisig:**[^33]
+Safe holds over $100B in assets and requires M-of-N signatures before any transaction executes. A common retail setup: 2-of-2 (hardware wallet key + hot wallet key required). No single compromised key can drain the wallet.
+
+**ERC-4337 Account Abstraction:**[^34]
+ERC-4337 replaces externally-owned accounts (EOAs) — where a private key directly controls funds — with a smart contract as the account. Key benefits:
+- **Gasless transactions:** a "paymaster" pays gas on the user's behalf.
+- **Batch transactions:** approve + swap in one transaction.
+- **Social recovery:** trusted "guardians" can collectively authorize key replacement.
+- **Passkeys:** sign via Face ID / fingerprint instead of a seed phrase.
+
+**Status (`verified-as-of: 2026-06-21`):** AA wallets are in wide deployment (Coinbase Smart Wallet, Argent, Braavos on Starknet) but the primary DeFi interfaces (MetaMask, Rabby, hardware wallets + EOA) remain EOA-dominant. AA wallets introduce smart contract risk — the wallet itself is a contract that can be exploited.
 
 ---
 
 ## Cross-Cutting Notes
 
-**The DeFi onboarding stack:** CEX or fiat on-ramp → self-custody wallet (`references/self-custody-wallets-and-key-security.md`) → bridge to L2 → DEX swap or LP. Each step has distinct risk: exchange counterparty risk at the on-ramp, seed phrase risk in the wallet, bridge smart contract risk in transit, and protocol/IL risk in the pool. Compartmentalize each step.
+**The DeFi onboarding stack:** CEX or fiat on-ramp → self-custody wallet → bridge to L2 → DEX swap or LP. Each step has distinct risk: exchange counterparty risk at the on-ramp, seed phrase risk in the wallet, bridge smart contract risk in transit, and protocol/IL risk in the pool. Compartmentalize each step.
 
 **L2 vs L1 for DeFi:** Ethereum mainnet gas costs ($5–$50+/swap) make small DeFi trades impractical on L1. Most retail DeFi activity has migrated to L2s (Arbitrum, Base, Optimism). Same protocols, same AMM math, ~100× cheaper gas. Use a bridge (see §9) to move assets from L1 to L2.
 
@@ -626,3 +688,14 @@ The wallet and key-custody material now lives in **`references/self-custody-wall
 
 [^28]: Google Cloud / Mandiant. "Dissecting the Nomad Bridge Hack." https://cloud.google.com/blog/topics/threat-intelligence/dissecting-nomad-bridge-hack — Technical root cause of the $190M Nomad exploit.
 
+[^29]: Tools4Crypto. "MetaMask vs Rabby 2026." https://www.tools4crypto.com/blog/metamask-vs-rabby-wallet-comparison — Feature and security comparison; pre-signing simulation analysis.
+
+[^30]: KuCoin. "Difference Between Rabby vs MetaMask." https://www.kucoin.com/knowledge-base/Review/what-is-the-difference-between-rabby-vs-metamask — Independent comparison of wallet UX and security models.
+
+[^31]: Ledger. "Ledger vs Trezor 2026." Ledger Academy. https://www.ledger.com/academy/topics/ledgersolutions/ledger-vs-trezor-2026-which-hardware-wallet-is-safer-ultimate-comparison — Ledger's own comparison (note: vendor source); Secure Element architecture.
+
+[^32]: CoinNews. "Trezor vs Ledger 2026." https://coinnews.com/best-crypto-wallets/trezor-vs-ledger/ — Independent hardware wallet comparison; open-source vs Secure Element trade-off analysis.
+
+[^33]: Safe. "Safe Documentation." https://docs.safe.global/ — Multisig architecture, M-of-N setup, ERC-4337 compatibility, total assets secured.
+
+[^34]: Eco. "What Is ERC-4337? Account Abstraction Explained 2026." https://eco.com/support/en/articles/15254036-what-is-erc-4337-account-abstraction-explained-2026 — Account abstraction mechanics: gasless transactions, social recovery, passkeys, paymaster model.

@@ -547,7 +547,7 @@ async function withRetry(fn, maxRetries = 3, baseDelay = 100) {
 | 91 | ShutdownInProgress | Cluster node draining | Retry on healthy node |
 | 112 | WriteConflict | WiredTiger write conflict | Retry the operation or transaction |
 | 211 | KeyNotFound | Missing expected key | Usually internal — check for data corruption |
-| 251 | TransactionExceededLifeTimeLimit | Transaction >60s default | Break into smaller transactions |
+| 290 | TransactionExceededLifetimeLimitSeconds | Transaction >60s default | Break into smaller transactions |
 | 10107 | NotWritablePrimary | Write to secondary | Driver re-selects primary automatically |
 | 13435 | NotPrimaryNoSecondaryOk | Read from non-primary with primary preference | Check readPreference |
 | 16500 | TooManyRequests (Atlas) | Rate-limited in serverless | Implement backoff or reduce request rate |

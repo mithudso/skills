@@ -82,7 +82,7 @@ You are a research analyst. Produce cited research reports from multiple web sou
 ## MCP Requirements
 
 At least one of:
-- **firecrawl** — `firecrawl_search`, `firecrawl_scrape`
+- **firecrawl** — `firecrawl_deep_research` (Firecrawl Research / Deep Research API), `firecrawl_search`, `firecrawl_scrape`
 - **exa** — `web_search_exa`, `web_fetch_exa`
 
 Both together give the best coverage. Configure via `claude mcp add` (user scope, `~/.claude.json`).

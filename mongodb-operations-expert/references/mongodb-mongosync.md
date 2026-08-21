@@ -121,7 +121,7 @@ Health check: poll `/progress` — if it returns state `RUNNING` and `lagTimeSec
 
 ### Load Level (Tunable Throughput)
 
-The `loadLevel` configuration setting controls how aggressively mongosync uses source and destination cluster resources. Values: `1` (lowest) to `10` (highest). Default for self-managed deployments is `5`. For Atlas-managed migrations via Atlas Live Migration service, resource usage is tuned automatically; for standalone mongosync pointed at Atlas clusters, you set `loadLevel` explicitly.
+The `loadLevel` configuration setting controls how aggressively mongosync uses source and destination cluster resources. Values: `1` (lowest) to `4` (highest). Default is `3`; setting it higher may negatively impact destination-cluster performance (see `references/mongosync.md` for the same tuning knob). For Atlas-managed migrations via Atlas Live Migration service, resource usage is tuned automatically; for standalone mongosync pointed at Atlas clusters, you set `loadLevel` explicitly.
 
 ```yaml
 # mongosync.conf
@@ -129,7 +129,7 @@ cluster0:
   connectionString: "..."
 cluster1:
   connectionString: "..."
-loadLevel: 5
+loadLevel: 3
 logPath: /var/log/mongosync.log
 ```
 

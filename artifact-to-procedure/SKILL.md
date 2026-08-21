@@ -8,11 +8,12 @@ description: >-
   completed work implying future reuse, not just documentation or summary. SKIP: building a
   new skill from scratch with no completed artifact → skill-creator; saving personal session
   notes for continuity → remember; documenting an API, codebase, or project structure →
-  technical-writing-craft.
+  technical-writing-craft; distilling a doc into a deduped reference list of facts/concepts,
+  not a reusable method → document-distiller.
 model: claude-opus-4-8
 effort: high
-version: 1.1.0
-updated: 2026-06-23
+version: 1.1.1
+updated: 2026-07-04
 ---
 
 # Artifact-to-Procedure Extraction

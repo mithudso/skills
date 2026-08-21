@@ -18,7 +18,7 @@ version: 1.0.0
 # MongoDB Aggregation Stages — Deep Reference
 
 This skill is the deep-dive companion to `mongodb-aggregation-pipeline`. It
-covers the high-leverage stages where most aggregation bugs and performance
+covers the highest-impact stages where most aggregation bugs and performance
 problems hide: cross-collection joins, recursive graph traversal, parallel
 facets, materialized-view writes, window functions, and time-series gap
 filling. Each section gives syntax, index/memory requirements, working
@@ -34,7 +34,7 @@ Coverage map:
 | `$facet`                    | Parallel sub-pipelines over the same input             | 3.4             |
 | `$bucket` / `$bucketAuto`   | Explicit / automatic histogram bucketing               | 3.4             |
 | `$merge`                    | Insert / update / upsert into any collection           | 4.2             |
-| `$out`                      | Replace a target collection wholesale                  | 2.6 (sharded target 4.4) |
+| `$out`                      | Replace a target collection wholesale                  | 2.6 (cannot target a sharded collection) |
 | `$setWindowFields`          | SQL-style window functions over partitions             | 5.0             |
 | `$densify`                  | Insert synthetic documents to close numeric/time gaps  | 5.1             |
 | `$fill`                     | Populate null/missing values (constant, linear, LOCF)  | 5.3             |
@@ -402,8 +402,8 @@ sub-pipeline's array of result documents.
 - **No `$facet` nesting**: you cannot put a `$facet` stage inside another
   `$facet`.
 - **Disallowed sub-stages**: `$out`, `$merge`, `$collStats`, `$indexStats`,
-  `$facet` (no nesting), `$geoNear`, and `$changeStream` cannot appear
-  inside a `$facet` branch.
+  `$planCacheStats`, `$facet` (no nesting), `$geoNear`, `$search`,
+  `$searchMeta`, and `$vectorSearch` cannot appear inside a `$facet` branch.
 - **Memory limit per branch**: each branch is independent and subject to
   its own 100 MB / `allowDiskUse` ceiling.
 
@@ -595,8 +595,9 @@ Semantics:
 - Preserves indexes on the target collection if it already exists (MongoDB
   re-creates the same indexes after the replacement).
 - Fails if the target is the source collection.
-- Sharded target collections are supported from MongoDB 4.4 onward; on
-  older releases the stage fails when the target is sharded.
+- **Cannot output to a sharded collection** (on any version). The input/source
+  collection may be sharded, but the `$out` target must be unsharded — use
+  `$merge` to write into a sharded collection.
 - Does not allow you to write conditionally — every run is an unconditional
   overwrite.
 
@@ -701,8 +702,9 @@ where you process only the delta.
   client reading the source mid-merge sees a mix. Wrap downstream
   consumers around a "last refresh at" marker.
 - **Sharding**: `$merge` is supported into sharded targets; the `on` key
-  must include the shard key (or be the shard key). `$out` into a sharded
-  collection requires 5.0+ and specific restrictions.
+  must include the shard key (or be the shard key). `$out` cannot target a
+  sharded collection on any version — use `$merge` when the destination is
+  sharded.
 
 ---
 
@@ -1070,8 +1072,7 @@ db.suppliers.aggregate([
 - All collections involved must be in the same database.
 - The combined stream of documents may have heterogeneous shapes. Project
   to a common shape before grouping or merging.
-- `$unionWith` cannot appear inside `$lookup`, `$facet`, `$transaction`,
-  or as the first stage of a view definition.
+- `$unionWith` cannot be used inside a multi-document transaction.
 - Disallowed stages inside the inner `pipeline`: `$out`, `$merge`.
 - Each collection scan inside `$unionWith` is independent — index it
   appropriately if you push down a `$match`.
@@ -1337,8 +1338,8 @@ db.telemetry.aggregate([
 - **`$merge` into the source collection** — risk of infinite loops if
   the merge changes document size or shard key. Write to a separate
   collection.
-- **`$out` to a sharded target on pre-4.4 deployments** — unsupported;
-  upgrade first or `$merge` into the sharded target instead.
+- **`$out` to a sharded target** — unsupported on any version; `$out` cannot
+  write to a sharded collection. Use `$merge` when the destination is sharded.
 - **`$setWindowFields` over one giant partition** — single-partition
   window over millions of documents will spill. Add a `partitionBy` key
   or split by tenant / day.

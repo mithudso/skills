@@ -79,7 +79,7 @@ this file keeps only the design-specific calibration.
 - **A single narrow question** answerable by one spoke ("what's a good font pairing?",
   "compute this contrast ratio") → that spoke directly (`ui-ux-pro-max`,
   `computational-aesthetics-ui-metrics`). The 11-pass loop is overkill for one lookup.
-- **Prose or documentation** → `document-critique` / `ddo`.
+- **Prose or documentation** → document-critique / `ddo`.
 - **Code logic / security / performance** → `code-deep-optimizer` (it composes: cdo for the code,
   deso for the rendered design).
 - **Aesthetic critique of a photograph or AI-generated image** → out of scope (this skill is tuned

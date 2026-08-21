@@ -23,7 +23,7 @@
 
 The MongoDB Database Tools are a suite of command-line utilities for importing, exporting, diagnosing, and managing data in MongoDB deployments. Since MongoDB 4.4 they ship as an independent package (`mongodb-database-tools`) with their own versioning (starting at `100.0.0`), separate from both the MongoDB Server and `mongosh`.
 
-**Current stable version:** 100.15.0  
+**Current stable version:** 100.15.0
 **Server compatibility:** MongoDB 4.2 through 8.0
 
 ### Tools in this skill
@@ -139,7 +139,7 @@ dump/
 └── oplog.bson                  # Only present with --oplog
 ```
 
-With `--gzip`: all files gain `.gz` suffix.  
+With `--gzip`: all files gain `.gz` suffix.
 With `--archive`: a single opaque binary file (no directory structure).
 
 ### --oplog Point-in-Time Behavior
@@ -627,7 +627,7 @@ Same as other tools: `--uri`, `--host`, `--port`, `--username`, `--password`, `-
 | `netIn` | Network bytes received |
 | `netOut` | Network bytes sent |
 | `conn` | Total open connections |
-| `repl` | Replication state (PRI, SEC, ARB, RTR, SLV, UNK, STL) |
+| `repl` | Replication state (PRI, SEC, REC, UNK, RTR, ARB) |
 
 ### Interpreting WiredTiger Cache Metrics
 

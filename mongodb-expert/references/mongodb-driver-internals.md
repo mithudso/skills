@@ -222,7 +222,6 @@ Python equivalent uses `pymongo.monitoring.register(PoolListener())`; Java uses 
 
 Full event list:
 
-
 | Event | When emitted |
 |-------|--------------|
 | `PoolCreatedEvent` | Pool instantiated |
@@ -1107,6 +1106,28 @@ Defaults below are for modern (4.x+) drivers in the Node.js, Python, Java, Go, a
 | `waitQueueTimeoutMS` | 0 | Pool checkout wait. Deprecated for `timeoutMS`. |
 | `wtimeoutMS` | unset | Server-side write concern timeout. Deprecated for `timeoutMS`. |
 | `zlibCompressionLevel` | unset | 1–9 if using zlib. |
+
+## 17. Java driver 5.x version timeline & 8.0 compatibility (verified-as-of: 2026-07-14)
+
+<!-- appended by /dr deep-research 2026-07-14 · gap-fill: driver version recency for upgrade-regression triage -->
+
+Release timeline (mongodb-driver-sync; dates from GitHub releases / community announcements):
+
+| Version | Released | Perf-relevant notes |
+|---|---|---|
+| 5.4.0 | ~Jan 2025 (forum announcement) | — |
+| 5.5.0 | ~Apr 2025 (forum announcement) | — |
+| 5.6.0 | 2025 | `CommandCursorResult.results` cleared after `next()`/`tryNext()` (memory); cluster topology events added; `MongoStalePrimaryException` added |
+| 5.6.4 | **2026-02-23** | patch on 5.6 line |
+| 5.7.0 | 2026 | **"Restores the optimized codec path for `RawBsonDocument` encoding, fixing a performance regression"** (i.e. 5.6.x carried a codec perf regression); "Reuses `ConnectionSource` to avoid extra server selection"; stack-safe async loops; Netty update; CSOT/RTT timeout handling improvements; idle-`getMore` connection release fix |
+| 5.8.0 | **2026-05-28** (latest as of 2026-07-14) | `RawBsonDocument` encode/decode optimization (eliminates intermediate allocations); vector search operators; libmongocrypt 1.18.1 |
+
+Triage facts:
+- **5.6.4 (Feb 2026) is a recent driver** — released ~16 months after MongoDB 8.0 GA (Oct 2024), fully 8.0-compatible under the drivers' minor-version-compatibility rule. A "driver too old for 8.0" framing is wrong for any 5.x ≥ 5.2.
+- **5.6.x carries a known driver-side perf regression** (RawBsonDocument codec path) fixed in 5.7.0 — cheap-win upgrade recommendation in perf cases, but note it is a **constant client-side cost**: if the same driver version ran against both sides of a server A/B comparison, the driver version cannot by itself explain a delta between the runs.
+- Compat matrix note: MongoDB drivers follow minor-version compatibility — a driver series that supports server 8.0 supports all 8.0.x patches.
+
+Sources: [GitHub releases](https://github.com/mongodb/mongo-java-driver/releases) · [5.6.2 announcement](https://www.mongodb.com/community/forums/t/mongo-java-driver-5-6-2-released/332411) · [Java sync release notes](https://www.mongodb.com/docs/drivers/java/sync/current/reference/release-notes/) · [compat tables index](https://www.mongodb.com/docs/drivers/java/sync/current/compatibility/)
 
 ## Sources
 

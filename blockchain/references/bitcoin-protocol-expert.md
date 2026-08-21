@@ -46,20 +46,19 @@ metadata:
   changelog:
     - "2026-06-16 sko v1.0.0->v1.0.1 — Pass H 10/10 pos, 0/10 neg (predicted); fixed 4 Medium (2 dangling citation anchors [^35]/[^15]; whenToUse prose->9-item list; description 1493->1000 chars under Glean cap); 0 banned terms; blind re-audit clean"
 ---
-
 # Bitcoin Protocol & Ecosystem Expert
 
-Expert reference for the **Bitcoin protocol and its ecosystem**: the base-layer data model and mechanics, the consensus-rule upgrades that shaped it, the Lightning Network, the ordinals/runes metaprotocols, the emerging L2/restaking landscape, and the practical operation (nodes, wallets) plus the comparative design against account-model chains.
+Expert reference for **Bitcoin protocol and ecosystem**: base-layer data model, consensus-rule upgrades, Lightning Network, ordinals/runes metaprotocols, emerging L2/restaking landscape, node/wallet operation, and design comparison vs account-model chains.
 
-> **Scope & peer deferral.** This is the *Bitcoin-specific* spoke of a blockchain skill family.
-> - **General consensus theory** — Proof-of-Work *as a mechanism class*, BFT, Nakamoto consensus, Proof-of-Stake, longest-chain/fork-choice, finality, the scalability trilemma, Sybil resistance — belongs to **`distributed-systems-consensus`**. This skill covers only Bitcoin's *concrete* mining/validation mechanics. (`distributed-systems-consensus` explicitly defers whole-Bitcoin to here.)
-> - **Cryptographic primitive internals** — ECDSA/Schnorr signature math, SHA-256/RIPEMD-160 internals, Merkle-proof construction math, BIP32 HD-derivation math — belong to **`blockchain-crypto-primitives`**. This skill references them by name and explains *what they do for Bitcoin*, never re-deriving the math.
-> - **Token-economics / valuation theory** — stock-to-flow, monetary-premium models, fee-market valuation — belong to **`blockchain-economics`**. This skill covers only Bitcoin's *concrete issuance mechanics* (subsidy schedule, 21M cap).
-> - Other whole chains (Ethereum, Solana, Cardano) → their per-chain skills. The account-vs-UTXO *comparison* lives here as design context.
+> **Scope & peer deferral.** Bitcoin-specific spoke of blockchain skill family.
+> - **General consensus theory** — PoW as mechanism class, BFT, Nakamoto consensus, PoS, longest-chain/fork-choice, finality, scalability trilemma, Sybil resistance — belongs to **`distributed-systems-consensus`**. Skill covers only Bitcoin's *concrete* mining/validation mechanics. (`distributed-systems-consensus` defers whole-Bitcoin here.)
+> - **Cryptographic primitive internals** — ECDSA/Schnorr math, SHA-256/RIPEMD-160, Merkle-proof math, BIP32 HD-derivation math — belong to **`blockchain-crypto-primitives`**. Skill references by name, explains *what they do for Bitcoin*, never re-derives math.
+> - **Token-economics / valuation theory** — stock-to-flow, monetary-premium models, fee-market valuation — belong to **`blockchain-economics`**. Skill covers only Bitcoin's *concrete* issuance mechanics (subsidy schedule, 21M cap).
+> - Other chains (Ethereum, Solana, Cardano) → per-chain skills. Account-vs-UTXO *comparison* lives here as design context.
 
 ## How to use this skill
 
-The base-layer model is the **shared foundation** — read it first; everything else builds on it. Load the reference file matching the task:
+Base-layer model = **shared foundation** — read first; everything builds on it. Load reference file matching task:
 
 | Topic | Reference |
 |---|---|
@@ -72,27 +71,27 @@ The base-layer model is the **shared foundation** — read it first; everything 
 
 ## Core mental model (the load-bearing facts)
 
-**Bitcoin is a UTXO ledger, not an account ledger.** There is no stored "balance" anywhere on-chain. Value exists as discrete **Unspent Transaction Outputs (UTXOs)**; a wallet's balance is the sum of every UTXO its keys can unlock.[^1] To spend, you consume whole UTXOs as **inputs** and create new **outputs**, returning the remainder to yourself as a **change output**. The leftover that isn't assigned to any output is the **fee** — fees are *implicit* (`sum(inputs) − sum(outputs)`), with no explicit fee field.[^2]
+**Bitcoin = UTXO ledger, not account ledger.** No stored "balance" on-chain. Value exists as discrete **Unspent Transaction Outputs (UTXOs)**; wallet balance = sum of every UTXO its keys can unlock.[^1] Spending: consume whole UTXOs as **inputs**, create new **outputs**, return remainder as **change output**. Leftover not assigned to output = **fee** — fees *implicit* (`sum(inputs) − sum(outputs)`), no explicit fee field.[^2]
 
-**Spending conditions are expressed in Bitcoin Script** — a stack-based, deliberately **non-Turing-complete** (no loops) language. Each output carries a locking script (`scriptPubKey`); spending it requires an unlocking script (`scriptSig` legacy, or the **witness** post-SegWit) that satisfies it.[^3] The standard output types and their addresses: **P2PKH** (`1…`, base58), **P2SH** (`3…`, base58), **P2WPKH/P2WSH** (`bc1q…`, bech32, SegWit v0), **P2TR** (`bc1p…`, bech32m, Taproot/SegWit v1).[^2][^3]
+**Spending conditions expressed in Bitcoin Script** — stack-based, deliberately **non-Turing-complete** (no loops). Each output carries locking script (`scriptPubKey`); spending requires unlocking script (`scriptSig` legacy, or **witness** post-SegWit) that satisfies it.[^3] Standard output types and addresses: **P2PKH** (`1…`, base58), **P2SH** (`3…`, base58), **P2WPKH/P2WSH** (`bc1q…`, bech32, SegWit v0), **P2TR** (`bc1p…`, bech32m, Taproot/SegWit v1).[^2][^3]
 
-**Blocks chain via Proof-of-Work over an 80-byte header.** Miners compute double-SHA256 of the header (version, prev-block-hash, **Merkle root**, time, nBits/target, nonce) seeking a hash below the target.[^4] Difficulty **retargets every 2016 blocks** (~2 weeks) to hold a **10-minute** average block time, clamped to a 4× swing per period.[^5] The first transaction is the **coinbase**, paying the miner **subsidy + fees**; coinbase outputs are unspendable for **100 blocks**.[^4]
+**Blocks chain via Proof-of-Work over 80-byte header.** Miners compute double-SHA256 of header (version, prev-block-hash, **Merkle root**, time, nBits/target, nonce) seeking hash below target.[^4] Difficulty **retargets every 2016 blocks** (~2 weeks) to hold **10-minute** average block time, clamped to 4× swing per period.[^5] First transaction = **coinbase**, paying miner **subsidy + fees**; coinbase outputs unspendable for **100 blocks**.[^4]
 
-**Issuance is capped and disinflationary.** The block subsidy **halves every 210,000 blocks** (~4 years): 50 → 25 → 12.5 → 6.25 → **3.125 BTC after the April 2024 halving**.[^6] The supply asymptotically approaches but stays **just under 21 million** (≈20,999,999.9769 BTC — integer-satoshi truncation of the subsidy), with issuance effectively ending ~2140, after which miners earn fees only.[^6] *(verified-as-of 2026-06-16)*
+**Issuance capped and disinflationary.** Block subsidy **halves every 210,000 blocks** (~4 years): 50 → 25 → 12.5 → 6.25 → **3.125 BTC after April 2024 halving**.[^6] Supply asymptotically approaches but stays **just under 21 million** (≈20,999,999.9769 BTC — integer-satoshi truncation), issuance ends ~2140, miners earn fees only after.[^6] *(verified-as-of 2026-06-16)*
 
-**Two consensus upgrades dominate the modern protocol.** **SegWit** (2017) moved the witness out of the txid preimage — fixing third-party transaction malleability (a prerequisite for Lightning) and redefining the block limit as **4,000,000 weight units** with a witness discount.[^7] **Taproot** (Nov 2021) added **Schnorr signatures**, **Pay-to-Taproot** with key-path vs script-path spends, and **MAST**, improving privacy and multisig efficiency.[^7] Both are **soft forks** (backward-compatible rule *tightening*); activation methods are Bitcoin's governance flashpoint.[^7]
+**Two consensus upgrades dominate modern protocol.** **SegWit** (2017) moved witness out of txid preimage — fixes third-party transaction malleability (Lightning prerequisite), redefines block limit as **4,000,000 weight units** with witness discount.[^7] **Taproot** (Nov 2021) added **Schnorr signatures**, **Pay-to-Taproot** with key-path vs script-path spends, and **MAST**, improving privacy and multisig efficiency.[^7] Both = **soft forks** (backward-compatible rule *tightening*); activation methods = Bitcoin's governance flashpoint.[^7]
 
-**Layers and metaprotocols sit on top.** The **Lightning Network** is the primary L2 for fast/cheap payments via bilateral payment channels and HTLC-routed multi-hop payments.[^8] **Ordinals/inscriptions, BRC-20, and Runes** are metaprotocols using the witness or OP_RETURN to embed data/tokens.[^9] **BitVM, sidechains/drivechains, and Babylon** are an *early, experimental, and heavily contested* L2/restaking frontier — most "Bitcoin L2" branding is marketing, and bridges are the recurring trust weak point.[^9] *(verified-as-of 2026-06-16)*
+**Layers and metaprotocols sit on top.** **Lightning Network** = primary L2 for fast/cheap payments via bilateral payment channels and HTLC-routed multi-hop payments.[^8] **Ordinals/inscriptions, BRC-20, Runes** = metaprotocols using witness or OP_RETURN to embed data/tokens.[^9] **BitVM, sidechains/drivechains, Babylon** = *early, experimental, contested* L2/restaking frontier — most "Bitcoin L2" branding is marketing, bridges = recurring trust weak point.[^9] *(verified-as-of 2026-06-16)*
 
 ## Cross-domain routing notes
 
-- A question about **whether PoW is a good consensus mechanism**, BFT bounds, or PoS comparisons → `distributed-systems-consensus`. A question about **how Bitcoin mining concretely works** → here (`references/blocks-mining-and-monetary-policy.md`).
-- A question about **how Schnorr/ECDSA signing works mathematically** → `blockchain-crypto-primitives`. A question about **what Schnorr enabled in Taproot** (key aggregation, P2TR, PTLCs) → here.
-- A question about **Bitcoin's price/monetary value** → `blockchain-economics`. A question about **the exact issuance schedule** → here.
+- **Whether PoW is good consensus mechanism**, BFT bounds, PoS comparisons → `distributed-systems-consensus`. **How Bitcoin mining concretely works** → here (`references/blocks-mining-and-monetary-policy.md`).
+- **How Schnorr/ECDSA signing works mathematically** → `blockchain-crypto-primitives`. **What Schnorr enabled in Taproot** (key aggregation, P2TR, PTLCs) → here.
+- **Bitcoin price/monetary value** → `blockchain-economics`. **Exact issuance schedule** → here.
 
 ## References (top-level sources)
 
-The deep per-topic citations live in each reference file's own `## References`. Anchors used above:
+Deep per-topic citations in each reference file's own `## References`. Anchors used above:
 
 [^1]: https://developer.bitcoin.org/devguide/transactions.html — Bitcoin Developer Guide: transaction anatomy, UTXO consumption, change, implicit fees.
 [^2]: https://learnmeabitcoin.com/technical/transaction/ — transaction serialization, value-in-satoshis, fee-as-leftover, vbytes.
@@ -102,4 +101,4 @@ The deep per-topic citations live in each reference file's own `## References`. 
 [^6]: https://en.bitcoin.it/wiki/Controlled_supply — halving schedule, ~20,999,999.9769 BTC asymptote, subsidy→0.
 [^7]: https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki — SegWit (BIP141); Taproot per BIPs 340/341/342; soft-fork activation per BIP9/BIP8.
 [^8]: https://lightning.network/lightning-network-paper.pdf — Lightning Network whitepaper (payment channels, penalty mechanism).
-[^9]: https://docs.ordinals.com/ — Ordinal Theory; plus Runes (rodarmor.com/blog/runes/), BitVM (bitvm.org), Babylon (docs.babylonlabs.io) — see the L2 reference for the full, skeptically-sourced survey.
+[^9]: https://docs.ordinals.com/ — Ordinal Theory; plus Runes (rodarmor.com/blog/runes/), BitVM (bitvm.org), Babylon (docs.babylonlabs.io) — see L2 reference for full, skeptically-sourced survey.

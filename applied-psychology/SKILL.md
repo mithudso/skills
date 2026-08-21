@@ -1,17 +1,17 @@
 ---
+name: applied-psychology
 description: >-
   Applied human psychology hub (operator/TAM) — how people decide, trust, are persuaded, learn,
-  feel, perform, differ, and relate to AI. 10 evidence-based, replication-honest references.
+  feel, perform, differ, and relate to AI. 13 evidence-based, replication-honest references.
   TRIGGER: behavior change & adoption (Self-Determination Theory, Fogg B=MAP, habits);
   decision-making (biases, prospect theory, nudge, System 1/2); persuasion (ELM, dissonance,
   reactance, inoculation); trust, rapport & psychological safety (Mayer ABI, Trust Equation,
-  Edmondson); human-AI interaction (automation bias, algorithm aversion, calibrated reliance);
+  Edmondson); human-AI interaction (automation bias, algorithm aversion);
   learning & expertise (cognitive load, retrieval practice, spacing, deliberate practice); emotion
-  & affect (emotion regulation, emotional intelligence/labor); performance & resilience (growth
+  & affect (emotion regulation, EI/labor, brahmavihara near/far enemies); performance & resilience (growth
   mindset, grit, flow, self-efficacy, burnout); personality (Big Five, HEXACO, MBTI critique, Dark
   Triad); moral psychology. SKIP: customer-facing comms drafting → content-and-marketing-writing /
   executive-comms. SKIP: clinical PD / ADHD / autism depth → psychology.
-name: applied-psychology
 ---
 # Applied Human Psychology (hub)
 
@@ -33,6 +33,7 @@ Ten evidence-based applied-psychology skills, folded as on-demand references. Ke
 | Performance, motivation & resilience | burnout, motivation, growth mindset, grit, flow, self-efficacy, stress/coping, recovery, prevent team burnout | `references/performance-and-resilience-psychology/SKILL.md` |
 | Personality & individual differences | MBTI legit?, Big Five/HEXACO, person-situation debate, Dark Triad, tailor comms to stakeholder personality | `references/personality-and-individual-differences/SKILL.md` |
 | Moral psychology | why they see this as moral issue, fairness/justice perception, values conflict, fair process, moral licensing/disengagement | `references/moral-psychology/SKILL.md` |
+| Near/far enemies (Buddhist psychology) | near enemy of compassion/love/joy/equanimity, counterfeit emotions, compassion vs pity, equanimity vs indifference, idiot compassion, empathic distress vs compassion | `references/near-enemies-buddhist-psychology.md` |
 
 ## Cross-hub map (topics owned elsewhere)
 
